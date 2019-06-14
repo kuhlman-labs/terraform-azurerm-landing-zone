@@ -18,7 +18,7 @@ module "storage_account" {
   stor_replication     = "${var.stor_replication}"
   access_tier          = "${var.access_tier}"
 
-  /* -- Tagging Variables -- */
+  # Tagging Variables
 
   owner_tag          = "${var.owner_tag}"
   region_tag         = "${var.region_tag}"
