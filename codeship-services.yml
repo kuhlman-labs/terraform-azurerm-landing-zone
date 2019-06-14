@@ -1,6 +1,0 @@
-
-base: &base
-  build:
-    dockerfile: Dockerfile
-    image: base
-  cached: true
