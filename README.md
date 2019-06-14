@@ -1,9 +1,9 @@
-# Azure Cloud Landing Zone 
-[![Codeship Status for cloudreach/azure-clz-terraform](https://app.codeship.com/projects/8354af40-6370-0137-263b-7a41d93eee23/status?branch=master)](https://app.codeship.com/projects/344598)
+# Azure Landing Zone Template 
+
 
 ## Purpose
 
-This repository itself is meant to provide curated, reusable [Terraform](https://www.terraform.io/) content for the deployment of an Azure Cloud Landing Zone. Creating such a library allows for sale of this material and making delivery quicker and easier.
+This repository itself is meant to provide curated, reusable [Terraform](https://www.terraform.io/) content for the deployment of an Azure Cloud Landing Zone.
 
 ## Structure
 
@@ -157,23 +157,9 @@ To clean up the infrastructure created for a solution you can run the following 
 terraform destroy -auto-approve -var-file=terraform.tfvars -var "subscription_id=$SUBSCRIPTION_ID" -var "tenant_id=$TENANT_ID" -var "client_secret=$CLIENT_SECRET" -var "app_id=$APP_ID" -var "environment=$ENVIRONMENT" -var "storage_account_name=$STORAGE_ACCOUNT_NAME" -var "access_key=$ACCESS_KEY" -var "state_key=$STATE_KEY" -var "shared_services_subscription_id=$SHARED_SERVICES_SUBSCRIPTION_ID";
 ```
 
-### Customer Deployment
-
-The bitbucket pipeline associated with this repo is designed for validation during the development lifecycle and is not designed for customer deployment. The variables configured in this repository should not be altered to provision to a different environment.
-
-To facilitate customer delivery, it is recommended to clone the repository to a platform that the customer selects. If included in the engagement a CI/CD pipeline can be configured, otherwise, the commands can be executed from the CLI against the cloned repository. Any custom configuration required can be completed in this cloned repository.
-
-Both the repository and the remote state storage account will be delivered at the end of the CLZ deployment.
-
-If any of the additions can be useful for future deployments of the CLZ it is requested a pull request is created that follows the standards outlined in [How to Contribute to Project Deploy](https://cloudreach.jira.com/wiki/spaces/PDEV/pages/1725104151/How+to+Contribute+to+Project+Deploy)
-
 ### Lab Deployment
 
 The solution can be deployed to a lab subscription by creating a [Service Principal](#service-principal) in the lab and setting the `SUBSCRIPTION_ID` environment variable to the ID of the lab you have been provisioned. No code changes are necessary to deploy to the lab.
-
-## Extending the Cloud Landing Zone
-
-As the CLZ is deployed on customer engagements there will be requests to include additional resources in the deployment resulting in additions to existing solutions and the creation of new solutions. 
 
 ### Solution
 * Definition: The top level composition that deploys all resources necessary for a single environment. Each solution is composed of one or more Infrastructure Modules.
@@ -222,11 +208,6 @@ The naming conventions are established in the resource modules, including the Re
 ### How do I request new materials?
 
 Please create an issue.
-
-### Who can I yell at about this?
-
-Adam Temple is the interim maintainer for this 
-project. Please reach out with questions and/or suggestions.
 
 ## Nota Bene
 
