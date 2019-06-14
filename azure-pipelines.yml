@@ -14,8 +14,10 @@ stages:
     - task: Bash@3  
       inputs:
         filePath: './scripts/install_terraform.sh'
-
-    #- script: wget https://releases.hashicorp.com/terraform/0.11.14/terraform_0.11.14_linux_amd64.zip
-    #- script: unzip terraform_0.11.14_linux_amd64.zip
-    #- script: sudo mv terraform /usr/local/bin/
     - script: terraform --version 
+  - job: Validate_Terrafrom_FMT
+    pool:
+      vmImage: 'ubuntu-16.04'
+    steps:
+      - script: terraform fmt -check  
+      
