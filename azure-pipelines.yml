@@ -23,7 +23,7 @@ stages:
       vmImage: 'ubuntu-16.04'
     steps:
       - script: terraform fmt -check -list=true 
-    dependsOn: Install_Terraform 
+  dependsOn: Install_Terraform 
 - stage: Validate_Terraform
   displayName: Validate the syntax of the terraform files 
   jobs:
@@ -32,6 +32,6 @@ stages:
       vmImage: 'ubuntu-16.04'
     steps:
       - script: terraform validate -check-variables=false
-    dependsOn: Install_Terraform     
+  dependsOn: Install_Terraform     
 
       
