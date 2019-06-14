@@ -15,6 +15,9 @@ stages:
       inputs:
         filePath: './scripts/install_terraform.sh'
     - script: terraform --version 
+- stage: Validate_Terraform
+  displayName: Validate Terraform format  
+  jobs:
   - job: Validate_Terrafrom_FMT
     pool:
       vmImage: 'ubuntu-16.04'
