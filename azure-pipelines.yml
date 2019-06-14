@@ -1,12 +1,19 @@
+name: $(Date:yyyyMMdd)$(Rev:.r)
+
 trigger:
 - master
 
-pool:
-  vmImage: 'ubuntu-16.04'
-
-steps:
-- script: sudo apt-get install unzip
-- script: wget https://releases.hashicorp.com/terraform/0.11.14/terraform_0.11.14_linux_amd64.zip
-- script: unzip terraform_0.11.14_linux_amd64.zip
-- script: sudo mv terraform /usr/local/bin/
-- script: terraform --version 
+stages:
+- stage: Install_Terraform
+  displayName: Install Terraform 0.11.14 on build agent
+  jobs:
+  - job: Installing_Terraform
+    displayName: Install Terraform and add to $PATH
+    pool:
+      vmImage: 'ubuntu-16.04'
+    steps:
+    - script: sudo apt-get install unzip
+    - script: wget https://releases.hashicorp.com/terraform/0.11.14/terraform_0.11.14_linux_amd64.zip
+    - script: unzip terraform_0.11.14_linux_amd64.zip
+    - script: sudo mv terraform /usr/local/bin/
+    - script: terraform --version 
