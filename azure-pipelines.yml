@@ -5,10 +5,9 @@ trigger:
 
 stages:
 - stage: Install_Terraform
-  displayName: Install Terraform 0.11.14 on build agent
+  displayName: Install Terraform 0.11.14 on build agent and add to $PATH
   jobs:
   - job: Installing_Terraform
-    displayName: Install Terraform and add to $PATH
     pool:
       vmImage: 'ubuntu-16.04'
     steps:
