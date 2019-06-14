@@ -1,0 +1,47 @@
+image: hashicorp/terraform:0.11.13
+
+clone:
+  depth: 1  
+
+options:
+  docker: true
+
+definitions:
+  steps:
+    - step: &tf-fmt
+        name: Checking Terraform style formatting
+        script:
+          - echo 'Commits must conform to the Terraform Style Guide. Please update code'
+          - terraform fmt -check
+    - step: &tf-validate
+        name: Validating Terraform configuration
+        script:
+          - for dir in solutions/*/; do
+              cd "$dir";
+              terraform validate --check-variables=false;
+              cd -;
+            done
+    - step: &tf-plan-apply
+        name: Terraform Plan and Apply
+        trigger: manual
+        script:
+          - ./scripts/plan-apply.sh
+        artifacts:
+          - solutions/*/tfplan
+    - step: &tf-destroy
+        name: Terraform Destroy
+        script:
+          - ./scripts/destroy.sh
+
+pipelines:
+  pull-requests:
+    '**':
+      - step: *tf-fmt
+      - step: *tf-validate
+      - step: *tf-plan-apply
+      - step: *tf-destroy
+  branches:
+    develop:
+      - step: *tf-fmt
+      - step: *tf-validate
+      - step: *tf-plan-apply
