@@ -1,5 +1,5 @@
 # Azure Landing Zone Template 
-
+[![Build Status](https://dev.azure.com/brett0091/brett/_apis/build/status/brettkuhlman.azure-landing-zone-template?branchName=master)](https://dev.azure.com/brett0091/brett/_build/latest?definitionId=1&branchName=master)
 
 ## Purpose
 
