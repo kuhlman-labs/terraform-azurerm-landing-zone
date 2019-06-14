@@ -4,7 +4,7 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
   
-container: terraform:0.11.14
+container: hashicorp/terraform:0.11.14
 
 steps:
 - script: echo Hello, world!
