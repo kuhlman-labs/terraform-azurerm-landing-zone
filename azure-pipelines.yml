@@ -40,15 +40,27 @@ stages:
         filePath: './scripts/bash/pipeline/validate_terraform.sh'
   dependsOn: Install_Terraform     
 
-- stage: Terraform_Plan
-  displayName: Run Terraform plan for solutions 
+- stage: Terraform_Apply
+  displayName: Run Terraform apply for solutions 
   jobs:
-  - job: Plan
+  - job: Apply
     pool:
       vmImage: 'ubuntu-16.04'
     steps:  
     - task: Bash@3  
       inputs:
-        filePath: './scripts/bash/pipeline/plan.sh'
+        filePath: './scripts/bash/pipeline/plan-apply.sh'
   dependsOn: [Validate_Terraform, Format_Check_Terraform] 
+
+- stage: Terraform_Destroy
+  displayName: Run Terraform Destroy for solutions 
+  jobs:
+  - job: Destroy
+    pool:
+      vmImage: 'ubuntu-16.04'
+    steps:  
+    - task: Bash@3  
+      inputs:
+        filePath: './scripts/bash/pipeline/destroy.sh'
+  dependsOn: Terraform_Apply   
       
