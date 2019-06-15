@@ -40,4 +40,15 @@ stages:
         filePath: './scripts/bash/pipeline/validate_terraform.sh'
   dependsOn: Install_Terraform     
 
+- stage: Terraform_Plan
+  displayName: Run Terraform plan for solutions 
+  jobs:
+  - job: Plan
+    pool:
+      vmImage: 'ubuntu-16.04'
+    steps:  
+    - task: Bash@3  
+      inputs:
+        filePath: './scripts/bash/pipeline/plan.sh'
+  dependsOn: [Validate_Terraform, Format_Check_Terraform] 
       
