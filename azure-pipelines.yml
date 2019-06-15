@@ -13,7 +13,7 @@ stages:
     steps:
     - task: Bash@3  
       inputs:
-        filePath: './scripts/install_terraform.sh'
+        filePath: './scripts/bash/pipeline/install_terraform.sh'
     - script: terraform --version 
 - stage: Format_Check_Terraform
   displayName: Run a format check on configuration files to match canonical format and style
@@ -31,7 +31,9 @@ stages:
     pool:
       vmImage: 'ubuntu-16.04'
     steps:
-      - script: terraform validate -check-variables=false
+    - task: Bash@3  
+      inputs:
+        filePath: './scripts/bash/pipeline/validate_terraform.sh'
   dependsOn: Install_Terraform     
 
       
