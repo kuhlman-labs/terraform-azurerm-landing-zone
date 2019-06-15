@@ -1,4 +1,6 @@
 name: $(Date:yyyyMMdd)$(Rev:.r)
+variables:
+- group: terraform_variables
 
 trigger:
 - master
@@ -15,6 +17,7 @@ stages:
       inputs:
         filePath: './scripts/bash/pipeline/install_terraform.sh'
     - script: terraform --version 
+
 - stage: Format_Check_Terraform
   displayName: Run a format check on configuration files to match canonical format and style
   jobs:
@@ -24,13 +27,14 @@ stages:
     steps:
       - script: terraform fmt -check -list=true 
   dependsOn: Install_Terraform 
+  
 - stage: Validate_Terraform
   displayName: Validate the syntax of the terraform files 
   jobs:
   - job: Validating_Terraform_Code
     pool:
       vmImage: 'ubuntu-16.04'
-    steps:
+    steps:  
     - task: Bash@3  
       inputs:
         filePath: './scripts/bash/pipeline/validate_terraform.sh'
