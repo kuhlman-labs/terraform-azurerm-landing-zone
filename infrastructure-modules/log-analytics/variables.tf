@@ -4,29 +4,29 @@
 
 variable "resource_prefix" {
   description = "a short pre-defined text to identify resource type"
-  type        = "string"
+  type        = string
   default     = "logaw"
 }
 
 variable "region" {
   description = "Geographic region resource will be deployed into"
-  type        = "string"
+  type        = string
 }
 
 variable "environment" {
   description = "Development environment for resource; p: Production, q: Quality and Assurance, s: Staging, d: Development or Lab"
-  type        = "string"
+  type        = string
 }
 
 variable "sku" {
   description = "SKU for Log Analytics Workspace"
-  type        = "string"
+  type        = string
   default     = "PerGB2018"
 }
 
 variable "retention_period" {
   description = "Time in days to retain logs in the log analytics workspace"
-  type        = "string"
+  type        = string
   default     = 30
 }
 
@@ -36,32 +36,32 @@ variable "retention_period" {
 
 variable "owner_tag" {
   description = "APP/Technical; Email address of App/Product Owner"
-  type        = "string"
+  type        = string
 }
 
 variable "region_tag" {
   description = "Financial; i.e. Sharepoint Global"
-  type        = "string"
+  type        = string
 }
 
 variable "cost_center_tag" {
   description = "Financial; Unique - Code provided directly from Finance (BU/Brand)"
-  type        = "string"
+  type        = string
 }
 
 variable "approver_tag" {
   description = "Financial; Unique - email address"
-  type        = "string"
+  type        = string
 }
 
 variable "service_hours_tag" {
   description = "Automation/Security; Sort -FullTime\\|Weekdays..."
-  type        = "string"
+  type        = string
 }
 
 variable "cloudreach_ops_tag" {
   description = "Automation/Security; Reserved for Cloudreach Ops"
-  type        = "string"
+  type        = string
 }
 
 #######################################
@@ -70,6 +70,7 @@ variable "cloudreach_ops_tag" {
 
 variable "optional_tags" {
   description = "Optional tags to be added to resource"
-  type        = "map"
+  type        = map(string)
   default     = {}
 }
+

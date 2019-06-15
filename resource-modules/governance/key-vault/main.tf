@@ -5,12 +5,12 @@
 locals {
   mandatory_tags = {
     Name           = "KV-${upper(random_string.kv.result)}"
-    Owner          = "${var.owner_tag}"
-    region         = "${var.region_tag}"
-    Cost-Center    = "${var.cost_center_tag}"
-    Approver       = "${var.approver_tag}"
-    Service-Hours  = "${var.service_hours_tag}"
-    Cloudreach-ops = "${var.cloudreach_ops_tag}"
+    Owner          = var.owner_tag
+    region         = var.region_tag
+    Cost-Center    = var.cost_center_tag
+    Approver       = var.approver_tag
+    Service-Hours  = var.service_hours_tag
+    Cloudreach-ops = var.cloudreach_ops_tag
   }
 }
 
@@ -23,14 +23,15 @@ resource "random_string" "kv" {
   special = false
 }
 
-data "azurerm_client_config" "current" {}
+data "azurerm_client_config" "current" {
+}
 
 ###########################
 # Setting up Resource Group
 ###########################
 
 data "azurerm_resource_group" "key_vault" {
-  name = "${var.resource_group}"
+  name = var.resource_group
 }
 
 ######################
@@ -39,17 +40,17 @@ data "azurerm_resource_group" "key_vault" {
 
 resource "azurerm_key_vault" "main" {
   name                = "KV-${upper(random_string.kv.result)}"
-  location            = "${data.azurerm_resource_group.key_vault.location}"
-  resource_group_name = "${data.azurerm_resource_group.key_vault.name}"
-  tenant_id           = "${var.tenant_id}"
+  location            = data.azurerm_resource_group.key_vault.location
+  resource_group_name = data.azurerm_resource_group.key_vault.name
+  tenant_id           = var.tenant_id
 
   sku {
-    name = "${var.sku}"
+    name = var.sku
   }
 
   access_policy {
-    tenant_id = "${var.tenant_id}"
-    object_id = "${data.azurerm_client_config.current.service_principal_object_id}"
+    tenant_id = var.tenant_id
+    object_id = data.azurerm_client_config.current.service_principal_object_id
 
     certificate_permissions = [
       "create",
@@ -97,8 +98,6 @@ resource "azurerm_key_vault" "main" {
     ]
   }
 
-  tags = "${merge(
-    local.mandatory_tags,
-    var.optional_tags
-  )}"
+  tags = merge(local.mandatory_tags, var.optional_tags)
 }
+
