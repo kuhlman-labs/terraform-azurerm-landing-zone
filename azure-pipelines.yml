@@ -62,7 +62,7 @@ stages:
     - task: Bash@3  
       inputs:
         filePath: './scripts/bash/pipeline/plan-apply.sh'
-  dependsOn: Validate_Terraform
+  dependsOn: Terraform_Validate
 
 - stage: Terraform_Destroy
   displayName: Run Terraform Destroy for solutions 
