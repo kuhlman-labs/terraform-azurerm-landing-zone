@@ -1,7 +1,7 @@
 # Azure Pipelines container requirements
 # https://docs.microsoft.com/en-us/azure/devops/pipelines/process/container-phases?view=azure-devops&tabs=yaml#requirements
 
-FROM ubuntu:1604
+FROM ubuntu:16.04
 
 # Here we install Terraform
 
