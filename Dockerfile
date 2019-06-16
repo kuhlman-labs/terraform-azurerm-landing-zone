@@ -1,23 +1,26 @@
 # Azure Pipelines container requirements
 # https://docs.microsoft.com/en-us/azure/devops/pipelines/process/container-phases?view=azure-devops&tabs=yaml#requirements
-
 FROM ubuntu:16.04
 
-# Here we install Terraform
+# Update Software repository
+RUN apt-get update
+ 
+# Install unzip, curl
+RUN apt-get install -y unzip curl && \
+    rm -rf /var/lib/apt/lists/*
 
-ENV TERRAFORM_VERSION=0.12.2
+# Install Terraform
+ENV TERRAFORM_VERSION=0.12.2    
 
 RUN \
-  apt-get install unzip && \
   wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip \
   unzip ./terraform_${TERRAFORM_VERSION}_linux_amd64.zip && \
   mv terraform /usr/local/bin && \
-  rm ./terraform_${TERRAFORM_VERSION}_linux_amd64.zip && \    
-  apt-get uninstall zip
+  rm ./terraform_${TERRAFORM_VERSION}_linux_amd64.zip
 
-# Here we install Azure CLI
-
+# Install Azure CLI
 RUN \
-  apt-get install curl && \
-  curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash && \
-  apt-get uninstall curl
+  curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+
+# Uninstall unzip, curl
+RUN apt-get uninstall -y unzip curl
