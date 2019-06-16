@@ -53,17 +53,17 @@ variable "region" {
 
 variable "vnet_address_ranges" {
   description = "This is a list of the ip address ranges for the vnet"
-  type        = list(string)
+  type        = list
 }
 
 variable "subnets_spoke" {
   description = "Map of subnets with name, subnet_cidr, and service_endpoints."
-  type        = list(string)
+  type        = list
 }
 
 variable "nsg_rules" {
   description = "List of NSG rules"
-  type        = list(string)
+  type        = list
 }
 
 #######################################
@@ -105,7 +105,7 @@ variable "cloudreach_ops_tag" {
 #######################################
 variable "optional_tags" {
   description = "A map of tags to add to all resources"
-  type        = map(string)
+  type        = map
   default     = {}
 }
 
