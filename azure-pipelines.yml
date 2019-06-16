@@ -39,7 +39,6 @@ stages:
     container: terraform  
     steps:
       - script: terraform fmt -check -list=true 
-    dependsOn: Install_Terraform 
   - job: Validate_Terraform
     pool:
       vmImage: 'ubuntu-16.04'
@@ -47,8 +46,7 @@ stages:
     steps:  
     - task: Bash@3  
       inputs:
-        filePath: './scripts/bash/pipeline/validate_terraform.sh'
-    dependsOn: Install_Terraform     
+        filePath: './scripts/bash/pipeline/validate_terraform.sh'  
 
 - stage: Terraform_Apply
   displayName: Run Terraform apply for solutions 
