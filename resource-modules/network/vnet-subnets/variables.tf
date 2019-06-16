@@ -13,6 +13,6 @@ variable "vnet_name" {
 
 variable "subnets" {
   description = "Map of subnets with name, subnet_cidr, and service_endpoints."
-  type        = list(string)
+  type        = list
 }
 

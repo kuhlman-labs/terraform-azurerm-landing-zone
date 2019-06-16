@@ -29,22 +29,22 @@ variable "tier" {
 
 variable "subnets_spoke" {
   description = "Map of subnets with name, subnet_cidr, and service_endpoints."
-  type        = list(string)
+  type        = list
 }
 
 variable "nsg_rules_edge" {
   description = "List of NSG rules"
-  type        = list(string)
+  type        = list
 }
 
 variable "nsg_rules_application" {
   description = "List of NSG rules"
-  type        = list(string)
+  type        = list
 }
 
 variable "nsg_rules_data" {
   description = "List of NSG rules"
-  type        = list(string)
+  type        = list
 }
 
 variable "storage_account_name" {
@@ -132,7 +132,7 @@ variable "cloudreach_ops_tag" {
 #######################################
 variable "optional_tags" {
   description = "A map of tags to add to all resources"
-  type        = map(string)
+  type        = map
   default     = {}
 }
 

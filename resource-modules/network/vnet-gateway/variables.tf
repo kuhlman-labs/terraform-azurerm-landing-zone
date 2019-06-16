@@ -65,7 +65,7 @@ variable "client_address_spaces" {
 
 variable "vpn_client_protocols" {
   description = "List of the protocols supported by the vpn client. The supported values are SSTP, IkeV2 and OpenVPN."
-  type        = list(string)
+  type        = list
 }
 
 #######################################
@@ -107,7 +107,7 @@ variable "cloudreach_ops_tag" {
 #######################################
 variable "optional_tags" {
   description = "Optional tags to be added to resource"
-  type        = map(string)
+  type        = map
   default     = {}
 }
 

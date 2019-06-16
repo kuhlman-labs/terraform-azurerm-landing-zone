@@ -25,12 +25,12 @@ variable "tier" {
 
 variable "subnet_ids" {
   description = "Subnets the NSG will apply to"
-  type        = list(string)
+  type        = list
 }
 
 variable "subnet_names" {
   description = "Subnet names the NSG will apply to. Used for count"
-  type        = list(string)
+  type        = list
 }
 
 variable "nsg_rules" {

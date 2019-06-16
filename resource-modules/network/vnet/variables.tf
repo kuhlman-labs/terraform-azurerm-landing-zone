@@ -9,7 +9,7 @@ variable "resource_group" {
 
 variable "vnet_address_ranges" {
   description = "This is a list of the ip address ranges for the vnet"
-  type        = list(string)
+  type        = list
 }
 
 variable "tier" {
@@ -56,7 +56,7 @@ variable "cloudreach_ops_tag" {
 #######################################
 variable "optional_tags" {
   description = "A map of tags to add to all resources"
-  type        = map(string)
+  type        = map
   default     = {}
 }
 

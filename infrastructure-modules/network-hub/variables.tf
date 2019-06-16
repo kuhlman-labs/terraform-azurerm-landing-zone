@@ -14,12 +14,12 @@ variable "tier" {
 
 variable "subnets_hub" {
   description = "Map of subnets with name, subnet_cidr, and service_endpoints."
-  type        = list(string)
+  type        = list
 }
 
 variable "nsg_rules_dmz" {
   description = "List of NSG rules"
-  type        = list(string)
+  type        = list
 }
 
 variable "certificate_data" {
@@ -30,12 +30,12 @@ variable "certificate_data" {
 
 variable "client_address_spaces" {
   description = "The address space out of which ip addresses for vpn clients will be taken. You can provide more than one address space, e.g. in CIDR notation"
-  type        = list(string)
+  type        = list
 }
 
 variable "vpn_client_protocols" {
   description = "List of the protocols supported by the vpn client. The supported values are SSTP, IkeV2 and OpenVPN."
-  type        = list(string)
+  type        = list
 }
 
 variable "region" {
@@ -87,7 +87,7 @@ variable "cloudreach_ops_tag" {
 #######################################
 variable "optional_tags" {
   description = "A map of tags to add to all resources"
-  type        = map(string)
+  type        = map
   default     = {}
 }
 

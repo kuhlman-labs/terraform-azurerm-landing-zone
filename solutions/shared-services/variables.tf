@@ -21,6 +21,27 @@ variable "tenant_id" {
   type        = string
 }
 
+variable "shared_services_subscription_id" {
+  description = "subscription id of shared-services env"
+  type        = string
+}
+
+variable "state_key" {
+  description = "Key for the state file of the solution, e.g. pre-prod.tfstate"
+  type        = string
+}
+
+
+variable "access_key" {
+  description = "access key for the storage account that contains the Remote Backend"
+  type        = string
+}
+
+variable "storage_account_name" {
+  description = "Storage account that contains Remote Backend, e.g. terraformdata24321"
+  type        = string
+}
+
 variable "environment" {
   description = "Development environment for resource; p: Production, q: Quality and Assurance, s: Staging, d: Development or Lab"
   type        = string
