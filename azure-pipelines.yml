@@ -9,7 +9,11 @@ pr:
 - develop
 - master 
 
-
+resources:
+  containers:
+    - container: terraform
+      image: kuhlmanlabs.azurecr.io/pipeline:38
+      endpoint: kuhlman-labs-container-registry
 
 stages:
 - stage: Docker_Build
@@ -22,7 +26,7 @@ stages:
     - task: Docker@2
       inputs:
         containerRegistry: 'kuhlman-labs-container-registry'
-        repository: 'pipeline'
+        repository: 'pipeline/terraform'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'  
         
@@ -32,6 +36,7 @@ stages:
   - job: Install_Terraform
     pool:
       vmImage: 'ubuntu-16.04'
+    container: terraform 
     steps:
     - task: Bash@3  
       inputs:
@@ -40,12 +45,14 @@ stages:
   - job: Format_Terraform
     pool:
       vmImage: 'ubuntu-16.04'
+    container: terraform  
     steps:
       - script: terraform fmt -check -list=true 
     dependsOn: Install_Terraform 
   - job: Validate_Terraform
     pool:
       vmImage: 'ubuntu-16.04'
+    container: terraform    
     steps:  
     - task: Bash@3  
       inputs:
