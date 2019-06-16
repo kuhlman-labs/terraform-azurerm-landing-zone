@@ -2,4 +2,4 @@
 # Remote State Variables
 ################
 
-region                      = "eastus"
+region = "eastus"
