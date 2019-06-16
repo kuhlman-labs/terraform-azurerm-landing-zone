@@ -97,7 +97,7 @@ variable "cloudreach_ops_tag" {
 
 variable "optional_tags" {
   description = "Optional tags to be added to resource"
-  type        = map(string)
+  type        = map
   default     = {}
 }
 

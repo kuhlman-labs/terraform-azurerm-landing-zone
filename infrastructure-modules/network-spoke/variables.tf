@@ -18,7 +18,7 @@ variable "resource_prefix" {
 
 variable "vnet_address_ranges" {
   description = "This is a list of the ip address ranges for the vnet"
-  type        = list(string)
+  type        = list
 }
 
 variable "tier" {
