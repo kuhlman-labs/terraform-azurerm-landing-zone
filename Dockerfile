@@ -20,7 +20,7 @@ RUN \
 
 # Install Azure CLI
 RUN \
-  curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+  curl -sL https://aka.ms/InstallAzureCLIDeb | bash
 
 # Uninstall unzip, curl
 RUN apt-get uninstall -y unzip curl wget
