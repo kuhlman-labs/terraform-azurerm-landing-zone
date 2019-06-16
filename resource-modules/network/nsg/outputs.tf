@@ -1,5 +1,5 @@
 output "nsg_id" {
-  value       = azurerm_network_security_group.main.id
+  value       = azurerm_network_security_group.main.*.id
   description = "Network security group resource id"
 }
 
