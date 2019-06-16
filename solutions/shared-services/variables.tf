@@ -55,6 +55,7 @@ variable "region" {
 variable "vnet_address_ranges" {
   description = "This is a list of the ip address ranges for the vnet"
   type        = list
+}
 
 variable "subnets_hub" {
   description = "Map of subnets with name, subnet_cidr, and service_endpoints."
