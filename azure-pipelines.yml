@@ -12,24 +12,11 @@ pr:
 resources:
   containers:
     - container: terraform
-      image: kuhlmanlabs.azurecr.io/pipeline/terraform:latest
+      image: kuhlmanlabs.azurecr.io/pipeline/terraform:51
       endpoint: kuhlman-labs-container-registry
 
 stages:
-- stage: Docker_Build
-  displayName: Build Container for pipeline
-  jobs:
-  - job:
-    pool:
-      vmImage: 'ubuntu-16.04'
-    steps:
-    - task: Docker@2
-      inputs:
-        containerRegistry: 'kuhlman-labs-container-registry'
-        repository: 'pipeline/terraform'
-        command: 'buildAndPush'
-        Dockerfile: '**/Dockerfile'  
-        
+      
 - stage: Terraform_Validate
   displayName: Check Terraform for format and validation
   jobs:
