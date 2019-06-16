@@ -3,7 +3,8 @@
 FROM ubuntu:16.04
 
 # Update Software repository
-RUN apt-get update
+RUN apt-get update && \
+    apt-get install -y software-properties-common build-essential
  
 # Install unzip, curl
 RUN apt-get install -y unzip curl wget && \
