@@ -6,7 +6,7 @@ FROM ubuntu:16.04
 RUN apt-get update
  
 # Install unzip, curl
-RUN apt-get install -y unzip curl && \
+RUN apt-get install -y unzip curl wget && \
     rm -rf /var/lib/apt/lists/*
 
 # Install Terraform
@@ -23,4 +23,4 @@ RUN \
   curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 
 # Uninstall unzip, curl
-RUN apt-get uninstall -y unzip curl
+RUN apt-get uninstall -y unzip curl wget
