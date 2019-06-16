@@ -1,11 +1,11 @@
 ########################################
 # Provider
 ########################################
-/*
+
 terraform {
-  required_version = ">= 0.11, < 0.12"
+  required_version = ">= 0.12"
 }
-*/
+
 provider "azurerm" {
   version = "=1.29.0"
 
