@@ -23,4 +23,4 @@ RUN \
   curl -sL https://aka.ms/InstallAzureCLIDeb | bash
 
 # Uninstall unzip, curl
-RUN apt-get uninstall unzip curl wget
+RUN apt-get remove -y unzip curl wget
