@@ -3,18 +3,17 @@
 FROM ubuntu:16.04
 
 # Update Software repository
-RUN apt-get update && \
-    apt-get install -y software-properties-common build-essential
+RUN apt-get update
  
 # Install unzip, curl
-RUN apt-get install -y unzip curl wget && \
+RUN apt-get install -y unzip curl wget bash && \
     rm -rf /var/lib/apt/lists/*
 
 # Install Terraform
 ENV TERRAFORM_VERSION=0.12.2    
 
 RUN \
-  wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip \
+  wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip && \
   unzip ./terraform_${TERRAFORM_VERSION}_linux_amd64.zip && \
   mv terraform /usr/local/bin && \
   rm ./terraform_${TERRAFORM_VERSION}_linux_amd64.zip
