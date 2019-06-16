@@ -6,7 +6,7 @@ FROM ubuntu:16.04
 RUN apt-get update
  
 # Install unzip, curl
-RUN apt-get install -y unzip curl wget bash && \
+RUN apt-get install -y unzip curl wget bash git && \
     rm -rf /var/lib/apt/lists/*
 
 # Install Terraform
