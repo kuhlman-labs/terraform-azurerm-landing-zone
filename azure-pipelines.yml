@@ -2,10 +2,6 @@ name: $(Date:yyyyMMdd)$(Rev:.r)
 variables:
 - group: terraform_variables
 
-resources:
-  containers: 
-  repositories:
-
 trigger:
 - master
 
