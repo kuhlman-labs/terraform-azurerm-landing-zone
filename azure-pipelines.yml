@@ -12,7 +12,7 @@ pr:
 resources:
   containers:
     - container: terraform
-      image: kuhlmanlabs.azurecr.io/pipeline/terraform:49
+      image: kuhlmanlabs.azurecr.io/pipeline/terraform:latest
       endpoint: kuhlman-labs-container-registry
 
 stages:
@@ -33,15 +33,6 @@ stages:
 - stage: Terraform_Validate
   displayName: Check Terraform for format and validation
   jobs:
-  - job: Install_Terraform
-    pool:
-      vmImage: 'ubuntu-16.04'
-    container: terraform 
-    steps:
-    - task: Bash@3  
-      inputs:
-        filePath: './scripts/bash/pipeline/install_terraform.sh'
-    - script: terraform --version 
   - job: Format_Terraform
     pool:
       vmImage: 'ubuntu-16.04'
