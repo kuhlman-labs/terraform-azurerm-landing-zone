@@ -60,7 +60,7 @@ variable "sku" {
 
 variable "client_address_spaces" {
   description = "The address space out of which ip addresses for vpn clients will be taken. You can provide more than one address space, e.g. in CIDR notation"
-  type        = list(string)
+  type        = list
 }
 
 variable "vpn_client_protocols" {

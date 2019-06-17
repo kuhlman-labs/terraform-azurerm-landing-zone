@@ -46,7 +46,7 @@ module "key-vault-with-p2s-cert" {
   region               = var.region
   tenant_id            = var.tenant_id
   object_id            = var.app_id
-  certificate_contents = "${base64encode(file("${path.module}/AzureP2SRootCert.pfx"))}"
+  certificate_contents = filebase64("${path.module}/AzureP2SRootCert.pfx")
   certificate_password = ""
 
   #TAGS#
