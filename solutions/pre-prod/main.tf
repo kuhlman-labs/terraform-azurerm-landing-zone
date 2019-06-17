@@ -28,7 +28,7 @@ module "pre-prod-network-spoke" {
   region_tag         = var.region_tag
   cost_center_tag    = var.cost_center_tag
   service_hours_tag  = var.service_hours_tag
-  cloudreach_ops_tag = var.cloudreach_ops_tag
+  
   optional_tags      = var.optional_tags
 }
 

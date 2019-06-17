@@ -10,7 +10,7 @@ locals {
     Cost-Center    = var.cost_center_tag
     Approver       = var.approver_tag
     Service-Hours  = var.service_hours_tag
-    Cloudreach-ops = var.cloudreach_ops_tag
+    
   }
 }
 

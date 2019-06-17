@@ -51,7 +51,7 @@ region_tag         = ""
 cost_center_tag    = ""
 approver_tag       = ""
 service_hours_tag  = ""
-cloudreach_ops_tag = ""
+
 
 ###########################
 #Optional Tagging Variables

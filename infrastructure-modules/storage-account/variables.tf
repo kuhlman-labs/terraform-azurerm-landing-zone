@@ -86,10 +86,7 @@ variable "service_hours_tag" {
   type        = string
 }
 
-variable "cloudreach_ops_tag" {
-  description = "Automation/Security; Reserved for Cloudreach Ops"
-  type        = string
-}
+
 
 #######################################
 #Setting up Optional Tagging Variables

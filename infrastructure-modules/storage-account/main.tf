@@ -25,7 +25,7 @@ module "storage_account" {
   cost_center_tag    = var.cost_center_tag
   approver_tag       = var.approver_tag
   service_hours_tag  = var.service_hours_tag
-  cloudreach_ops_tag = var.cloudreach_ops_tag
+  
   optional_tags      = var.optional_tags
 }
 
