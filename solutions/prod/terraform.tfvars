@@ -48,11 +48,11 @@ nsg_rules = [
 #Mandatory Tagging Variables
 ############################
 
-owner_tag          = ""
-region_tag         = ""
-cost_center_tag    = ""
-approver_tag       = ""
-service_hours_tag  = ""
+owner_tag         = ""
+region_tag        = ""
+cost_center_tag   = ""
+approver_tag      = ""
+service_hours_tag = ""
 
 
 ###########################

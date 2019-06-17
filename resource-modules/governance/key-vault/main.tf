@@ -4,13 +4,13 @@
 
 locals {
   mandatory_tags = {
-    Name           = "KV-${upper(random_string.kv.result)}"
-    Owner          = var.owner_tag
-    region         = var.region_tag
-    Cost-Center    = var.cost_center_tag
-    Approver       = var.approver_tag
-    Service-Hours  = var.service_hours_tag
-    
+    Name          = "KV-${upper(random_string.kv.result)}"
+    Owner         = var.owner_tag
+    region        = var.region_tag
+    Cost-Center   = var.cost_center_tag
+    Approver      = var.approver_tag
+    Service-Hours = var.service_hours_tag
+
   }
 }
 

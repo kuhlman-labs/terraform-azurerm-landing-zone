@@ -20,7 +20,7 @@ provider "azurerm" {
 }
 
 provider "azurerm" {
-  alias   = "shared-services"
+  alias = "shared-services"
 
   # https://www.terraform.io/docs/configuration/providers.html#alias-multiple-provider-instances
   subscription_id = var.shared_services_subscription_id

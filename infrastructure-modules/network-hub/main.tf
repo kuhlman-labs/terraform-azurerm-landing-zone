@@ -19,8 +19,8 @@ module "vnet-hub" {
   region_tag          = var.region_tag
   cost_center_tag     = var.cost_center_tag
   service_hours_tag   = var.service_hours_tag
-  
-  optional_tags       = var.optional_tags
+
+  optional_tags = var.optional_tags
 }
 
 module "vnet-subnets-hub" {
@@ -47,8 +47,8 @@ module "nsg-subnets-hub-dmz" {
 }
 
 module "vnet-gateway-hub" {
-  source                = "../../resource-modules/network/vnet-gateway"
-  resource_group        = module.resource_group.resource_group_name
+  source         = "../../resource-modules/network/vnet-gateway"
+  resource_group = module.resource_group.resource_group_name
   #certificate_data      = var.certificate_data
   client_address_spaces = var.client_address_spaces
   vpn_client_protocols  = var.vpn_client_protocols
@@ -62,14 +62,14 @@ module "vnet-gateway-hub" {
     0,
   )
 
-  region             = var.region
-  environment        = var.environment
-  approver_tag       = var.approver_tag
-  owner_tag          = var.owner_tag
-  region_tag         = var.region_tag
-  cost_center_tag    = var.cost_center_tag
-  service_hours_tag  = var.service_hours_tag
-  
-  optional_tags      = var.optional_tags
+  region            = var.region
+  environment       = var.environment
+  approver_tag      = var.approver_tag
+  owner_tag         = var.owner_tag
+  region_tag        = var.region_tag
+  cost_center_tag   = var.cost_center_tag
+  service_hours_tag = var.service_hours_tag
+
+  optional_tags = var.optional_tags
 }
 

@@ -4,13 +4,13 @@
 
 locals {
   mandatory_tags = {
-    Name           = "${upper(var.resource_prefix)}-${upper(var.region)}-${upper(var.environment)}"
-    Owner          = var.owner_tag
-    region         = var.region_tag
-    Cost-Center    = var.cost_center_tag
-    Approver       = var.approver_tag
-    Service-Hours  = var.service_hours_tag
-    
+    Name          = "${upper(var.resource_prefix)}-${upper(var.region)}-${upper(var.environment)}"
+    Owner         = var.owner_tag
+    region        = var.region_tag
+    Cost-Center   = var.cost_center_tag
+    Approver      = var.approver_tag
+    Service-Hours = var.service_hours_tag
+
   }
 }
 
@@ -62,12 +62,12 @@ resource "azurerm_virtual_network_gateway" "main" {
     address_space        = var.client_address_spaces
     vpn_client_protocols = var.vpn_client_protocols
 
-  /*  root_certificate {
+    /*  root_certificate {
       name = "Self-signed-P2S-KV-cert"
 
       public_cert_data = base64encode(var.certificate_data)
     }*/
-  } 
+  }
   tags = merge(local.mandatory_tags, var.optional_tags)
 }
 

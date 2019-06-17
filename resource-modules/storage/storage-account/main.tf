@@ -4,13 +4,13 @@
 
 locals {
   MANDATORY_TAGS = {
-    Name           = "${var.resource_prefix}${var.stor_name}"
-    Owner          = var.owner_tag
-    region         = var.region_tag
-    Cost-Center    = var.cost_center_tag
-    Approver       = var.approver_tag
-    Service-Hours  = var.service_hours_tag
-    
+    Name          = "${var.resource_prefix}${var.stor_name}"
+    Owner         = var.owner_tag
+    region        = var.region_tag
+    Cost-Center   = var.cost_center_tag
+    Approver      = var.approver_tag
+    Service-Hours = var.service_hours_tag
+
   }
 }
 
