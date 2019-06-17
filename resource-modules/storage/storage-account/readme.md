@@ -30,7 +30,7 @@ This module deploys an Azure Storage Account.
 | cost\_center\_tag | Financial; Unique - Code provided directly from Finance (BU/Brand) | string | n/a | yes |
 | approver\_tag | Financial; Unique - email address | string | n/a | yes |
 | service\_hours\_tag | Automation/Security; Sort -FullTime\|Weekdays... | string | n/a | yes |
-| cloudreach\_ops\_tag | Automation/Security; Reserved for Cloudreach Ops | string | n/a | yes |
+
 | optional\_tags | A map of tags to add to all resources | map | `<map>` | no |
 
 ## Outputs

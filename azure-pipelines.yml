@@ -5,59 +5,56 @@ variables:
 trigger:
 - master
 
-stages:
-- stage: Install_Terraform
-  displayName: Install Terraform 0.11.14 on build agent and add to $PATH
-  jobs:
-  - job: Installing_Terraform
-    pool:
-      vmImage: 'ubuntu-16.04'
-    steps:
-    - task: Bash@3  
-      inputs:
-        filePath: './scripts/bash/pipeline/install_terraform.sh'
-    - script: terraform --version 
+pr:
+- develop
+- master 
 
-- stage: Format_Check_Terraform
-  displayName: Run a format check on configuration files to match canonical format and style
+resources:
+  containers:
+    - container: terraform
+      image: kuhlmanlabs.azurecr.io/build/terraform:latest
+      endpoint: kuhlman-labs-container-registry
+
+stages:
+      
+- stage: Terraform_Validate
+  displayName: Check Terraform for format and validation
   jobs:
   - job: Format_Terraform
     pool:
       vmImage: 'ubuntu-16.04'
+    container: terraform  
     steps:
-      - script: terraform fmt -check -list=true 
-  dependsOn: Install_Terraform 
-  
-- stage: Validate_Terraform
-  displayName: Validate the syntax of the terraform files 
-  jobs:
-  - job: Validating_Terraform_Code
+      - script: terraform fmt -recursive -check -list=true 
+  - job: Validate_Terraform
     pool:
       vmImage: 'ubuntu-16.04'
+    container: terraform    
     steps:  
     - task: Bash@3  
       inputs:
-        filePath: './scripts/bash/pipeline/validate_terraform.sh'
-  dependsOn: Install_Terraform     
+        filePath: './scripts/bash/pipeline/validate_terraform.sh'  
 
 - stage: Terraform_Apply
   displayName: Run Terraform apply for solutions 
   jobs:
-  - job: Apply
+  - job: Apply_Terraform
     pool:
       vmImage: 'ubuntu-16.04'
+    container: terraform   
     steps:  
     - task: Bash@3  
       inputs:
         filePath: './scripts/bash/pipeline/plan-apply.sh'
-  dependsOn: [Validate_Terraform, Format_Check_Terraform] 
+  dependsOn: Terraform_Validate
 
 - stage: Terraform_Destroy
   displayName: Run Terraform Destroy for solutions 
   jobs:
-  - job: Destroy
+  - job: Destroy_Terraform
     pool:
       vmImage: 'ubuntu-16.04'
+    container: terraform   
     steps:  
     - task: Bash@3  
       inputs:

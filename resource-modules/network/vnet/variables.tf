@@ -4,17 +4,17 @@
 
 variable "resource_group" {
   description = "The name of the target resource group"
-  type        = "string"
+  type        = string
 }
 
 variable "vnet_address_ranges" {
   description = "This is a list of the ip address ranges for the vnet"
-  type        = "list"
+  type        = list
 }
 
 variable "tier" {
   description = "The tier of a VNet, e.g HUB, or SPK"
-  type        = "string"
+  type        = string
 }
 
 #######################################
@@ -23,39 +23,37 @@ variable "tier" {
 
 variable "owner_tag" {
   description = "APP/Technical; Email address of App/Product Owner"
-  type        = "string"
+  type        = string
 }
 
 variable "region_tag" {
   description = "Financial; i.e. Sharepoint Global"
-  type        = "string"
+  type        = string
 }
 
 variable "cost_center_tag" {
   description = "Financial; Unique - Code provided directly from Finance (BU/Brand)"
-  type        = "string"
+  type        = string
 }
 
 variable "approver_tag" {
   description = "Financial; Unique - email address"
-  type        = "string"
+  type        = string
 }
 
 variable "service_hours_tag" {
   description = "Automation/Security; Sort -FullTime\\|Weekdays..."
-  type        = "string"
+  type        = string
 }
 
-variable "cloudreach_ops_tag" {
-  description = "Automation/Security; Reserved for Cloudreach Ops"
-  type        = "string"
-}
+
 
 #######################################
 #Setting up Optional Tagging Variables
 #######################################
 variable "optional_tags" {
   description = "A map of tags to add to all resources"
-  type        = "map"
+  type        = map
   default     = {}
 }
+

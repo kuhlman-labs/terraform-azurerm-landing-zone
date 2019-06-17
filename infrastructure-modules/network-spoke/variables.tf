@@ -3,94 +3,94 @@
 ########################################
 variable "region" {
   description = "Geographic region resource will be deployed into"
-  type        = "string"
+  type        = string
 }
 
 variable "environment" {
   description = "Development environment for resource; p: Production, q: Quality and Assurance, s: Staging, d: Development or Lab"
-  type        = "string"
+  type        = string
 }
 
 variable "resource_prefix" {
   description = "a short pre-defined text to identify resource type"
-  type        = "string"
+  type        = string
 }
 
 variable "vnet_address_ranges" {
   description = "This is a list of the ip address ranges for the vnet"
-  type        = "list"
+  type        = list
 }
 
 variable "tier" {
   description = "The tier of a VNet, e.g HUB, or SPK"
-  type        = "string"
+  type        = string
   default     = "spk"
 }
 
 variable "subnets_spoke" {
   description = "Map of subnets with name, subnet_cidr, and service_endpoints."
-  type        = "list"
+  type        = list
 }
 
 variable "nsg_rules_edge" {
   description = "List of NSG rules"
-  type        = "list"
+  type        = list
 }
 
 variable "nsg_rules_application" {
   description = "List of NSG rules"
-  type        = "list"
+  type        = list
 }
 
 variable "nsg_rules_data" {
   description = "List of NSG rules"
-  type        = "list"
+  type        = list
 }
 
 variable "storage_account_name" {
   description = "Storage account that contains Remote Backend, e.g. terraformdata24321"
-  type        = "string"
+  type        = string
 }
 
 variable "container_name" {
   description = "Storage account container that contains Remote Backend, e.g. tfstate"
-  type        = "string"
+  type        = string
 }
 
 variable "shared_state_key" {
   description = "Key for the shared services State file, e.g. shared-services.tfstate"
-  type        = "string"
+  type        = string
 }
 
 variable "access_key" {
   description = "access key for the storage account that contains the Remote Backend"
-  type        = "string"
+  type        = string
 }
 
 variable "allow_forwarded_traffic" {
   description = "Controls if forwarded traffic from VMs in the remote virtual network is allowed. Defaults to true."
-  type        = "string"
+  type        = string
   default     = "true"
 }
 
 variable "hub_allow_gateway_transit" {
   description = "Controls gatewayLinks can be used in the remote virtual network’s link to the local virtual network."
-  type        = "string"
+  type        = string
 }
 
 variable "hub_use_remote_gateways" {
   description = "Controls if remote gateways can be used on the local virtual network. If the flag is set to true, and allow_gateway_transit on the remote peering is also true, virtual network will use gateways of remote virtual network for transit. Only one peering can have this flag set to true. This flag cannot be set if virtual network already has a gateway. Defaults to false."
-  type        = "string"
+  type        = string
 }
 
 variable "spoke_allow_gateway_transit" {
   description = "Controls gatewayLinks can be used in the remote virtual network’s link to the local virtual network."
-  type        = "string"
+  type        = string
 }
 
 variable "spoke_use_remote_gateways" {
   description = "Controls if remote gateways can be used on the local virtual network. If the flag is set to true, and allow_gateway_transit on the remote peering is also true, virtual network will use gateways of remote virtual network for transit. Only one peering can have this flag set to true. This flag cannot be set if virtual network already has a gateway. Defaults to false."
-  type        = "string"
+  type        = string
 }
 
 #######################################
@@ -99,39 +99,37 @@ variable "spoke_use_remote_gateways" {
 
 variable "owner_tag" {
   description = "APP/Technical; Email address of App/Product Owner"
-  type        = "string"
+  type        = string
 }
 
 variable "region_tag" {
   description = "Financial; i.e. Sharepoint Global"
-  type        = "string"
+  type        = string
 }
 
 variable "cost_center_tag" {
   description = "Financial; Unique - Code provided directly from Finance (BU/Brand)"
-  type        = "string"
+  type        = string
 }
 
 variable "approver_tag" {
   description = "Financial; Unique - email address"
-  type        = "string"
+  type        = string
 }
 
 variable "service_hours_tag" {
   description = "Automation/Security; Sort -FullTime\\|Weekdays..."
-  type        = "string"
+  type        = string
 }
 
-variable "cloudreach_ops_tag" {
-  description = "Automation/Security; Reserved for Cloudreach Ops"
-  type        = "string"
-}
+
 
 #######################################
 #Setting up Optional Tagging Variables
 #######################################
 variable "optional_tags" {
   description = "A map of tags to add to all resources"
-  type        = "map"
+  type        = map
   default     = {}
 }
+

@@ -3,7 +3,7 @@
 #############################################################################
 
 data "azurerm_resource_group" "vnet" {
-  name = "${var.resource_group}"
+  name = var.resource_group
 }
 
 ####################
@@ -11,11 +11,15 @@ data "azurerm_resource_group" "vnet" {
 ####################
 
 resource "azurerm_subnet" "main" {
-  count = "${length(var.subnets)}"
+  count = length(var.subnets)
 
-  name                 = "${lookup("${var.subnets[count.index]}","name")}"
-  address_prefix       = "${lookup("${var.subnets[count.index]}", "subnet_cidr")}"
-  resource_group_name  = "${data.azurerm_resource_group.vnet.name}"
-  virtual_network_name = "${var.vnet_name}"
-  service_endpoints    = "${split(",", lookup("${var.subnets[count.index]}", "service_endpoints", ""))}"
+  name                 = var.subnets[count.index]["name"]
+  address_prefix       = var.subnets[count.index]["subnet_cidr"]
+  resource_group_name  = data.azurerm_resource_group.vnet.name
+  virtual_network_name = var.vnet_name
+  service_endpoints = split(
+    ",",
+    lookup(var.subnets[count.index], "service_endpoints", ""),
+  )
 }
+

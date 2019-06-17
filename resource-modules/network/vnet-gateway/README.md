@@ -35,7 +35,7 @@ This TF module can be used to create a Virtual Network Gateway that has an assoc
 | cost\_center\_tag | Financial; Unique - Code provided directly from Finance (BU/Brand) | string | n/a | yes |
 | approver\_tag | Financial; Unique - email address | string | n/a | yes |
 | service\_hours\_tag | Automation/Security; Sort -FullTime\|Weekdays... | string | n/a | yes |
-| cloudreach\_ops\_tag | Automation/Security; Reserved for Cloudreach Ops | string | n/a | yes |
+
 | optional\_tags | Optional tags to be added to resource | map | `<map>` | no |
 
 ## Outputs

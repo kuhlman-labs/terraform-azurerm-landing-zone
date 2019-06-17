@@ -3,3 +3,4 @@ resource "azurerm_resource_group" "test" {
 
   location = "Central US"
 }
+

@@ -4,45 +4,45 @@
 variable "resource_prefix" {
   description = "Prefix that will be used as initial part of the name for resource group and storage account, must be compatible with storage account naming, i.e. lowercase letters/numbers, no special characters"
 
-  type    = "string"
+  type    = string
   default = "stor"
 }
 
 variable "region" {
   description = "Geographic region resource will be deployed into"
-  type        = "string"
+  type        = string
 }
 
 variable "environment" {
   description = "Development environment for resource; p: Production, q: Quality and Assurance, s: Staging, d: Development or Lab"
-  type        = "string"
+  type        = string
 }
 
 variable "stor_name" {
   description = "Name of the storage account to create. Will be added the resource_prefix. must be lowercase letters/numbers, no special characters maximum of 24 characters for prefix + name"
-  type        = "string"
+  type        = string
 }
 
 variable "stor_kind" {
-  type        = "string"
+  type        = string
   description = "Type of storage to use, valid inputs include Storage, StorageV2, BlobStorage"
   default     = "StorageV2"
 }
 
 variable "stor_tier" {
-  type        = "string"
+  type        = string
   default     = "Standard"
   description = "Tier of storage to use, valid inputs include Standard, Premium"
 }
 
 variable "stor_blob_encryption" {
-  type        = "string"
+  type        = string
   default     = "true"
   description = "Enable/disable encryption for blob storage"
 }
 
 variable "stor_file_encryption" {
-  type        = "string"
+  type        = string
   default     = "true"
   description = "Enable/disable encryption for file storage"
 }
@@ -63,33 +63,30 @@ variable "access_tier" {
 
 variable "owner_tag" {
   description = "APP/Technical; Email address of App/Product Owner"
-  type        = "string"
+  type        = string
 }
 
 variable "region_tag" {
   description = "Financial; i.e. Sharepoint Global"
-  type        = "string"
+  type        = string
 }
 
 variable "cost_center_tag" {
   description = "Financial; Unique - Code provided directly from Finance (BU/Brand)"
-  type        = "string"
+  type        = string
 }
 
 variable "approver_tag" {
   description = "Financial; Unique - email address"
-  type        = "string"
+  type        = string
 }
 
 variable "service_hours_tag" {
   description = "Automation/Security; Sort -FullTime\\|Weekdays..."
-  type        = "string"
+  type        = string
 }
 
-variable "cloudreach_ops_tag" {
-  description = "Automation/Security; Reserved for Cloudreach Ops"
-  type        = "string"
-}
+
 
 #######################################
 #Setting up Optional Tagging Variables
@@ -97,6 +94,7 @@ variable "cloudreach_ops_tag" {
 
 variable "optional_tags" {
   description = "Optional tags to be added to resource"
-  type        = "map"
+  type        = map
   default     = {}
 }
+

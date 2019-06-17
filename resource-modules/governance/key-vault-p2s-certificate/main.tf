@@ -3,11 +3,11 @@
 ############################
 resource "azurerm_key_vault_certificate" "p2s" {
   name         = "P2SRootCert"
-  key_vault_id = "${var.key_vault_id}"
+  key_vault_id = var.key_vault_id
 
   certificate {
-    contents = "${var.certificate_contents}"
-    password = "${var.certificate_password}"
+    contents = var.certificate_contents
+    password = var.certificate_password
   }
 
   certificate_policy {
@@ -27,3 +27,4 @@ resource "azurerm_key_vault_certificate" "p2s" {
     }
   }
 }
+

@@ -4,38 +4,38 @@
 
 variable "resource_group" {
   description = "This is the resource group to which the resources will be deployed"
-  type        = "string"
+  type        = string
 }
 
 variable "resource_prefix" {
   description = "A short pre-defined text to identify the resource type"
-  type        = "string"
+  type        = string
   default     = "nsg"
 }
 
 variable "environment" {
   description = "Development environment for resource; p: Production, q: Quality and Assurance, s: Staging, d: Development or Lab"
-  type        = "string"
+  type        = string
 }
 
 variable "tier" {
   description = "The tier of a VNet, e.g HUB, or SPK"
-  type        = "string"
+  type        = string
 }
 
 variable "subnet_ids" {
   description = "Subnets the NSG will apply to"
-  type        = "list"
+  type        = list
 }
 
 variable "subnet_names" {
   description = "Subnet names the NSG will apply to. Used for count"
-  type        = "list"
+  type        = list
 }
 
 variable "nsg_rules" {
   description = "List of NSG rules"
-  type        = "list"
+  type        = list
 
   default = [
     {
@@ -62,3 +62,4 @@ variable "nsg_rules" {
     },
   ]
 }
+
