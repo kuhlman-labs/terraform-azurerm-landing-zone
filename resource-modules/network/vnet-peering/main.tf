@@ -11,8 +11,7 @@ resource "azurerm_virtual_network_peering" "hub_to_spoke" {
   allow_forwarded_traffic      = var.allow_forwarded_traffic
   allow_gateway_transit        = var.hub_allow_gateway_transit
   use_remote_gateways          = var.hub_use_remote_gateways
-  provider                     = azurerm.shared-services
-}
+  }
 
 #################################
 # Setting up Spoke to Hub Peering

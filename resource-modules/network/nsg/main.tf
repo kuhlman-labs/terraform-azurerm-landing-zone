@@ -33,7 +33,7 @@ resource "azurerm_network_security_rule" "main" {
   source_address_prefix       = var.nsg_rules[count.index]["source_address_prefix"]
   destination_address_prefix  = var.nsg_rules[count.index]["destination_address_prefix"]
   resource_group_name         = data.azurerm_resource_group.vnet.name
-  network_security_group_name = "${element(azurerm_network_security_group.main[count.index].name, count.index)}"
+  network_security_group_name = "${upper(var.resource_prefix)}-${data.azurerm_resource_group.vnet.name}-${upper(element(var.subnet_names, count.index))}"
 }
 
 #############################
@@ -43,6 +43,6 @@ resource "azurerm_network_security_rule" "main" {
 resource "azurerm_subnet_network_security_group_association" "nsg_subnets" {
   count                     = length(var.subnet_names)
   subnet_id                 = element(var.subnet_ids, count.index)
-  network_security_group_id = "${element(azurerm_network_security_group.main[count.index].id, count.index)}"
+  network_security_group_id = "${element(azurerm_network_security_group.main[count.index], count.index)}"
 }
 
