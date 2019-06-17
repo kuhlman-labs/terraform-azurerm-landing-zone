@@ -49,7 +49,7 @@ module "nsg-subnets-hub-dmz" {
 module "vnet-gateway-hub" {
   source                = "../../resource-modules/network/vnet-gateway"
   resource_group        = module.resource_group.resource_group_name
-  certificate_data      = var.certificate_data
+  #certificate_data      = var.certificate_data
   client_address_spaces = var.client_address_spaces
   vpn_client_protocols  = var.vpn_client_protocols
 

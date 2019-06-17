@@ -62,12 +62,12 @@ resource "azurerm_virtual_network_gateway" "main" {
     address_space        = var.client_address_spaces
     vpn_client_protocols = var.vpn_client_protocols
 
-    root_certificate {
+  /*  root_certificate {
       name = "Self-signed-P2S-KV-cert"
 
       public_cert_data = base64encode(var.certificate_data)
-    }
-  }
+    }*/
+  } 
   tags = merge(local.mandatory_tags, var.optional_tags)
 }
 
