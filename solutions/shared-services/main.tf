@@ -7,7 +7,7 @@ module "shared-network-hub" {
   vnet_address_ranges   = var.vnet_address_ranges
   subnets_hub           = var.subnets_hub
   nsg_rules_dmz         = var.nsg_rules
-  certificate_data      = base64encode(module.key-vault-with-p2s-cert.key_vault_p2s_certificate_data)
+  #certificate_data      = module.key-vault-with-p2s-cert.key_vault_p2s_certificate_data
   client_address_spaces = var.client_address_spaces
   vpn_client_protocols  = var.vpn_client_protocols
   environment           = var.environment

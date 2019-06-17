@@ -65,7 +65,7 @@ resource "azurerm_virtual_network_gateway" "main" {
     root_certificate {
       name = "Self-signed-P2S-KV-cert"
 
-      public_cert_data = var.certificate_data
+      public_cert_data = base64encode(var.certificate_data)
     }
   }
   tags = merge(local.mandatory_tags, var.optional_tags)
