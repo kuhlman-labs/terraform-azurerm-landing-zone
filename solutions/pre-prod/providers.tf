@@ -11,7 +11,6 @@ terraform {
 }
 
 provider "azurerm" {
-  version = "=1.29.0"
 
   # https://www.terraform.io/docs/providers/azurerm/auth/service_principal_client_secret.html
   subscription_id = var.subscription_id
@@ -21,7 +20,6 @@ provider "azurerm" {
 }
 
 provider "azurerm" {
-  version = "=1.29.0"
   alias   = "shared-services"
 
   # https://www.terraform.io/docs/configuration/providers.html#alias-multiple-provider-instances

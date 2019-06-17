@@ -11,7 +11,6 @@ terraform {
 }
 
 provider "azurerm" {
-  version = "=1.29.0"
 
   # https://www.terraform.io/docs/providers/azurerm/auth/service_principal_client_secret.html
 
