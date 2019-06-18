@@ -8,7 +8,7 @@ variable "region" {
 }
 
 variable "environment" {
-  description = "Development environment for resource; p: Production, q: Quality and Assurance, s: Staging, d: Development or Lab"
+  description = "Development environment for resource; prod, non-prod, shared-services"
   type        = string
 }
 
