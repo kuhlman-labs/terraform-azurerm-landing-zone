@@ -5,7 +5,7 @@ FROM ubuntu:16.04
 # Update Software repository
 RUN apt-get update
  
-# Install unzip, curl
+# Install unzip, curl, wget bash, git
 RUN apt-get install -y unzip curl wget bash git && \
     rm -rf /var/lib/apt/lists/*
 
@@ -22,5 +22,5 @@ RUN \
 RUN \
   curl -sL https://aka.ms/InstallAzureCLIDeb | bash
 
-# Uninstall unzip, curl
+# Uninstall unzip, curl, wget
 RUN apt-get remove -y unzip curl wget
