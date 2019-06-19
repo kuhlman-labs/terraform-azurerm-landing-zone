@@ -7,16 +7,16 @@ region              = "eastus"
 vnet_address_ranges = ["10.1.0.0/16"]
 subnets_spoke = [
   {
-    name        = "edge"
+    name        = "aks_nodes"
     subnet_cidr = "10.1.0.0/24"
   },
   {
-    name        = "application"
+    name        = "virtual_node_aci"
     subnet_cidr = "10.1.1.0/24"
   },
   {
-    name        = "data"
-    subnet_cidr = "10.1.2.0/24"
+    name        = "aks_waf"
+    subnet_cidr = "10.1.2.0/28"
   }
 ]
 nsg_rules = [
