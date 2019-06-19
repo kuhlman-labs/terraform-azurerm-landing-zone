@@ -1,7 +1,7 @@
 ###################
 # Prod Composistion
 ###################
-
+/*
 module "prod-network-spoke" {
   source                      = "../../infrastructure-modules/network-spoke"
   resource_prefix             = "PROD-SPK"
@@ -32,3 +32,4 @@ module "prod-network-spoke" {
   optional_tags = var.optional_tags
 }
 
+*/

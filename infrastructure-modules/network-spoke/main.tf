@@ -30,7 +30,7 @@ module "vnet-subnets-spoke" {
   subnets        = var.subnets_spoke
 }
 
-module "nsg-subnets-spoke-edge" {
+module "nsg-subnets-spoke-aks-nodes" {
   source         = "../../resource-modules/network/nsg"
   resource_group = module.resource_group.resource_group_name
   environment    = var.environment
@@ -39,14 +39,14 @@ module "nsg-subnets-spoke-edge" {
   subnet_ids = matchkeys(
     module.vnet-subnets-spoke.subnet_ids,
     module.vnet-subnets-spoke.subnet_names,
-    ["edge"],
+    ["aks_nodes"],
   )
 
-  subnet_names = ["edge"]
-  nsg_rules    = var.nsg_rules_edge
+  subnet_names = ["aks_nodes"]
+  nsg_rules    = var.nsg_rules_aks_nodes
 }
 
-module "nsg-subnets-spoke-application" {
+module "nsg-subnets-spoke-virtual-node-aci" {
   source         = "../../resource-modules/network/nsg"
   resource_group = module.resource_group.resource_group_name
   environment    = var.environment
@@ -55,14 +55,14 @@ module "nsg-subnets-spoke-application" {
   subnet_ids = matchkeys(
     module.vnet-subnets-spoke.subnet_ids,
     module.vnet-subnets-spoke.subnet_names,
-    ["application"],
+    ["virtual_node_aci"],
   )
 
-  subnet_names = ["application"]
-  nsg_rules    = var.nsg_rules_application
+  subnet_names = ["virtual_node_aci"]
+  nsg_rules    = var.nsg_rules_virtual_node_aci
 }
 
-module "nsg-subnets-spoke-data" {
+module "nsg-subnets-spoke-aks-waf" {
   source         = "../../resource-modules/network/nsg"
   resource_group = module.resource_group.resource_group_name
   environment    = var.environment
@@ -71,11 +71,11 @@ module "nsg-subnets-spoke-data" {
   subnet_ids = matchkeys(
     module.vnet-subnets-spoke.subnet_ids,
     module.vnet-subnets-spoke.subnet_names,
-    ["data"],
+    ["aks_waf"],
   )
 
-  subnet_names = ["data"]
-  nsg_rules    = var.nsg_rules_data
+  subnet_names = ["aks_waf"]
+  nsg_rules    = var.nsg_rules_aks_waf
 }
 
 #Pulling in remote state info from shared-services stack for peering
