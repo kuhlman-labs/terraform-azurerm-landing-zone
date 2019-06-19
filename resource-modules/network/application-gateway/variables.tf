@@ -2,41 +2,47 @@
 # Setting up Resource Variables
 ###############################
 
-variable "region" {
-  description = "Geographic region resource will be deployed into"
+variable "resource_group" {
+  description = "The name of the target resource group"
   type        = string
 }
 
-variable "environment" {
-  description = "Development environment for resource; prod, non-prod, shared-services"
+variable "appgw_vnet_name" {
+  description = "Name of the Vnet that the appgw is in"
   type        = string
 }
 
-variable "tenant_id" {
-  description = "The Azure Active Directory tenant ID that should be used for authenticating requests to the key vault."
+variable "appgw_name" {
+  description = "The name of the Application Gateway. Changing this forces a new resource to be created."
   type        = string
 }
 
-variable "object_id" {
-  description = "The object ID of a user, service principal or security group in the Azure Active Directory tenant for the vault. The object ID must be unique for the list of access policies."
+variable "appgw_sku" {
+  description = "The Name of the SKU to use for this Application Gateway. Possible values are Standard_Small, Standard_Medium, Standard_Large, Standard_v2, WAF_Medium, WAF_Large, and WAF_v2."
+  type        = string
+
+}
+
+variable "appgw_tier" {
+  description = "The Tier of the SKU to use for this Application Gateway. Possible values are Standard, Standard_v2, WAF and WAF_v2."
+  type        = string
+}
+variable "appgw_subnet_id" {
+  description = "The ID of a Subnet."
   type        = string
 }
 
-variable "certificate_contents" {
-  description = "The base64-encoded certificate contents. Changing this forces a new resource to be created."
-  type        = string
-}
-
-variable "certificate_password" {
-  description = "The password associated with the certificate. Changing this forces a new resource to be created."
-  type        = string
-}
 
 #######################################
 #Setting up Mandatory Tagging Variables
 #######################################
 
 variable "owner_tag" {
+  description = "APP/Technical; Email address of App/Product Owner"
+  type        = string
+}
+
+variable "name_tag" {
   description = "APP/Technical; Email address of App/Product Owner"
   type        = string
 }
@@ -61,8 +67,6 @@ variable "service_hours_tag" {
   type        = string
 }
 
-
-
 #######################################
 #Setting up Optional Tagging Variables
 #######################################
@@ -72,4 +76,3 @@ variable "optional_tags" {
   type        = map
   default     = {}
 }
-
