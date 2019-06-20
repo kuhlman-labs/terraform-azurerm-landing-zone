@@ -32,17 +32,7 @@ variable "subnets_spoke" {
   type        = list
 }
 
-variable "nsg_rules_edge" {
-  description = "List of NSG rules"
-  type        = list
-}
-
-variable "nsg_rules_application" {
-  description = "List of NSG rules"
-  type        = list
-}
-
-variable "nsg_rules_data" {
+variable "nsg_rules_aks_nodes" {
   description = "List of NSG rules"
   type        = list
 }

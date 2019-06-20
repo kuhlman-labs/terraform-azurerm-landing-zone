@@ -42,11 +42,6 @@ variable "owner_tag" {
   type        = string
 }
 
-variable "name_tag" {
-  description = "APP/Technical; Email address of App/Product Owner"
-  type        = string
-}
-
 variable "region_tag" {
   description = "Financial; i.e. Sharepoint Global"
   type        = string

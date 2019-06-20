@@ -23,7 +23,6 @@ module "aks_waf" {
   appgw_sku         = "WAF_v2"
   appgw_tier        = "WAF_v2"
   appgw_subnet_id   = var.appgw_subnet_id
-  name_tag          = var.name_tag
   approver_tag      = var.approver_tag
   owner_tag         = var.owner_tag
   region_tag        = var.region_tag
@@ -32,18 +31,21 @@ module "aks_waf" {
   optional_tags     = var.optional_tags
 }
 
+data "azurerm_client_config" "current" {}
+
+
 module "aks_role_assignment_1" {
   source               = "../../resource-modules/governance/role-assignment"
   scope                = var.aks_subnet_id
   role_definition_name = "Network Contributor"
-  principal_id         = var.client_id
+  principal_id         = data.azurerm_client_config.current.service_principal_object_id
 }
 
 module "aks_role_assignment_2" {
   source               = "../../resource-modules/governance/role-assignment"
   scope                = module.aks_user_assigned_identity.uai_id
   role_definition_name = "Managed Identity Operator"
-  principal_id         = var.client_id
+  principal_id         = data.azurerm_client_config.current.service_principal_object_id
 }
 
 module "aks_role_assignment_3" {
@@ -64,7 +66,7 @@ module "aks_cluster" {
   source                          = "../../resource-modules/containers/aks-cluster"
   resource_group                  = module.resource_group.resource_group_name
   aks_name                        = module.resource_group.resource_group_name
-  aks_dns_prefix                  = var.aks_dns_prefix
+  aks_dns_prefix                  = "${module.resource_group.resource_group_name}-DNS"
   admin_user_name                 = var.admin_user_name
   log_analytics_workspace_id      = var.log_analytics_workspace_id
   aks_subnet_id                   = var.aks_subnet_id
@@ -80,7 +82,6 @@ module "aks_cluster" {
   aks_dns_service_ip              = var.aks_dns_service_ip
   aks_docker_bridge_cidr          = var.aks_docker_bridge_cidr
   aks_service_cidr                = var.aks_service_cidr
-  name_tag                        = var.name_tag
   approver_tag                    = var.approver_tag
   owner_tag                       = var.owner_tag
   region_tag                      = var.region_tag
