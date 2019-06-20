@@ -4,7 +4,6 @@
 
 locals {
   mandatory_tags = {
-    Name          = var.name_tag
     Owner         = var.owner_tag
     region        = var.region_tag
     Cost-Center   = var.cost_center_tag

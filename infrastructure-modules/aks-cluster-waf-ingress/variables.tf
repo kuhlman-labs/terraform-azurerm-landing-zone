@@ -47,11 +47,6 @@ variable "log_analytics_workspace_id" {
   type        = string
 }
 
-variable "aks_dns_prefix" {
-  description = "DNS prefix specified when creating the managed cluster. Changing this forces a new resource to be created."
-  type        = string
-}
-
 variable "admin_user_name" {
   description = "The Admin Username for the Cluster. Changing this forces a new resource to be created."
   type        = string
@@ -107,11 +102,6 @@ variable "aks_service_cidr" {
 #######################################
 
 variable "owner_tag" {
-  description = "APP/Technical; Email address of App/Product Owner"
-  type        = string
-}
-
-variable "name_tag" {
   description = "APP/Technical; Email address of App/Product Owner"
   type        = string
 }

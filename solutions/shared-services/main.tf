@@ -18,5 +18,6 @@ module "shared-network-hub" {
   owner_tag         = var.owner_tag
   region_tag        = var.region_tag
   cost_center_tag   = var.cost_center_tag
-  service_hours_tag = var.service_hours_tagoptional_tags = var.optional_tags
+  service_hours_tag = var.service_hours_tag
+  optional_tags     = var.optional_tags
 }
