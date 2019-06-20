@@ -12,8 +12,7 @@ pr:
 resources:
   containers:
     - container: terraform
-      image: kuhlmanlabs.azurecr.io/build/terraform:latest
-      endpoint: kuhlman-labs-container-registry
+      image: brettkuhlman/terraform:latest
 
 stages:
       
