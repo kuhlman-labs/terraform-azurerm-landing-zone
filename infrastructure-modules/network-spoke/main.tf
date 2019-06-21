@@ -14,7 +14,7 @@ module "vnet-spoke" {
   resource_group      = module.resource_group.resource_group_name
   vnet_address_ranges = var.vnet_address_ranges
   tier                = var.tier
-  
+
   #tags
   approver_tag      = var.approver_tag
   owner_tag         = var.owner_tag
@@ -30,7 +30,7 @@ module "vnet-subnets-spoke" {
   vnet_name      = module.vnet-spoke.vnet_name
   subnets        = var.subnets_spoke
 }
-
+/*
 #Pulling in remote state info from shared-services stack for peering
 data "terraform_remote_state" "vnet-hub" {
   backend = "azurerm"
@@ -58,3 +58,4 @@ module "vnet-peering" {
   spoke_use_remote_gateways   = var.spoke_use_remote_gateways
 }
 
+*/

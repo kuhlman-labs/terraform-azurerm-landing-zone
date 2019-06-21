@@ -21,7 +21,7 @@ appgw:
 # Two authentication methods are available:
 # - Option 1: AAD-Pod-Identity (https://github.com/Azure/aad-pod-identity)
 armAuth:
-    type: ${aadPodIdentity}
+    type: aadPodIdentity
     identityResourceID: ${identity_resource_id}
     identityClientID:  ${identity_client_id}
 
@@ -29,3 +29,6 @@ armAuth:
 # Specify if the cluster is RBAC enabled or not
 rbac:
     enabled: true # true/false
+
+aksClusterConfiguration:
+    apiServerAddress: ${aks-api-server-address}
