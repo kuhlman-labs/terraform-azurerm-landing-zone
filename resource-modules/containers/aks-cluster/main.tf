@@ -59,9 +59,9 @@ resource "azurerm_kubernetes_cluster" "main" {
   role_based_access_control {
     # NOTE: in a Production environment these should be different values than Service Principal 
     azure_active_directory {
-      client_app_id     = var.client_id
-      server_app_id     = var.client_id
-      server_app_secret = var.client_secret
+      client_app_id     = var.aks_client_id
+      server_app_id     = var.aks_server_id
+      server_app_secret = var.aks_server_client_secret
       tenant_id         = var.tenant_id
     }
     enabled = true
@@ -70,12 +70,12 @@ resource "azurerm_kubernetes_cluster" "main" {
   #api_server_authorized_ip_ranges = var.api_server_authorized_ip_ranges
 
   agent_pool_profile {
-    name            = "agentpool"
-    count           = var.aks_agent_count
-    vm_size         = var.aks_agent_vm_size
-    os_type         = "Linux"
-    vnet_subnet_id  = var.aks_subnet_id
-    type            = var.aks_agent_type
+    name           = "agentpool"
+    count          = var.aks_agent_count
+    vm_size        = var.aks_agent_vm_size
+    os_type        = "Linux"
+    vnet_subnet_id = var.aks_subnet_id
+    type           = var.aks_agent_type
   }
 
   service_principal {

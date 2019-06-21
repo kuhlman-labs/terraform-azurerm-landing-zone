@@ -79,6 +79,21 @@ variable "client_secret" {
   type        = string
 }
 
+variable "aks_client_id" {
+  description = " The Client ID of an Azure Active Directory Application. Changing this forces a new resource to be created."
+  type        = string
+}
+
+variable "aks_server_client_secret" {
+  description = "The Server Secret of an Azure Active Directory Application. Changing this forces a new resource to be created."
+  type        = string
+}
+
+variable "aks_server_id" {
+  description = "The Server ID of an Azure Active Directory Application. Changing this forces a new resource to be created."
+  type        = string
+}
+
 variable "aks_dns_service_ip" {
   description = "IP address within the Kubernetes service address range that will be used by cluster service discovery (kube-dns). This is required when network_plugin is set to azure. Changing this forces a new resource to be created."
   type        = string

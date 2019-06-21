@@ -3,21 +3,23 @@
 #######################
 
 module "pre-prod-network-spoke" {
-  source                      = "../../infrastructure-modules/network-spoke"
-  resource_prefix             = "PRE-PROD-SPK"
-  vnet_address_ranges         = var.vnet_address_ranges
-  subnets_spoke               = var.subnets_spoke
-  environment                 = var.environment
-  region                      = var.region
-  storage_account_name        = var.storage_account_name
-  access_key                  = var.access_key
-  shared_state_key            = replace(var.state_key, "pre-prod", "shared-services")
-  container_name              = "tfstate"
+  source               = "../../infrastructure-modules/network-spoke"
+  resource_prefix      = "PRE-PROD-SPK"
+  vnet_address_ranges  = var.vnet_address_ranges
+  subnets_spoke        = var.subnets_spoke
+  environment          = var.environment
+  region               = var.region
+  storage_account_name = var.storage_account_name
+  access_key           = var.access_key
+  shared_state_key     = replace(var.state_key, "pre-prod", "shared-services")
+  container_name       = "tfstate"
+  /*
   allow_forwarded_traffic     = "true"
   hub_allow_gateway_transit   = "true"
   hub_use_remote_gateways     = "false"
   spoke_allow_gateway_transit = "false"
   spoke_use_remote_gateways   = "false"
+  */
 
   #TAGS#
   approver_tag      = var.approver_tag
@@ -62,16 +64,16 @@ module "pre-prod-aks-cluster-waf-ingress" {
     module.pre-prod-network-spoke.vnet_subnets_names,
     ["aks_nodes"],
   ), 0)
-  aks_aci_subnet_name             = "virtual_node_aci"
-  log_analytics_workspace_id      = element(module.pre-prod-log-analytics.log_analytics_id, 0)
-  admin_user_name                 = var.admin_user_name
-  aks_version                     = var.aks_version
-  aks_agent_type                  = var.aks_agent_type
-  aks_agent_count                 = var.aks_agent_count
-  aks_agent_vm_size               = var.aks_agent_vm_size
-  aks_dns_service_ip              = var.aks_dns_service_ip
-  aks_docker_bridge_cidr          = var.aks_docker_bridge_cidr
-  aks_service_cidr                = var.aks_service_cidr
+  aks_aci_subnet_name        = "virtual_node_aci"
+  log_analytics_workspace_id = element(module.pre-prod-log-analytics.log_analytics_id, 0)
+  admin_user_name            = var.admin_user_name
+  aks_version                = var.aks_version
+  aks_agent_type             = var.aks_agent_type
+  aks_agent_count            = var.aks_agent_count
+  aks_agent_vm_size          = var.aks_agent_vm_size
+  aks_dns_service_ip         = var.aks_dns_service_ip
+  aks_docker_bridge_cidr     = var.aks_docker_bridge_cidr
+  aks_service_cidr           = var.aks_service_cidr
   #api_server_authorized_ip_ranges = var.api_server_authorized_ip_ranges
 
   #TAGS
