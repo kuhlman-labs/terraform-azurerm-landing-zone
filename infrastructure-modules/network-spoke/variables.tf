@@ -32,11 +32,6 @@ variable "subnets_spoke" {
   type        = list
 }
 
-variable "nsg_rules_aks_nodes" {
-  description = "List of NSG rules"
-  type        = list
-}
-
 variable "storage_account_name" {
   description = "Storage account that contains Remote Backend, e.g. terraformdata24321"
   type        = string

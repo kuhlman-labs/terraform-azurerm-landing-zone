@@ -62,10 +62,10 @@ variable "aks_version" {
   type        = string
 }
 
-variable "api_server_authorized_ip_ranges" {
-  description = "The IP ranges to whitelist for incoming traffic to the masters"
-  type        = list
-}
+#variable "api_server_authorized_ip_ranges" {
+#  description = "The IP ranges to whitelist for incoming traffic to the masters"
+#  type        = list
+#}
 
 variable "aks_agent_count" {
   description = "Number of Agents (VMs) in the Pool. Possible values must be in the range of 1 to 100 (inclusive). Defaults to 1."
@@ -74,11 +74,6 @@ variable "aks_agent_count" {
 
 variable "aks_agent_vm_size" {
   description = "The size of each VM in the Agent Pool (e.g. Standard_F1). Changing this forces a new resource to be created."
-  type        = string
-}
-
-variable "aks_agent_os_disk_size" {
-  description = "The Agent Operating System disk size in GB. Changing this forces a new resource to be created."
   type        = string
 }
 
@@ -94,6 +89,11 @@ variable "aks_docker_bridge_cidr" {
 
 variable "aks_service_cidr" {
   description = "The Network Range used by the Kubernetes service. This is required when network_plugin is set to azure. Changing this forces a new resource to be created."
+  type        = string
+}
+
+variable "aks_agent_type" {
+  description = "Type of the Agent Pool. Possible values are AvailabilitySet and VirtualMachineScaleSets. Changing this forces a new resource to be created. Defaults to AvailabilitySet."
   type        = string
 }
 
