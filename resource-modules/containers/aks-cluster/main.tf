@@ -67,15 +67,15 @@ resource "azurerm_kubernetes_cluster" "main" {
     enabled = true
   }
 
-  api_server_authorized_ip_ranges = var.api_server_authorized_ip_ranges
+  #api_server_authorized_ip_ranges = var.api_server_authorized_ip_ranges
 
   agent_pool_profile {
     name            = "agentpool"
     count           = var.aks_agent_count
     vm_size         = var.aks_agent_vm_size
     os_type         = "Linux"
-    os_disk_size_gb = var.aks_agent_os_disk_size
     vnet_subnet_id  = var.aks_subnet_id
+    type            = var.aks_agent_type
   }
 
   service_principal {
