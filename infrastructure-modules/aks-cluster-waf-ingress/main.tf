@@ -104,7 +104,7 @@ resource "null_resource" "aks_status" {
   provisioner "local-exec" {
     command = <<EOT
     az aks get-credentials --resource-group ${module.resource_group.resource_group_name} --name ${module.resource_group.resource_group_name} --overwrite-existing;
-    kubectl apply -f https://raw.githubusercontent.com/Azure/aad-pod-identity/master/deploy/infra/deployment-rbac.yaml;
+    kubectl create -f https://raw.githubusercontent.com/Azure/aad-pod-identity/master/deploy/infra/deployment-rbac.yaml;
     kubectl apply -f "${templatefile("${path.module}/aadpodidentity.yaml", {
       name = "aks_cluster",
       identity_resource_id = module.aks_user_assigned_identity.uai_principal_id,
