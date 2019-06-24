@@ -68,7 +68,34 @@ module "vnet-gateway-hub" {
   region_tag        = var.region_tag
   cost_center_tag   = var.cost_center_tag
   service_hours_tag = var.service_hours_tag
-
-  optional_tags = var.optional_tags
+  optional_tags     = var.optional_tags
 }
 
+module "firewall-hub" {
+  source             = "../../resource-modules/network/firewall"
+  resource_group     = module.resource_group.resource_group_name
+  region             = var.region
+  environment        = var.environment
+  firewall_subnet_id = element(
+    matchkeys(
+      module.vnet-subnets-hub.subnet_ids,
+      module.vnet-subnets-hub.subnet_names,
+      ["AzureFirewallSubnet"],
+    ),
+    0,
+  )
+  firewall_collection_priority        = 200
+  firewall_collection_action          = "Allow"
+  firewall_rule_name                  = "AKSAllowTCPOutbound"
+  firewall_rule_source_addresses      = ["*"]
+  firewall_rule_destination_ports     = ["*"]
+  firewall_rule_destination_addresses = ["*"]
+  firewall_rule_protocols             = ["TCP"]
+
+  approver_tag      = var.approver_tag
+  owner_tag         = var.owner_tag
+  region_tag        = var.region_tag
+  cost_center_tag   = var.cost_center_tag
+  service_hours_tag = var.service_hours_tag
+  optional_tags     = var.optional_tags
+}

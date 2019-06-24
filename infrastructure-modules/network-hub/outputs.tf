@@ -33,3 +33,10 @@ output "vnet_subnets_hub_dmz_nsg" {
   description = "DMZ network security group resource id"
 }
 
+output "firewall_hub_private_ip" {
+  value = module.firewall-hub.firewall_private_ip
+}
+
+output "firewall_hub_id" {
+  value = module.firewall-hub.firewall_id
+}

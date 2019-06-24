@@ -30,9 +30,10 @@ module "vnet-subnets-spoke" {
   vnet_name      = module.vnet-spoke.vnet_name
   subnets        = var.subnets_spoke
 }
-/*
-#Pulling in remote state info from shared-services stack for peering
-data "terraform_remote_state" "vnet-hub" {
+
+#Pulling in outputs form shared-services stack for peering
+
+data "terraform_remote_state" "shared_services" {
   backend = "azurerm"
 
   config = {
@@ -45,9 +46,9 @@ data "terraform_remote_state" "vnet-hub" {
 
 module "vnet-peering" {
   source                      = "../../resource-modules/network/vnet-peering"
-  hub_vnet_name               = data.terraform_remote_state.vnet-hub.outputs.shared_vnet_hub_name
-  hub_vnet_rg                 = data.terraform_remote_state.vnet-hub.outputs.shared_vnet_hub_rg
-  hub_vnet_id                 = data.terraform_remote_state.vnet-hub.outputs.shared_vnet_hub_id
+  hub_vnet_name               = data.terraform_remote_state.shared_services.outputs.shared_vnet_hub_name
+  hub_vnet_rg                 = data.terraform_remote_state.shared_services.outputs.shared_vnet_hub_rg
+  hub_vnet_id                 = data.terraform_remote_state.shared_services.outputs.shared_vnet_hub_id
   spoke_vnet_name             = module.vnet-spoke.vnet_name
   spoke_vnet_id               = module.vnet-spoke.vnet_id
   spoke_vnet_rg               = module.resource_group.resource_group_name
@@ -58,4 +59,23 @@ module "vnet-peering" {
   spoke_use_remote_gateways   = var.spoke_use_remote_gateways
 }
 
-*/
+module "vnet-spoke-route-table" {
+  resource_group                = module.resource_group.resource_group_name
+  source                        = "../../resource-modules/network/route-table"
+  route_table_name              = "${module.vnet-spoke.vnet_name}-ROUTE-TABLE"
+  disable_bgp_route_propagation = false
+  route_name                    = "AzureFirewallRoute"
+  route_address_prefix          = var.aks_route_address_prefix
+  route_next_hop_type           = "VirtualAppliance"
+  route_next_hop_in_ip_address  = data.terraform_remote_state.shared_services.outputs.firewall_hub_private_ip
+}
+
+module "vnet-spoke-route-table-association" {
+  source = "../../resource-modules/network/route-table-association"
+  subnet_id = element(matchkeys(
+    module.vnet-subnets-spoke.subnet_ids,
+    module.vnet-subnets-spoke.subnet_names,
+    ["aks_nodes"],
+  ), 0)
+  route_table_id = module.vnet-spoke-route-table.route_table_id
+}

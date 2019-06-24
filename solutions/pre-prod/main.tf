@@ -12,6 +12,7 @@ module "pre-prod-network-spoke" {
   storage_account_name        = var.storage_account_name
   access_key                  = var.access_key
   shared_state_key            = replace(var.state_key, "pre-prod", "shared-services")
+  aks_route_address_prefix    = var.aks_route_address_prefix
   container_name              = "tfstate"
   allow_forwarded_traffic     = "true"
   hub_allow_gateway_transit   = "true"
