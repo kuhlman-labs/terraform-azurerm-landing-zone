@@ -171,7 +171,7 @@ resource "null_resource" "aks_status" {
             applicationgateway_name = "${module.resource_group.resource_group_name}-WAF",
             identity_resource_id    = module.aks_user_assigned_identity.uai_id,
             identity_client_id      = module.aks_user_assigned_identity.uai_client_id,
-            aks-api-server-address  = "${module.aks_cluster.aks_kube_admin_config_host}"
+            aks-api-server-address  = "${module.aks_cluster.aks_fqdn}"
           })}"
         ]
       }
