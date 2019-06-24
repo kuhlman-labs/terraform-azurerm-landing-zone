@@ -26,8 +26,8 @@ output "aks_kube_admin_config_client_certificate" {
   value = module.aks_cluster.aks_kube_admin_config_client_certificate
 }
 
-output "aks_kube_admin_config_client_ca_certificate" {
-  value = module.aks_cluster.aks_kube_admin_config_client_ca_certificate
+output "aks_kube_admin_config_cluster_ca_certificate" {
+  value = module.aks_cluster.aks_kube_admin_config_cluster_ca_certificate
 }
 
 output "aks_kube_admin_config_host" {

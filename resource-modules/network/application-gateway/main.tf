@@ -4,7 +4,6 @@
 
 locals {
   mandatory_tags = {
-    Name          = var.name_tag
     Owner         = var.owner_tag
     region        = var.region_tag
     Cost-Center   = var.cost_center_tag
@@ -51,7 +50,7 @@ resource "azurerm_application_gateway" "appgw" {
   }
 
   gateway_ip_configuration {
-    name      = "${azurerm_application_gateway.appgw.name}-ip-configuration"
+    name      = "${var.appgw_name}-ip-configuration"
     subnet_id = var.appgw_subnet_id
   }
 

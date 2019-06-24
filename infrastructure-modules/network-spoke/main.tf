@@ -14,13 +14,14 @@ module "vnet-spoke" {
   resource_group      = module.resource_group.resource_group_name
   vnet_address_ranges = var.vnet_address_ranges
   tier                = var.tier
-  approver_tag        = var.approver_tag
-  owner_tag           = var.owner_tag
-  region_tag          = var.region_tag
-  cost_center_tag     = var.cost_center_tag
-  service_hours_tag   = var.service_hours_tag
 
-  optional_tags = var.optional_tags
+  #tags
+  approver_tag      = var.approver_tag
+  owner_tag         = var.owner_tag
+  region_tag        = var.region_tag
+  cost_center_tag   = var.cost_center_tag
+  service_hours_tag = var.service_hours_tag
+  optional_tags     = var.optional_tags
 }
 
 module "vnet-subnets-spoke" {
@@ -29,55 +30,7 @@ module "vnet-subnets-spoke" {
   vnet_name      = module.vnet-spoke.vnet_name
   subnets        = var.subnets_spoke
 }
-
-module "nsg-subnets-spoke-edge" {
-  source         = "../../resource-modules/network/nsg"
-  resource_group = module.resource_group.resource_group_name
-  environment    = var.environment
-  tier           = var.tier
-
-  subnet_ids = matchkeys(
-    module.vnet-subnets-spoke.subnet_ids,
-    module.vnet-subnets-spoke.subnet_names,
-    ["edge"],
-  )
-
-  subnet_names = ["edge"]
-  nsg_rules    = var.nsg_rules_edge
-}
-
-module "nsg-subnets-spoke-application" {
-  source         = "../../resource-modules/network/nsg"
-  resource_group = module.resource_group.resource_group_name
-  environment    = var.environment
-  tier           = var.tier
-
-  subnet_ids = matchkeys(
-    module.vnet-subnets-spoke.subnet_ids,
-    module.vnet-subnets-spoke.subnet_names,
-    ["application"],
-  )
-
-  subnet_names = ["application"]
-  nsg_rules    = var.nsg_rules_application
-}
-
-module "nsg-subnets-spoke-data" {
-  source         = "../../resource-modules/network/nsg"
-  resource_group = module.resource_group.resource_group_name
-  environment    = var.environment
-  tier           = var.tier
-
-  subnet_ids = matchkeys(
-    module.vnet-subnets-spoke.subnet_ids,
-    module.vnet-subnets-spoke.subnet_names,
-    ["data"],
-  )
-
-  subnet_names = ["data"]
-  nsg_rules    = var.nsg_rules_data
-}
-
+/*
 #Pulling in remote state info from shared-services stack for peering
 data "terraform_remote_state" "vnet-hub" {
   backend = "azurerm"
@@ -105,3 +58,4 @@ module "vnet-peering" {
   spoke_use_remote_gateways   = var.spoke_use_remote_gateways
 }
 
+*/

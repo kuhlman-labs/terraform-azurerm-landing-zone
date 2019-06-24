@@ -16,4 +16,3 @@ module "log-analytics" {
 
   optional_tags = var.optional_tags
 }
-

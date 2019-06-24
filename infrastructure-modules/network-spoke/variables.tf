@@ -32,21 +32,6 @@ variable "subnets_spoke" {
   type        = list
 }
 
-variable "nsg_rules_edge" {
-  description = "List of NSG rules"
-  type        = list
-}
-
-variable "nsg_rules_application" {
-  description = "List of NSG rules"
-  type        = list
-}
-
-variable "nsg_rules_data" {
-  description = "List of NSG rules"
-  type        = list
-}
-
 variable "storage_account_name" {
   description = "Storage account that contains Remote Backend, e.g. terraformdata24321"
   type        = string
@@ -66,6 +51,7 @@ variable "access_key" {
   description = "access key for the storage account that contains the Remote Backend"
   type        = string
 }
+/*
 
 variable "allow_forwarded_traffic" {
   description = "Controls if forwarded traffic from VMs in the remote virtual network is allowed. Defaults to true."
@@ -92,6 +78,7 @@ variable "spoke_use_remote_gateways" {
   description = "Controls if remote gateways can be used on the local virtual network. If the flag is set to true, and allow_gateway_transit on the remote peering is also true, virtual network will use gateways of remote virtual network for transit. Only one peering can have this flag set to true. This flag cannot be set if virtual network already has a gateway. Defaults to false."
   type        = string
 }
+*/
 
 #######################################
 #Setting up Mandatory Tagging Variables

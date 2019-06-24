@@ -31,4 +31,3 @@ module "prod-network-spoke" {
 
   optional_tags = var.optional_tags
 }
-
