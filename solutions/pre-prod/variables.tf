@@ -112,6 +112,25 @@ variable "aks_agent_type" {
   type        = string
 }
 
+variable "aks_client_id" {
+  description = "The Client ID of an Azure Active Directory Application. Changing this forces a new resource to be created."
+  type        = string
+}
+
+variable "aks_server_id" {
+  description = "The Server ID of an Azure Active Directory Application. Changing this forces a new resource to be created."
+  type        = string
+}
+
+variable "aks_server_object_id" {
+  description = "The Object ID of the AKS Server to assign the Role Definition to. Changing this forces a new resource to be created."
+  type        = string
+}
+
+variable "aks_server_client_secret" {
+  description = "The Server Secret of an Azure Active Directory Application. Changing this forces a new resource to be created."
+  type        = string
+}
 
 #######################################
 #Setting up Mandatory Tagging Variables

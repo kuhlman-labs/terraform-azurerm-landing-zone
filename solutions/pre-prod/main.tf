@@ -3,23 +3,22 @@
 #######################
 
 module "pre-prod-network-spoke" {
-  source               = "../../infrastructure-modules/network-spoke"
-  resource_prefix      = "PRE-PROD-SPK"
-  vnet_address_ranges  = var.vnet_address_ranges
-  subnets_spoke        = var.subnets_spoke
-  environment          = var.environment
-  region               = var.region
-  storage_account_name = var.storage_account_name
-  access_key           = var.access_key
-  shared_state_key     = replace(var.state_key, "pre-prod", "shared-services")
-  container_name       = "tfstate"
-  /*
+  source                      = "../../infrastructure-modules/network-spoke"
+  resource_prefix             = "PRE-PROD-SPK"
+  vnet_address_ranges         = var.vnet_address_ranges
+  subnets_spoke               = var.subnets_spoke
+  environment                 = var.environment
+  region                      = var.region
+  storage_account_name        = var.storage_account_name
+  access_key                  = var.access_key
+  shared_state_key            = replace(var.state_key, "pre-prod", "shared-services")
+  container_name              = "tfstate"
   allow_forwarded_traffic     = "true"
   hub_allow_gateway_transit   = "true"
   hub_use_remote_gateways     = "false"
   spoke_allow_gateway_transit = "false"
-  spoke_use_remote_gateways   = "false"
-  */
+  spoke_use_remote_gateways   = "true"
+
 
   #TAGS#
   approver_tag      = var.approver_tag
@@ -74,6 +73,10 @@ module "pre-prod-aks-cluster-waf-ingress" {
   aks_dns_service_ip         = var.aks_dns_service_ip
   aks_docker_bridge_cidr     = var.aks_docker_bridge_cidr
   aks_service_cidr           = var.aks_service_cidr
+  aks_client_id              = var.aks_client_id
+  aks_server_client_secret   = var.aks_server_client_secret
+  aks_server_id              = var.aks_server_id
+  aks_server_object_id       = var.aks_server_object_id
   #api_server_authorized_ip_ranges = var.api_server_authorized_ip_ranges
 
   #TAGS
