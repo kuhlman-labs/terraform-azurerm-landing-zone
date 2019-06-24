@@ -13,8 +13,4 @@ RUN apt-get update && \
     mv terraform /usr/local/bin && \
     rm ./terraform_${TERRAFORM_VERSION}_linux_amd64.zip && \
     curl -sL https://aka.ms/InstallAzureCLIDeb | bash && \
-<<<<<<< HEAD
     apt-get remove -y unzip curl wget
-=======
-apt-get remove -y unzip curl wget
->>>>>>> Preparing to merge
