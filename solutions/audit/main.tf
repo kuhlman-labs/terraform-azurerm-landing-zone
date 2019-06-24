@@ -1,7 +1,5 @@
 # Log Analytics Workspace for Activity Log
 
-/*
-
 module "log-analytics" {
   source           = "../../infrastructure-modules/log-analytics"
   region           = var.region
@@ -18,5 +16,3 @@ module "log-analytics" {
 
   optional_tags = var.optional_tags
 }
-
-*/

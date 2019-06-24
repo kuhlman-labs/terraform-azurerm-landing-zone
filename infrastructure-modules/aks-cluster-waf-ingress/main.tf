@@ -38,14 +38,14 @@ module "aks_role_assignment_1" {
   source               = "../../resource-modules/governance/role-assignment"
   scope                = var.aks_subnet_id
   role_definition_name = "Network Contributor"
-  principal_id         = "1f88650c-a051-47a1-a704-d9ad8844de32"
+  principal_id         = var.aks_server_object_id
 }
 
 module "aks_role_assignment_2" {
   source               = "../../resource-modules/governance/role-assignment"
   scope                = module.aks_user_assigned_identity.uai_id
   role_definition_name = "Managed Identity Operator"
-  principal_id         = "1f88650c-a051-47a1-a704-d9ad8844de32"
+  principal_id         = var.aks_server_object_id
 }
 
 module "aks_role_assignment_3" {
@@ -74,14 +74,14 @@ module "aks_cluster" {
   aks_aci_subnet_name        = var.aks_aci_subnet_name
   aks_version                = var.aks_version
   tenant_id                  = var.tenant_id
-  #api_server_authorized_ip_ranges = var.api_server_authorized_ip_ranges
+  #api_server_authorized_ip_ranges = var.api_server_authorized_ip_ranges #TODO Add Azure Firewall Config
   aks_agent_count          = var.aks_agent_count
   aks_agent_vm_size        = var.aks_agent_vm_size
   client_id                = var.client_id
   client_secret            = var.client_secret
-  aks_client_id            = "01521c5e-7bed-47df-b89f-19cb344e6388"
-  aks_server_client_secret = "pEbmEA1XWzDdB*g-?RhvQ7/Y9ti43oeA"
-  aks_server_id            = "dff1eb98-81e3-4cb9-910c-6ecfa69c822c"
+  aks_client_id            = var.aks_client_id
+  aks_server_client_secret = var.aks_server_client_secret
+  aks_server_id            = var.aks_server_id
   aks_dns_service_ip       = var.aks_dns_service_ip
   aks_docker_bridge_cidr   = var.aks_docker_bridge_cidr
   aks_service_cidr         = var.aks_service_cidr
@@ -148,7 +148,6 @@ resource "null_resource" "aks_status" {
           host = "${module.aks_cluster.aks_kube_admin_config_host}"
           #username = "${module.aks_cluster.aks_kube_admin_config_username}"
           #password = "${module.aks_cluster.aks_kube_admin_config_password}"
-
           client_certificate     = "${base64decode(module.aks_cluster.aks_kube_admin_config_client_certificate)}"
           client_key             = "${base64decode(module.aks_cluster.aks_kube_admin_config_client_key)}"
           cluster_ca_certificate = "${base64decode(module.aks_cluster.aks_kube_admin_config_cluster_ca_certificate)}"
