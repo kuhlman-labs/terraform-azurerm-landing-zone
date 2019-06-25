@@ -37,6 +37,10 @@ output "firewall_hub_private_ip" {
   value = module.firewall-hub.firewall_private_ip
 }
 
+output "firewall_hub_public_ip" {
+  value = module.firewall-hub.firewall_public_ip
+}
+
 output "firewall_hub_id" {
   value = module.firewall-hub.firewall_id
 }

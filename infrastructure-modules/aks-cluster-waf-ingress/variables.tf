@@ -27,6 +27,25 @@ variable "tenant_id" {
   type        = string
 }
 
+variable "storage_account_name" {
+  description = "Storage account that contains Remote Backend, e.g. terraformdata24321"
+  type        = string
+}
+
+variable "container_name" {
+  description = "Storage account container that contains Remote Backend, e.g. tfstate"
+  type        = string
+}
+
+variable "shared_state_key" {
+  description = "Key for the shared services State file, e.g. shared-services.tfstate"
+  type        = string
+}
+
+variable "access_key" {
+  description = "access key for the storage account that contains the Remote Backend"
+  type        = string
+}
 variable "appgw_vnet_name" {
   description = "Name of the Vnet that the appgw is in"
   type        = string

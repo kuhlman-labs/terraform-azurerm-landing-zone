@@ -16,3 +16,7 @@ output "shared_vnet_hub_rg" {
 output "shared_firewall_hub_private_ip" {
   value = module.shared-network-hub.firewall_hub_private_ip
 }
+
+output "shared_firewall_hub_public_ip" {
+  value = module.shared-network-hub.firewall_hub_public_ip
+}

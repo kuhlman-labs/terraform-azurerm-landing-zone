@@ -48,12 +48,12 @@ variable "tenant_id" {
   description = "The Tenant ID used for Azure Active Directory Application. If this isn't specified the Tenant ID of the current Subscription is used. Changing this forces a new resource to be created."
   type        = string
 }
-
-#variable "api_server_authorized_ip_ranges" {
-#  description = "The IP ranges to whitelist for incoming traffic to the masters"
-#  type        = list
-#}
-
+/*
+variable "api_server_authorized_ip_ranges" {
+  description = "The IP ranges to whitelist for incoming traffic to the masters"
+  type        = list
+}
+*/
 variable "aks_agent_count" {
   description = "Number of Agents (VMs) in the Pool. Possible values must be in the range of 1 to 100 (inclusive). Defaults to 1."
   type        = string

@@ -25,7 +25,7 @@ data "azurerm_resource_group" "firewall" {
 #####################
 
 resource "azurerm_public_ip" "firewall" {
-  name                = "${upper(var.resource_prefix)}-ip"
+  name                = "${upper(var.resource_prefix)}-IP"
   location            = data.azurerm_resource_group.firewall.location
   resource_group_name = data.azurerm_resource_group.firewall.name
   allocation_method   = "Static"
