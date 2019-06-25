@@ -67,7 +67,7 @@ module "vnet-spoke-route-table" {
   route_name                    = "AzureFirewallRoute"
   route_address_prefix          = var.aks_route_address_prefix
   route_next_hop_type           = "VirtualAppliance"
-  route_next_hop_in_ip_address  = data.terraform_remote_state.shared_services.outputs.firewall_hub_private_ip
+  route_next_hop_in_ip_address  = data.terraform_remote_state.shared_services.outputs.shared_firewall_hub_private_ip
 }
 
 module "vnet-spoke-route-table-association" {

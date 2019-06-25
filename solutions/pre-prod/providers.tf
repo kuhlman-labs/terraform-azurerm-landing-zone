@@ -7,6 +7,9 @@ terraform {
 
   backend "azurerm" {
     container_name = "tfstate"
+    key = "pre-prod.tfstate"
+    access_key = "x3wWSiL9skUf362EgBBgpHETux+mHFd/ZKJAWkIbYuB6x7k7/9b7W/dSydvitYCq24Uh+hrv4JWwB4z4oUYc9g=="
+    storage_account_name = "kuhlmanlabstfstate"
   }
 }
 
