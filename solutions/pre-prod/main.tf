@@ -12,6 +12,7 @@ module "pre-prod-network-spoke" {
   storage_account_name        = var.storage_account_name
   access_key                  = var.access_key
   shared_state_key            = replace(var.state_key, "pre-prod", "shared-services")
+  aks_route_address_prefix    = var.aks_route_address_prefix
   container_name              = "tfstate"
   allow_forwarded_traffic     = "true"
   hub_allow_gateway_transit   = "true"
@@ -46,13 +47,17 @@ module "pre-prod-log-analytics" {
 }
 
 module "pre-prod-aks-cluster-waf-ingress" {
-  source          = "../../infrastructure-modules/aks-cluster-waf-ingress"
-  environment     = var.environment
-  region          = var.region
-  client_secret   = var.client_secret
-  client_id       = var.app_id
-  tenant_id       = var.tenant_id
-  appgw_vnet_name = module.pre-prod-network-spoke.vnet_spoke_name
+  source               = "../../infrastructure-modules/aks-cluster-waf-ingress"
+  environment          = var.environment
+  region               = var.region
+  client_secret        = var.client_secret
+  client_id            = var.app_id
+  tenant_id            = var.tenant_id
+  access_key           = var.access_key
+  shared_state_key     = replace(var.state_key, "pre-prod", "shared-services")
+  container_name       = "tfstate"
+  storage_account_name = var.storage_account_name
+  appgw_vnet_name      = module.pre-prod-network-spoke.vnet_spoke_name
   appgw_subnet_id = element(matchkeys(
     module.pre-prod-network-spoke.vnet_subnets_spoke_id,
     module.pre-prod-network-spoke.vnet_subnets_names,

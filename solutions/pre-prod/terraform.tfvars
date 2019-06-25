@@ -23,6 +23,8 @@ subnets_spoke = [
   }
 ]
 
+aks_route_address_prefix = "10.1.0.0/23"
+
 #kubernetes
 admin_user_name        = "brettkuhlman"
 aks_version            = "1.12.8"

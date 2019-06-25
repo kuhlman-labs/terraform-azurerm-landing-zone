@@ -62,6 +62,19 @@ module "aks_role_assignment_4" {
   principal_id         = module.aks_user_assigned_identity.uai_principal_id
 }
 
+#Pulling in outputs form shared-services stack for Firewall IP
+
+data "terraform_remote_state" "shared_services" {
+  backend = "azurerm"
+
+  config = {
+    storage_account_name = var.storage_account_name
+    container_name       = var.container_name
+    key                  = var.shared_state_key
+    access_key           = var.access_key
+  }
+}
+
 module "aks_cluster" {
   source                     = "../../resource-modules/containers/aks-cluster"
   resource_group             = module.resource_group.resource_group_name
@@ -74,7 +87,7 @@ module "aks_cluster" {
   aks_aci_subnet_name        = var.aks_aci_subnet_name
   aks_version                = var.aks_version
   tenant_id                  = var.tenant_id
-  #api_server_authorized_ip_ranges = var.api_server_authorized_ip_ranges #TODO Add Azure Firewall Config
+  #api_server_authorized_ip_ranges = ["${data.terraform_remote_state.shared_services.outputs.shared_firewall_hub_public_ip}/32"] TODO
   aks_agent_count          = var.aks_agent_count
   aks_agent_vm_size        = var.aks_agent_vm_size
   client_id                = var.client_id
@@ -136,10 +149,10 @@ resource "null_resource" "aks_status" {
         }
         subject {
           kind      = "ServiceAccount"
-          name      = "tiller-sa"
+          name      = kubernetes_service_account.tiller_sa.metadata.0.name
           namespace = "kube-system"
         }
-        depends_on = [kubernetes_service_account.tiller_sa]
+        # depends_on = [kubernetes_service_account.tiller_sa]
       }
 
       provider "helm" {
@@ -170,7 +183,7 @@ resource "null_resource" "aks_status" {
             applicationgateway_name = "${module.resource_group.resource_group_name}-WAF",
             identity_resource_id    = module.aks_user_assigned_identity.uai_id,
             identity_client_id      = module.aks_user_assigned_identity.uai_client_id,
-            aks-api-server-address  = "${module.aks_cluster.aks_fqdn}"
+            aks-api-server-address  = module.aks_cluster.aks_fqdn
           })}"
         ]
       }

@@ -2,6 +2,7 @@
 # Shared Services Variables
 ###########################
 
+
 environment         = "shared-services"
 region              = "eastus"
 vnet_address_ranges = ["10.0.0.0/16"]
@@ -13,6 +14,10 @@ subnets_hub = [
   {
     name        = "dmz"
     subnet_cidr = "10.0.1.0/24"
+  },
+  {
+    name        = "AzureFirewallSubnet"
+    subnet_cidr = "10.0.2.0/24"
   }
 ]
 nsg_rules = [

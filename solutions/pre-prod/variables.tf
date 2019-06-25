@@ -132,6 +132,11 @@ variable "aks_server_client_secret" {
   type        = string
 }
 
+variable "aks_route_address_prefix" {
+  description = "The destination CIDR to which the route applies, such as 10.1.0.0/16"
+  type        = string
+}
+
 #######################################
 #Setting up Mandatory Tagging Variables
 #######################################
