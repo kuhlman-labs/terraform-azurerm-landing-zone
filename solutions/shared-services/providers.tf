@@ -6,9 +6,9 @@ terraform {
   required_version = ">= 0.12"
 
   backend "azurerm" {
-    container_name = "tfstate"
-    key = "shared-services.tfstate"
-    access_key = "x3wWSiL9skUf362EgBBgpHETux+mHFd/ZKJAWkIbYuB6x7k7/9b7W/dSydvitYCq24Uh+hrv4JWwB4z4oUYc9g=="
+    container_name       = "tfstate"
+    key                  = "shared-services.tfstate"
+    access_key           = "x3wWSiL9skUf362EgBBgpHETux+mHFd/ZKJAWkIbYuB6x7k7/9b7W/dSydvitYCq24Uh+hrv4JWwB4z4oUYc9g=="
     storage_account_name = "kuhlmanlabstfstate"
   }
 }

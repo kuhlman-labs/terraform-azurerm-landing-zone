@@ -152,7 +152,7 @@ resource "null_resource" "aks_status" {
           name      = kubernetes_service_account.tiller_sa.metadata.0.name
           namespace = "kube-system"
         }
-       # depends_on = [kubernetes_service_account.tiller_sa]
+        # depends_on = [kubernetes_service_account.tiller_sa]
       }
 
       provider "helm" {

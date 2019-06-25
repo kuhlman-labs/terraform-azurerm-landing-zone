@@ -27,7 +27,7 @@ subnets_hub = [
     subnet_cidr = "10.0.1.0/24"
   },
   {
-    name = "AzureFirewallSubnet"
+    name        = "AzureFirewallSubnet"
     subnet_cidr = "10.0.2.0/24"
   }
 ]

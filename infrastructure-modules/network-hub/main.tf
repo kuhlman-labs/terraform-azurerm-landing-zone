@@ -72,10 +72,10 @@ module "vnet-gateway-hub" {
 }
 
 module "firewall-hub" {
-  source             = "../../resource-modules/network/firewall"
-  resource_group     = module.resource_group.resource_group_name
-  region             = var.region
-  environment        = var.environment
+  source         = "../../resource-modules/network/firewall"
+  resource_group = module.resource_group.resource_group_name
+  region         = var.region
+  environment    = var.environment
   firewall_subnet_id = element(
     matchkeys(
       module.vnet-subnets-hub.subnet_ids,
