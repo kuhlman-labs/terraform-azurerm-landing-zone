@@ -23,7 +23,6 @@ There are dedicated `README.md` files in each directory, summarised links provid
     * [log-analytics](infrastructure-modules/log-analytics/README.md)
     * [network-hub](infrastructure-modules/network-hub/README.md)
     * [network-spoke](infrastructure-modules/network-spoke/README.md)
-    * [storage-account](infrastructure-modules/storage-account/README.md)
 
 * Resource Modules
     * Governance
@@ -37,8 +36,6 @@ There are dedicated `README.md` files in each directory, summarised links provid
         * [vnet-subnets](resource-modules/network/vnet-subnets/README.md)
     *  Resource Group
         *  [resource-group](resource-modules/resource-group/README.md)
-    *  Storage
-        * [storage-account](resource-modules/storage/storage-account/README.md)
 
 ## Launching
 
