@@ -12,10 +12,10 @@ module "network_spoke" {
   shared_state_key     = replace(var.state_key, "prod", "shared-services")
   container_name       = "tfstate"
   #vnet
-  vnet_address_ranges                    = var.vnet_address_ranges
-  subnet_aks_nodes_address_prefix        = var.subnet_aks_nodes_address_prefix
-  subnet_virtual_node_aci_address_prefix = var.subnet_virtual_node_aci_address_prefix
-  route_address_prefix                   = var.route_address_prefix
+  vnet_address_ranges            = var.vnet_address_ranges
+  subnet_frontend_address_prefix = var.subnet_frontend_address_prefix
+  subnet_backend_address_prefix  = var.subnet_backend_address_prefix
+  route_address_prefix           = var.route_address_prefix
   #peering
   allow_forwarded_traffic     = "true"
   hub_allow_gateway_transit   = "true"
