@@ -63,22 +63,7 @@ variable "vnet_address_ranges" {
   type        = list
 }
 
-variable "subnet_gateway_address_prefix" {
-  description = "The address prefix to use for the subnet."
-  type        = string
-}
-
 variable "subnet_dmz_address_prefix" {
-  description = "The address prefix to use for the subnet."
-  type        = string
-}
-
-variable "subnet_firewall_address_prefix" {
-  description = "The address prefix to use for the subnet."
-  type        = string
-}
-
-variable "subnet_app_gw_address_prefix" {
   description = "The address prefix to use for the subnet."
   type        = string
 }
@@ -88,40 +73,6 @@ variable "subnet_app_gw_address_prefix" {
 variable "nsg_rules_dmz" {
   description = "List of NSG rules for DMZ subnet"
   type        = list
-}
-
-#vpn
-
-variable "client_address_spaces" {
-  description = "The address space out of which ip addresses for vpn clients will be taken. You can provide more than one address space, e.g. in CIDR notation"
-  type        = list
-}
-
-variable "vpn_client_protocols" {
-  description = "List of the protocols supported by the vpn client. The supported values are SSTP, IkeV2 and OpenVPN."
-  type        = list
-}
-
-#aks
-
-variable "aks_client_id" {
-  description = "The Client ID of an Azure Active Directory Application. Changing this forces a new resource to be created."
-  type        = string
-}
-
-variable "aks_server_id" {
-  description = "The Server ID of an Azure Active Directory Application. Changing this forces a new resource to be created."
-  type        = string
-}
-
-variable "aks_server_object_id" {
-  description = "The Object ID of the AKS Server to assign the Role Definition to. Changing this forces a new resource to be created."
-  type        = string
-}
-
-variable "aks_server_client_secret" {
-  description = "The Server Secret of an Azure Active Directory Application. Changing this forces a new resource to be created."
-  type        = string
 }
 
 #tags

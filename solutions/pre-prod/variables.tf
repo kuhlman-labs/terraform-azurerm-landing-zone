@@ -63,7 +63,7 @@ variable "vnet_address_ranges" {
   type        = list
 }
 
-variable "subnet_frontend_prefix" {
+variable "subnet_frontend_address_prefix" {
   description = "The address prefix to use for the subnet."
   type        = string
 }

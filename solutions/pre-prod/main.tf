@@ -15,7 +15,6 @@ module "network_spoke" {
   vnet_address_ranges            = var.vnet_address_ranges
   subnet_frontend_address_prefix = var.subnet_frontend_address_prefix
   subnet_backend_address_prefix  = var.subnet_backend_address_prefix
-  route_address_prefix           = var.route_address_prefix
   #peering
   allow_forwarded_traffic     = "true"
   hub_allow_gateway_transit   = "true"
