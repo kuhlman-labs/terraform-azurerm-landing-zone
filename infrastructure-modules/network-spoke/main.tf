@@ -31,26 +31,22 @@ module "vnet_spoke" {
   tags                = var.tags
 }
 
-#Setting up subnet
+#Setting up subnets
 
-module "subnet_aks_nodes" {
+module "subnet_frontend" {
   source                = "../../resource-modules/network/vnet-subnet"
   resource_group        = module.resource_group.resource_group_name
   vnet_name             = module.vnet_spoke.vnet_name
-  subnet_name           = "aks_nodes"
-  subnet_address_prefix = var.subnet_aks_nodes_address_prefix
-  route_table_id        = module.route_table.route_table_id
+  subnet_name           = "frontend"
+  subnet_address_prefix = var.subnet_frontend_address_prefix
 }
 
-module "subnet_virtual_node_aci" {
-  source                     = "../../resource-modules/network/vnet-subnet-with-delegation"
-  resource_group             = module.resource_group.resource_group_name
-  vnet_name                  = module.vnet_spoke.vnet_name
-  subnet_name                = "virtual_node_aci"
-  subnet_address_prefix      = var.subnet_virtual_node_aci_address_prefix
-  delegation_name            = "ACI"
-  service_delegation_name    = "Microsoft.ContainerInstance/containerGroups"
-  service_delegation_actions = ["Microsoft.Network/virtualNetworks/subnets/action"]
+module "subnet_backend" {
+  source                = "../../resource-modules/network/vnet-subnet"
+  resource_group        = module.resource_group.resource_group_name
+  vnet_name             = module.vnet_spoke.vnet_name
+  subnet_name           = "backend"
+  subnet_address_prefix = var.subnet_backend_address_prefix
 }
 
 #Setting up vnet peering
@@ -68,22 +64,4 @@ module "vnet_peering" {
   hub_use_remote_gateways     = var.hub_use_remote_gateways
   spoke_allow_gateway_transit = var.spoke_allow_gateway_transit
   spoke_use_remote_gateways   = var.spoke_use_remote_gateways
-}
-
-#setting up route table
-
-module "route_table" {
-  resource_group                = module.resource_group.resource_group_name
-  source                        = "../../resource-modules/network/route-table"
-  disable_bgp_route_propagation = false
-  route_name                    = "AzureFirewallRoute"
-  route_address_prefix          = var.route_address_prefix
-  route_next_hop_type           = "VirtualAppliance"
-  route_next_hop_in_ip_address  = data.terraform_remote_state.shared_services.outputs.shared_services_firewall_private_ip
-}
-
-module "route_table_association_aks_nodes" {
-  source         = "../../resource-modules/network/route-table-association"
-  subnet_id      = module.subnet_aks_nodes.subnet_id
-  route_table_id = module.route_table.route_table_id
 }

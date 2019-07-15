@@ -63,8 +63,6 @@ module "aks_role_assignment_4" {
   principal_id         = module.aks_user_assigned_identity.uai_principal_id
 }
 
-
-/*
 #Setting up WAF
 
 module "aks_waf" {
@@ -77,8 +75,6 @@ module "aks_waf" {
   appgw_subnet_id = var.appgw_subnet_id
   tags            = var.tags
 }
-
-*/
 
 #Setting up AKS Cluster
 

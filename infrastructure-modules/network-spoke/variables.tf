@@ -1,6 +1,6 @@
-################################
-## Setting up resource variables
-################################
+###############################
+# Setting up resource variables
+###############################
 
 #common
 
@@ -13,6 +13,8 @@ variable "environment" {
   description = "Development environment for resource; prod, non-prod, shared-services"
   type        = string
 }
+
+#shared services backend 
 
 variable "storage_account_name" {
   description = "Storage account that contains Remote Backend, e.g. terraformdata24321"
@@ -47,14 +49,14 @@ variable "tier" {
   default     = "spk"
 }
 
-#subnet
+#subnets
 
-variable "subnet_aks_nodes_address_prefix" {
+variable "subnet_frontend_address_prefix" {
   description = "The address prefix to use for the subnet."
   type        = string
 }
 
-variable "subnet_virtual_node_aci_address_prefix" {
+variable "subnet_backend_address_prefix" {
   description = "The address prefix to use for the subnet."
   type        = string
 }
@@ -87,26 +89,8 @@ variable "spoke_use_remote_gateways" {
   type        = string
 }
 
-#route table
+#tags
 
-variable "route_address_prefix" {
-  description = "The destination CIDR to which the route applies, such as 10.1.0.0/16"
-  type        = string
-}
-
-
-
-
-
-
-
-
-
-
-
-#######################################
-#Setting up Optional Tagging Variables
-#######################################
 variable "tags" {
   description = "A map of tags to add to all resources"
   type        = map

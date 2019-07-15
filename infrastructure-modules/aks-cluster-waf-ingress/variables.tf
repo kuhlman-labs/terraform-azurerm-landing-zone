@@ -49,8 +49,6 @@ variable "access_key" {
   type        = string
 }
 
-/*
-
 #waf
 
 variable "appgw_vnet_name" {
@@ -62,8 +60,6 @@ variable "appgw_subnet_id" {
   description = "The ID of a Subnet."
   type        = string
 }
-
-*/
 
 #aks
 
