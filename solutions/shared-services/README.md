@@ -1,5 +1,5 @@
 
-# Module `solutions/shared-services/`
+# Module `.`
 
 Core Version Constraints:
 * `>= 0.12`
@@ -33,15 +33,10 @@ Provider Requirements:
 * `vpn_client_protocols` (required): List of the protocols supported by the vpn client. The supported values are SSTP, IkeV2 and OpenVPN.
 
 ## Output Values
-* `shared_services_appgw_id`
-* `shared_services_firewall_private_ip`
-* `shared_services_firewall_public_ip`
-* `shared_services_subnet_app_gw_id`
 * `shared_services_vnet_id`: Resource id of the hub virtual network
 * `shared_services_vnet_name`: Generated name of the hub virtual network
 * `shared_services_vnet_rg`: Generated name of the resource group for hub virtual network
 
 ## Child Modules
-* `log_analytics` from `../../infrastructure-modules/log-analytics`
 * `network_hub` from `../../infrastructure-modules/network-hub`
 

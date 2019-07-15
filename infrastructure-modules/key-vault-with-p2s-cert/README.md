@@ -1,5 +1,5 @@
 
-# Module `infrastructure-modules/key-vault-with-p2s-cert/`
+# Module `.`
 
 ## Input Variables
 * `approver_tag` (required): Financial; Unique - email address
@@ -16,8 +16,8 @@
 * `tenant_id` (required): The Azure Active Directory tenant ID that should be used for authenticating requests to the key vault.
 
 ## Output Values
-* `key_vault_id`: Key Vault resource id
-* `key_vault_p2s_certificate_data`: Raw Key Vault Certificate
+* `key_vault_id`: key vault resource id
+* `key_vault_p2s_certificate_data`: raw key vault certificate
 
 ## Child Modules
 * `key-vault` from `../../resource-modules/governance/key-vault`

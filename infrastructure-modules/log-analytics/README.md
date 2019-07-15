@@ -1,4 +1,5 @@
-# Module `infrastructure-modules/log-analytics/`
+
+# Module `.`
 
 ## Input Variables
 * `environment` (required): Development environment for resource; prod, non-prod, shared-services
@@ -9,10 +10,11 @@
 * `tags` (required): Optional tags to be added to resource
 
 ## Output Values
-* `log_analytics_id`: Log Analytics Workspace id
-* `log_analytics_primary_shared_key`: Primary shared key for the Log Analytics Workspace
-* `log_analytics_workspace_id`: Workspace (or Customer) ID for the Log Analytics Workspace
+* `log_analytics_id`: log analytics resource id
+* `log_analytics_primary_shared_key`: primary shared key for the Log Analytics Workspace
+* `log_analytics_workspace_id`: workspace (or customer) ID for the log analytics workspace
 
 ## Child Modules
 * `log-analytics` from `../../resource-modules/governance/log-analytics`
 * `resource_group` from `../../resource-modules/resource-group`
+

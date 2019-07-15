@@ -1,4 +1,5 @@
-# Module `infrastructure-modules/aks-cluster-waf-ingress`
+
+# Module `.`
 
 Provider Requirements:
 * **azurerm:** (any version)
@@ -24,6 +25,8 @@ Provider Requirements:
 * `aks_subnet_id` (required): The ID of the Subnet where the Agents in the Pool should be provisioned. Changing this forces a new resource to be created.
 * `aks_version` (required): Version of Kubernetes specified when creating the AKS managed cluster. If not specified, the latest recommended version will be used at provisioning time (but won't auto-upgrade).
 * `api_server_authorized_ip_ranges` (required): The IP ranges to whitelist for incoming traffic to the masters
+* `appgw_subnet_id` (required): The ID of a Subnet.
+* `appgw_vnet_name` (required): Name of the Vnet that the appgw is in
 * `client_id` (required):  The Client ID for the Service Principal. Changing this forces a new resource to be created
 * `client_secret` (required): The Client Secret for the Service Principal. Changing this forces a new resource to be created.
 * `container_name` (required): Storage account container that contains Remote Backend, e.g. tfstate
@@ -36,16 +39,16 @@ Provider Requirements:
 * `tenant_id` (required): The Tenant ID used for Azure Active Directory Application. If this isn't specified the Tenant ID of the current Subscription is used. Changing this forces a new resource to be created.
 
 ## Output Values
-* `aks_fqdn`
-* `aks_id`
-* `aks_kube_admin_config_client_certificate`
-* `aks_kube_admin_config_client_key`
-* `aks_kube_admin_config_cluster_ca_certificate`
-* `aks_kube_admin_config_host`
-* `aks_kube_admin_config_password`
-* `aks_kube_admin_config_raw`
-* `aks_kube_admin_config_username`
-* `aks_node_resource_group`
+* `aks_fqdn`: The FQDN of the Azure Kubernetes Managed Cluster.
+* `aks_id`: The ID of the Kubernetes Managed Cluster.
+* `aks_kube_admin_config_client_certificate`: Base64 encoded public certificate used by clients to authenticate to the Kubernetes cluster.
+* `aks_kube_admin_config_client_key`: Base64 encoded private key used by clients to authenticate to the Kubernetes cluster.
+* `aks_kube_admin_config_cluster_ca_certificate`: Base64 encoded public CA certificate used as the root of trust for the Kubernetes cluster.
+* `aks_kube_admin_config_host`: The Kubernetes cluster server host.
+* `aks_kube_admin_config_password`: A password or token used to authenticate to the Kubernetes cluster.
+* `aks_kube_admin_config_raw`: Raw Kubernetes config for the admin account to be used by kubectl and other compatible tools. This is only available when Role Based Access Control with Azure Active Directory is enabled.
+* `aks_kube_admin_config_username`: A username used to authenticate to the Kubernetes cluster.
+* `aks_node_resource_group`: Auto-generated Resource Group containing AKS Cluster resources.
 
 ## Managed Resources
 * `helm_release.ingress-azure` from `helm`
@@ -64,4 +67,6 @@ Provider Requirements:
 * `aks_role_assignment_3` from `../../resource-modules/governance/role-assignment`
 * `aks_role_assignment_4` from `../../resource-modules/governance/role-assignment`
 * `aks_user_assigned_identity` from `../../resource-modules/governance/user-assigned-identity`
+* `aks_waf` from `../../resource-modules/network/application-gateway`
 * `resource_group` from `../../resource-modules/resource-group`
+
