@@ -23,17 +23,27 @@ There are dedicated `README.md` files in each directory, summarised links provid
     * [log-analytics](infrastructure-modules/log-analytics/README.md)
     * [network-hub](infrastructure-modules/network-hub/README.md)
     * [network-spoke](infrastructure-modules/network-spoke/README.md)
+    * [aks-cluster-waf-ingress](infrastructure-modules/aks-cluster-waf-ingress/README.md)
 
 * Resource Modules
+    * Backup
+        * [recovery-services-vault](resource-modules/backup/recovery-services-vault/README.md)
+    * Containers
+        * [aks-cluster](resource-modules/containers/aks-cluster/README.md)        
     * Governance
         * [key-vault](resource-modules/governance/key-vault/README.md)
         * [log-analytics](resource-modules/governance/log-analytics/README.md)
+        * [role-assignment](resource-modules/governance/role-assignment/README.md)
+        * [user-assigned-identity](resource-modules/governance/user-assigned-identity/README.md)
     * Network
+        * [application-gateway](resource-modules/network/application-gateway/README.md)
+        * [firewall](resource-modules/network/firewall/README.md)
+        * [route-table](resource-modules/network/route-table/README.md)
         * [nsg](resource-modules/network/nsg/README.md)
         * [vnet](resource-modules/network/vnet/README.md)
         * [vnet-gateway](resource-modules/network/vnet-gateway/README.md)
         * [vnet-peering](resource-modules/network/vnet-peering/README.md)
-        * [vnet-subnets](resource-modules/network/vnet-subnets/README.md)
+        * [vnet-subnet](resource-modules/network/vnet-subnet/README.md)
     *  Resource Group
         *  [resource-group](resource-modules/resource-group/README.md)
 
