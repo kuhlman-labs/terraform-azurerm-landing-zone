@@ -14,6 +14,8 @@ variable "environment" {
   type        = string
 }
 
+#authentication
+
 variable "subscription_id" {
   description = "The Id of the Subscription that should contain the created resources"
   type        = string
