@@ -2,32 +2,26 @@
 # Prod Composistion
 ###################
 
-module "prod-network-spoke" {
-  source                      = "../../infrastructure-modules/network-spoke"
-  resource_prefix             = "PROD-SPK"
-  vnet_address_ranges         = var.vnet_address_ranges
-  subnets_spoke               = var.subnets_spoke
-  environment                 = var.environment
-  region                      = var.region
-  nsg_rules_edge              = var.nsg_rules
-  nsg_rules_application       = var.nsg_rules
-  nsg_rules_data              = var.nsg_rules
-  storage_account_name        = var.storage_account_name
-  access_key                  = var.access_key
-  container_name              = "tfstate"
-  shared_state_key            = replace(var.state_key, "prod", "shared-services")
+module "network_spoke" {
+  source = "../../infrastructure-modules/network-spoke"
+  #common
+  environment          = var.environment
+  region               = var.region
+  storage_account_name = var.storage_account_name
+  access_key           = var.access_key
+  shared_state_key     = replace(var.state_key, "prod", "shared-services")
+  container_name       = "tfstate"
+  #vnet
+  vnet_address_ranges                    = var.vnet_address_ranges
+  subnet_aks_nodes_address_prefix        = var.subnet_aks_nodes_address_prefix
+  subnet_virtual_node_aci_address_prefix = var.subnet_virtual_node_aci_address_prefix
+  route_address_prefix                   = var.route_address_prefix
+  #peering
   allow_forwarded_traffic     = "true"
   hub_allow_gateway_transit   = "true"
   hub_use_remote_gateways     = "false"
   spoke_allow_gateway_transit = "false"
   spoke_use_remote_gateways   = "true"
-
-  #TAGS#
-  approver_tag      = var.approver_tag
-  owner_tag         = var.owner_tag
-  region_tag        = var.region_tag
-  cost_center_tag   = var.cost_center_tag
-  service_hours_tag = var.service_hours_tag
-
-  optional_tags = var.optional_tags
+  #tags
+  tags = var.tags
 }
