@@ -10,7 +10,7 @@ module "network_hub" {
   #vnet
   vnet_address_ranges = var.vnet_address_ranges
   #subnets
-  subnet_dmz_address_prefix      = var.subnet_dmz_address_prefix
+  subnet_dmz_address_prefix = var.subnet_dmz_address_prefix
   #nsg
   nsg_rules_dmz = var.nsg_rules_dmz
   #tags
