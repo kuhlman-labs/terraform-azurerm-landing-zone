@@ -1,50 +1,8 @@
-########################################
-# Authentication Variables
-########################################
-variable "subscription_id" {
-  description = "The Id of the Subscription that should contain the created resources"
-  type        = string
-}
+#################
+# Audit Variables
+#################
 
-variable "app_id" {
-  description = "The client ID for the Service Principal"
-  type        = string
-}
-
-variable "client_secret" {
-  description = "The secret for the Service Principal authentication"
-  type        = string
-}
-
-variable "tenant_id" {
-  description = "The tenant ID for the Service Principal"
-  type        = string
-}
-
-variable "shared_services_subscription_id" {
-  description = "subscription id of shared-services env"
-  type        = string
-}
-
-variable "state_key" {
-  description = "Key for the state file of the solution, e.g. pre-prod.tfstate"
-  type        = string
-}
-
-
-variable "access_key" {
-  description = "access key for the storage account that contains the Remote Backend"
-  type        = string
-}
-
-variable "storage_account_name" {
-  description = "Storage account that contains Remote Backend, e.g. terraformdata24321"
-  type        = string
-}
-
-########################################
-# Variables
-########################################
+#common
 
 variable "environment" {
   description = "Development environment for resource; prod, non-prod, shared-services"
@@ -56,41 +14,9 @@ variable "region" {
   type        = string
 }
 
-########################################
-# Tagging Variables
-########################################
+#tags
 
-variable "owner_tag" {
-  description = "APP/Technical; Email address of App/Product Owner"
-  type        = string
-}
-
-variable "region_tag" {
-  description = "Financial; i.e. Sharepoint Global"
-  type        = string
-}
-
-variable "cost_center_tag" {
-  description = "Financial; Unique - Code provided directly from Finance (BU/Brand)"
-  type        = string
-}
-
-variable "approver_tag" {
-  description = "Financial; Unique - email address"
-  type        = string
-}
-
-variable "service_hours_tag" {
-  description = "Automation/Security; Sort -FullTime\\|Weekdays..."
-  type        = string
-}
-
-
-
-#######################################
-#Setting up Optional Tagging Variables
-#######################################
-variable "optional_tags" {
+variable "tags" {
   description = "A map of tags to add to all resources"
   type        = map
   default     = {}
