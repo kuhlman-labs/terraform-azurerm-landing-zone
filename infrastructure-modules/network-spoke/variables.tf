@@ -1,6 +1,9 @@
-########################################
-## Setting up Network Resource Variables
-########################################
+################################
+## Setting up resource variables
+################################
+
+#common
+
 variable "region" {
   description = "Geographic region resource will be deployed into"
   type        = string
@@ -9,27 +12,6 @@ variable "region" {
 variable "environment" {
   description = "Development environment for resource; prod, non-prod, shared-services"
   type        = string
-}
-
-variable "resource_prefix" {
-  description = "a short pre-defined text to identify resource type"
-  type        = string
-}
-
-variable "vnet_address_ranges" {
-  description = "This is a list of the ip address ranges for the vnet"
-  type        = list
-}
-
-variable "tier" {
-  description = "The tier of a VNet, e.g HUB, or SPK"
-  type        = string
-  default     = "spk"
-}
-
-variable "subnets_spoke" {
-  description = "Map of subnets with name, subnet_cidr, and service_endpoints."
-  type        = list
 }
 
 variable "storage_account_name" {
@@ -51,6 +33,33 @@ variable "access_key" {
   description = "access key for the storage account that contains the Remote Backend"
   type        = string
 }
+
+#vnet
+
+variable "vnet_address_ranges" {
+  description = "This is a list of the ip address ranges for the vnet"
+  type        = list
+}
+
+variable "tier" {
+  description = "The tier of a VNet, e.g HUB, or SPK"
+  type        = string
+  default     = "spk"
+}
+
+#subnet
+
+variable "subnet_aks_nodes_address_prefix" {
+  description = "The address prefix to use for the subnet."
+  type        = string
+}
+
+variable "subnet_virtual_node_aci_address_prefix" {
+  description = "The address prefix to use for the subnet."
+  type        = string
+}
+
+#peering
 
 variable "allow_forwarded_traffic" {
   description = "Controls if forwarded traffic from VMs in the remote virtual network is allowed. Defaults to true."
@@ -78,46 +87,27 @@ variable "spoke_use_remote_gateways" {
   type        = string
 }
 
-variable "aks_route_address_prefix" {
+#route table
+
+variable "route_address_prefix" {
   description = "The destination CIDR to which the route applies, such as 10.1.0.0/16"
   type        = string
 }
 
-#######################################
-#Setting up Mandatory Tagging Variables
-#######################################
 
-variable "owner_tag" {
-  description = "APP/Technical; Email address of App/Product Owner"
-  type        = string
-}
 
-variable "region_tag" {
-  description = "Financial; i.e. Sharepoint Global"
-  type        = string
-}
 
-variable "cost_center_tag" {
-  description = "Financial; Unique - Code provided directly from Finance (BU/Brand)"
-  type        = string
-}
 
-variable "approver_tag" {
-  description = "Financial; Unique - email address"
-  type        = string
-}
 
-variable "service_hours_tag" {
-  description = "Automation/Security; Sort -FullTime\\|Weekdays..."
-  type        = string
-}
+
+
 
 
 
 #######################################
 #Setting up Optional Tagging Variables
 #######################################
-variable "optional_tags" {
+variable "tags" {
   description = "A map of tags to add to all resources"
   type        = map
   default     = {}

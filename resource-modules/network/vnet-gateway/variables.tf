@@ -1,6 +1,9 @@
 ###############################
-# Setting up Resource Variables
+# Setting up resource variables
 ###############################
+
+#common
+
 variable "resource_group" {
   description = "Resource Group that vNet Gateway will deploy into, must be same as the vNet's resource gorup"
   type        = string
@@ -9,7 +12,7 @@ variable "resource_group" {
 variable "resource_prefix" {
   description = "a short pre-defined text to identify resource type"
   type        = string
-  default     = "vnetgw"
+  default     = "vnet-gw"
 }
 
 variable "region" {
@@ -21,6 +24,8 @@ variable "environment" {
   description = "Development environment for resource; prod, non-prod, shared-services"
   type        = string
 }
+
+#vnet gateway
 
 variable "gateway_subnet" {
   description = "The GateWay subnet id that the VPN gateway will use"
@@ -35,7 +40,7 @@ variable "certificate_data" {
 }
 
 variable "ip_allocation" {
-  description = "Allocation method for Public IP Address; Can beStatic or Dynamic"
+  description = "Allocation method for Public IP Address; Can be Static or Dynamic"
   type        = string
   default     = "Dynamic"
 }
@@ -55,7 +60,7 @@ variable "vpn_type" {
 variable "sku" {
   description = "Configuration of the size and capacity of the virtual network gateway; Can be are Basic, Standard, HighPerformance, UltraPerformance, ErGw1AZ, ErGw2AZ, ErGw3AZ, VpnGw1, VpnGw2, VpnGw3, VpnGw1AZ, VpnGw2AZ, and VpnGw3AZ and depend on the type and vpn_type arguments. A PolicyBased gateway only supports the Basic sku. Further, the UltraPerformance sku is only supported by an ExpressRoute gateway."
   type        = string
-  default     = "VpnGw1"
+  default     = "Basic"
 }
 
 variable "client_address_spaces" {
@@ -68,41 +73,20 @@ variable "vpn_client_protocols" {
   type        = list
 }
 
-#######################################
-#Setting up Mandatory Tagging Variables
-#######################################
 
-variable "owner_tag" {
-  description = "APP/Technical; Email address of App/Product Owner"
-  type        = string
-}
 
-variable "region_tag" {
-  description = "Financial; i.e. Sharepoint Global"
-  type        = string
-}
 
-variable "cost_center_tag" {
-  description = "Financial; Unique - Code provided directly from Finance (BU/Brand)"
-  type        = string
-}
 
-variable "approver_tag" {
-  description = "Financial; Unique - email address"
-  type        = string
-}
 
-variable "service_hours_tag" {
-  description = "Automation/Security; Sort -FullTime\\|Weekdays..."
-  type        = string
-}
+
+
 
 
 
 #######################################
 #Setting up Optional Tagging Variables
 #######################################
-variable "optional_tags" {
+variable "tags" {
   description = "Optional tags to be added to resource"
   type        = map
   default     = {}

@@ -1,6 +1,19 @@
 ####################
 # Pre-Prod Variables
 ####################
+
+#common
+
+variable "region" {
+  description = "Geographic region resource will be deployed into"
+  type        = string
+}
+
+variable "environment" {
+  description = "Development environment for resource; prod, non-prod, shared-services"
+  type        = string
+}
+
 variable "subscription_id" {
   description = "The Id of the Subscription that should contain the created resources"
   type        = string
@@ -36,36 +49,37 @@ variable "storage_account_name" {
   type        = string
 }
 
-variable "environment" {
-  description = "Development environment for resource; prod, non-prod, shared-services"
-  type        = string
-}
-
 variable "state_key" {
   description = "Key for the state file of the solution, e.g. pre-prod.tfstate"
   type        = string
 }
 
-variable "region" {
-  description = "Geographic region resource will be deployed into"
-  type        = string
-}
+#network
 
 variable "vnet_address_ranges" {
   description = "This is a list of the ip address ranges for the vnet"
   type        = list
 }
 
-variable "subnets_spoke" {
-  description = "Map of subnets with name, subnet_cidr, and service_endpoints."
-  type        = list
+variable "subnet_aks_nodes_address_prefix" {
+  description = "The address prefix to use for the subnet."
+  type        = string
 }
+
+variable "subnet_virtual_node_aci_address_prefix" {
+  description = "The address prefix to use for the subnet."
+  type        = string
+}
+
+#nsg
 
 variable "nsg_rules" {
   description = "List of NSG rules"
   type        = list
   default     = []
 }
+
+#aks
 
 variable "admin_user_name" {
   description = "The Admin Username for the Cluster. Changing this forces a new resource to be created."
@@ -77,10 +91,10 @@ variable "aks_version" {
   type        = string
 }
 
-#variable "api_server_authorized_ip_ranges" {
-#  description = "The IP ranges to whitelist for incoming traffic to the masters"
-#  type        = list
-#}
+variable "api_server_authorized_ip_ranges" {
+  description = "The IP ranges to whitelist for incoming traffic to the masters"
+  type        = list
+}
 
 variable "aks_agent_count" {
   description = "Number of Agents (VMs) in the Pool. Possible values must be in the range of 1 to 100 (inclusive). Defaults to 1."
@@ -132,46 +146,14 @@ variable "aks_server_client_secret" {
   type        = string
 }
 
-variable "aks_route_address_prefix" {
+variable "route_address_prefix" {
   description = "The destination CIDR to which the route applies, such as 10.1.0.0/16"
   type        = string
 }
 
-#######################################
-#Setting up Mandatory Tagging Variables
-#######################################
+#tags
 
-variable "owner_tag" {
-  description = "APP/Technical; Email address of App/Product Owner"
-  type        = string
-}
-
-variable "region_tag" {
-  description = "Financial; i.e. Sharepoint Global"
-  type        = string
-}
-
-variable "cost_center_tag" {
-  description = "Financial; Unique - Code provided directly from Finance (BU/Brand)"
-  type        = string
-}
-
-variable "approver_tag" {
-  description = "Financial; Unique - email address"
-  type        = string
-}
-
-variable "service_hours_tag" {
-  description = "Automation/Security; Sort -FullTime\\|Weekdays..."
-  type        = string
-}
-
-
-
-#######################################
-#Setting up Optional Tagging Variables
-#######################################
-variable "optional_tags" {
+variable "tags" {
   description = "A map of tags to add to all resources"
   type        = map
   default     = {}

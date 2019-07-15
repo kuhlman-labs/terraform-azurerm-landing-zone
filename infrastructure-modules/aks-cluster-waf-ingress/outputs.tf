@@ -1,7 +1,3 @@
-output "appgw_id" {
-  value = module.aks_waf.appgw_id
-}
-
 output "aks_id" {
   value = module.aks_cluster.aks_id
 }

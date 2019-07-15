@@ -1,31 +1,18 @@
-# **Resource Modules: Resource Group**
 
-## Description
+# Module `resource-modules/resource-group/`
 
-This TF module creates a resource group with the name derived from the input variables and then converted to upper case.
+Provider Requirements:
+* **azurerm:** (any version)
 
-## Resources Created
+## Input Variables
+* `environment` (required): Development environment for resource; prod, non-prod, shared-services
+* `region` (required): Geographic region resource will be deployed into
+* `resource_prefix` (required): A short pre-defined text to identify the resource type
 
-- Resource Group
+## Output Values
+* `resource_group_id`: Generated resource group id
+* `resource_group_name`: Generated resource group name
 
-## Example Variables
-```javascript
-  resource_prefix = "vnet"
-  region          = "westeurope"
-  environment     = "p"
-```
-
-## Inputs
-
-| Name | Description | Type | Default | Required |
-|------|-------------|:----:|:-----:|:-----:|
-| resource\_prefix | A short pre-defined text to identify the resource type | string | n/a | yes |
-| region | Geographic region resource will be deployed into | string | n/a | yes |
-| environment | Development environment for resource; p: Production, q: Quality and Assurance, s: Staging, d: Development or Lab | string | n/a | yes |
-
-## Outputs
-
-| Name | Description |
-|------|-------------|
-| resource\_group\_name | Generated resource group name |
+## Managed Resources
+* `azurerm_resource_group.base` from `azurerm`
 

@@ -1,16 +1,8 @@
-########################################
-#Setting up Locals for Tags and Resource
-########################################
+##################
+#Setting up locals
+##################
 
 locals {
-  mandatory_tags = {
-    Owner         = var.owner_tag
-    region        = var.region_tag
-    Cost-Center   = var.cost_center_tag
-    Approver      = var.approver_tag
-    Service-Hours = var.service_hours_tag
-  }
-  #block for hardcoded names
   backend_address_pool_name      = "${var.appgw_vnet_name}-beap"
   frontend_port_name             = "${var.appgw_vnet_name}-feport"
   frontend_ip_configuration_name = "${var.appgw_vnet_name}-feip"
@@ -20,28 +12,28 @@ locals {
 }
 
 ###########################
-# Setting up Resource Group
+# Setting up resource group
 ###########################
 
-data "azurerm_resource_group" "appgw" {
+data "azurerm_resource_group" "base" {
   name = var.resource_group
 }
 
 
-# Setting up appgw public IP
+# Setting up app_gw public ip
 
-resource "azurerm_public_ip" "appgw_ip" {
-  name                = "${var.appgw_name}-ip"
-  resource_group_name = data.azurerm_resource_group.appgw.name
-  location            = data.azurerm_resource_group.appgw.location
+resource "azurerm_public_ip" "base" {
+  name                = "${data.azurerm_resource_group.base.name}-${var.resource_prefix}-ip"
+  resource_group_name = data.azurerm_resource_group.base.name
+  location            = data.azurerm_resource_group.base.location
   allocation_method   = "Static"
   sku                 = "Standard"
 }
 
-resource "azurerm_application_gateway" "appgw" {
-  name                = var.appgw_name
-  resource_group_name = data.azurerm_resource_group.appgw.name
-  location            = data.azurerm_resource_group.appgw.location
+resource "azurerm_application_gateway" "base" {
+  name                = "${data.azurerm_resource_group.base.name}-${var.resource_prefix}"
+  resource_group_name = data.azurerm_resource_group.base.name
+  location            = data.azurerm_resource_group.base.location
 
   sku {
     name     = var.appgw_sku
@@ -50,7 +42,7 @@ resource "azurerm_application_gateway" "appgw" {
   }
 
   gateway_ip_configuration {
-    name      = "${var.appgw_name}-ip-configuration"
+    name      = "${data.azurerm_resource_group.base.name}-${var.resource_prefix}-ip-configuration"
     subnet_id = var.appgw_subnet_id
   }
 
@@ -61,7 +53,7 @@ resource "azurerm_application_gateway" "appgw" {
 
   frontend_ip_configuration {
     name                 = "${local.frontend_ip_configuration_name}"
-    public_ip_address_id = "${azurerm_public_ip.appgw_ip.id}"
+    public_ip_address_id = "${azurerm_public_ip.base.id}"
   }
 
   backend_address_pool {
@@ -90,5 +82,10 @@ resource "azurerm_application_gateway" "appgw" {
     backend_address_pool_name  = "${local.backend_address_pool_name}"
     backend_http_settings_name = "${local.http_setting_name}"
   }
-  tags = merge(local.mandatory_tags, var.optional_tags)
+  tags = var.tags
+
+  #'aks with waf ingress' specific configuration
+  lifecycle {
+    ignore_changes = [tags, backend_address_pool, backend_http_settings, frontend_ip_configuration, frontend_port, http_listener, probe, request_routing_rule]
+  }
 }

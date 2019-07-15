@@ -1,10 +1,18 @@
 ###############################
-# Setting up Resource Variables
+# Setting up resource variables
 ###############################
+
+#common
 
 variable "resource_group" {
   description = "The name of the target resource group"
   type        = string
+}
+
+variable "resource_prefix" {
+  description = "Short prefix to identify resource"
+  type        = string
+  default     = "aks-cluster"
 }
 
 variable "aks_name" {
@@ -25,7 +33,6 @@ variable "admin_user_name" {
 variable "public_ssh_key_path" {
   description = "The Public SSH Key used to access the cluster. Changing this forces a new resource to be created."
   type        = string
-  default     = "~/.ssh/id_rsa.pub"
 }
 
 variable "log_analytics_workspace_id" {
@@ -48,12 +55,12 @@ variable "tenant_id" {
   description = "The Tenant ID used for Azure Active Directory Application. If this isn't specified the Tenant ID of the current Subscription is used. Changing this forces a new resource to be created."
   type        = string
 }
-/*
+
 variable "api_server_authorized_ip_ranges" {
   description = "The IP ranges to whitelist for incoming traffic to the masters"
   type        = list
 }
-*/
+
 variable "aks_agent_count" {
   description = "Number of Agents (VMs) in the Pool. Possible values must be in the range of 1 to 100 (inclusive). Defaults to 1."
   type        = string
@@ -114,41 +121,9 @@ variable "aks_agent_type" {
   type        = string
 }
 
+#tags
 
-#######################################
-#Setting up Mandatory Tagging Variables
-#######################################
-
-variable "owner_tag" {
-  description = "APP/Technical; Email address of App/Product Owner"
-  type        = string
-}
-
-variable "region_tag" {
-  description = "Financial; i.e. Sharepoint Global"
-  type        = string
-}
-
-variable "cost_center_tag" {
-  description = "Financial; Unique - Code provided directly from Finance (BU/Brand)"
-  type        = string
-}
-
-variable "approver_tag" {
-  description = "Financial; Unique - email address"
-  type        = string
-}
-
-variable "service_hours_tag" {
-  description = "Automation/Security; Sort -FullTime\\|Weekdays..."
-  type        = string
-}
-
-#######################################
-#Setting up Optional Tagging Variables
-#######################################
-
-variable "optional_tags" {
+variable "tags" {
   description = "Optional tags to be added to resource"
   type        = map
   default     = {}

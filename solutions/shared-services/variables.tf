@@ -1,6 +1,19 @@
-########################################
+###########################
 # Shared Services Variables
-########################################
+###########################
+
+#common
+
+variable "environment" {
+  description = "Development environment for resource; prod, non-prod, shared-services"
+  type        = string
+}
+
+variable "region" {
+  description = "Geographic region resource will be deployed into"
+  type        = string
+}
+
 variable "subscription_id" {
   description = "The Id of the Subscription that should contain the created resources"
   type        = string
@@ -31,7 +44,6 @@ variable "state_key" {
   type        = string
 }
 
-
 variable "access_key" {
   description = "access key for the storage account that contains the Remote Backend"
   type        = string
@@ -42,30 +54,41 @@ variable "storage_account_name" {
   type        = string
 }
 
-variable "environment" {
-  description = "Development environment for resource; prod, non-prod, shared-services"
-  type        = string
-}
-
-variable "region" {
-  description = "Geographic region resource will be deployed into"
-  type        = string
-}
+#network
 
 variable "vnet_address_ranges" {
   description = "This is a list of the ip address ranges for the vnet"
   type        = list
 }
 
-variable "subnets_hub" {
-  description = "Map of subnets with name, subnet_cidr, and service_endpoints."
+variable "subnet_gateway_address_prefix" {
+  description = "The address prefix to use for the subnet."
+  type        = string
+}
+
+variable "subnet_dmz_address_prefix" {
+  description = "The address prefix to use for the subnet."
+  type        = string
+}
+
+variable "subnet_firewall_address_prefix" {
+  description = "The address prefix to use for the subnet."
+  type        = string
+}
+
+variable "subnet_app_gw_address_prefix" {
+  description = "The address prefix to use for the subnet."
+  type        = string
+}
+
+#nsg
+
+variable "nsg_rules_dmz" {
+  description = "List of NSG rules for DMZ subnet"
   type        = list
 }
 
-variable "nsg_rules" {
-  description = "List of NSG rules"
-  type        = list
-}
+#vpn
 
 variable "client_address_spaces" {
   description = "The address space out of which ip addresses for vpn clients will be taken. You can provide more than one address space, e.g. in CIDR notation"
@@ -77,82 +100,31 @@ variable "vpn_client_protocols" {
   type        = list
 }
 
-/* -- Diagnostic Store Optional Variables -- */
-variable "diag_acc_prefix" {
-  description = "Prefix to be used for the shared services diagnostic storage account name. Must be compatible with Azure storage account naming, only lowercase letters and numbers"
-  type        = string
-  default     = "sshubinfdiag"
-}
+#aks
 
-variable "diag_kind" {
-  type        = string
-  description = "Type of storage to use, valid inputs include Storage, StorageV2, BlobStorage"
-  default     = "StorageV2"
-}
-
-variable "diag_tier" {
-  type        = string
-  default     = "Standard"
-  description = "Tier of storage to use, valid inputs include Standard, Premium"
-}
-
-variable "diag_blob_encryption" {
-  type        = string
-  default     = "true"
-  description = "Enable/disable encryption for blob storage"
-}
-
-variable "diag_file_encryption" {
-  type        = string
-  default     = "true"
-  description = "Enable/disable encryption for file storage"
-}
-
-variable "diag_replication" {
-  description = "Replication type to use, valid inputs include LRS, GRS, RAGRS, ZRS"
-  default     = "LRS"
-}
-
-variable "diag_access_tier" {
-  description = "Defines the access tier for BlobStorage and StorageV2 accounts. Valid options are Hot and Cool."
-  default     = "Hot"
-}
-
-#######################################
-#Setting up Mandatory Tagging Variables
-#######################################
-
-variable "owner_tag" {
-  description = "APP/Technical; Email address of App/Product Owner"
+variable "aks_client_id" {
+  description = "The Client ID of an Azure Active Directory Application. Changing this forces a new resource to be created."
   type        = string
 }
 
-variable "region_tag" {
-  description = "Financial; i.e. Sharepoint Global"
+variable "aks_server_id" {
+  description = "The Server ID of an Azure Active Directory Application. Changing this forces a new resource to be created."
   type        = string
 }
 
-variable "cost_center_tag" {
-  description = "Financial; Unique - Code provided directly from Finance (BU/Brand)"
+variable "aks_server_object_id" {
+  description = "The Object ID of the AKS Server to assign the Role Definition to. Changing this forces a new resource to be created."
   type        = string
 }
 
-variable "approver_tag" {
-  description = "Financial; Unique - email address"
+variable "aks_server_client_secret" {
+  description = "The Server Secret of an Azure Active Directory Application. Changing this forces a new resource to be created."
   type        = string
 }
 
-variable "service_hours_tag" {
-  description = "Automation/Security; Sort -FullTime\\|Weekdays..."
-  type        = string
-}
+#tags
 
-
-
-#######################################
-#Setting up Optional Tagging Variables
-#######################################
-variable "optional_tags" {
+variable "tags" {
   description = "A map of tags to add to all resources"
   type        = map
   default     = {}

@@ -1,54 +1,48 @@
-########################################
-#Setting up Locals for Tags and Resource
-########################################
-
-locals {
-  mandatory_tags = {
-    Owner         = var.owner_tag
-    region        = var.region_tag
-    Cost-Center   = var.cost_center_tag
-    Approver      = var.approver_tag
-    Service-Hours = var.service_hours_tag
-  }
-}
-
 ###########################
-# Setting up Resource Group
+# Setting up resource group
 ###########################
 
-data "azurerm_resource_group" "firewall" {
+data "azurerm_resource_group" "base" {
   name = var.resource_group
 }
 
-#####################
-# Setting up Firewall
-#####################
+########################
+# Setting up firewall ip
+########################
 
-resource "azurerm_public_ip" "firewall" {
-  name                = "${upper(var.resource_prefix)}-IP"
-  location            = data.azurerm_resource_group.firewall.location
-  resource_group_name = data.azurerm_resource_group.firewall.name
+resource "azurerm_public_ip" "base" {
+  name                = "${data.azurerm_resource_group.base.name}-${var.resource_prefix}-ip"
+  location            = data.azurerm_resource_group.base.location
+  resource_group_name = data.azurerm_resource_group.base.name
   allocation_method   = "Static"
   sku                 = "Standard"
 }
 
+#####################
+# Setting up firewall
+#####################
+
 resource "azurerm_firewall" "base" {
-  name                = "${upper(var.resource_prefix)}-${upper(var.region)}-${upper(var.environment)}"
-  location            = data.azurerm_resource_group.firewall.location
-  resource_group_name = data.azurerm_resource_group.firewall.name
+  name                = "${data.azurerm_resource_group.base.name}-${var.resource_prefix}"
+  location            = data.azurerm_resource_group.base.location
+  resource_group_name = data.azurerm_resource_group.base.name
 
   ip_configuration {
-    name                 = "${upper(var.resource_prefix)}-ip-collection"
+    name                 = "${data.azurerm_resource_group.base.name}-${var.resource_prefix}-ip-configuration"
     subnet_id            = var.firewall_subnet_id
-    public_ip_address_id = azurerm_public_ip.firewall.id
+    public_ip_address_id = azurerm_public_ip.base.id
   }
-  tags = merge(local.mandatory_tags, var.optional_tags)
+  tags = var.tags
 }
 
+#############################################
+# Setting up firewall network rule collection 
+#############################################
+
 resource "azurerm_firewall_network_rule_collection" "base" {
-  name                = "${upper(var.resource_prefix)}-${upper(var.region)}-${upper(var.environment)}"
+  name                = "${data.azurerm_resource_group.base.name}-${var.resource_prefix}-network-rule-collection"
   azure_firewall_name = azurerm_firewall.base.name
-  resource_group_name = data.azurerm_resource_group.firewall.name
+  resource_group_name = data.azurerm_resource_group.base.name
   priority            = var.firewall_collection_priority
   action              = var.firewall_collection_action
 

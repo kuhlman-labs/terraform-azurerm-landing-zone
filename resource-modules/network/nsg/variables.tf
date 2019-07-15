@@ -1,6 +1,8 @@
-#######################################
-# Setting up Resource Variables for NSG
-#######################################
+###############################
+# Setting up resource variables
+###############################
+
+#common
 
 variable "resource_group" {
   description = "This is the resource group to which the resources will be deployed"
@@ -18,16 +20,6 @@ variable "environment" {
   type        = string
 }
 
-variable "tier" {
-  description = "The tier of a VNet, e.g HUB, or SPK"
-  type        = string
-}
-
-variable "subnet_ids" {
-  description = "Subnets the NSG will apply to"
-  type        = list
-}
-
 variable "subnet_names" {
   description = "Subnet names the NSG will apply to. Used for count"
   type        = list
@@ -43,7 +35,7 @@ variable "nsg_rules" {
       priority                   = 100
       direction                  = "Inbound"
       access                     = "Allow"
-      protocol                   = "Tcp"
+      protocol                   = "*"
       source_port_range          = "22"
       destination_port_range     = "22"
       source_address_prefix      = "VirtualNetwork"
@@ -54,7 +46,7 @@ variable "nsg_rules" {
       priority                   = 110
       direction                  = "Inbound"
       access                     = "Allow"
-      protocol                   = "Tcp"
+      protocol                   = "*"
       source_port_range          = "3389"
       destination_port_range     = "3389"
       source_address_prefix      = "VirtualNetwork"

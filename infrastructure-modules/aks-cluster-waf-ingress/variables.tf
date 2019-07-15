@@ -1,6 +1,8 @@
-###############################################
-## Setting up aks-cluster-waf-ingress Variables
-###############################################
+##############################################
+# Setting up aks-cluster-waf-ingress variables
+##############################################
+
+#common
 
 variable "region" {
   description = "Geographic Region resource will be deployed into"
@@ -46,6 +48,11 @@ variable "access_key" {
   description = "access key for the storage account that contains the Remote Backend"
   type        = string
 }
+
+/*
+
+#waf
+
 variable "appgw_vnet_name" {
   description = "Name of the Vnet that the appgw is in"
   type        = string
@@ -55,6 +62,10 @@ variable "appgw_subnet_id" {
   description = "The ID of a Subnet."
   type        = string
 }
+
+*/
+
+#aks
 
 variable "aks_subnet_id" {
   description = "The ID of the Subnet where the Agents in the Pool should be provisioned. Changing this forces a new resource to be created."
@@ -81,10 +92,10 @@ variable "aks_version" {
   type        = string
 }
 
-#variable "api_server_authorized_ip_ranges" {
-#  description = "The IP ranges to whitelist for incoming traffic to the masters"
-#  type        = list
-#}
+variable "api_server_authorized_ip_ranges" {
+  description = "The IP ranges to whitelist for incoming traffic to the masters"
+  type        = list
+}
 
 variable "aks_agent_count" {
   description = "Number of Agents (VMs) in the Pool. Possible values must be in the range of 1 to 100 (inclusive). Defaults to 1."
@@ -136,40 +147,9 @@ variable "aks_server_client_secret" {
   type        = string
 }
 
-#######################################
-#Setting up Mandatory Tagging Variables
-#######################################
+#tags
 
-variable "owner_tag" {
-  description = "APP/Technical; Email address of App/Product Owner"
-  type        = string
-}
-
-variable "region_tag" {
-  description = "Financial; i.e. Sharepoint Global"
-  type        = string
-}
-
-variable "cost_center_tag" {
-  description = "Financial; Unique - Code provided directly from Finance (BU/Brand)"
-  type        = string
-}
-
-variable "approver_tag" {
-  description = "Financial; Unique - email address"
-  type        = string
-}
-
-variable "service_hours_tag" {
-  description = "Automation/Security; Sort -FullTime\\|Weekdays..."
-  type        = string
-}
-
-#######################################
-#Setting up Optional Tagging Variables
-#######################################
-
-variable "optional_tags" {
+variable "tags" {
   description = "Optional tags to be added to resource"
   type        = map
   default     = {}
