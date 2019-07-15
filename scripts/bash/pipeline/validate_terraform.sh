@@ -20,7 +20,7 @@ for dir in ${solutions}; do
     export STATE_KEY="$formatted_branch.$solution.tfstate";
     echo $STATE_KEY;
     terraform init -input=false -upgrade=true -backend=true -backend-config="access_key=$ACCESS_KEY" -backend-config="storage_account_name=$STORAGE_ACCOUNT_NAME" -backend-config="key=$STATE_KEY" -var "storage_account_name=$STORAGE_ACCOUNT_NAME" -var "access_key=$ACCESS_KEY" -var "state_key=$STATE_KEY";
-    terraform validate -check-variables=false;
+    terraform validate;
     echo "Validation Completed";
   fi;
   cd -;
