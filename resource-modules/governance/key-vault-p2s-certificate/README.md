@@ -1,5 +1,5 @@
 
-# Module `resource-modules/governance/key-vault-p2s-certificate/`
+# Module `.`
 
 Provider Requirements:
 * **azurerm:** (any version)
@@ -13,5 +13,5 @@ Provider Requirements:
 * `key_vault_p2s_certificate_data`: Raw Key Vault Certificate
 
 ## Managed Resources
-* `azurerm_key_vault_certificate.p2s` from `azurerm`
+* `azurerm_key_vault_certificate.base` from `azurerm`
 

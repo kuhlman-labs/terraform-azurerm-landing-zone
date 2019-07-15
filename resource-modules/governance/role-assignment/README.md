@@ -1,5 +1,5 @@
 
-# Module `resource-modules/governance/role-assignment/`
+# Module `.`
 
 Provider Requirements:
 * **azurerm:** (any version)

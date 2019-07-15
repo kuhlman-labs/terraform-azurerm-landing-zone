@@ -1,5 +1,5 @@
 
-# Module `resource-modules/governance/log-analytics/`
+# Module `.`
 
 Provider Requirements:
 * **azurerm:** (any version)

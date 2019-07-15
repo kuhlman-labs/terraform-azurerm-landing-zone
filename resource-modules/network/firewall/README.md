@@ -1,5 +1,5 @@
 
-# Module `resource-modules/network/firewall/`
+# Module `.`
 
 Provider Requirements:
 * **azurerm:** (any version)
