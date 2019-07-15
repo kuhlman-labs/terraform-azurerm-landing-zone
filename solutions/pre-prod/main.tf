@@ -17,10 +17,10 @@ module "network_spoke" {
   subnet_backend_address_prefix  = var.subnet_backend_address_prefix
   #peering
   allow_forwarded_traffic     = "true"
-  hub_allow_gateway_transit   = "true"
+  hub_allow_gateway_transit   = "false"
   hub_use_remote_gateways     = "false"
   spoke_allow_gateway_transit = "false"
-  spoke_use_remote_gateways   = "true"
+  spoke_use_remote_gateways   = "false"
   #tags
   tags = var.tags
 }

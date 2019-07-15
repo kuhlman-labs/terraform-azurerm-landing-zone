@@ -69,7 +69,6 @@ module "aks_waf" {
   source          = "../../resource-modules/network/application-gateway"
   resource_group  = module.resource_group.resource_group_name
   appgw_vnet_name = var.appgw_vnet_name
-  appgw_name      = "${module.resource_group.resource_group_name}-WAF"
   appgw_sku       = "WAF_v2"
   appgw_tier      = "WAF_v2"
   appgw_subnet_id = var.appgw_subnet_id

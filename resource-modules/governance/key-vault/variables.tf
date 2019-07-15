@@ -9,6 +9,12 @@ variable "resource_group" {
   type        = string
 }
 
+variable "resource_prefix" {
+  description = "a short pre-defined text to identify resource type"
+  type        = string
+  default     = "key-vault"
+}
+
 #key vault
 
 variable "sku" {
