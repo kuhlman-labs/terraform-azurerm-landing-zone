@@ -1,4 +1,5 @@
 #!/bin/sh
+set -e
 
 solutions="solutions/audit/ solutions/shared-services/ solutions/pre-prod/ solutions/prod/"
 
