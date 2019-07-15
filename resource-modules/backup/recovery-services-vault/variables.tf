@@ -13,42 +13,10 @@ variable "sku" {
   default     = "Standard"
 }
 
-#######################################
-#Setting up Mandatory Tagging Variables
-#######################################
+#tags
 
-variable "owner_tag" {
-  description = "APP/Technical; Email address of App/Product Owner"
-  type        = string
-}
-
-variable "region_tag" {
-  description = "Financial; i.e. Sharepoint Global"
-  type        = string
-}
-
-variable "cost_center_tag" {
-  description = "Financial; Unique - Code provided directly from Finance (BU/Brand)"
-  type        = string
-}
-
-variable "approver_tag" {
-  description = "Financial; Unique - email address"
-  type        = string
-}
-
-variable "service_hours_tag" {
-  description = "Automation/Security; Sort -FullTime\\|Weekdays..."
-  type        = string
-}
-
-
-
-#######################################
-#Setting up Optional Tagging Variables
-#######################################
-variable "optional_tags" {
-  description = "Optional tags to be added to resource"
+variable "tags" {
+  description = "tags to be added to resource"
   type        = map
   default     = {}
 }

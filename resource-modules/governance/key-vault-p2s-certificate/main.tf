@@ -1,7 +1,8 @@
 ############################
 # Setting up P2S Certificate
 ############################
-resource "azurerm_key_vault_certificate" "p2s" {
+
+resource "azurerm_key_vault_certificate" "base" {
   name         = "P2SRootCert"
   key_vault_id = var.key_vault_id
 
