@@ -1,36 +1,25 @@
-# **Resource Modules: Recovery Services Vault**
 
-## Description
+# Module `resource-modules/backup/recovery-services-vault/`
 
-This TF module creates a Recovery Services Vault within an existing resource group. The vault will be created with the same name as the resource group.
+Provider Requirements:
+* **azurerm:** (any version)
 
-## Resources created
+## Input Variables
+* `approver_tag` (required): Financial; Unique - email address
+* `cost_center_tag` (required): Financial; Unique - Code provided directly from Finance (BU/Brand)
+* `optional_tags` (required): Optional tags to be added to resource
+* `owner_tag` (required): APP/Technical; Email address of App/Product Owner
+* `region_tag` (required): Financial; i.e. Sharepoint Global
+* `resource_group` (required): The name of the target resource group
+* `service_hours_tag` (required): Automation/Security; Sort -FullTime\|Weekdays...
+* `sku` (default `"Standard"`): SKU for Recovery Services Vault
 
-- Recovery Services Vault
+## Output Values
+* `recovery_services_id`: Recovery Services Vault resource id
 
-## Example Variables
-```javascript
-  resource_group  = "RECOVERY_USEAST_P"
-  sku             = "Standard"
-```
+## Managed Resources
+* `azurerm_recovery_services_vault.main` from `azurerm`
 
-## Inputs
-
-| Name | Description | Type | Default | Required |
-|------|-------------|:----:|:-----:|:-----:|
-| resource\_group | The name of the target resource group | string | n/a | yes |
-| sku | SKU for Recovery Services Vault | string | `"Standard"` | no |
-| owner\_tag | APP/Technical; Email address of App/Product Owner | string | n/a | yes |
-| region\_tag | Financial; i.e. Sharepoint Global | string | n/a | yes |
-| cost\_center\_tag | Financial; Unique - Code provided directly from Finance (BU/Brand) | string | n/a | yes |
-| approver\_tag | Financial; Unique - email address | string | n/a | yes |
-| service\_hours\_tag | Automation/Security; Sort -FullTime\|Weekdays... | string | n/a | yes |
-
-| optional\_tags | Optional tags to be added to resource | map | `<map>` | no |
-
-## Outputs
-
-| Name | Description |
-|------|-------------|
-| recovery\_services\_id | Recovery Services Vault resource id |
+## Data Resources
+* `data.azurerm_resource_group.vault` from `azurerm`
 
