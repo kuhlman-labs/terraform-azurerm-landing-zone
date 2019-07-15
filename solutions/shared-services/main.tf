@@ -2,22 +2,34 @@
 # Shared Services Composistion
 ##############################
 
-module "shared-network-hub" {
-  source              = "../../infrastructure-modules/network-hub"
+module "network_hub" {
+  source = "../../infrastructure-modules/network-hub"
+  #common
+  environment = var.environment
+  region      = var.region
+  #vnet
   vnet_address_ranges = var.vnet_address_ranges
-  subnets_hub         = var.subnets_hub
-  nsg_rules_dmz       = var.nsg_rules
-  #certificate_data      = module.key-vault-with-p2s-cert.key_vault_p2s_certificate_data
+  #subnets
+  subnet_gateway_address_prefix  = var.subnet_gateway_address_prefix
+  subnet_firewall_address_prefix = var.subnet_firewall_address_prefix
+  subnet_dmz_address_prefix      = var.subnet_dmz_address_prefix
+  subnet_app_gw_address_prefix   = var.subnet_app_gw_address_prefix
+  #nsg
+  nsg_rules_dmz = var.nsg_rules_dmz
+  #vnet-gw
   client_address_spaces = var.client_address_spaces
   vpn_client_protocols  = var.vpn_client_protocols
-  environment           = var.environment
-  region                = var.region
+  #tags
+  tags = var.tags
+}
 
-  #TAGS#
-  approver_tag      = var.approver_tag
-  owner_tag         = var.owner_tag
-  region_tag        = var.region_tag
-  cost_center_tag   = var.cost_center_tag
-  service_hours_tag = var.service_hours_tag
-  optional_tags     = var.optional_tags
+module "log_analytics" {
+  source = "../../infrastructure-modules/log-analytics"
+  #common
+  environment = var.environment
+  region      = var.region
+  #log-aw
+  retention_period = "90"
+  #tags
+  tags = var.tags
 }

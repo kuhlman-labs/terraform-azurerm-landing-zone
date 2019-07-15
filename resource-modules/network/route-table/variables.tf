@@ -1,5 +1,5 @@
 ###############################
-# Setting up Resource Variables
+# Setting up resource variables
 ###############################
 
 variable "resource_group" {
@@ -7,9 +7,10 @@ variable "resource_group" {
   type        = string
 }
 
-variable "route_table_name" {
-  description = "The name of the route table. Changing this forces a new resource to be created."
+variable "resource_prefix" {
+  description = "A short pre-defined text to identify the resource type"
   type        = string
+  default     = "route-table"
 }
 
 variable "disable_bgp_route_propagation" {

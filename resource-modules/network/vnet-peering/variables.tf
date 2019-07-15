@@ -1,5 +1,5 @@
 ################################################
-# Setting up Resource Variables for VNet Peering
+# Setting up resource variables for vnet peering
 ################################################
 
 variable "hub_vnet_rg" {

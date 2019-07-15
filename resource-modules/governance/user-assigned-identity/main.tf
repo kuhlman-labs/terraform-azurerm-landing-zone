@@ -1,8 +1,8 @@
 ###########################
-# Setting up Resource Group
+# Setting up resource group
 ###########################
 
-data "azurerm_resource_group" "uai" {
+data "azurerm_resource_group" "base" {
   name = var.resource_group
 }
 
@@ -12,8 +12,7 @@ data "azurerm_resource_group" "uai" {
 ################
 
 resource "azurerm_user_assigned_identity" "base" {
-  resource_group_name = data.azurerm_resource_group.uai.name
-  location            = data.azurerm_resource_group.uai.location
-
-  name = var.uai_name
+  resource_group_name = data.azurerm_resource_group.base.name
+  location            = data.azurerm_resource_group.base.location
+  name                = var.uai_name
 }

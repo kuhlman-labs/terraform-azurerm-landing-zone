@@ -1,11 +1,21 @@
 ###############################
-# Setting up Resource Variables
+# Setting up resource variables
 ###############################
+
+#common
 
 variable "resource_group" {
   description = "The name of the target resource group"
   type        = string
 }
+
+variable "resource_prefix" {
+  description = "a short pre-defined text to identify resource type"
+  type        = string
+  default     = "log-aw"
+}
+
+#log analytics
 
 variable "sku" {
   description = "sku for Log Analytics Workspace"
@@ -19,41 +29,9 @@ variable "retention_period" {
   default     = 30
 }
 
-#######################################
-#Setting up Mandatory Tagging Variables
-#######################################
+#tags
 
-variable "owner_tag" {
-  description = "APP/Technical; Email address of App/Product Owner"
-  type        = string
-}
-
-variable "region_tag" {
-  description = "Financial; i.e. Sharepoint Global"
-  type        = string
-}
-
-variable "cost_center_tag" {
-  description = "Financial; Unique - Code provided directly from Finance (BU/Brand)"
-  type        = string
-}
-
-variable "approver_tag" {
-  description = "Financial; Unique - email address"
-  type        = string
-}
-
-variable "service_hours_tag" {
-  description = "Automation/Security; Sort -FullTime\\|Weekdays..."
-  type        = string
-}
-
-
-
-#######################################
-#Setting up Optional Tagging Variables
-#######################################
-variable "optional_tags" {
+variable "tags" {
   description = "Optional tags to be added to resource"
   type        = map
   default     = {}

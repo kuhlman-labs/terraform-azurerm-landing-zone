@@ -1,26 +1,56 @@
-########################################
-## Setting up Network Resource Variables
-########################################
+################################
+## Setting up resource variables
+################################
+
+#common
+
+variable "region" {
+  description = "Geographic Region resource will be deployed into"
+  type        = string
+}
+
+variable "environment" {
+  description = "Development environment for resource; prod, non-prod, shared-services"
+  type        = string
+}
+
+#vnet
+
 variable "vnet_address_ranges" {
   description = "This is a list of the ip address ranges for the vnet"
   type        = list
 }
 
-variable "tier" {
-  description = "The tier of a VNet, e.g HUB, or SPK"
+#subnet
+
+variable "subnet_gateway_address_prefix" {
+  description = "The address prefix to use for the subnet."
   type        = string
-  default     = "hub"
 }
 
-variable "subnets_hub" {
-  description = "Map of subnets with name, subnet_cidr, and service_endpoints."
-  type        = list
+variable "subnet_dmz_address_prefix" {
+  description = "The address prefix to use for the subnet."
+  type        = string
 }
+
+variable "subnet_firewall_address_prefix" {
+  description = "The address prefix to use for the subnet."
+  type        = string
+}
+
+variable "subnet_app_gw_address_prefix" {
+  description = "The address prefix to use for the subnet."
+  type        = string
+}
+
+#nsg
 
 variable "nsg_rules_dmz" {
   description = "List of NSG rules"
   type        = list
 }
+
+#vpn
 
 variable "certificate_data" {
   description = "Certificate Information generated from Key Vault that the vNet gateway will use for the P2S connections"
@@ -38,51 +68,9 @@ variable "vpn_client_protocols" {
   type        = list
 }
 
-variable "region" {
-  description = "Geographic Region resource will be deployed into"
-  type        = string
-}
+#tags
 
-variable "environment" {
-  description = "Development environment for resource; prod, non-prod, shared-services"
-  type        = string
-}
-
-#######################################
-#Setting up Mandatory Tagging Variables
-#######################################
-
-variable "owner_tag" {
-  description = "APP/Technical; Email address of App/Product Owner"
-  type        = string
-}
-
-variable "region_tag" {
-  description = "Financial; i.e. Sharepoint Global"
-  type        = string
-}
-
-variable "cost_center_tag" {
-  description = "Financial; Unique - Code provided directly from Finance (BU/Brand)"
-  type        = string
-}
-
-variable "approver_tag" {
-  description = "Financial; Unique - email address"
-  type        = string
-}
-
-variable "service_hours_tag" {
-  description = "Automation/Security; Sort -FullTime\\|Weekdays..."
-  type        = string
-}
-
-
-
-#######################################
-#Setting up Optional Tagging Variables
-#######################################
-variable "optional_tags" {
+variable "tags" {
   description = "A map of tags to add to all resources"
   type        = map
   default     = {}

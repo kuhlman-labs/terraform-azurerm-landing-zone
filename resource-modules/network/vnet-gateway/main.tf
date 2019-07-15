@@ -1,24 +1,8 @@
 ###########################
-#Setting up Locals for Tags
+# Setting up resource group
 ###########################
 
-locals {
-  mandatory_tags = {
-    Name          = "${upper(var.resource_prefix)}-${upper(var.region)}-${upper(var.environment)}"
-    Owner         = var.owner_tag
-    region        = var.region_tag
-    Cost-Center   = var.cost_center_tag
-    Approver      = var.approver_tag
-    Service-Hours = var.service_hours_tag
-
-  }
-}
-
-########################################################################################
-# Setting up Resource Group *****Must be deployed in same resource group as the vNet****
-########################################################################################
-
-data "azurerm_resource_group" "vnet" {
+data "azurerm_resource_group" "base" {
   name = var.resource_group
 }
 
@@ -26,10 +10,10 @@ data "azurerm_resource_group" "vnet" {
 # Setting up Public IP for VPN Gateway
 ######################################
 
-resource "azurerm_public_ip" "vnet_gateway" {
-  name                = "${upper(var.resource_prefix)}-${upper(var.region)}-${upper(var.environment)}-IP"
-  location            = data.azurerm_resource_group.vnet.location
-  resource_group_name = data.azurerm_resource_group.vnet.name
+resource "azurerm_public_ip" "base" {
+  name                = "${data.azurerm_resource_group.base.name}-${var.resource_prefix}-ip"
+  location            = data.azurerm_resource_group.base.location
+  resource_group_name = data.azurerm_resource_group.base.name
   allocation_method   = var.ip_allocation
 }
 
@@ -37,10 +21,10 @@ resource "azurerm_public_ip" "vnet_gateway" {
 # Setting up VPN Gateway Resource
 #################################
 
-resource "azurerm_virtual_network_gateway" "main" {
-  name                = "${upper(var.resource_prefix)}-${upper(var.region)}-${upper(var.environment)}"
-  location            = data.azurerm_resource_group.vnet.location
-  resource_group_name = data.azurerm_resource_group.vnet.name
+resource "azurerm_virtual_network_gateway" "base" {
+  name                = "${data.azurerm_resource_group.base.name}-${var.resource_prefix}"
+  location            = data.azurerm_resource_group.base.location
+  resource_group_name = data.azurerm_resource_group.base.name
 
   type     = var.gateway_type
   vpn_type = var.vpn_type
@@ -48,15 +32,15 @@ resource "azurerm_virtual_network_gateway" "main" {
   sku = var.sku
 
   ip_configuration {
-    name                          = azurerm_public_ip.vnet_gateway.name
-    public_ip_address_id          = azurerm_public_ip.vnet_gateway.id
+    name                          = azurerm_public_ip.base.name
+    public_ip_address_id          = azurerm_public_ip.base.id
     private_ip_address_allocation = var.ip_allocation
     subnet_id                     = var.gateway_subnet
   }
 
-  #################################
-  # Setting up VPN P2S Connection
-  #################################
+  ###############################
+  # Setting up vpn p2s connection
+  ###############################
 
   vpn_client_configuration {
     address_space        = var.client_address_spaces
@@ -68,6 +52,6 @@ resource "azurerm_virtual_network_gateway" "main" {
       public_cert_data = base64encode(var.certificate_data)
     }*/
   }
-  tags = merge(local.mandatory_tags, var.optional_tags)
+  tags = var.tags
 }
 
