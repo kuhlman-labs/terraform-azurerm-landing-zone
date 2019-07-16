@@ -1,5 +1,5 @@
 
-# Module `.`
+# Module `resource-modules/network/application-gateway`
 
 Provider Requirements:
 * **azurerm:** (any version)

@@ -1,5 +1,5 @@
 
-# Module `.`
+# Module `resource-modules/governance/key-vault-p2s-certificate`
 
 Provider Requirements:
 * **azurerm:** (any version)

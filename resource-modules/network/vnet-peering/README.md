@@ -1,5 +1,5 @@
 
-# Module `.`
+# Module `resource-modules/network/vnet-peering`
 
 Provider Requirements:
 * **azurerm:** (any version)

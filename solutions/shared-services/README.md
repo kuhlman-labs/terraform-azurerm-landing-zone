@@ -1,5 +1,5 @@
 
-# Module `.`
+# Module `solutions/shared-services`
 
 Core Version Constraints:
 * `>= 0.12`

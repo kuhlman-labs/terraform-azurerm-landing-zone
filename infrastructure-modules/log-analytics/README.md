@@ -1,5 +1,5 @@
 
-# Module `.`
+# Module `infrastructure-modules/log-analytics`
 
 ## Input Variables
 * `environment` (required): Development environment for resource; prod, non-prod, shared-services

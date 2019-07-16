@@ -1,5 +1,5 @@
 
-# Module `.`
+# Module `resource-modules/resource-group`
 
 Provider Requirements:
 * **azurerm:** (any version)

@@ -1,5 +1,5 @@
 
-# Module `.`
+# Module `infrastructure-modules/key-vault-with-p2s-cert`
 
 ## Input Variables
 * `certificate_contents` (required): The base64-encoded certificate contents. Changing this forces a new resource to be created.

@@ -1,5 +1,5 @@
 
-# Module `.`
+# Module `resource-modules/governance/user-assigned-identity`
 
 Provider Requirements:
 * **azurerm:** (any version)

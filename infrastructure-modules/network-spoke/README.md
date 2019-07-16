@@ -1,5 +1,5 @@
 
-# Module `.`
+# Module `infrastructure-modules/network-spoke`
 
 Provider Requirements:
 * **terraform:** (any version)

@@ -1,5 +1,5 @@
 
-# Module `.`
+# Module `solutions/test`
 
 Core Version Constraints:
 * `>= 0.12`

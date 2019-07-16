@@ -1,5 +1,5 @@
 
-# Module `.`
+# Module `resource-modules/network/vnet-gateway`
 
 Provider Requirements:
 * **azurerm:** (any version)

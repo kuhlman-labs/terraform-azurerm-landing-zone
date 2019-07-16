@@ -1,5 +1,5 @@
 
-# Module `.`
+# Module `resource-modules/governance/key-vault`
 
 Provider Requirements:
 * **azurerm:** (any version)

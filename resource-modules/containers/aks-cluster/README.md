@@ -1,5 +1,5 @@
 
-# Module `.`
+# Module `resource-modules/containers/aks-cluster`
 
 Provider Requirements:
 * **azurerm:** (any version)

@@ -3,12 +3,15 @@ set -e
 
 modules="solutions/* infrastructure-modules/* resource-modules/*"
 
-for dir in $(find ${modules} -maxdepth 2 -type d); do
-  cd "$dir";
+for dir in $(find ${modules} -maxdepth 1 -type d); do
+  cd "$dir/";
   if [ -f main.tf ]; 
   then
-    echo "$dir/";
-    echo | terraform-config-inspect  > README.md
-  fi;
+    cd -;
+    echo "$dir";
+    echo | terraform-config-inspect "$dir"  > "$dir/"README.md
+  else
   cd -;
+  echo skipping $dir, not a module directory
+  fi;
 done

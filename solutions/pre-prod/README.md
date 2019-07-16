@@ -1,5 +1,5 @@
 
-# Module `.`
+# Module `solutions/pre-prod`
 
 Core Version Constraints:
 * `>= 0.12`

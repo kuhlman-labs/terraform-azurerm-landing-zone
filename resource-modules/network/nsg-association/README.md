@@ -1,5 +1,5 @@
 
-# Module `.`
+# Module `resource-modules/network/nsg-association`
 
 Provider Requirements:
 * **azurerm:** (any version)

@@ -1,5 +1,5 @@
 
-# Module `.`
+# Module `resource-modules/network/route-table-association`
 
 Provider Requirements:
 * **azurerm:** (any version)

@@ -1,5 +1,5 @@
 
-# Module `.`
+# Module `infrastructure-modules/aks-cluster-waf-ingress`
 
 Provider Requirements:
 * **azurerm:** (any version)

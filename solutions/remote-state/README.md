@@ -1,5 +1,5 @@
 
-# Module `.`
+# Module `solutions/remote-state`
 
 Core Version Constraints:
 * `>= 0.12`

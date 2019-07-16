@@ -1,5 +1,5 @@
 
-# Module `.`
+# Module `resource-modules/network/vnet-subnet`
 
 Provider Requirements:
 * **azurerm:** (any version)

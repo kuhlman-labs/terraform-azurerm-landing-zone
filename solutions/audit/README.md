@@ -1,5 +1,5 @@
 
-# Module `.`
+# Module `solutions/audit`
 
 Core Version Constraints:
 * `>= 0.12`
