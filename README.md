@@ -1,5 +1,5 @@
 # Azure Landing Zone Template 
-[![Build Status](https://dev.azure.com/Kuhlman-Labs/azure-landing-zone-template/_apis/build/status/brettkuhlman.azure-landing-zone-template?branchName=master)](https://dev.azure.com/Kuhlman-Labs/azure-landing-zone-template/_build/latest?definitionId=1&branchName=master)
+[![Build Status](https://dev.azure.com/Kuhlman-Labs/azure-landing-zone-template/_apis/build/status/brettkuhlman.azure-landing-zone-template?branchName=develop)](https://dev.azure.com/Kuhlman-Labs/azure-landing-zone-template/_build/latest?definitionId=1&branchName=develop)
 [![Board Status](https://dev.azure.com/Kuhlman-Labs/040ac2ad-6e3c-4ed0-9fa7-9bd937d86ea0/dc26cefa-1675-4c37-bcca-b1ee83a15af2/_apis/work/boardbadge/0c1c1325-bfc5-4ade-81c7-98c1561e46fb)](https://dev.azure.com/kuhlman-labs/040ac2ad-6e3c-4ed0-9fa7-9bd937d86ea0/_boards/board/t/dc26cefa-1675-4c37-bcca-b1ee83a15af2/Microsoft.RequirementCategory)
 
 ## Purpose
