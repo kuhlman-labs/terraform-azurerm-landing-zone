@@ -9,8 +9,8 @@ region      = "eastus"
 
 #network
 
-vnet_address_ranges            = ["10.0.0.0/16"]
-subnet_dmz_address_prefix      = "10.0.1.0/24"
+vnet_address_ranges       = ["10.0.0.0/16"]
+subnet_dmz_address_prefix = "10.0.1.0/24"
 
 #nsg
 
