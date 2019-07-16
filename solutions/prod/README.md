@@ -17,7 +17,7 @@ Provider Requirements:
 * `state_key` (required): Key for the state file of the solution, e.g. pre-prod.tfstate
 * `storage_account_name` (required): Storage account that contains Remote Backend, e.g. terraformdata24321
 * `subnet_backend_address_prefix` (required): The address prefix to use for the subnet.
-* `subnet_frontend_prefix` (required): The address prefix to use for the subnet.
+* `subnet_frontend_address_prefix` (required): The address prefix to use for the subnet.
 * `subscription_id` (required): The Id of the Subscription that should contain the created resources
 * `tags` (required): A map of tags to add to all resources
 * `tenant_id` (required): The tenant ID for the Service Principal

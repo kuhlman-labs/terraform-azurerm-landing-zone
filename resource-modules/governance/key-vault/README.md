@@ -7,6 +7,7 @@ Provider Requirements:
 
 ## Input Variables
 * `resource_group` (required): The name of the target resource group
+* `resource_prefix` (default `"key-vault"`): a short pre-defined text to identify resource type
 * `sku` (default `"standard"`): The Name of the sku used for this Key Vault. Possible values are standard and premium.
 * `tags` (required): tags to be added to resource
 
