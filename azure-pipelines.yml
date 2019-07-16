@@ -3,7 +3,7 @@ variables:
 - group: terraform_variables
 
 trigger:
-- master
+- develop
 
 pr:
 - develop
@@ -16,15 +16,19 @@ resources:
 
 stages:
       
-- stage: Terraform_Validate
-  displayName: Check Terraform for format and validation
+- stage: Terraform_Fmt
+  displayName: Check Terraform Format
   jobs:
   - job: Format_Terraform
     pool:
       vmImage: 'ubuntu-16.04'
     container: terraform  
     steps:
-      - script: terraform fmt -recursive -check -list=true 
+      - script: terraform fmt -recursive -check -list=true
+
+- stage: Terraform_Validate
+  displayName: Validate Terraform Syntax 
+  jobs:      
   - job: Validate_Terraform
     pool:
       vmImage: 'ubuntu-16.04'
@@ -32,7 +36,8 @@ stages:
     steps:  
     - task: Bash@3  
       inputs:
-        filePath: './scripts/bash/pipeline/validate_terraform.sh'  
+        filePath: './scripts/bash/pipeline/validate_terraform.sh'
+  dependsOn: Terraform_Fmt        
 
 - stage: Terraform_Apply
   displayName: Run Terraform apply for solutions 
@@ -48,7 +53,7 @@ stages:
   dependsOn: Terraform_Validate
 
 - stage: Terraform_Destroy
-  displayName: Run Terraform Destroy for solutions 
+  displayName: Run Terraform destroy for solutions 
   jobs:
   - job: Destroy_Terraform
     pool:
