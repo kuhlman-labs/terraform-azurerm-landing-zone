@@ -44,6 +44,12 @@ variable "subnet_id" {
   type        = string
 }
 
+variable "public_ip_address_id" {
+  description = "(Optional) The ID of a Public IP Address which the Application Gateway should use."
+  type        = string
+}
+
+
 variable "private_ip" {
   description = "(Optional) The Private IP Address to use for the Application Gateway."
   type        = string

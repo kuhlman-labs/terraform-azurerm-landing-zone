@@ -6,18 +6,6 @@ data "azurerm_resource_group" "base" {
   name = var.resource_group
 }
 
-########################
-# Setting up firewall ip
-########################
-
-resource "azurerm_public_ip" "base" {
-  name                = "${data.azurerm_resource_group.base.name}-${var.resource_prefix}-ip"
-  location            = data.azurerm_resource_group.base.location
-  resource_group_name = data.azurerm_resource_group.base.name
-  allocation_method   = "Static"
-  sku                 = "Standard"
-}
-
 #####################
 # Setting up firewall
 #####################
@@ -29,8 +17,8 @@ resource "azurerm_firewall" "base" {
 
   ip_configuration {
     name                 = "${data.azurerm_resource_group.base.name}-${var.resource_prefix}-ip-configuration"
-    subnet_id            = var.firewall_subnet_id
-    public_ip_address_id = azurerm_public_ip.base.id
+    subnet_id            = var.subnet_id
+    public_ip_address_id = var.public_ip_address_id
   }
   tags = var.tags
 }
