@@ -1,6 +1,6 @@
-########################################
+###########
 # Variables
-########################################
+###########
 variable "subscription_id" {
   description = "The Id of the Subscription that should contain the created resources"
   type        = string
@@ -30,9 +30,3 @@ variable "environment" {
   description = "The environment that the resource group is holding state"
   type        = string
 }
-
-variable "storage_account_name" {
-  description = "The name of the storage account which must be globally unique"
-  type        = string
-}
-

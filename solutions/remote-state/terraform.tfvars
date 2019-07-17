@@ -1,5 +1,6 @@
-################
+########################
 # Remote State Variables
-################
+########################
 
-region = "eastus"
+region      = "eastus"
+environment = "shared-services"
