@@ -19,41 +19,34 @@ data "azurerm_resource_group" "base" {
   name = var.resource_group
 }
 
-
-# Setting up app_gw public ip
-
-resource "azurerm_public_ip" "base" {
-  name                = "${data.azurerm_resource_group.base.name}-${var.resource_prefix}-ip"
-  resource_group_name = data.azurerm_resource_group.base.name
-  location            = data.azurerm_resource_group.base.location
-  allocation_method   = "Static"
-  sku                 = "Standard"
-}
-
 resource "azurerm_application_gateway" "base" {
   name                = "${data.azurerm_resource_group.base.name}-${var.resource_prefix}"
   resource_group_name = data.azurerm_resource_group.base.name
   location            = data.azurerm_resource_group.base.location
 
   sku {
-    name     = var.appgw_sku
-    tier     = var.appgw_tier
-    capacity = 2
+    name     = var.sku_name
+    tier     = var.sku_tier
+    capacity = var.sku_capacity
+  }
+
+  zones = var.zones
+
+  frontend_ip_configuration {
+    name                 = "appGwPublicFrontendIp"
+    subnet_id            = var.subnet_id
+    public_ip_address_id = var.public_ip_address_id
+    private_ip_address   = var.private_ip_address
   }
 
   gateway_ip_configuration {
-    name      = "${data.azurerm_resource_group.base.name}-${var.resource_prefix}-ip-configuration"
-    subnet_id = var.appgw_subnet_id
+    name      = "appGatewayIpConfig"
+    subnet_id = var.subnet_id
   }
 
   frontend_port {
     name = "${local.frontend_port_name}"
     port = 80
-  }
-
-  frontend_ip_configuration {
-    name                 = "${local.frontend_ip_configuration_name}"
-    public_ip_address_id = "${azurerm_public_ip.base.id}"
   }
 
   backend_address_pool {
@@ -84,7 +77,6 @@ resource "azurerm_application_gateway" "base" {
   }
   tags = var.tags
 
-  #'aks with waf ingress' specific configuration
   lifecycle {
     ignore_changes = [tags, backend_address_pool, backend_http_settings, frontend_ip_configuration, frontend_port, http_listener, probe, request_routing_rule]
   }

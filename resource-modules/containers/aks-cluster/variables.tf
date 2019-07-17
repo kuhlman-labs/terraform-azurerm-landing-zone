@@ -15,6 +15,40 @@ variable "resource_prefix" {
   default     = "aks-cluster"
 }
 
+#authentication
+
+variable "tenant_id" {
+  description = "The Tenant ID used for Azure Active Directory Application. If this isn't specified the Tenant ID of the current Subscription is used. Changing this forces a new resource to be created."
+  type        = string
+}
+
+variable "client_id" {
+  description = " The Client ID for the Service Principal. Changing this forces a new resource to be created"
+  type        = string
+}
+
+variable "client_secret" {
+  description = "The Client Secret for the Service Principal. Changing this forces a new resource to be created."
+  type        = string
+}
+
+variable "aks_client_id" {
+  description = " The Client ID of an Azure Active Directory Application. Changing this forces a new resource to be created."
+  type        = string
+}
+
+variable "aks_server_client_secret" {
+  description = "The Server Secret of an Azure Active Directory Application. Changing this forces a new resource to be created."
+  type        = string
+}
+
+variable "aks_server_id" {
+  description = "The Server ID of an Azure Active Directory Application. Changing this forces a new resource to be created."
+  type        = string
+}
+
+#aks
+
 variable "aks_name" {
   description = "The name of the Managed Kubernetes Cluster to create. Changing this forces a new resource to be created."
   type        = string
@@ -50,12 +84,6 @@ variable "aks_version" {
   type        = string
 }
 
-
-variable "tenant_id" {
-  description = "The Tenant ID used for Azure Active Directory Application. If this isn't specified the Tenant ID of the current Subscription is used. Changing this forces a new resource to be created."
-  type        = string
-}
-
 variable "api_server_authorized_ip_ranges" {
   description = "The IP ranges to whitelist for incoming traffic to the masters"
   type        = list
@@ -73,31 +101,6 @@ variable "aks_agent_vm_size" {
 
 variable "aks_subnet_id" {
   description = "The ID of the Subnet where the Agents in the Pool should be provisioned. Changing this forces a new resource to be created."
-  type        = string
-}
-
-variable "client_id" {
-  description = " The Client ID for the Service Principal. Changing this forces a new resource to be created"
-  type        = string
-}
-
-variable "client_secret" {
-  description = "The Client Secret for the Service Principal. Changing this forces a new resource to be created."
-  type        = string
-}
-
-variable "aks_client_id" {
-  description = " The Client ID of an Azure Active Directory Application. Changing this forces a new resource to be created."
-  type        = string
-}
-
-variable "aks_server_client_secret" {
-  description = "The Server Secret of an Azure Active Directory Application. Changing this forces a new resource to be created."
-  type        = string
-}
-
-variable "aks_server_id" {
-  description = "The Server ID of an Azure Active Directory Application. Changing this forces a new resource to be created."
   type        = string
 }
 
@@ -119,6 +122,48 @@ variable "aks_service_cidr" {
 variable "aks_agent_type" {
   description = "Type of the Agent Pool. Possible values are AvailabilitySet and VirtualMachineScaleSets. Changing this forces a new resource to be created. Defaults to AvailabilitySet."
   type        = string
+}
+
+variable "http_application_routing_enabled" {
+  description = "(Required) Is HTTP Application Routing Enabled? Changing this forces a new resource to be created."
+  type        = boolean
+  default     = false
+}
+
+variable "oms_agent_enabled" {
+  description = "(Required) Is the OMS Agent Enabled?"
+  type        = boolean
+  default     = true
+}
+
+variable "aci_connector_linux_enabled" {
+  description = "(Required) Is the virtual node addon enabled?"
+  type        = boolean
+  default     = true
+}
+
+variable "aks_agent_name" {
+  description = "(Required) Unique name of the Agent Pool Profile in the context of the Subscription and Resource Group. Changing this forces a new resource to be created."
+  type        = string
+  default     = "agentpool"
+}
+
+variable "aks_agent_os" {
+  description = "(Optional) The Operating System used for the Agents. Possible values are Linux and Windows. Changing this forces a new resource to be created. Defaults to Linux."
+  type        = "string"
+  default     = "Linux"
+}
+
+variable "aks_network_plugin" {
+  description = " (Required) Network plugin to use for networking. Currently supported values are azure and kubenet. Changing this forces a new resource to be created."
+  type        = "string"
+  default     = "azure"
+}
+
+variable "rbac_enabled" {
+  description = "(Required) Is Role Based Access Control Enabled? Changing this forces a new resource to be created."
+  type        = boolean
+  default     = true
 }
 
 #tags

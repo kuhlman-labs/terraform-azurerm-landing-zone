@@ -26,14 +26,14 @@ resource "azurerm_kubernetes_cluster" "base" {
   }
   addon_profile {
     http_application_routing {
-      enabled = false
+      enabled = var.http_application_routing_enabled
     }
     oms_agent {
-      enabled                    = true
+      enabled                    = var.oms_agent_enabled
       log_analytics_workspace_id = var.log_analytics_workspace_id
     }
     aci_connector_linux {
-      enabled     = true
+      enabled     = var.aci_connector_linux_enabled
       subnet_name = var.aks_aci_subnet_name
     }
   }
@@ -44,13 +44,13 @@ resource "azurerm_kubernetes_cluster" "base" {
       server_app_secret = var.aks_server_client_secret
       tenant_id         = var.tenant_id
     }
-    enabled = true
+    enabled = var.rbac_enabled
   }
   agent_pool_profile {
-    name           = "agentpool"
+    name           = var.aks_agent_name
     count          = var.aks_agent_count
     vm_size        = var.aks_agent_vm_size
-    os_type        = "Linux"
+    os_type        = var.aks_agent_os
     vnet_subnet_id = var.aks_subnet_id
     type           = var.aks_agent_type
   }
@@ -59,7 +59,7 @@ resource "azurerm_kubernetes_cluster" "base" {
     client_secret = var.client_secret
   }
   network_profile {
-    network_plugin     = "azure"
+    network_plugin     = var.aks_network_plugin
     dns_service_ip     = var.aks_dns_service_ip
     docker_bridge_cidr = var.aks_docker_bridge_cidr
     service_cidr       = var.aks_service_cidr

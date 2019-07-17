@@ -6,7 +6,6 @@ data "azurerm_resource_group" "base" {
   name = var.resource_group
 }
 
-
 ################
 # Setting up UAI
 ################
