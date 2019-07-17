@@ -3,12 +3,12 @@
 ##################
 
 locals {
-  backend_address_pool_name      = "${var.appgw_vnet_name}-beap"
-  frontend_port_name             = "${var.appgw_vnet_name}-feport"
-  frontend_ip_configuration_name = "${var.appgw_vnet_name}-feip"
-  http_setting_name              = "${var.appgw_vnet_name}-be-htst"
-  listener_name                  = "${var.appgw_vnet_name}-httplstn"
-  request_routing_rule_name      = "${var.appgw_vnet_name}-rqrt"
+  backend_address_pool_name      = "${data.azurerm_resource_group.base.name}-${var.resource_prefix}-beap"
+  frontend_port_name             = "${data.azurerm_resource_group.base.name}-${var.resource_prefix}-feport"
+  frontend_ip_configuration_name = "${data.azurerm_resource_group.base.name}-${var.resource_prefix}-feip"
+  http_setting_name              = "${data.azurerm_resource_group.base.name}-${var.resource_prefix}-be-htst"
+  listener_name                  = "${data.azurerm_resource_group.base.name}-${var.resource_prefix}-httplstn"
+  request_routing_rule_name      = "${data.azurerm_resource_group.base.name}-${var.resource_prefix}-rqrt"
 }
 
 ###########################

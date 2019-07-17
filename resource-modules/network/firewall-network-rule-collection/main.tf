@@ -15,7 +15,7 @@ resource "azurerm_firewall_network_rule_collection" "base" {
   azure_firewall_name = var.azure_firewall_name
   resource_group_name = data.azurerm_resource_group.base.name
   priority            = var.collection_priority
-  action              = var.ollection_action
+  action              = var.collection_action
 
   rule {
     name                  = var.rule_name

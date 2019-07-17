@@ -35,7 +35,7 @@ variable "sku_capacity" {
 
 variable "zones" {
   description = "(Optional) A collection of availability zones to spread the Application Gateway over."
-  type        = string
+  type        = list
   default     = null
 }
 
@@ -49,8 +49,7 @@ variable "public_ip_address_id" {
   type        = string
 }
 
-
-variable "private_ip" {
+variable "private_ip_address" {
   description = "(Optional) The Private IP Address to use for the Application Gateway."
   type        = string
   default     = null

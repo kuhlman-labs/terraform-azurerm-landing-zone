@@ -65,14 +65,22 @@ module "aks_role_assignment_4" {
 
 #Setting up WAF
 
-module "aks_waf" {
-  source          = "../../resource-modules/network/application-gateway"
-  resource_group  = module.resource_group.resource_group_name
-  appgw_vnet_name = var.appgw_vnet_name
-  appgw_sku       = "WAF_v2"
-  appgw_tier      = "WAF_v2"
-  appgw_subnet_id = var.appgw_subnet_id
-  tags            = var.tags
+module "waf_public_ip" {
+  source            = "../../resource-modules/network/public-ip"
+  name              = "${module.resource_group.resource_group_name}-app-gw-ip"
+  resource_group    = module.resource_group.resource_group_name
+  allocation_method = "Static"
+}
+
+
+module "waf" {
+  source               = "../../resource-modules/network/application-gateway"
+  resource_group       = module.resource_group.resource_group_name
+  sku_name             = "WAF_v2"
+  sku_tier             = "WAF_v2"
+  subnet_id            = var.appgw_subnet_id
+  public_ip_address_id = module.waf_public_ip.public_ip_id
+  tags                 = var.tags
 }
 
 #Setting up AKS Cluster
@@ -82,7 +90,7 @@ module "aks_cluster" {
   resource_group                  = module.resource_group.resource_group_name
   public_ssh_key_path             = "${path.module}/id_rsa.pub"
   aks_name                        = module.resource_group.resource_group_name
-  aks_dns_prefix                  = "${module.resource_group.resource_group_name}-AGENTS"
+  aks_dns_prefix                  = "${module.resource_group.resource_group_name}-agents"
   aks_agent_type                  = var.aks_agent_type
   admin_user_name                 = var.admin_user_name
   log_analytics_workspace_id      = var.log_analytics_workspace_id

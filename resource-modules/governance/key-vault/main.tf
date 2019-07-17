@@ -23,11 +23,7 @@ resource "azurerm_key_vault" "base" {
   location            = data.azurerm_resource_group.base.location
   resource_group_name = data.azurerm_resource_group.base.name
   tenant_id           = data.azurerm_client_config.current.tenant_id
-
-  sku {
-    name = var.sku
-  }
-
+  sku_name            = var.sku_name
   access_policy {
     tenant_id               = data.azurerm_client_config.current.tenant_id
     object_id               = data.azurerm_client_config.current.service_principal_object_id
@@ -35,7 +31,6 @@ resource "azurerm_key_vault" "base" {
     key_permissions         = var.key_permissions
     secret_permissions      = var.secret_permissions
   }
-
   tags = var.tags
 }
 

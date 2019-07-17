@@ -6,6 +6,13 @@ variable "key_vault_id" {
   type        = string
 }
 
+variable "certificate_name" {
+  description = " (Required) Specifies the name of the Key Vault Certificate. Changing this forces a new resource to be created."
+  type        = string
+  default     = "imported-cert"
+}
+
+
 variable "certificate_contents" {
   description = "The base64-encoded certificate contents. Changing this forces a new resource to be created."
   type        = string
