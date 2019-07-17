@@ -126,19 +126,19 @@ variable "aks_agent_type" {
 
 variable "http_application_routing_enabled" {
   description = "(Required) Is HTTP Application Routing Enabled? Changing this forces a new resource to be created."
-  type        = boolean
+  type        = bool
   default     = false
 }
 
 variable "oms_agent_enabled" {
   description = "(Required) Is the OMS Agent Enabled?"
-  type        = boolean
+  type        = bool
   default     = true
 }
 
 variable "aci_connector_linux_enabled" {
   description = "(Required) Is the virtual node addon enabled?"
-  type        = boolean
+  type        = bool
   default     = true
 }
 
@@ -162,7 +162,7 @@ variable "aks_network_plugin" {
 
 variable "rbac_enabled" {
   description = "(Required) Is Role Based Access Control Enabled? Changing this forces a new resource to be created."
-  type        = boolean
+  type        = bool
   default     = true
 }
 

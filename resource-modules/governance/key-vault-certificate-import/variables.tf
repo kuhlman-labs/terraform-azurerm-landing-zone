@@ -24,7 +24,7 @@ variable "issuer_name" {
 
 variable "key_exportable" {
   description = "(Required) Is this Certificate Exportable? Changing this forces a new resource to be created."
-  type        = boolean
+  type        = bool
   default     = true
 }
 
@@ -42,7 +42,7 @@ variable "key_type" {
 
 variable "key_reuse" {
   description = "(Required) Is the key reusable? Changing this forces a new resource to be created."
-  type        = boolean
+  type        = bool
   default     = true
 }
 

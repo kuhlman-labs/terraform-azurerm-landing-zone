@@ -5,7 +5,7 @@ Provider Requirements:
 * **azurerm:** (any version)
 
 ## Input Variables
-* `disable_bgp_route_propagation` (required): Boolean flag which controls propagation of routes learned by BGP on that route table. True means disable.
+* `disable_bgp_route_propagation` (required): bool flag which controls propagation of routes learned by BGP on that route table. True means disable.
 * `resource_group` (required): The name of the target resource group
 * `resource_prefix` (default `"route-table"`): A short pre-defined text to identify the resource type
 * `route_address_prefix` (required): The destination CIDR to which the route applies, such as 10.1.0.0/16
