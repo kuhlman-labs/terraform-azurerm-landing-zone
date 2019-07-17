@@ -1,12 +1,3 @@
-###############################################
-#Setting up Random String generator for KV name
-###############################################
-
-resource "random_string" "kv" {
-  length  = 8
-  special = false
-}
-
 data "azurerm_client_config" "current" {
 }
 
@@ -22,8 +13,13 @@ data "azurerm_resource_group" "base" {
 # Setting up Key Vault
 ######################
 
+resource "random_string" "base" {
+  length  = 10
+  special = false
+}
+
 resource "azurerm_key_vault" "base" {
-  name                = "${var.resource_prefix}-${random_string.kv.result}"
+  name                = "${var.resource_prefix}-${random_string.base.result}"
   location            = data.azurerm_resource_group.base.location
   resource_group_name = data.azurerm_resource_group.base.name
   tenant_id           = data.azurerm_client_config.current.tenant_id
@@ -33,53 +29,11 @@ resource "azurerm_key_vault" "base" {
   }
 
   access_policy {
-    tenant_id = data.azurerm_client_config.current.tenant_id
-    object_id = data.azurerm_client_config.current.service_principal_object_id
-
-    certificate_permissions = [
-      "create",
-      "delete",
-      "deleteissuers",
-      "get",
-      "getissuers",
-      "import",
-      "list",
-      "listissuers",
-      "managecontacts",
-      "manageissuers",
-      "setissuers",
-      "update",
-    ]
-
-    key_permissions = [
-      "backup",
-      "create",
-      "decrypt",
-      "delete",
-      "encrypt",
-      "get",
-      "import",
-      "list",
-      "purge",
-      "recover",
-      "restore",
-      "sign",
-      "unwrapKey",
-      "update",
-      "verify",
-      "wrapKey",
-    ]
-
-    secret_permissions = [
-      "backup",
-      "delete",
-      "get",
-      "list",
-      "purge",
-      "recover",
-      "restore",
-      "set",
-    ]
+    tenant_id               = data.azurerm_client_config.current.tenant_id
+    object_id               = data.azurerm_client_config.current.service_principal_object_id
+    certificate_permissions = var.certificate_permissions
+    key_permissions         = var.key_permissions
+    secret_permissions      = var.secret_permissions
   }
 
   tags = var.tags
