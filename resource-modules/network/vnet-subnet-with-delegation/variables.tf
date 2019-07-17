@@ -29,23 +29,23 @@ variable "subnet_address_prefix" {
 variable "subnet_service_endpoints" {
   description = "The list of Service endpoints to associate with the subnet. Possible values include: Microsoft.AzureActiveDirectory, Microsoft.AzureCosmosDB, Microsoft.EventHub, Microsoft.KeyVault, Microsoft.ServiceBus, Microsoft.Sql and Microsoft.Storage."
   type        = list
-  default     = []
+  default     = null
 }
 
 variable "delegation_name" {
   description = "A name for this delegation."
   type        = string
-  default     = ""
+  default     = null
 }
 
 variable "service_delegation_name" {
   description = "The name of service to delegate to. Possible values include: Microsoft.Batch/batchAccounts, Microsoft.ContainerInstance/containerGroups, Microsoft.HardwareSecurityModules/dedicatedHSMs, Microsoft.Logic/integrationServiceEnvironments, Microsoft.Netapp/volumes, Microsoft.ServiceFabricMesh/networks, Microsoft.Sql/managedInstances, Microsoft.Sql/servers or Microsoft.Web/serverFarms."
   type        = string
-  default     = ""
+  default     = null
 }
 
 variable "service_delegation_actions" {
   description = "A list of Actions which should be delegated. Possible values include: Microsoft.Network/virtualNetworks/subnets/action."
   type        = list
-  default     = []
+  default     = null
 }

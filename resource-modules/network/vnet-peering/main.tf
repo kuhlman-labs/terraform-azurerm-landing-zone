@@ -3,9 +3,9 @@
 #################################
 
 resource "azurerm_virtual_network_peering" "hub_to_spoke" {
-  name                         = "${upper(var.hub_vnet_name)}-to-${upper(var.spoke_vnet_name)}"
+  name                         = "${var.hub_vnet_name}-to-${var.spoke_vnet_name}"
   resource_group_name          = var.hub_vnet_rg
-  virtual_network_name         = upper(var.hub_vnet_name)
+  virtual_network_name         = var.hub_vnet_name
   remote_virtual_network_id    = var.spoke_vnet_id
   allow_virtual_network_access = var.allow_vnet_access
   allow_forwarded_traffic      = var.allow_forwarded_traffic
@@ -18,7 +18,7 @@ resource "azurerm_virtual_network_peering" "hub_to_spoke" {
 #################################
 
 resource "azurerm_virtual_network_peering" "spoke_to_hub" {
-  name                         = "${upper(var.spoke_vnet_name)}-to-${upper(var.hub_vnet_name)}"
+  name                         = "${var.spoke_vnet_name}-to-${var.hub_vnet_name}"
   resource_group_name          = var.spoke_vnet_rg
   virtual_network_name         = var.spoke_vnet_name
   remote_virtual_network_id    = var.hub_vnet_id
