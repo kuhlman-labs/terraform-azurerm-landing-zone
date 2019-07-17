@@ -2,6 +2,8 @@
 # Setting up resource variables
 ###############################
 
+#common
+
 variable "resource_group" {
   description = "The name of the target resource group"
   type        = string
@@ -12,6 +14,8 @@ variable "resource_prefix" {
   type        = string
   default     = "app-gw"
 }
+
+#app_gw
 
 variable "sku_name" {
   description = "The Name of the SKU to use for this Application Gateway. Possible values are Standard_Small, Standard_Medium, Standard_Large, Standard_v2, WAF_Medium, WAF_Large, and WAF_v2."
