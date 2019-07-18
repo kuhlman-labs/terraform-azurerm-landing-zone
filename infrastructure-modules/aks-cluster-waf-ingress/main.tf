@@ -136,7 +136,7 @@ resource "null_resource" "aks_config" {
       resource "helm_release" "ingress-azure" {
         depends_on = [null_resource.aks_config]
         name       = "application-gateway-kubernetes-ingress"
-        repository = "https://azure.github.io/application-gateway-kubernetes-ingress/helm/"
+        repository = "https://appgwingress.blob.core.windows.net/ingress-azure-helm-package/"
         chart      = "ingress-azure"
         namespace  = "default"
 
