@@ -63,6 +63,7 @@ module "waf_public_ip" {
   name              = "${module.resource_group.resource_group_name}-app-gw-ip"
   resource_group    = module.resource_group.resource_group_name
   allocation_method = "Static"
+  sku               = "Standard"
 }
 
 module "waf" {
