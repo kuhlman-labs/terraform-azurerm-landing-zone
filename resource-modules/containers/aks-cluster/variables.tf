@@ -37,19 +37,19 @@ variable "client_secret" {
 variable "client_app_id" {
   description = " The Client ID of an Azure Active Directory Application. Changing this forces a new resource to be created."
   type        = string
-  default     = ""
+  default     = null
 }
 
 variable "server_app_secret" {
   description = "The Server Secret of an Azure Active Directory Application. Changing this forces a new resource to be created."
   type        = string
-  default     = ""
+  default     = null
 }
 
 variable "server_app_id" {
   description = "The Server ID of an Azure Active Directory Application. Changing this forces a new resource to be created."
   type        = string
-  default     = ""
+  default     = null
 }
 
 #aks
@@ -68,8 +68,8 @@ variable "oms_agent_enabled" {
 
 variable "aci_connector_linux_enabled" {
   description = "(Required) Is the virtual node addon enabled?"
-  type        = bool
-  default     = false
+  type        = string
+  default     = "false"
 }
 
 variable "rbac_enabled" {
@@ -108,7 +108,7 @@ variable "public_ssh_key_path" {
 variable "aci_subnet_name" {
   description = "The subnet name for the virtual nodes to run."
   type        = string
-  default     = ""
+  default     = null
 }
 
 variable "subnet_id" {
@@ -119,7 +119,7 @@ variable "subnet_id" {
 variable "log_analytics_workspace_id" {
   description = "The ID of the Log Analytics Workspace which the OMS Agent should send data to."
   type        = string
-  default     = ""
+  default     = null
 }
 
 variable "api_server_authorized_ip_ranges" {
