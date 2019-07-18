@@ -11,12 +11,12 @@ data "azurerm_resource_group" "base" {
 ################
 
 resource "azurerm_kubernetes_cluster" "base" {
-  name                            = "${data.azurerm_resource_group.base.name}-${var.resource_prefix}"
-  location                        = data.azurerm_resource_group.base.location
-  dns_prefix                      = var.dns_prefix
-  resource_group_name             = data.azurerm_resource_group.base.name
+  name                = "${data.azurerm_resource_group.base.name}-${var.resource_prefix}"
+  location            = data.azurerm_resource_group.base.location
+  dns_prefix          = var.dns_prefix
+  resource_group_name = data.azurerm_resource_group.base.name
   #api_server_authorized_ip_ranges = var.api_server_authorized_ip_ranges
-  kubernetes_version              = var.kubernetes_version
+  kubernetes_version = var.kubernetes_version
 
   agent_pool_profile {
     name           = var.agent_name
