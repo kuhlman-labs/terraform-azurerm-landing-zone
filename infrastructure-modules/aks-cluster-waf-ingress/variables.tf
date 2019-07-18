@@ -33,7 +33,6 @@ variable "vnet_rg" {
   type        = string
 }
 
-
 variable "subnet_aks_nodes_address_prefix" {
   description = "The address prefix to use for the subnet."
   type        = string
