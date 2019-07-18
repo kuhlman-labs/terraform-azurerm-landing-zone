@@ -67,6 +67,7 @@ Provider Requirements:
 * `aks_role_assignment_3` from `../../resource-modules/governance/role-assignment`
 * `aks_role_assignment_4` from `../../resource-modules/governance/role-assignment`
 * `aks_user_assigned_identity` from `../../resource-modules/governance/user-assigned-identity`
-* `aks_waf` from `../../resource-modules/network/application-gateway`
 * `resource_group` from `../../resource-modules/resource-group`
+* `waf` from `../../resource-modules/network/application-gateway`
+* `waf_public_ip` from `../../resource-modules/network/public-ip`
 
