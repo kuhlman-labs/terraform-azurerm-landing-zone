@@ -23,7 +23,7 @@ module "network_spoke" {
   #authentication
   storage_account_name = var.storage_account_name
   access_key           = var.access_key
-  shared_state_key     = replace(var.state_key, "test", "test")
+  shared_state_key     = replace(var.state_key, "test", "shared-services")
   container_name       = "tfstate"
   #network
   vnet_address_ranges            = var.spoke_vnet_address_ranges
