@@ -7,11 +7,12 @@ module "network_spoke" {
   #common
   environment          = var.environment
   region               = var.region
+  #authentication
   storage_account_name = var.storage_account_name
   access_key           = var.access_key
   shared_state_key     = replace(var.state_key, "prod", "shared-services")
   container_name       = "tfstate"
-  #vnet
+  #network
   vnet_address_ranges            = var.vnet_address_ranges
   subnet_frontend_address_prefix = var.subnet_frontend_address_prefix
   subnet_backend_address_prefix  = var.subnet_backend_address_prefix

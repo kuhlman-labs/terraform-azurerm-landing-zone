@@ -6,18 +6,14 @@ data "azurerm_resource_group" "base" {
   name = var.resource_group
 }
 
-############################################
-#Setting up Random String generator for name
-############################################
+####################################
+# Setting up Log Analytics Workspace
+####################################
 
 resource "random_string" "base" {
   length  = 8
   special = false
 }
-
-####################################
-# Setting up Log Analytics Workspace
-####################################
 
 resource "azurerm_log_analytics_workspace" "base" {
   name                = "${data.azurerm_resource_group.base.name}-${var.resource_prefix}-${random_string.base.result}"
