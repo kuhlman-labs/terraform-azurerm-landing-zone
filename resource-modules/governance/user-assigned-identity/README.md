@@ -11,6 +11,7 @@ Provider Requirements:
 ## Output Values
 * `uai_client_id`
 * `uai_id`
+* `uai_name`
 * `uai_principal_id`
 
 ## Managed Resources

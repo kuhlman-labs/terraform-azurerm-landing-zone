@@ -18,7 +18,7 @@ module "key_vault" {
 module "key_vault_p2s_certificate" {
   source               = "../../resource-modules/governance/key-vault-certificate-import"
   key_vault_id         = module.key_vault.key_vault_id
-  certificate_contents = var.certificate_contents
-  certificate_password = var.certificate_password
+  certificate_contents = "${path.module}/AzureP2SRootCert.pfx"
+  certificate_password = ""
 }
 

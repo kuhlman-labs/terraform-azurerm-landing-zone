@@ -6,9 +6,8 @@ module "resource_group" {
 }
 
 module "log-analytics" {
-  source           = "../../resource-modules/governance/log-analytics"
-  resource_group   = module.resource_group.resource_group_name
-  retention_period = var.retention_period
-  tags             = var.tags
+  source         = "../../resource-modules/governance/log-analytics"
+  resource_group = module.resource_group.resource_group_name
+  tags           = var.tags
 }
 
