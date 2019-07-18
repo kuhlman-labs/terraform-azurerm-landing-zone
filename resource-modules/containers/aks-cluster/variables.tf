@@ -56,14 +56,14 @@ variable "server_app_id" {
 
 variable "http_application_routing_enabled" {
   description = "(Required) Is HTTP Application Routing Enabled? Changing this forces a new resource to be created."
-  type        = bool
-  default     = false
+  type        = string
+  default     = "false"
 }
 
 variable "oms_agent_enabled" {
   description = "(Required) Is the OMS Agent Enabled?"
-  type        = bool
-  default     = false
+  type        = string
+  default     = "false"
 }
 
 variable "aci_connector_linux_enabled" {
@@ -74,8 +74,8 @@ variable "aci_connector_linux_enabled" {
 
 variable "rbac_enabled" {
   description = "(Required) Is Role Based Access Control Enabled? Changing this forces a new resource to be created."
-  type        = bool
-  default     = false
+  type        = string
+  default     = "false"
 }
 
 variable "name" {
