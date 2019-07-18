@@ -15,25 +15,25 @@ output "aks_kube_admin_config_raw" {
 }
 
 output "aks_kube_admin_config_client_key" {
-  value = azurerm_kubernetes_cluster.base.kube_admin_config.0.client_key
+  value = azurerm_kubernetes_cluster.base.kube_admin_config.client_key
 }
 
 output "aks_kube_admin_config_client_certificate" {
-  value = azurerm_kubernetes_cluster.base.kube_admin_config.0.client_certificate
+  value = azurerm_kubernetes_cluster.base.kube_admin_config.client_certificate
 }
 
 output "aks_kube_admin_config_cluster_ca_certificate" {
-  value = azurerm_kubernetes_cluster.base.kube_admin_config.0.cluster_ca_certificate
+  value = azurerm_kubernetes_cluster.base.kube_admin_config.cluster_ca_certificate
 }
 
 output "aks_kube_admin_config_host" {
-  value = azurerm_kubernetes_cluster.base.kube_admin_config.0.host
+  value = azurerm_kubernetes_cluster.base.kube_admin_config.host
 }
 
 output "aks_kube_admin_config_username" {
-  value = azurerm_kubernetes_cluster.base.kube_admin_config.0.username
+  value = azurerm_kubernetes_cluster.base.kube_admin_config.username
 }
 
 output "aks_kube_admin_config_password" {
-  value = azurerm_kubernetes_cluster.base.kube_admin_config.0.password
+  value = azurerm_kubernetes_cluster.base.kube_admin_config.password
 }
