@@ -15,7 +15,7 @@ resource "azurerm_kubernetes_cluster" "base" {
   location                        = data.azurerm_resource_group.base.location
   dns_prefix                      = var.dns_prefix
   resource_group_name             = data.azurerm_resource_group.base.name
-  api_server_authorized_ip_ranges = var.api_server_authorized_ip_ranges
+  #api_server_authorized_ip_ranges = var.api_server_authorized_ip_ranges
   kubernetes_version              = var.kubernetes_version
 
   agent_pool_profile {
@@ -43,6 +43,7 @@ resource "azurerm_kubernetes_cluster" "base" {
     docker_bridge_cidr = var.docker_bridge_cidr
     service_cidr       = var.service_cidr
   }
+  /*
   addon_profile {
     http_application_routing {
       enabled = var.http_application_routing_enabled
@@ -65,6 +66,7 @@ resource "azurerm_kubernetes_cluster" "base" {
     }
     enabled = var.rbac_enabled
   }
+  */
   tags = var.tags
 }
 
