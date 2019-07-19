@@ -15,18 +15,6 @@ variable "environment" {
   type        = string
 }
 
-#key vault cert
-
-variable "certificate_contents" {
-  description = "The base64-encoded certificate contents. Changing this forces a new resource to be created."
-  type        = string
-}
-
-variable "certificate_password" {
-  description = "The password associated with the certificate. Changing this forces a new resource to be created."
-  type        = string
-}
-
 #tags
 
 variable "tags" {

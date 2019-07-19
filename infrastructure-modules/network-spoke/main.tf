@@ -11,9 +11,7 @@ data "terraform_remote_state" "shared_services" {
   }
 }
 
-###########################
 # Setting up resource group
-###########################
 
 module "resource_group" {
   source          = "../../resource-modules/resource-group"

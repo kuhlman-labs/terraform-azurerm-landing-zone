@@ -10,3 +10,6 @@ output "uai_client_id" {
   value = azurerm_user_assigned_identity.base.client_id
 }
 
+output "uai_name" {
+  value = azurerm_user_assigned_identity.base.name
+}

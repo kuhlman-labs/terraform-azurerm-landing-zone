@@ -1,6 +1,4 @@
-###########################
 # Setting up resource group
-###########################
 
 module "resource_group" {
   source          = "../../resource-modules/resource-group"

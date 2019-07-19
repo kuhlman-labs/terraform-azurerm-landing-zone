@@ -14,7 +14,7 @@ variable "resource_prefix" {
 }
 
 variable "disable_bgp_route_propagation" {
-  description = "Boolean flag which controls propagation of routes learned by BGP on that route table. True means disable."
+  description = "bool flag which controls propagation of routes learned by BGP on that route table. True means disable."
   type        = bool
 }
 

@@ -3,12 +3,9 @@
 ####################
 
 module "log_analytics" {
-  source = "../../infrastructure-modules/log-analytics"
-  #common
-  environment = var.environment
-  region      = var.region
-  #log-aw
+  source           = "../../infrastructure-modules/log-analytics"
+  environment      = var.environment
+  region           = var.region
   retention_period = "90"
-  #tags
-  tags = var.tags
+  tags             = var.tags
 }

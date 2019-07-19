@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-solutions="solutions/prod/ solutions/pre-prod/ solutions/audit/ solutions/shared-services/"
+solutions="solutions/prod/ solutions/pre-prod/ solutions/audit/ solutions/test/ solutions/shared-services/"
 
 for dir in ${solutions}; do
   cd "$dir";
