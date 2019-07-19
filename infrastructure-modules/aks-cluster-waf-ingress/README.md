@@ -23,13 +23,13 @@ Provider Requirements:
 ## Output Values
 * `aks_fqdn`: The FQDN of the Azure Kubernetes Managed Cluster.
 * `aks_id`: The ID of the Kubernetes Managed Cluster.
-* `aks_kube_admin_config_client_certificate`: Base64 encoded public certificate used by clients to authenticate to the Kubernetes cluster.
-* `aks_kube_admin_config_client_key`: Base64 encoded private key used by clients to authenticate to the Kubernetes cluster.
-* `aks_kube_admin_config_cluster_ca_certificate`: Base64 encoded public CA certificate used as the root of trust for the Kubernetes cluster.
-* `aks_kube_admin_config_host`: The Kubernetes cluster server host.
-* `aks_kube_admin_config_password`: A password or token used to authenticate to the Kubernetes cluster.
-* `aks_kube_admin_config_raw`: Raw Kubernetes config for the admin account to be used by kubectl and other compatible tools. This is only available when Role Based Access Control with Azure Active Directory is enabled.
-* `aks_kube_admin_config_username`: A username used to authenticate to the Kubernetes cluster.
+* `aks_kube_config_client_certificate`: Base64 encoded public certificate used by clients to authenticate to the Kubernetes cluster.
+* `aks_kube_config_client_key`: Base64 encoded private key used by clients to authenticate to the Kubernetes cluster.
+* `aks_kube_config_cluster_ca_certificate`: Base64 encoded public CA certificate used as the root of trust for the Kubernetes cluster.
+* `aks_kube_config_host`: The Kubernetes cluster server host.
+* `aks_kube_config_password`: A password or token used to authenticate to the Kubernetes cluster.
+* `aks_kube_config_raw`: Raw Kubernetes config for the admin account to be used by kubectl and other compatible tools.
+* `aks_kube_config_username`: A username used to authenticate to the Kubernetes cluster.
 * `aks_node_resource_group`: Auto-generated Resource Group containing AKS Cluster resources.
 
 ## Managed Resources

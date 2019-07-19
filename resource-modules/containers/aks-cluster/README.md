@@ -5,7 +5,7 @@ Provider Requirements:
 * **azurerm:** (any version)
 
 ## Input Variables
-* `aci_connector_linux_enabled` (required): (Required) Is the virtual node addon enabled?
+* `aci_connector_linux_enabled` (default `"false"`): (Required) Is the virtual node addon enabled?
 * `aci_subnet_name` (required): The subnet name for the virtual nodes to run.
 * `admin_user_name` (required): The Admin Username for the Cluster. Changing this forces a new resource to be created.
 * `agent_count` (default `"1"`): Number of Agents (VMs) in the Pool. Possible values must be in the range of 1 to 100 (inclusive). Defaults to 1.
@@ -20,14 +20,14 @@ Provider Requirements:
 * `dns_prefix` (default `"agents"`): DNS prefix specified when creating the managed cluster. Changing this forces a new resource to be created.
 * `dns_service_ip` (required): IP address within the Kubernetes service address range that will be used by cluster service discovery (kube-dns). This is required when network_plugin is set to azure. Changing this forces a new resource to be created.
 * `docker_bridge_cidr` (required): IP address (in CIDR notation) used as the Docker bridge IP address on nodes. This is required when network_plugin is set to azure. Changing this forces a new resource to be created.
-* `http_application_routing_enabled` (required): (Required) Is HTTP Application Routing Enabled? Changing this forces a new resource to be created.
+* `http_application_routing_enabled` (default `"false"`): (Required) Is HTTP Application Routing Enabled? Changing this forces a new resource to be created.
 * `kubernetes_version` (required): Version of Kubernetes specified when creating the AKS managed cluster. If not specified, the latest recommended version will be used at provisioning time (but won't auto-upgrade).
 * `log_analytics_workspace_id` (required): The ID of the Log Analytics Workspace which the OMS Agent should send data to.
 * `name` (required): The name of the Managed Kubernetes Cluster to create. Changing this forces a new resource to be created.
 * `network_plugin` (required):  (Required) Network plugin to use for networking. Currently supported values are azure and kubenet. Changing this forces a new resource to be created.
-* `oms_agent_enabled` (required): (Required) Is the OMS Agent Enabled?
+* `oms_agent_enabled` (default `"false"`): (Required) Is the OMS Agent Enabled?
 * `public_ssh_key_path` (required): The Public SSH Key used to access the cluster. Changing this forces a new resource to be created.
-* `rbac_enabled` (required): (Required) Is Role Based Access Control Enabled? Changing this forces a new resource to be created.
+* `rbac_enabled` (default `"false"`): (Required) Is Role Based Access Control Enabled? Changing this forces a new resource to be created.
 * `resource_group` (required): The name of the target resource group
 * `resource_prefix` (default `"aks-cluster"`): Short prefix to identify resource
 * `server_app_id` (required): The Server ID of an Azure Active Directory Application. Changing this forces a new resource to be created.
@@ -40,13 +40,13 @@ Provider Requirements:
 ## Output Values
 * `aks_fqdn`
 * `aks_id`
-* `aks_kube_admin_config_client_certificate`
-* `aks_kube_admin_config_client_key`
-* `aks_kube_admin_config_cluster_ca_certificate`
-* `aks_kube_admin_config_host`
-* `aks_kube_admin_config_password`
-* `aks_kube_admin_config_raw`
-* `aks_kube_admin_config_username`
+* `aks_kube_config_client_certificate`
+* `aks_kube_config_client_key`
+* `aks_kube_config_cluster_ca_certificate`
+* `aks_kube_config_host`
+* `aks_kube_config_password`
+* `aks_kube_config_raw`
+* `aks_kube_config_username`
 * `aks_node_resource_group`
 
 ## Managed Resources
