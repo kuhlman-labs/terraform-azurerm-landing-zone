@@ -4,7 +4,9 @@
 
 ## Purpose
 
-This repository itself is meant to provide curated, reusable [Terraform](https://www.terraform.io/) content for the deployment of an Azure Cloud Landing Zone.
+This repository itself is meant to provide curated, reusable [Terraform](https://www.terraform.io/) content for the deployment of an [Azure Landing Zone](https://docs.microsoft.com/en-us/azure/architecture/cloud-adoption/ready/considerations/).
+
+* Landing zones are the basic building blocks of any cloud adoption environment. The term landing zone is used to describe an environment that has been provisioned and prepared to host workloads in a cloud environment, such as Azure. A fully functioning landing zone is the final deliverable of any iteration of the Cloud Adoption Framework's Ready methodology.
 
 ## Structure
 
@@ -47,7 +49,7 @@ There are dedicated `README.md` files in each directory, summarised links provid
     *  Resource Group
         *  [resource-group](resource-modules/resource-group/README.md)
 
-## Launching
+## Deployment
 
 ### Deployment prerequisites
 
@@ -55,7 +57,11 @@ There are dedicated `README.md` files in each directory, summarised links provid
 
 The following items are necessary to deploy a solution using the [commands](#commands-for-deploying-with-terraform) listed in this README:
 
-* terraform
+* [terraform](https://www.terraform.io/downloads.html)
+* [azure-cli](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest)
+* [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
+
+The [Dockerfile](Dockerfile) in this repository can be used to build a container with all neccesarry prerequisites.
 
 #### Subscription(s)
 
@@ -135,7 +141,7 @@ The deployable resources are organized into solutions that are designed to solve
 The order in which the solutions should be deployed based upon interdependencies:
 
 * (Optional) test
-    * A minimal solution that helps confirm the backend configuration and authentication are properly configured
+    * A validation solution that helps confirm the modules are properly configured
 *  audit
     * Deploys log analytics for storage audit logs  
 *  shared-services
@@ -164,10 +170,6 @@ To clean up the infrastructure created for a solution you can run the following 
 ```bash
 terraform destroy -auto-approve -var-file=terraform.tfvars -var "subscription_id=$SUBSCRIPTION_ID" -var "tenant_id=$TENANT_ID" -var "client_secret=$CLIENT_SECRET" -var "app_id=$APP_ID" -var "environment=$ENVIRONMENT" -var "storage_account_name=$STORAGE_ACCOUNT_NAME" -var "access_key=$ACCESS_KEY" -var "state_key=$STATE_KEY" -var "shared_services_subscription_id=$SHARED_SERVICES_SUBSCRIPTION_ID";
 ```
-
-### Lab Deployment
-
-The solution can be deployed to a lab subscription by creating a [Service Principal](#service-principal) in the lab and setting the `SUBSCRIPTION_ID` environment variable to the ID of the lab you have been provisioned. No code changes are necessary to deploy to the lab.
 
 ### Solution
 * Definition: The top level composition that deploys all resources necessary for a single environment. Each solution is composed of one or more Infrastructure Modules.
@@ -213,7 +215,12 @@ The naming conventions are established in the resource modules, including the Re
 
 ## FAQs
 
-### How do I request new materials?
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+### How do I request new modules?
 
 Please create an issue.
 
