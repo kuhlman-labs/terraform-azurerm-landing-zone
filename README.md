@@ -61,7 +61,7 @@ The following items are necessary to deploy a solution using the [commands](#com
 * [azure-cli](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest)
 * [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 
-The [Dockerfile](Dockerfile) in this repository can be used to build a container with all neccesarry prerequisites.
+The [Dockerfile](Dockerfile) in this repository can be used to build a container with all neccesary prerequisites.
 
 #### Subscription(s)
 
