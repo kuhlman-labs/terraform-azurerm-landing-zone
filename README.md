@@ -99,7 +99,7 @@ Terraform maintains state files that allow for the execution of [Terraform comma
 
 The storage account for remote state must be created and the related environment variables exported before the Terraform commands for a [solution](#solutions) can be executed.
 
-The CLZ was created to work off of a single Azure storage account and container. The tfstate files are generated separately for each solution to limit the impact of changes to the only the solution being altered.
+The Landing Zone was created to work off of a single Azure storage account and container. The tfstate files are generated separately for each solution to limit the impact of changes to the only the solution being altered.
 
 See README in /solutions/remote-state for automated creation of the storage account.
 

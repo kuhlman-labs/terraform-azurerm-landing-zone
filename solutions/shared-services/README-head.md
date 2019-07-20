@@ -4,7 +4,7 @@
 
 This solution creates a hub network, a Key Vault for VPN certificate storage, a Storage Account for centralized log persistence, and a Log Analytics Workspace for centralized analysis of logs.
 
-**Note:** The solution takes in a pfx certificate for the configuration of the Key Vault certificate. The certificate in this repository should be replaced with a valid certificate for the destination of the CLZ.
+**Note:** The solution takes in a pfx certificate for the configuration of the Key Vault certificate. The certificate in this repository should be replaced with a valid certificate for the destination of the Landing Zone.
 
 ## Resources
 
