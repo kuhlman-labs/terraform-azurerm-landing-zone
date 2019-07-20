@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-modules="solutions/* infrastructure-modules/* resource-modules/*"
+modules="environments/* modules/* resources/*"
 
 for dir in $(find ${modules} -maxdepth 1 -type d); do
   cd "$dir/";

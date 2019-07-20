@@ -13,41 +13,41 @@ This repository itself is meant to provide curated, reusable [Terraform](https:/
 There are dedicated `README.md` files in each directory, summarised links provided here for your convenience
 
 * Solutions
-    * [remote-state](solutions/remote-state/README.md)
-    * [test](solutions/test/README.md)
-    * [audit](solutions/audit/README.md)
-    * [shared-services](solutions/shared-services/README.md)
-    * [pre-prod](solutions/pre-prod/README.md)
-    * [prod](solutions/prod/README.md)
+    * [remote-state](environments/remote-state/README.md)
+    * [test](environments/test/README.md)
+    * [audit](environments/audit/README.md)
+    * [shared-services](environments/shared-services/README.md)
+    * [pre-prod](environments/pre-prod/README.md)
+    * [prod](environments/prod/README.md)
 
 * Infrastructure Modules
-    * [key-vault-with-p2s-cert](infrastructure-modules/key-vault-with-p2s-cert/README.md)
-    * [log-analytics](infrastructure-modules/log-analytics/README.md)
-    * [network-hub](infrastructure-modules/network-hub/README.md)
-    * [network-spoke](infrastructure-modules/network-spoke/README.md)
-    * [aks-cluster-waf-ingress](infrastructure-modules/aks-cluster-waf-ingress/README.md)
+    * [key-vault-with-p2s-cert](modules/key-vault-with-p2s-cert/README.md)
+    * [log-analytics](modules/log-analytics/README.md)
+    * [network-hub](modules/network-hub/README.md)
+    * [network-spoke](modules/network-spoke/README.md)
+    * [aks-cluster-waf-ingress](modules/aks-cluster-waf-ingress/README.md)
 
 * Resource Modules
     * Backup
-        * [recovery-services-vault](resource-modules/backup/recovery-services-vault/README.md)
+        * [recovery-services-vault](resources/backup/recovery-services-vault/README.md)
     * Containers
-        * [aks-cluster](resource-modules/containers/aks-cluster/README.md)        
+        * [aks-cluster](resources/containers/aks-cluster/README.md)        
     * Governance
-        * [key-vault](resource-modules/governance/key-vault/README.md)
-        * [log-analytics](resource-modules/governance/log-analytics/README.md)
-        * [role-assignment](resource-modules/governance/role-assignment/README.md)
-        * [user-assigned-identity](resource-modules/governance/user-assigned-identity/README.md)
+        * [key-vault](resources/governance/key-vault/README.md)
+        * [log-analytics](resources/governance/log-analytics/README.md)
+        * [role-assignment](resources/governance/role-assignment/README.md)
+        * [user-assigned-identity](resources/governance/user-assigned-identity/README.md)
     * Network
-        * [application-gateway](resource-modules/network/application-gateway/README.md)
-        * [firewall](resource-modules/network/firewall/README.md)
-        * [route-table](resource-modules/network/route-table/README.md)
-        * [nsg](resource-modules/network/nsg/README.md)
-        * [vnet](resource-modules/network/vnet/README.md)
-        * [vnet-gateway](resource-modules/network/vnet-gateway/README.md)
-        * [vnet-peering](resource-modules/network/vnet-peering/README.md)
-        * [vnet-subnet](resource-modules/network/vnet-subnet/README.md)
+        * [application-gateway](resources/network/application-gateway/README.md)
+        * [firewall](resources/network/firewall/README.md)
+        * [route-table](resources/network/route-table/README.md)
+        * [nsg](resources/network/nsg/README.md)
+        * [vnet](resources/network/vnet/README.md)
+        * [vnet-gateway](resources/network/vnet-gateway/README.md)
+        * [vnet-peering](resources/network/vnet-peering/README.md)
+        * [vnet-subnet](resources/network/vnet-subnet/README.md)
     *  Resource Group
-        *  [resource-group](resource-modules/resource-group/README.md)
+        *  [resource-group](resources/resource-group/README.md)
 
 ## Deployment
 
@@ -101,7 +101,7 @@ The storage account for remote state must be created and the related environment
 
 The Landing Zone was created to work off of a single Azure storage account and container. The tfstate files are generated separately for each solution to limit the impact of changes to the only the solution being altered.
 
-See README in /solutions/remote-state for automated creation of the storage account.
+See README in /environments/remote-state for automated creation of the storage account.
 
 Steps to create:
 
@@ -157,7 +157,7 @@ These commands can be executed from your local environment, however, it is recom
 
 Commands are executed from the folder corresponding to the solution that you are deploying. These commands will need to be run for each solution that needs to be deployed.
 
-Example: `/solutions/test`
+Example: `/environments/test`
 
 ```bash
 terraform init -input=false -upgrade=true -backend=true -backend-config="access_key=$ACCESS_KEY" -backend-config="storage_account_name=$STORAGE_ACCOUNT_NAME" -backend-config="key=$STATE_KEY";
