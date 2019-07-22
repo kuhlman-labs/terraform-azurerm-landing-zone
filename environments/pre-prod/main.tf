@@ -3,7 +3,7 @@
 #######################
 
 module "network_spoke" {
-  source = "../../../modules/azure/network-spoke"
+  source = "../../modules/azure/network-spoke"
   #common
   environment = var.environment
   region      = var.region
