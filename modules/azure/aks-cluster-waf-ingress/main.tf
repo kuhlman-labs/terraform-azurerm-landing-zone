@@ -4,7 +4,7 @@ data "azurerm_client_config" "current" {
 # Setting up resource group
 
 module "resource_group" {
-  source          = "../../resources/azure/resource-group"
+  source          = "../../../resources/azure/resource-group"
   resource_prefix = "k8s"
   region          = var.region
   environment     = var.environment
@@ -13,7 +13,7 @@ module "resource_group" {
 #Setting up aks managed identity
 
 module "aks_user_assigned_identity" {
-  source         = "../../resources/azure/governance/user-assigned-identity"
+  source         = "../../../resources/azure/governance/user-assigned-identity"
   resource_group = module.aks_cluster.aks_node_resource_group
   uai_name       = "aks-cluster-id"
 }
@@ -21,28 +21,28 @@ module "aks_user_assigned_identity" {
 #Setting up role assignments for AD integration
 
 module "aks_role_assignment_1" {
-  source               = "../../resources/azure/governance/role-assignment"
+  source               = "../../../resources/azure/governance/role-assignment"
   scope                = module.waf.appgw_id
   role_definition_name = "Network Contributor"
   principal_id         = data.azurerm_client_config.current.service_principal_object_id
 }
 
 module "aks_role_assignment_2" {
-  source               = "../../resources/azure/governance/role-assignment"
+  source               = "../../../resources/azure/governance/role-assignment"
   scope                = module.aks_user_assigned_identity.uai_id
   role_definition_name = "Managed Identity Operator"
   principal_id         = data.azurerm_client_config.current.service_principal_object_id
 }
 
 module "aks_role_assignment_3" {
-  source               = "../../resources/azure/governance/role-assignment"
+  source               = "../../../resources/azure/governance/role-assignment"
   scope                = module.waf.appgw_id
   role_definition_name = "Contributor"
   principal_id         = module.aks_user_assigned_identity.uai_principal_id
 }
 
 module "aks_role_assignment_4" {
-  source               = "../../resources/azure/governance/role-assignment"
+  source               = "../../../resources/azure/governance/role-assignment"
   scope                = module.resource_group.resource_group_id
   role_definition_name = "Reader"
   principal_id         = module.aks_user_assigned_identity.uai_principal_id
@@ -51,7 +51,7 @@ module "aks_role_assignment_4" {
 #Setting up WAF
 
 module "waf_subnet" {
-  source                = "../../resources/azure/network/vnet-subnet"
+  source                = "../../../resources/azure/network/vnet-subnet"
   vnet_name             = var.vnet_name
   resource_group        = var.vnet_rg
   subnet_name           = "app_gw"
@@ -59,7 +59,7 @@ module "waf_subnet" {
 }
 
 module "waf_public_ip" {
-  source            = "../../resources/azure/network/public-ip"
+  source            = "../../../resources/azure/network/public-ip"
   name              = "${module.resource_group.resource_group_name}-app-gw-ip"
   resource_group    = module.resource_group.resource_group_name
   allocation_method = "Static"
@@ -67,7 +67,7 @@ module "waf_public_ip" {
 }
 
 module "waf" {
-  source               = "../../resources/azure/network/application-gateway"
+  source               = "../../../resources/azure/network/application-gateway"
   resource_group       = module.resource_group.resource_group_name
   sku_name             = "WAF_v2"
   sku_tier             = "WAF_v2"
@@ -79,7 +79,7 @@ module "waf" {
 #Setting up AKS Cluster
 
 module "aks_subnet" {
-  source                = "../../resources/azure/network/vnet-subnet"
+  source                = "../../../resources/azure/network/vnet-subnet"
   vnet_name             = var.vnet_name
   resource_group        = var.vnet_rg
   subnet_name           = "aks_nodes"
@@ -87,7 +87,7 @@ module "aks_subnet" {
 }
 
 module "aks_cluster" {
-  source              = "../../resources/azure/containers/aks-cluster"
+  source              = "../../../resources/azure/containers/aks-cluster"
   resource_group      = module.resource_group.resource_group_name
   public_ssh_key_path = "${path.module}/id_rsa.pub"
   name                = module.resource_group.resource_group_name

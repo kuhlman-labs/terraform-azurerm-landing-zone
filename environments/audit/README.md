@@ -26,5 +26,5 @@ Provider Requirements:
 * `log_analytics_workspace_id`: Workspace (or Customer) ID for the Log Analytics Workspace
 
 ## Child Modules
-* `log_analytics` from `../../modules/azure/log-analytics`
+* `log_analytics` from `../../../modules/azure/log-analytics`
 

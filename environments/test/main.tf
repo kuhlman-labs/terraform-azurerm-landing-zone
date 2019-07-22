@@ -3,7 +3,7 @@
 ###################
 
 module "network_hub" {
-  source = "../../modules/azure/network-hub"
+  source = "../../../modules/azure/network-hub"
   #common
   environment = var.environment
   region      = var.region
@@ -16,7 +16,7 @@ module "network_hub" {
 }
 
 module "network_spoke" {
-  source = "../../modules/azure/network-spoke"
+  source = "../../../modules/azure/network-spoke"
   #common
   environment = var.environment
   region      = var.region
@@ -40,7 +40,7 @@ module "network_spoke" {
 }
 
 module "aks_cluster_waf_ingress" {
-  source                          = "../../modules/azure/aks-cluster-waf-ingress"
+  source                          = "../../../modules/azure/aks-cluster-waf-ingress"
   environment                     = var.environment
   region                          = var.region
   client_secret                   = var.client_secret
@@ -57,14 +57,14 @@ module "aks_cluster_waf_ingress" {
 }
 
 module "key_vault_with_p2s_cert" {
-  source      = "../../modules/azure/key-vault-with-p2s-cert"
+  source      = "../../../modules/azure/key-vault-with-p2s-cert"
   environment = var.environment
   region      = var.region
   tags        = var.tags
 }
 
 module "log_analytics" {
-  source      = "../../modules/azure/log-analytics"
+  source      = "../../../modules/azure/log-analytics"
   environment = var.environment
   region      = var.region
   tags        = var.tags

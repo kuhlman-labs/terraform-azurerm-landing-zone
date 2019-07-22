@@ -15,6 +15,6 @@
 * `log_analytics_workspace_id`: workspace (or customer) ID for the log analytics workspace
 
 ## Child Modules
-* `log-analytics` from `../../resources/azure/governance/log-analytics`
-* `resource_group` from `../../resources/azure/resource-group`
+* `log-analytics` from `../../../resources/azure/governance/log-analytics`
+* `resource_group` from `../../../resources/azure/resource-group`
 

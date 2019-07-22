@@ -8,6 +8,6 @@ This TF module creates a Resource Group containing a Log Analytics Workspace.
 
 | Type     | resource module     |
 |----------|------------|
-| Resource Group | [resource-group](../../resources/azure/resource-group/README.md)|
-| Log Analytics Workspace | [governance/log-analytics](../../resources/azure/governance/log-analytics/README.md)|
+| Resource Group | [resource-group](../../../resources/azure/resource-group/README.md)|
+| Log Analytics Workspace | [governance/log-analytics](../../../resources/azure/governance/log-analytics/README.md)|
 

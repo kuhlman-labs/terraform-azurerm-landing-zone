@@ -17,9 +17,9 @@
 * `vnet_hub_rg`: resource group name of vnet hub
 
 ## Child Modules
-* `nsg_association_dmz` from `../../resources/azure/network/nsg-association`
-* `nsg_dmz` from `../../resources/azure/network/nsg`
-* `resource_group` from `../../resources/azure/resource-group`
-* `subnet_dmz` from `../../resources/azure/network/vnet-subnet`
-* `vnet_hub` from `../../resources/azure/network/vnet`
+* `nsg_association_dmz` from `../../../resources/azure/network/nsg-association`
+* `nsg_dmz` from `../../../resources/azure/network/nsg`
+* `resource_group` from `../../../resources/azure/resource-group`
+* `subnet_dmz` from `../../../resources/azure/network/vnet-subnet`
+* `vnet_hub` from `../../../resources/azure/network/vnet`
 

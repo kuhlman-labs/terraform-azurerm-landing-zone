@@ -14,12 +14,12 @@ Solutions are built by calling infrastructure modules that compose the lower lev
 
 | Type     | Module     |
 |----------|------------|
-| Log Analytics | [log-analytics](../../modules/azure/log-analytics) |
+| Log Analytics | [log-analytics](../../../modules/azure/log-analytics) |
 
 ### Resources Created
 
 | Type     | Resource Module     |
 |----------|------------|
-| Resource Group | [resource-group](../../resources/azure/resource-group/README.md)|
-| Log Analytics Workspace | [governance/log-analytics](../../resources/azure/governance/log-analytics/README.md)|
+| Resource Group | [resource-group](../../../resources/azure/resource-group/README.md)|
+| Log Analytics Workspace | [governance/log-analytics](../../../resources/azure/governance/log-analytics/README.md)|
 

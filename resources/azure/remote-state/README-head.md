@@ -10,8 +10,8 @@ This solution allows for creation of the necessary storage account for the azure
 
 | Type     | Resource Module     |
 |----------|------------|
-| Resource Group | [resource-group](../../resources/azure/resource-group/README.md)|
-| Storage Account | [storage/storage-account](../../resources/azure/storage/storage-account/README.md)|
+| Resource Group | [resource-group](../../../resources/azure/resource-group/README.md)|
+| Storage Account | [storage/storage-account](../../../resources/azure/storage/storage-account/README.md)|
 
 ## Execution
 

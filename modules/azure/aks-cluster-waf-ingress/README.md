@@ -40,15 +40,15 @@ Provider Requirements:
 * `data.azurerm_client_config.current` from `azurerm`
 
 ## Child Modules
-* `aks_cluster` from `../../resources/azure/containers/aks-cluster`
-* `aks_role_assignment_1` from `../../resources/azure/governance/role-assignment`
-* `aks_role_assignment_2` from `../../resources/azure/governance/role-assignment`
-* `aks_role_assignment_3` from `../../resources/azure/governance/role-assignment`
-* `aks_role_assignment_4` from `../../resources/azure/governance/role-assignment`
-* `aks_subnet` from `../../resources/azure/network/vnet-subnet`
-* `aks_user_assigned_identity` from `../../resources/azure/governance/user-assigned-identity`
-* `resource_group` from `../../resources/azure/resource-group`
-* `waf` from `../../resources/azure/network/application-gateway`
-* `waf_public_ip` from `../../resources/azure/network/public-ip`
-* `waf_subnet` from `../../resources/azure/network/vnet-subnet`
+* `aks_cluster` from `../../../resources/azure/containers/aks-cluster`
+* `aks_role_assignment_1` from `../../../resources/azure/governance/role-assignment`
+* `aks_role_assignment_2` from `../../../resources/azure/governance/role-assignment`
+* `aks_role_assignment_3` from `../../../resources/azure/governance/role-assignment`
+* `aks_role_assignment_4` from `../../../resources/azure/governance/role-assignment`
+* `aks_subnet` from `../../../resources/azure/network/vnet-subnet`
+* `aks_user_assigned_identity` from `../../../resources/azure/governance/user-assigned-identity`
+* `resource_group` from `../../../resources/azure/resource-group`
+* `waf` from `../../../resources/azure/network/application-gateway`
+* `waf_public_ip` from `../../../resources/azure/network/public-ip`
+* `waf_subnet` from `../../../resources/azure/network/vnet-subnet`
 

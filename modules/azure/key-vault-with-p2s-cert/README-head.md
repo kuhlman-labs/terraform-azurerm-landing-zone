@@ -8,8 +8,8 @@ This TF module creates a Resource Group containing Key Vault and supporting cert
 
 | Type     | resource module     |
 |----------|------------|
-| Resource Group | [resource-group](../../resources/azure/resource-group/README.md)|
-| Key Vault | [network/vnet](../../resources/azure/governance/key-vault/README.md)|
-| P2S Certificate | [governance/key-vault-p2s-certificate](../../resources/azure/governance/key-vault-p2s-certificate/README.md) |
+| Resource Group | [resource-group](../../../resources/azure/resource-group/README.md)|
+| Key Vault | [network/vnet](../../../resources/azure/governance/key-vault/README.md)|
+| P2S Certificate | [governance/key-vault-p2s-certificate](../../../resources/azure/governance/key-vault-p2s-certificate/README.md) |
 
 

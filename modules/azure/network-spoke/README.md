@@ -35,9 +35,9 @@ Provider Requirements:
 * `data.terraform_remote_state.shared_services` from `terraform`
 
 ## Child Modules
-* `resource_group` from `../../resources/azure/resource-group`
-* `subnet_backend` from `../../resources/azure/network/vnet-subnet`
-* `subnet_frontend` from `../../resources/azure/network/vnet-subnet`
-* `vnet_peering` from `../../resources/azure/network/vnet-peering`
-* `vnet_spoke` from `../../resources/azure/network/vnet`
+* `resource_group` from `../../../resources/azure/resource-group`
+* `subnet_backend` from `../../../resources/azure/network/vnet-subnet`
+* `subnet_frontend` from `../../../resources/azure/network/vnet-subnet`
+* `vnet_peering` from `../../../resources/azure/network/vnet-peering`
+* `vnet_spoke` from `../../../resources/azure/network/vnet`
 

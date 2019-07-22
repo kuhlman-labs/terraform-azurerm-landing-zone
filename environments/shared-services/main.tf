@@ -3,7 +3,7 @@
 ##############################
 
 module "network_hub" {
-  source = "../../modules/azure/network-hub"
+  source = "../../../modules/azure/network-hub"
   #common
   environment = var.environment
   region      = var.region

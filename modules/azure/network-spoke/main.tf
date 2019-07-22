@@ -14,7 +14,7 @@ data "terraform_remote_state" "shared_services" {
 # Setting up resource group
 
 module "resource_group" {
-  source          = "../../resources/azure/resource-group"
+  source          = "../../../resources/azure/resource-group"
   resource_prefix = "network-spoke"
   region          = var.region
   environment     = var.environment
@@ -23,7 +23,7 @@ module "resource_group" {
 #Setting up vnet
 
 module "vnet_spoke" {
-  source              = "../../resources/azure/network/vnet"
+  source              = "../../../resources/azure/network/vnet"
   resource_group      = module.resource_group.resource_group_name
   vnet_address_ranges = var.vnet_address_ranges
   tags                = var.tags
@@ -32,7 +32,7 @@ module "vnet_spoke" {
 #Setting up subnets
 
 module "subnet_frontend" {
-  source                = "../../resources/azure/network/vnet-subnet"
+  source                = "../../../resources/azure/network/vnet-subnet"
   resource_group        = module.resource_group.resource_group_name
   vnet_name             = module.vnet_spoke.vnet_name
   subnet_name           = "frontend"
@@ -40,7 +40,7 @@ module "subnet_frontend" {
 }
 
 module "subnet_backend" {
-  source                = "../../resources/azure/network/vnet-subnet"
+  source                = "../../../resources/azure/network/vnet-subnet"
   resource_group        = module.resource_group.resource_group_name
   vnet_name             = module.vnet_spoke.vnet_name
   subnet_name           = "backend"
@@ -50,7 +50,7 @@ module "subnet_backend" {
 #Setting up vnet peering
 
 module "vnet_peering" {
-  source                      = "../../resources/azure/network/vnet-peering"
+  source                      = "../../../resources/azure/network/vnet-peering"
   hub_vnet_name               = data.terraform_remote_state.shared_services.outputs.shared_services_vnet_name
   hub_vnet_rg                 = data.terraform_remote_state.shared_services.outputs.shared_services_vnet_rg
   hub_vnet_id                 = data.terraform_remote_state.shared_services.outputs.shared_services_vnet_id

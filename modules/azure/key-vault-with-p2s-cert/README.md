@@ -11,7 +11,7 @@
 * `key_vault_p2s_certificate_data`: raw key vault certificate
 
 ## Child Modules
-* `key_vault` from `../../resources/azure/governance/key-vault`
-* `key_vault_p2s_certificate` from `../../resources/azure/governance/key-vault-certificate-import`
-* `resource_group` from `../../resources/azure/resource-group`
+* `key_vault` from `../../../resources/azure/governance/key-vault`
+* `key_vault_p2s_certificate` from `../../../resources/azure/governance/key-vault-certificate-import`
+* `resource_group` from `../../../resources/azure/resource-group`
 
