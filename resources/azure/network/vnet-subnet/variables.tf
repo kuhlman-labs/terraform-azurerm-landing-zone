@@ -29,17 +29,33 @@ variable "subnet_address_prefix" {
 variable "route_table_id" {
   description = "The ID of the Route Table to associate with the subnet."
   type        = string
-  default     = ""
+  default     = null
 }
 
 variable "network_security_group_id" {
   description = "The ID of the Network Security Group to associate with the subnet."
   type        = string
-  default     = ""
+  default     = null
 }
 
 variable "subnet_service_endpoints" {
   description = "The list of Service endpoints to associate with the subnet. Possible values include: Microsoft.AzureActiveDirectory, Microsoft.AzureCosmosDB, Microsoft.EventHub, Microsoft.KeyVault, Microsoft.ServiceBus, Microsoft.Sql and Microsoft.Storage."
   type        = list
-  default     = []
+  default     = null
+}
+
+variable "delegations" {
+  description = "A List of delegation blocks to associate with the subnet."
+  type = list
+  default = []
+  /*
+  Example:
+  [
+    {
+    delegation_name            = "testdelegation"
+    service_delegation_name    = "Microsoft.ContainerInstance/containerGroups"
+    service_delegation_actions = ["Microsoft.Network/virtualNetworks/subnets/action"]
+    }
+  ]
+*/
 }

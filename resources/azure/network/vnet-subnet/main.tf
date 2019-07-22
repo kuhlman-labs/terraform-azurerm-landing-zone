@@ -18,6 +18,22 @@ resource "azurerm_subnet" "base" {
   service_endpoints         = var.subnet_service_endpoints
   route_table_id            = var.route_table_id
   network_security_group_id = var.network_security_group_id
+
+  dynamic "delegation" {
+    for_each = [for d in var.delegations : {
+      name                       = d.delegation_name
+      service_deleagion_name     = d.service_delegation_name
+      service_delegation_actions = d.service_delegation_actions
+    }]
+
+    content {
+      name = delegation.value.name
+      service_delegation {
+        name    = delegation.value.service_deleagion_name
+        actions = delegation.value.service_delegation_actions
+      }
+    }
+  }
 }
 
 
