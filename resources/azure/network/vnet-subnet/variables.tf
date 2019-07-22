@@ -46,8 +46,8 @@ variable "subnet_service_endpoints" {
 
 variable "delegations" {
   description = "A List of delegation blocks to associate with the subnet."
-  type = list
-  default = []
+  type        = list
+  default     = []
   /*
   Example:
   [
