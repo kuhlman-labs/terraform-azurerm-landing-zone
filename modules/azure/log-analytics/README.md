@@ -1,5 +1,5 @@
 
-# Module `modules/log-analytics`
+# Module `modules/azure/log-analytics`
 
 ## Input Variables
 * `environment` (required): Development environment for resource; prod, non-prod, shared-services

@@ -1,5 +1,5 @@
 
-# Module `modules/key-vault-with-p2s-cert`
+# Module `modules/azure/key-vault-with-p2s-cert`
 
 ## Input Variables
 * `environment` (required): Development environment for resource; prod, non-prod, shared-services

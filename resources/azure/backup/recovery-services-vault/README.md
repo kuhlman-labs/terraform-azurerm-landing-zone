@@ -1,5 +1,5 @@
 
-# Module `resources/backup/recovery-services-vault`
+# Module `resources/azure/backup/recovery-services-vault`
 
 Provider Requirements:
 * **azurerm:** (any version)

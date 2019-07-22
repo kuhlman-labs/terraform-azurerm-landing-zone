@@ -1,5 +1,5 @@
 
-# Module `resources/governance/key-vault-certificate-import`
+# Module `resources/azure/governance/key-vault-certificate-import`
 
 Provider Requirements:
 * **azurerm:** (any version)

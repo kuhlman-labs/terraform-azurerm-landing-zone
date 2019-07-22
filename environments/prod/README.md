@@ -28,5 +28,5 @@ Provider Requirements:
 * `prod_vnet_spoke_rg`: Generated name of the Virtual Network resource group
 
 ## Child Modules
-* `network_spoke` from `../../../modules/azure/network-spoke`
+* `network_spoke` from `../../modules/azure/network-spoke`
 

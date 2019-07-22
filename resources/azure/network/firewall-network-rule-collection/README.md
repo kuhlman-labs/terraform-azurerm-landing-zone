@@ -1,5 +1,5 @@
 
-# Module `resources/network/firewall-network-rule-collection`
+# Module `resources/azure/network/firewall-network-rule-collection`
 
 Provider Requirements:
 * **azurerm:** (any version)

@@ -1,5 +1,5 @@
 
-# Module `resources/network/vnet-subnet-with-delegation`
+# Module `resources/azure/network/vnet-subnet-with-delegation`
 
 Provider Requirements:
 * **azurerm:** (any version)

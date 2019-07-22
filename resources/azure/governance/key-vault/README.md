@@ -1,5 +1,5 @@
 
-# Module `resources/governance/key-vault`
+# Module `resources/azure/governance/key-vault`
 
 Provider Requirements:
 * **azurerm:** (any version)

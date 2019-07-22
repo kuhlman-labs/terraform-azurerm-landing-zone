@@ -1,5 +1,5 @@
 
-# Module `resources/resource-group`
+# Module `resources/azure/resource-group`
 
 Provider Requirements:
 * **azurerm:** (any version)

@@ -29,5 +29,5 @@ Provider Requirements:
 * `shared_services_vnet_rg`: Generated name of the resource group for hub virtual network
 
 ## Child Modules
-* `network_hub` from `../../../modules/azure/network-hub`
+* `network_hub` from `../../modules/azure/network-hub`
 

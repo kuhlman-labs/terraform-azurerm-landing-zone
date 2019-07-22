@@ -1,5 +1,5 @@
 
-# Module `modules/network-spoke`
+# Module `modules/azure/network-spoke`
 
 Provider Requirements:
 * **terraform:** (any version)

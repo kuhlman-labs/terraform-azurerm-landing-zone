@@ -1,5 +1,5 @@
 
-# Module `resources/network/vnet`
+# Module `resources/azure/network/vnet`
 
 Provider Requirements:
 * **azurerm:** (any version)

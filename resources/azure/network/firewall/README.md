@@ -1,5 +1,5 @@
 
-# Module `resources/network/firewall`
+# Module `resources/azure/network/firewall`
 
 Provider Requirements:
 * **azurerm:** (any version)

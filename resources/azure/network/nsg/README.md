@@ -1,5 +1,5 @@
 
-# Module `resources/network/nsg`
+# Module `resources/azure/network/nsg`
 
 Provider Requirements:
 * **azurerm:** (any version)

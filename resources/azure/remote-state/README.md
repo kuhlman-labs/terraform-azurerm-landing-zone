@@ -1,5 +1,5 @@
 
-# Module `environments/remote-state`
+# Module `resources/azure/remote-state`
 
 Core Version Constraints:
 * `>= 0.12`

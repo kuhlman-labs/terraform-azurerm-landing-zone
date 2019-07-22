@@ -38,9 +38,9 @@ Provider Requirements:
 * `test_vnet_rg`: Generated name of the resource group for hub virtual network
 
 ## Child Modules
-* `aks_cluster_waf_ingress` from `../../../modules/azure/aks-cluster-waf-ingress`
-* `key_vault_with_p2s_cert` from `../../../modules/azure/key-vault-with-p2s-cert`
-* `log_analytics` from `../../../modules/azure/log-analytics`
-* `network_hub` from `../../../modules/azure/network-hub`
-* `network_spoke` from `../../../modules/azure/network-spoke`
+* `aks_cluster_waf_ingress` from `../../modules/azure/aks-cluster-waf-ingress`
+* `key_vault_with_p2s_cert` from `../../modules/azure/key-vault-with-p2s-cert`
+* `log_analytics` from `../../modules/azure/log-analytics`
+* `network_hub` from `../../modules/azure/network-hub`
+* `network_spoke` from `../../modules/azure/network-spoke`
 

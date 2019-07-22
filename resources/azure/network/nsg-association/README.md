@@ -1,5 +1,5 @@
 
-# Module `resources/network/nsg-association`
+# Module `resources/azure/network/nsg-association`
 
 Provider Requirements:
 * **azurerm:** (any version)

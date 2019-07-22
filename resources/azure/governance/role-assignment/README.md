@@ -1,5 +1,5 @@
 
-# Module `resources/governance/role-assignment`
+# Module `resources/azure/governance/role-assignment`
 
 Provider Requirements:
 * **azurerm:** (any version)

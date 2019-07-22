@@ -1,10 +1,11 @@
 
-# Module `resources/network/vnet-subnet`
+# Module `resources/azure/network/vnet-subnet`
 
 Provider Requirements:
 * **azurerm:** (any version)
 
 ## Input Variables
+* `delegations` (required): A List of delegation blocks to associate with the subnet.
 * `network_security_group_id` (required): The ID of the Network Security Group to associate with the subnet.
 * `resource_group` (required): Resource Group of vNet
 * `route_table_id` (required): The ID of the Route Table to associate with the subnet.

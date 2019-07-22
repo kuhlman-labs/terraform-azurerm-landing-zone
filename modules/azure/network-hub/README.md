@@ -1,5 +1,5 @@
 
-# Module `modules/network-hub`
+# Module `modules/azure/network-hub`
 
 ## Input Variables
 * `environment` (required): Development environment for resource; prod, non-prod, shared-services

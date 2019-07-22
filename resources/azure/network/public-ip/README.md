@@ -1,5 +1,5 @@
 
-# Module `resources/network/public-ip`
+# Module `resources/azure/network/public-ip`
 
 Provider Requirements:
 * **azurerm:** (any version)

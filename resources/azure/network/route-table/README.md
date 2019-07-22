@@ -1,5 +1,5 @@
 
-# Module `resources/network/route-table`
+# Module `resources/azure/network/route-table`
 
 Provider Requirements:
 * **azurerm:** (any version)
