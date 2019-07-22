@@ -1,9 +1,9 @@
 #!/bin/sh
 set -e
 
-solutions="solutions/prod/ solutions/pre-prod/ solutions/audit/ solutions/test/ solutions/shared-services/"
+environments="environments/prod/ environments/pre-prod/ environments/audit/ environments/test/ environments/shared-services/"
 
-for dir in ${solutions}; do
+for dir in ${environments}; do
   cd "$dir";
   if [ -f terraform.tfvars ]; 
   then
@@ -13,7 +13,7 @@ for dir in ${solutions}; do
     echo $formatted_branch;
     export ENVIRONMENT=$formatted_branch;
     echo $dir;
-    solution=$(echo ${dir#solutions/});
+    solution=$(echo ${dir#environments/});
     echo $solution;
     solution=${solution%/};
     echo $solution;

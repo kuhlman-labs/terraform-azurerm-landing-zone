@@ -6,48 +6,8 @@
 
 This repository itself is meant to provide curated, reusable [Terraform](https://www.terraform.io/) content for the deployment of an [Azure Landing Zone](https://docs.microsoft.com/en-us/azure/architecture/cloud-adoption/ready/considerations/).
 
-* Landing zones are the basic building blocks of any cloud adoption environment. The term landing zone is used to describe an environment that has been provisioned and prepared to host workloads in a cloud environment, such as Azure. A fully functioning landing zone is the final deliverable of any iteration of the Cloud Adoption Framework's Ready methodology.
+Landing zones are the basic building blocks of any cloud adoption environment. The term landing zone is used to describe an environment that has been provisioned and prepared to host workloads in a cloud environment, such as Azure. A fully functioning landing zone is the final deliverable of any iteration of the Cloud Adoption Framework's Ready methodology.
 
-## Structure
-
-There are dedicated `README.md` files in each directory, summarised links provided here for your convenience
-
-* Solutions
-    * [remote-state](solutions/remote-state/README.md)
-    * [test](solutions/test/README.md)
-    * [audit](solutions/audit/README.md)
-    * [shared-services](solutions/shared-services/README.md)
-    * [pre-prod](solutions/pre-prod/README.md)
-    * [prod](solutions/prod/README.md)
-
-* Infrastructure Modules
-    * [key-vault-with-p2s-cert](infrastructure-modules/key-vault-with-p2s-cert/README.md)
-    * [log-analytics](infrastructure-modules/log-analytics/README.md)
-    * [network-hub](infrastructure-modules/network-hub/README.md)
-    * [network-spoke](infrastructure-modules/network-spoke/README.md)
-    * [aks-cluster-waf-ingress](infrastructure-modules/aks-cluster-waf-ingress/README.md)
-
-* Resource Modules
-    * Backup
-        * [recovery-services-vault](resource-modules/backup/recovery-services-vault/README.md)
-    * Containers
-        * [aks-cluster](resource-modules/containers/aks-cluster/README.md)        
-    * Governance
-        * [key-vault](resource-modules/governance/key-vault/README.md)
-        * [log-analytics](resource-modules/governance/log-analytics/README.md)
-        * [role-assignment](resource-modules/governance/role-assignment/README.md)
-        * [user-assigned-identity](resource-modules/governance/user-assigned-identity/README.md)
-    * Network
-        * [application-gateway](resource-modules/network/application-gateway/README.md)
-        * [firewall](resource-modules/network/firewall/README.md)
-        * [route-table](resource-modules/network/route-table/README.md)
-        * [nsg](resource-modules/network/nsg/README.md)
-        * [vnet](resource-modules/network/vnet/README.md)
-        * [vnet-gateway](resource-modules/network/vnet-gateway/README.md)
-        * [vnet-peering](resource-modules/network/vnet-peering/README.md)
-        * [vnet-subnet](resource-modules/network/vnet-subnet/README.md)
-    *  Resource Group
-        *  [resource-group](resource-modules/resource-group/README.md)
 
 ## Deployment
 
@@ -55,7 +15,7 @@ There are dedicated `README.md` files in each directory, summarised links provid
 
 #### Software Dependencies
 
-The following items are necessary to deploy a solution using the [commands](#commands-for-deploying-with-terraform) listed in this README:
+The following items are necessary to deploy a environments using the [commands](#commands-for-deploying-with-terraform) listed in this README:
 
 * [terraform](https://www.terraform.io/downloads.html)
 * [azure-cli](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest)
@@ -65,43 +25,41 @@ The [Dockerfile](Dockerfile) in this repository can be used to build a container
 
 #### Subscription(s)
 
-The Landing Zone can be deployed to a single subscription or to a number of subscriptions defined per solution. The subscription is specified during solution application through the `SUBSCRIPTION_ID` environment variable that is passed into each terraform command. No code changes are necessary to deploy to a different number of subscriptions.
+The Landing Zone can be deployed to a single subscription or to a number of subscriptions defined per environments. The subscription is specified during environments application through the `SUBSCRIPTION_ID` environment variable that is passed into each terraform command. No code changes are necessary to deploy to a different number of subscriptions.
 
-The [Service Principal](#service-principal) that is created must be scoped to the Subscription that the solution is deployed.
+The [Service Principal](#service-principal) that is created must be scoped to the Subscription that the environments is deployed.
 
 #### Environment Variables
 
-Environment variables are used in the [Terraform Commands](#commands-for-deploying-with-terraform) for deployment of the solutions. The environment variables should be populated in the environment where the commands will be executed.
+Environment variables are used in the [Terraform Commands](#commands-for-deploying-with-terraform) for deployment of the environments. The environment variables should be populated in the environment where the commands will be executed.
 
 *  ACCESS_KEY
-    *  The [Storage Account](#storage-account) access key that gives permission to Terraform to retrieve and update the tfstate files
-*  ENVIRONMENT
-    *  The environment in which the solution is being deployed (e.g. WEBAPP)
+    *  The [Storage Account](#remote-state) access key that gives permission to Terraform to retrieve and update the tfstate files
 *  STORAGE_ACCOUNT_NAME
-    *  The name of the [Storage Account](#storage-account) used to store the remote Terraform state
+    *  The name of the [Storage Account](#remote-state) used to store the remote Terraform state
 *  STATE_KEY
-    *  This should be the name of the Terraform state file for the solution. It should follow the {*}.{solution}.tfstate structure. (e.g. webapp.audit.tfstate)
-        *  Using the exact name of the solution directory (e.g. `prod`, `shared-services`) is required for cross state file access in some solutions (e.g. `prod`). Following a set syntax for cross solution state file access limits the number of inputs that need to be provided as the number of solutions increases. See `prod` solution `main.tf` for an example of how this syntax is leveraged for accessing the state file of a different solution.
+    *  This should be the name of the Terraform state file for the environment. It should follow the {*}.{environments}.tfstate structure. (e.g. webapp.audit.tfstate)
+        *  Using the exact name of the environments directory (e.g. `prod`, `shared-services`) is required for cross state file access in some environments (e.g. `prod`). Following a set syntax for cross environments state file access limits the number of inputs that need to be provided as the number of environments increases. See `prod` environments `main.tf` for an example of how this syntax is leveraged for accessing the state file of a different environments.
 *  SUBSCRIPTION_ID
-    *  The ID of the target Subscription for the solution
+    *  The ID of the target Subscription for the environments
 *  TENANT_ID
-    *  The tenant ID for the [Service Principal](#service-principal) used to deploy the solution
+    *  The tenant ID for the [Service Principal](#service-principal) used to deploy the environments
 *  APP_ID
-    *  The application ID associated to the [Service Principal](#service-principal) used to deploy the solution
+    *  The application ID associated to the [Service Principal](#service-principal) used to deploy the environments
 *  CLIENT_SECRET
-    *  The client secret used to authenticate the [Service Principal](#service-principal) used to deploy the solution
+    *  The client secret used to authenticate the [Service Principal](#service-principal) used to deploy the environments
 *  SHARED_SERVICES_SUBSCRIPTION_ID
-    *  The ID of the Subscription that the shared-services solution is deployed. This is necessary for the VNet Peering between the spoke and hub vnets
+    *  The ID of the Subscription that the shared-services environments is deployed. This is necessary for the VNet Peering between the spoke and hub vnets
 
-#### Storage Account
+#### Remote-State
 
-Terraform maintains state files that allow for the execution of [Terraform commands](#commands-for-deploying-with-terraform) to have context of the environment that the commands are executed against. Using a remote location for state allows for higher redundancy and the ability for multiple users to access the state for a shared environment. The `azurerm` provider utilizes a storage account in Azure for this remote state storage. 
+Terraform maintains state files that allow for the execution of [Terraform commands](#commands-for-deploying-with-terraform) to have context of the environment that the commands are executed against. Using a remote location for state allows for higher redundancy and the ability for multiple users to access the state for a shared  environment. The `azurerm` provider utilizes a storage account in Azure for this remote state storage. 
 
-The storage account for remote state must be created and the related environment variables exported before the Terraform commands for a [solution](#solutions) can be executed.
+The storage account for remote state must be created and the related environment variables exported before the Terraform commands for a [modules](#modules) can be executed.
 
-The Landing Zone was created to work off of a single Azure storage account and container. The tfstate files are generated separately for each solution to limit the impact of changes to the only the solution being altered.
+The Landing Zone was created to work off of a single Azure storage account and container. The tfstate files are generated separately for each environments to limit the impact of changes to the only the environments being altered.
 
-See README in /solutions/remote-state for automated creation of the storage account.
+See README in /environments/remote-state for automated creation of the storage account.
 
 Steps to create:
 
@@ -110,7 +68,7 @@ Steps to create:
 *  Retrieve access key and set `ACCESS_KEY` environment variable
 *  Retrieve Storage Account name and set `STORAGE_ACCOUNT_NAME` environment variable
 
-The individual state files for each solution will be created by the azurerm provider in this container.
+The individual state files for each environment will be created by the azurerm provider in this container.
 
 #### Service Principal
 
@@ -120,28 +78,15 @@ For the steps to create a Service Principal for an application registered in AAD
 
 [Service Principal Configuration](https://www.terraform.io/docs/providers/azurerm/auth/service_principal_client_secret.html#creating-a-service-principal-in-the-azure-portal)
 
-##### Example Programmatic Creation
 
-A sample command that will create a Service Principal with a contributor role on a Subscription:
+### Environments
 
-```bash
-az ad sp create-for-rbac -n="{SERVICE PRINCIPAL NAME}" --role="Contributor" --scopes="/subscriptions/{SUBSCRIPTION ID}"
-```
-
-This will return the values necessary for populating the `TENANT_ID`, `APP_ID`, and `CLIENT_SECRET` environment variables used in the terraform commands. 
-
-Note: The `password` return value is populated into the `CLIENT_SECRET` environment variable.
-
-### Solutions
-
-The deployable resources are organized into solutions that are designed to solve a specific purpose. Detail on each of the solutions can be found in the README located in the solution directory.
+The deployable resources are organized into environments that are designed to solve a specific purpose. Detail on each of the environments can be found in the README located in the environments directory.
 
 ##### Order of Deployment
 
-The order in which the solutions should be deployed based upon interdependencies:
+The order in which the environments should be deployed based upon interdependencies:
 
-* (Optional) test
-    * A validation solution that helps confirm the modules are properly configured
 *  audit
     * Deploys log analytics for storage audit logs  
 *  shared-services
@@ -150,60 +95,62 @@ The order in which the solutions should be deployed based upon interdependencies
     * Deploys spoke network designated for pre-prod workloads
 *  prod
     * Deploys spoke network designated for prod workloads
+* (Optional) test
+    * A validation environment that helps confirm the modules are properly configured    
 
 ### Commands for Deploying with Terraform
 
 These commands can be executed from your local environment, however, it is recommended that the commands be incorporated into a deployment pipeline in the CI/CD platform of your choice.
 
-Commands are executed from the folder corresponding to the solution that you are deploying. These commands will need to be run for each solution that needs to be deployed.
+Commands are executed from the folder corresponding to the environments that you are deploying. These commands will need to be run for each environments that needs to be deployed.
 
-Example: `/solutions/test`
+Example: `/environments/test`
 
 ```bash
 terraform init -input=false -upgrade=true -backend=true -backend-config="access_key=$ACCESS_KEY" -backend-config="storage_account_name=$STORAGE_ACCOUNT_NAME" -backend-config="key=$STATE_KEY";
-terraform plan -out=tfplan -var-file=terraform.tfvars -var "subscription_id=$SUBSCRIPTION_ID" -var "tenant_id=$TENANT_ID" -var "client_secret=$CLIENT_SECRET" -var "app_id=$APP_ID" -var "environment=$ENVIRONMENT" -var "storage_account_name=$STORAGE_ACCOUNT_NAME" -var "access_key=$ACCESS_KEY" -var "state_key=$STATE_KEY" -var "shared_services_subscription_id=$SHARED_SERVICES_SUBSCRIPTION_ID";
+terraform plan -out=tfplan -var-file=terraform.tfvars -var "subscription_id=$SUBSCRIPTION_ID" -var "tenant_id=$TENANT_ID" -var "client_secret=$CLIENT_SECRET" -var "app_id=$APP_ID"  -var "storage_account_name=$STORAGE_ACCOUNT_NAME" -var "access_key=$ACCESS_KEY" -var "state_key=$STATE_KEY" -var "shared_services_subscription_id=$SHARED_SERVICES_SUBSCRIPTION_ID";
 terraform apply tfplan;
 ```
 
-To clean up the infrastructure created for a solution you can run the following in the solution directory:
+To clean up the infrastructure created for a environments you can run the following in the environments directory:
 
 ```bash
-terraform destroy -auto-approve -var-file=terraform.tfvars -var "subscription_id=$SUBSCRIPTION_ID" -var "tenant_id=$TENANT_ID" -var "client_secret=$CLIENT_SECRET" -var "app_id=$APP_ID" -var "environment=$ENVIRONMENT" -var "storage_account_name=$STORAGE_ACCOUNT_NAME" -var "access_key=$ACCESS_KEY" -var "state_key=$STATE_KEY" -var "shared_services_subscription_id=$SHARED_SERVICES_SUBSCRIPTION_ID";
+terraform destroy -auto-approve -var-file=terraform.tfvars -var "subscription_id=$SUBSCRIPTION_ID" -var "tenant_id=$TENANT_ID" -var "client_secret=$CLIENT_SECRET" -var "app_id=$APP_ID"  -var "storage_account_name=$STORAGE_ACCOUNT_NAME" -var "access_key=$ACCESS_KEY" -var "state_key=$STATE_KEY" -var "shared_services_subscription_id=$SHARED_SERVICES_SUBSCRIPTION_ID";
 ```
 
-### Solution
-* Definition: The top level composition that deploys all resources necessary for a single environment. Each solution is composed of one or more Infrastructure Modules.
+### environments
+* Definition: The top level composition that deploys all resources necessary for a single environment. Each environment is composed of one or more modules.
 * Extending:
-    * An Existing Solution
-         * An existing solution can be extended by referencing additional Infrastructure Modules.
-    * Creating a New Solution
-         * To create a new solution a new directory should be created with the standard files (`main.tf, outputs.tf, providers.tf, terraform.tfvars, variables.tf, README-head.md, README.md`). Inside the `main.tf` the required Infrastructure Module(s) should be called. If new modules need to be created the instructions for Infrastructure Modules should be consulted.
+    * An Existing environments
+         * An existing environments can be extended by referencing additional Modules.
+    * Creating a New environments
+         * To create a new environments a new directory should be created with the standard files (`main.tf, outputs.tf, providers.tf, terraform.tfvars, variables.tf, README-head.md, README.md`). Inside the `main.tf` the required Module(s) should be called. If new modules need to be created the instructions for Modules should be consulted.
 
-### Infrastructure Module
-* Definition: Composes a logical portion of infrastructure by composing one or more Resource Modules.
+### modules
+* Definition: Composes a logical portion of infrastructure by composing one or more resources.
 * Extending:
-    * An Existing Infrastructure Module
-        * Adding additional resources can be accomplished by referencing additional Resource Modules
-    * Create a New Infrastructure Module
-        * To create a new Infrastructure Module a new directory should be created in a child folder of the infrastructure-modules directory with the standard files (`main.tf, outputs.tf, variables.tf, README-head.md, README.md`). Inside the `main.tf` the required Resource Module(s) should be called. If new modules need to be created the instructions for Resource Modules should be consulted.
+    * An Existing Module
+        * Adding additional resources can be accomplished by referencing additional Resources
+    * Create a New Module
+        * To create a new Module a new directory should be created in a child folder of the infrastructure-modules directory with the standard files (`main.tf, outputs.tf, variables.tf, README-head.md, README.md`). Inside the `main.tf` the required Resource(s) should be called. If new modules need to be created the instructions for Resources should be consulted.
 
-### Resource Module
+### resources
 * Defintion: Represents, in most cases, the deployment of a single resource.
 * Extending:
-    * An Existing Resource Module
-        * Adjusting existing Resource Modules should be kept to a minimum because they are not currently being versioned.
-    * Create a New Resource Module
-        * To create a new Resource Module a new directory should be created in a child folder of the resource-modules directory with the standard files (`main.tf, outputs.tf, variables.tf, README-head.md, README.md`). It is recommended that a single resource is created in the `main.tf` to keep the module simple and reuseable. 
+    * An Existing Resource
+        * Adjusting existing Resources should be kept to a minimum because they are not currently being versioned.
+    * Create a New Resource
+        * To create a new Resource a new directory should be created in a child folder of the resource-modules directory with the standard files (`main.tf, outputs.tf, variables.tf, README-head.md, README.md`). It is recommended that a single resource is created in the `main.tf` to keep the module simple and reuseable. 
 
 ### File Definitions
 * main.tf
-    * Contains the reference to the terraform modules and resources in scope for the solution or module.
+    * Contains the reference to the terraform modules and resources in scope for the environments or module.
 * outputs.tf
-    * Defines any outputs of the solution or module.
+    * Defines any outputs of the environments or module.
 * providers.tf
     * Takes in the remote state credential information and sets up the azurerm backend. The Terraform and azurerm versions are defined in this file as well.
 * variables.tf
-    * Defines the input variables for the solution or module. All variables should have a type and description defined.
+    * Defines the input variables for the environments or module. All variables should have a type and description defined.
 * README-head.md
     * Defines the manually created header information (`Description, Resource Created`) for the README file that will be combined with the automatically generated terraform-docs content.
 * README.md
@@ -211,7 +158,7 @@ terraform destroy -auto-approve -var-file=terraform.tfvars -var "subscription_id
 
 ### Adjusting Naming Conventions
 
-The naming conventions are established in the resource modules, including the Resource Group module that builds out the name based upon variable inputs to the calling solution.
+The naming conventions are established in the Resources, including the Resource Group module that builds out the name based upon variable inputs to the calling environments.
 
 ## FAQs
 

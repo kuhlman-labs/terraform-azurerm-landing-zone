@@ -1,9 +1,9 @@
 #!/bin/sh
 set -e
 
-modules="solutions/* infrastructure-modules/* resource-modules/*"
+modules="environments/* modules/* resources/*"
 
-for dir in $(find ${modules} -maxdepth 1 -type d); do
+for dir in $(find ${modules} -maxdepth 3 -type d); do
   cd "$dir/";
   if [ -f main.tf ]; 
   then
@@ -15,3 +15,8 @@ for dir in $(find ${modules} -maxdepth 1 -type d); do
   echo skipping $dir, not a module directory
   fi;
 done
+
+# keep track of the last executed command
+trap 'last_command=$current_command; current_command=$BASH_COMMAND' DEBUG
+# echo an error message before exiting
+trap 'echo "\"${last_command}\" command filed with exit code $?."' EXIT
