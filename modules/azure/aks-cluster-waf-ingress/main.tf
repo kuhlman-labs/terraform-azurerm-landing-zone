@@ -96,11 +96,11 @@ module "aks_cluster" {
       name            = "default"
       count           = "1"
       vm_size         = "Standard_B2s"
-      maxpods         = null
+      max_pods        = null
       os_disk_size_gb = null
       os_type         = null
       type            = null
-      subnet_id       = module.aks_subnet.subnet_id
+      vnet_subnet_id  = module.aks_subnet.subnet_id
 
     }
   ]
