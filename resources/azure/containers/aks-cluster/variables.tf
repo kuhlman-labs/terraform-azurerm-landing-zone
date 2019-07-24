@@ -17,11 +17,6 @@ variable "resource_prefix" {
 
 #authentication
 
-variable "tenant_id" {
-  description = "The Tenant ID used for Azure Active Directory Application. If this isn't specified the Tenant ID of the current Subscription is used. Changing this forces a new resource to be created."
-  type        = string
-}
-
 variable "client_id" {
   description = " The Client ID for the Service Principal. Changing this forces a new resource to be created"
   type        = string
@@ -30,26 +25,6 @@ variable "client_id" {
 variable "client_secret" {
   description = "The Client Secret for the Service Principal. Changing this forces a new resource to be created."
   type        = string
-}
-
-#aks rbac
-
-variable "client_app_id" {
-  description = " The Client ID of an Azure Active Directory Application. Changing this forces a new resource to be created."
-  type        = string
-  default     = null
-}
-
-variable "server_app_secret" {
-  description = "The Server Secret of an Azure Active Directory Application. Changing this forces a new resource to be created."
-  type        = string
-  default     = null
-}
-
-variable "server_app_id" {
-  description = "The Server ID of an Azure Active Directory Application. Changing this forces a new resource to be created."
-  type        = string
-  default     = null
 }
 
 #aks
