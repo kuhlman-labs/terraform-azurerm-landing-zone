@@ -20,7 +20,6 @@ subnet_app_gw_address_prefix    = "10.200.4.0/24"
 
 #aks
 
-admin_user_name    = "klabsadmin"
 service_cidr       = "10.200.10.0/24"
 dns_service_ip     = "10.200.10.10"
 docker_bridge_cidr = "172.17.0.1/16"
