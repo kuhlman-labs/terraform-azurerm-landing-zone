@@ -87,20 +87,35 @@ module "aks_subnet" {
 }
 
 module "aks_cluster" {
-  source              = "../../../resources/azure/containers/aks-cluster"
-  resource_group      = module.resource_group.resource_group_name
-  public_ssh_key_path = "${path.module}/id_rsa.pub"
-  name                = module.resource_group.resource_group_name
-  network_plugin      = "azure"
-  dns_service_ip      = var.dns_service_ip
-  docker_bridge_cidr  = var.docker_bridge_cidr
-  service_cidr        = var.service_cidr
-  admin_user_name     = var.admin_user_name
-  subnet_id           = module.aks_subnet.subnet_id
-  tenant_id           = data.azurerm_client_config.current.tenant_id
-  client_id           = data.azurerm_client_config.current.client_id
-  client_secret       = var.client_secret
-  tags                = var.tags
+  source         = "../../../resources/azure/containers/aks-cluster"
+  resource_group = module.resource_group.resource_group_name
+  client_id      = data.azurerm_client_config.current.client_id
+  client_secret  = var.client_secret
+  agent_pool_profile = [
+    {
+      name            = "default"
+      count           = "1"
+      vm_size         = "Standard_B2s"
+      maxpods         = null
+      os_disk_size_gb = null
+      os_type         = null
+      type            = null
+      subnet_id       = module.aks_subnet.subnet_id
+
+    }
+  ]
+  network_profile = [
+    {
+      network_plugin     = "azure"
+      network_policy     = "azure"
+      dns_service_ip     = var.dns_service_ip
+      docker_bridge_cidr = var.docker_bridge_cidr
+      service_cidr       = var.service_cidr
+      subnet_id          = module.aks_subnet.subnet_id
+      pod_cidr           = null
+    }
+  ]
+  tags = var.tags
 }
 
 #Setting up aapodidentity for ARM integration
