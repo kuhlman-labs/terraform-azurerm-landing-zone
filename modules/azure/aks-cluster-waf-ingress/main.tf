@@ -96,10 +96,10 @@ module "aks_cluster" {
       name            = "default"
       count           = "1"
       vm_size         = "Standard_B2s"
-      max_pods        = ""
-      os_disk_size_gb = ""
-      os_type         = "Linux"
-      type            = ""
+      max_pods        = null
+      os_disk_size_gb = null
+      os_type         = null
+      type            = null
       vnet_subnet_id  = module.aks_subnet.subnet_id
 
     }
@@ -112,7 +112,7 @@ module "aks_cluster" {
       docker_bridge_cidr = var.docker_bridge_cidr
       service_cidr       = var.service_cidr
       subnet_id          = module.aks_subnet.subnet_id
-      pod_cidr           = ""
+      pod_cidr           = null
     }
   ]
   tags = var.tags
