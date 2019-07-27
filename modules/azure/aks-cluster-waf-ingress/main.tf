@@ -22,7 +22,7 @@ module "aks_user_assigned_identity" {
 
 module "aks_role_assignment_1" {
   source               = "../../../resources/azure/governance/role-assignment"
-  scope                = module.waf.appgw_id
+  scope                = module.aks_subnet.subnet_id
   role_definition_name = "Network Contributor"
   principal_id         = data.azurerm_client_config.current.service_principal_object_id
 }
@@ -36,7 +36,7 @@ module "aks_role_assignment_2" {
 
 module "aks_role_assignment_3" {
   source               = "../../../resources/azure/governance/role-assignment"
-  scope                = module.waf.appgw_id
+  scope                = module.waf_subnet.subnet_id
   role_definition_name = "Contributor"
   principal_id         = module.aks_user_assigned_identity.uai_principal_id
 }
@@ -93,27 +93,31 @@ module "aks_cluster" {
   client_secret  = var.client_secret
   agent_pool_profile = [
     {
-      name            = "default"
-      count           = "1"
-      vm_size         = "Standard_B2s"
-      max_pods        = null
-      os_disk_size_gb = null
-      os_type         = null
-      type            = null
-      vnet_subnet_id  = module.aks_subnet.subnet_id
-
-    }
+      name                = "default"
+      count               = "1"
+      vm_size             = "Standard_B2s"
+      availability_zones  = null
+      enable_auto_scaling = "true"
+      min_count           = "1"
+      max_count           = "2"
+      max_pods            = null
+      os_disk_size_gb     = "60"
+      os_type             = "Linux"
+      type                = "VirtualMachineScaleSets"
+      vnet_subnet_id      = module.aks_subnet.subnet_id
+      node_taints         = null
+    },
   ]
   network_profile = [
     {
       network_plugin     = "azure"
-      network_policy     = "azure"
       dns_service_ip     = var.dns_service_ip
       docker_bridge_cidr = var.docker_bridge_cidr
       service_cidr       = var.service_cidr
       subnet_id          = module.aks_subnet.subnet_id
       pod_cidr           = null
-    }
+      load_balancer_sku  = null
+    },
   ]
   tags = var.tags
 }
@@ -159,8 +163,8 @@ resource "null_resource" "aks_config" {
         values = [
           "${templatefile("${path.module}/helm-config.yaml", {
             subscription_id         = data.azurerm_client_config.current.subscription_id,
-            resource_group_name     = var.vnet_rg,
-            applicationgateway_name = "${var.vnet_rg}-app-gw",
+            resource_group_name     = module.resource_group.resource_group_name,
+            applicationgateway_name = "${module.resource_group.resource_group_name}-app-gw",
             identity_resource_id    = module.aks_user_assigned_identity.uai_id,
             identity_client_id      = module.aks_user_assigned_identity.uai_client_id,
             aks-api-server-address  = module.aks_cluster.aks_fqdn

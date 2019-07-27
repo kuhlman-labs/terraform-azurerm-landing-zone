@@ -47,20 +47,32 @@ variable "api_server_authorized_ip_ranges" {
   default     = null
 }
 
+variable "node_resource_group" {
+  description = "(Optional) The name of the Resource Group where the the Kubernetes Nodes should exist. Changing this forces a new resource to be created."
+  type        = string
+  default     = null
+}
+
+
 variable "agent_pool_profile" {
   description = "https://www.terraform.io/docs/providers/azurerm/r/kubernetes_cluster.html#agent_pool_profile"
   type        = list
   default = [
     #NOTE: When network_plugin is set to azure - the vnet_subnet_id field in the agent_pool_profile block must be set.  
     {
-      name            = "default"
-      count           = "1"
-      vm_size         = "Standard_B2s"
-      maxpods         = null
-      os_disk_size_gb = null
-      os_type         = null
-      type            = null
-      vnet_subnet_id  = null
+      name               = "default"
+      count              = "1"
+      vm_size            = "Standard_B2s"
+      availability_zones = null
+      enable_autoscaling = "true"
+      min_count          = "1"
+      max_count          = "3"
+      maxpods            = null
+      os_disk_size_gb    = "30"
+      os_type            = "Linux"
+      type               = "VirtualMachineScaleSets"
+      vnet_subnet_id     = null
+      node_taints        = null
     }
   ]
 }
@@ -74,6 +86,20 @@ variable "linux_profile" {
     {
       admin_username = "admin"
       key_data = "${path.module}/id_rsa.pub"
+    }
+  ]
+  */
+}
+
+variable "windows_profile" {
+  description = "https://www.terraform.io/docs/providers/azurerm/r/kubernetes_cluster.html#windows_profile"
+  type        = list
+  default     = []
+  /*
+  [
+    {
+      admin_username = "admin"
+      admin_password = "password"
     }
   ]
   */
@@ -99,47 +125,7 @@ variable "network_profile" {
       pod_cidr = "172.16.0.0/16"
       #This is required when network_plugin is set to azure.
       service_cidr = null
-    }
-  ]
-  */
-}
-
-variable "http_application_routing" {
-  description = "https://www.terraform.io/docs/providers/azurerm/r/kubernetes_cluster.html#http_application_routing"
-  type        = list
-  default     = []
-  /*
-  [
-    {
-      enabled = "true"
-    }
-  ]
-  */
-}
-
-variable "oms_agent" {
-  description = "https://www.terraform.io/docs/providers/azurerm/r/kubernetes_cluster.html#oms_agent"
-  type        = list
-  default     = []
-  /*
-  [
-    {
-      enabled = "true"
-      log_analytics_workspace_id = "log_analytics_workspace_id"
-    }
-  ]
-  */
-}
-
-variable "aci_connector_linux" {
-  description = "https://www.terraform.io/docs/providers/azurerm/r/kubernetes_cluster.html#aci_connector_linux"
-  type        = list
-  default     = []
-  /*
-  [
-    {
-      enabled = "true"
-      subnet_name = "subnet_name"
+      load_balancer_sku = "Basic"
     }
   ]
   */
@@ -161,6 +147,24 @@ variable "role_based_access_control" {
   ]
   */
 }
+
+variable "addon_profile" {
+  description = "https://www.terraform.io/docs/providers/azurerm/r/kubernetes_cluster.html#addon_profile"
+  type        = list
+  default     = []
+  /*
+  [
+    {
+      http_appication_routing_enabled = "false"
+      oms_agent_enabled               = "false"
+      log_analytics_workspace_id = null
+      aci_connector_linux_enabled = "false"
+      aci_connector_linux_subnet_name = null
+    }
+  ]
+  */
+}
+
 
 #tags
 
