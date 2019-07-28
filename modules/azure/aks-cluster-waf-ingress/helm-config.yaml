@@ -28,7 +28,7 @@ armAuth:
 ################################################################################
 # Specify if the cluster is RBAC enabled or not
 rbac:
-    enabled: true # true/false
+    enabled: false # true/false
 
 aksClusterConfiguration:
     apiServerAddress: ${aks-api-server-address}

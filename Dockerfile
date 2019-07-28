@@ -2,7 +2,7 @@
 # https://docs.microsoft.com/en-us/azure/devops/pipelines/process/container-phases?view=azure-devops&tabs=yaml#requirements
 FROM ubuntu:16.04
 
-ENV TERRAFORM_VERSION=0.12.4
+ENV TERRAFORM_VERSION=0.12.5
 
 
 RUN apt-get update && \

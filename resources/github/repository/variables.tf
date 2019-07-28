@@ -3,6 +3,16 @@ variable "name" {
   type        = string
 }
 
+variable "organization" {
+  description = "(Optional) This is the target GitHub organization to manage. The account corresponding to the token will need owner privileges for this organization. It must be provided, but it can also be sourced from the GITHUB_ORGANIZATION environment variable."
+  type        = string
+}
+
+variable "token" {
+  description = "(Optional) This is the GitHub personal access token. It must be provided, but it can also be sourced from the GITHUB_TOKEN environment variable."
+  type        = "string"
+}
+
 variable "description" {
   description = "(Optional) A description of the repository."
   type        = string

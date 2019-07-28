@@ -45,11 +45,6 @@ variable "subnet_app_gw_address_prefix" {
 
 #aks
 
-variable "admin_user_name" {
-  description = "The Admin Username for the Cluster. Changing this forces a new resource to be created."
-  type        = string
-}
-
 variable "dns_service_ip" {
   description = "IP address within the Kubernetes service address range that will be used by cluster service discovery (kube-dns). This is required when network_plugin is set to azure. Changing this forces a new resource to be created."
   type        = string

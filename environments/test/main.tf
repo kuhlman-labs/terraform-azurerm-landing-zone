@@ -51,7 +51,6 @@ module "aks_cluster_waf_ingress" {
   dns_service_ip                  = var.dns_service_ip
   docker_bridge_cidr              = var.docker_bridge_cidr
   service_cidr                    = var.service_cidr
-  admin_user_name                 = var.admin_user_name
 
   tags = var.tags
 }
