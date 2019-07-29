@@ -38,10 +38,6 @@ resource "azurerm_virtual_network_gateway" "base" {
     subnet_id                     = var.gateway_subnet
   }
 
-  ###############################
-  # Setting up vpn p2s connection
-  ###############################
-
   vpn_client_configuration {
     address_space        = var.client_address_spaces
     vpn_client_protocols = var.vpn_client_protocols

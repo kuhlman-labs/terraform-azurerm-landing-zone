@@ -1,7 +1,3 @@
-#################################
-# Setting up Hub to Spoke Peering
-#################################
-
 resource "azurerm_virtual_network_peering" "hub_to_spoke" {
   name                         = "${var.hub_vnet_name}-to-${var.spoke_vnet_name}"
   resource_group_name          = var.hub_vnet_rg
@@ -12,10 +8,6 @@ resource "azurerm_virtual_network_peering" "hub_to_spoke" {
   allow_gateway_transit        = var.hub_allow_gateway_transit
   use_remote_gateways          = var.hub_use_remote_gateways
 }
-
-#################################
-# Setting up Spoke to Hub Peering
-#################################
 
 resource "azurerm_virtual_network_peering" "spoke_to_hub" {
   name                         = "${var.spoke_vnet_name}-to-${var.hub_vnet_name}"

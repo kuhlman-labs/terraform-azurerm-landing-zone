@@ -131,7 +131,7 @@ resource "null_resource" "aks_config" {
     az login --service-principal -u ${data.azurerm_client_config.current.client_id} -p ${var.client_secret} --tenant ${data.azurerm_client_config.current.tenant_id};
     az aks get-credentials --resource-group ${module.resource_group.resource_group_name} --name ${module.resource_group.resource_group_name}-aks-cluster --admin --overwrite-existing;
     kubectl create -f https://raw.githubusercontent.com/Azure/aad-pod-identity/master/deploy/infra/deployment.yaml;
-    echo "${templatefile("${path.module}/aadpodidentity.yaml", {
+    echo "${templatefile("${path.module}/templates/aadpodidentity.yaml", {
       name = module.aks_user_assigned_identity.uai_name,
       identity_resource_id = module.aks_user_assigned_identity.uai_id,
       identity_client_id = module.aks_user_assigned_identity.uai_client_id
@@ -161,7 +161,7 @@ resource "null_resource" "aks_config" {
         namespace  = "default"
 
         values = [
-          "${templatefile("${path.module}/helm-config.yaml", {
+          "${templatefile("${path.module}/templates/helm-config.yaml", {
             subscription_id         = data.azurerm_client_config.current.subscription_id,
             resource_group_name     = module.resource_group.resource_group_name,
             applicationgateway_name = "${module.resource_group.resource_group_name}-app-gw",

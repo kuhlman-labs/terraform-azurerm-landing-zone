@@ -1,14 +1,6 @@
-###########################
-# Setting up resource group
-###########################
-
 data "azurerm_resource_group" "base" {
   name = var.resource_group
 }
-
-####################################
-# Setting up Log Analytics Workspace
-####################################
 
 resource "random_string" "base" {
   length  = 8

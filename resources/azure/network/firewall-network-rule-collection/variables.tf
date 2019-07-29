@@ -32,6 +32,14 @@ variable "collection_action" {
   type        = string
 }
 
+variable "rule" {
+  description = ""
+  type = list
+  default []  
+}
+
+/*
+
 variable "rule_name" {
   description = "Specifies the name of the rule."
   type        = string
@@ -55,6 +63,8 @@ variable "rule_protocols" {
   description = "A list of protocols. Possible values are Any, ICMP, TCP and UDP."
   type        = list
 }
+
+*/
 
 #tags
 

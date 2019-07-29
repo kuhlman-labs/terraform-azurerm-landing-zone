@@ -1,7 +1,3 @@
-###############################
-# Setting up resource variables
-###############################
-
 #nsg assocation
 
 variable "subnet_id" {
