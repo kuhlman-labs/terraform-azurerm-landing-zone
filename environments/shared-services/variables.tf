@@ -1,5 +1,5 @@
 ###
-# Shared Services variables
+# environment variables
 ###
 
 #common

@@ -1,5 +1,5 @@
 ###
-#  network-spoke module variables
+#  module variables
 ###
 
 #common

@@ -1,5 +1,5 @@
 ###
-# network-hub module variables
+#  module variables
 ###
 
 #common

@@ -1,7 +1,6 @@
 ###
-#  key-vault-with-p2s-cert module variables
+#  module variables
 ###
-
 
 #common
 

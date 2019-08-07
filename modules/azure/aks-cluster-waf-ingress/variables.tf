@@ -1,5 +1,5 @@
 ###
-#  aks-cluster-waf-ingress module variables
+#  module variables
 ###
 
 #common

@@ -1,6 +1,8 @@
 ###
-#  log-analytics module variables
+#  module variables
 ###
+
+#log-analytics
 
 variable "resource_prefix" {
   description = "a short pre-defined text to identify resource type"

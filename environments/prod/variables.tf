@@ -1,5 +1,5 @@
 ###
-# Pre-Prod variables
+# environment variables
 ###
 
 #common

@@ -1,5 +1,5 @@
 ###
-# Audit variables
+# environment variables
 ###
 
 #common

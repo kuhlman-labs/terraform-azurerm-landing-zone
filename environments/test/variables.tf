@@ -1,5 +1,5 @@
 ###
-# Test variables
+# environment variables
 ###
 
 #common
