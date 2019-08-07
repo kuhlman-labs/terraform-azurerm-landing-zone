@@ -1,6 +1,6 @@
-#################
-# Audit variables
-#################
+###
+# environment variables
+###
 
 environment = "audit"
 region      = "eastus"
