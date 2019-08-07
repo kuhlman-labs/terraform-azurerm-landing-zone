@@ -2,7 +2,7 @@
 # resource variables
 ###
 
-# common
+#common
 
 variable "resource_group" {
   description = "This is the resource group to which the resources will be deployed"
@@ -19,6 +19,8 @@ variable "environment" {
   description = "Development environment for resource; prod, non-prod, shared-services"
   type        = string
 }
+
+#nsg
 
 variable "subnet_names" {
   description = "Subnet names the NSG will apply to. Used for count"

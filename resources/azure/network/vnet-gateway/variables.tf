@@ -25,7 +25,7 @@ variable "environment" {
   type        = string
 }
 
-#vnet gateway
+#vnet-gateway
 
 variable "gateway_subnet" {
   description = "The GateWay subnet id that the VPN gateway will use"

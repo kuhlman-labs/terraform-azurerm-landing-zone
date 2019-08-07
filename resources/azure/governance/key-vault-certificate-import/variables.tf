@@ -2,7 +2,7 @@
 # resource variables
 ###
 
-# key vault
+#key-vault
 
 variable "key_vault_id" {
   description = "ID for the Key Vault that the certificate will be generated in"

@@ -2,6 +2,8 @@
 # resource variables
 ###
 
+#vnet-peering
+
 variable "hub_vnet_rg" {
   description = "This is the resource group name for the Hub Vnet"
   type        = string

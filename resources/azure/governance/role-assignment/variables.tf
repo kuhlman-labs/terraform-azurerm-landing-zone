@@ -2,7 +2,7 @@
 # resource variables
 ###
 
-# role-assignment
+#role-assignment
 
 variable "role_definition_name" {
   description = " The name of a built-in Role. Changing this forces a new resource to be created."
