@@ -7,7 +7,7 @@ Provider Requirements:
 ## Input Variables
 * `delegations` (required): A List of delegation blocks to associate with the subnet.
 * `network_security_group_id` (required): The ID of the Network Security Group to associate with the subnet.
-* `resource_group` (required): Resource Group of vNet
+* `resource_group` (required): resource Group of vNet
 * `route_table_id` (required): The ID of the Route Table to associate with the subnet.
 * `subnet_address_prefix` (required): The address prefix to use for the subnet.
 * `subnet_name` (required): The name of the subnet. Changing this forces a new resource to be created.

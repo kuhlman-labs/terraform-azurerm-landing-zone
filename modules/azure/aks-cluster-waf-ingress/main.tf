@@ -18,7 +18,7 @@ module "resource_group" {
 
 module "aks_user_assigned_identity" {
   source         = "../../../resources/azure/governance/user-assigned-identity"
-  resource_group = module.aks_cluster.aks_node_resource_group
+  resource_group = module.aks_cluster.node_resource_group
   uai_name       = "aks-cluster-id"
 }
 
@@ -148,10 +148,10 @@ resource "null_resource" "aks_config" {
 
 provider "helm" {
   kubernetes {
-    host                   = "${module.aks_cluster.aks_kube_config_host}"
-    client_certificate     = "${base64decode(module.aks_cluster.aks_kube_config_client_certificate)}"
-    client_key             = "${base64decode(module.aks_cluster.aks_kube_config_client_key)}"
-    cluster_ca_certificate = "${base64decode(module.aks_cluster.aks_kube_config_cluster_ca_certificate)}"
+    host                   = "${module.aks_cluster.kube_config_host}"
+    client_certificate     = "${base64decode(module.aks_cluster.kube_config_client_certificate)}"
+    client_key             = "${base64decode(module.aks_cluster.kube_config_client_key)}"
+    cluster_ca_certificate = "${base64decode(module.aks_cluster.kube_config_cluster_ca_certificate)}"
   }
 }
 
@@ -171,7 +171,7 @@ resource "helm_release" "ingress-azure" {
       applicationgateway_name = "${module.resource_group.resource_group_name}-app-gw",
       identity_resource_id    = module.aks_user_assigned_identity.uai_id,
       identity_client_id      = module.aks_user_assigned_identity.uai_client_id,
-      aks-api-server-address  = module.aks_cluster.aks_fqdn
+      aks-api-server-address  = module.aks_cluster.fqdn
     })}"
   ]
 }

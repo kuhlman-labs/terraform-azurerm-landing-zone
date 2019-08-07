@@ -7,7 +7,6 @@ Provider Requirements:
 * **null:** (any version)
 
 ## Input Variables
-* `admin_user_name` (required): The Admin Username for the Cluster. Changing this forces a new resource to be created.
 * `client_secret` (required): The Client Secret for the Service Principal. Changing this forces a new resource to be created.
 * `dns_service_ip` (required): IP address within the Kubernetes service address range that will be used by cluster service discovery (kube-dns). This is required when network_plugin is set to azure. Changing this forces a new resource to be created.
 * `docker_bridge_cidr` (required): IP address (in CIDR notation) used as the Docker bridge IP address on nodes. This is required when network_plugin is set to azure. Changing this forces a new resource to be created.
@@ -18,7 +17,7 @@ Provider Requirements:
 * `subnet_app_gw_address_prefix` (required): The address prefix to use for the subnet.
 * `tags` (required): Optional tags to be added to resource
 * `vnet_name` (required): The name of the Vnet.
-* `vnet_rg` (required): The Resource Group of the Vnet
+* `vnet_rg` (required): The resource Group of the Vnet
 
 ## Output Values
 * `aks_fqdn`: The FQDN of the Azure Kubernetes Managed Cluster.
