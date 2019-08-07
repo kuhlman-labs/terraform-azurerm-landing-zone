@@ -36,7 +36,7 @@ stages:
     steps:  
     - task: Bash@3  
       inputs:
-        filePath: './scripts/bash/pipeline/validate_terraform.sh'
+        filePath: './scripts/pipeline/validate_terraform.sh'
   dependsOn: Terraform_Fmt        
 
 - stage: Terraform_Apply
@@ -49,7 +49,7 @@ stages:
     steps:  
     - task: Bash@3  
       inputs:
-        filePath: './scripts/bash/pipeline/plan-apply.sh'
+        filePath: './scripts/pipeline/plan-apply.sh'
   dependsOn: Terraform_Validate
 
 - stage: Terraform_Destroy
@@ -62,6 +62,6 @@ stages:
     steps:  
     - task: Bash@3  
       inputs:
-        filePath: './scripts/bash/pipeline/destroy.sh'
+        filePath: './scripts/pipeline/destroy.sh'
   dependsOn: Terraform_Apply   
       
