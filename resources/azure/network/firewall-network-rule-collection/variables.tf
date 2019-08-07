@@ -34,8 +34,8 @@ variable "collection_action" {
 
 variable "rule" {
   description = ""
-  type = list
-  default []  
+  type        = list
+  default     = []
 }
 
 /*

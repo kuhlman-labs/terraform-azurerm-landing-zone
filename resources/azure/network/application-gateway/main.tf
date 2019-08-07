@@ -33,7 +33,7 @@ resource "azurerm_application_gateway" "base" {
   zones = var.zones
 
   frontend_ip_configuration {
-    name = "appGwPublicFrontendIp"
+    name                 = "appGwPublicFrontendIp"
     public_ip_address_id = var.public_ip_address_id
     private_ip_address   = var.private_ip_address
   }

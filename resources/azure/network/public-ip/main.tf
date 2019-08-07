@@ -3,10 +3,10 @@ data "azurerm_resource_group" "base" {
 }
 
 resource "azurerm_public_ip" "base" {
-  name                = var.name
-  resource_group_name = data.azurerm_resource_group.base.name
-  location            = data.azurerm_resource_group.base.location
-  allocation_method   = var.allocation_method
+  name                    = var.name
+  resource_group_name     = data.azurerm_resource_group.base.name
+  location                = data.azurerm_resource_group.base.location
+  allocation_method       = var.allocation_method
   sku                     = var.sku
   ip_version              = var.ip_version
   idle_timeout_in_minutes = var.idle_timeout_in_minutes

@@ -9,14 +9,14 @@ resource "azurerm_firewall_network_rule_collection" "base" {
   priority            = var.collection_priority
   action              = var.collection_action
 
-  dynamic "rule"{
+  dynamic "rule" {
     for_each = var.rule
     content {
-      name = rule.value.name
-      source_addresses = rule.value.source_addresses
-      destination_ports = rule.value.destination_ports
-      destination_addresses= rule.value.destination_addresses
-      protocols = rule.value.protocols
+      name                  = rule.value.name
+      source_addresses      = rule.value.source_addresses
+      destination_ports     = rule.value.destination_ports
+      destination_addresses = rule.value.destination_addresses
+      protocols             = rule.value.protocols
     }
   }
 

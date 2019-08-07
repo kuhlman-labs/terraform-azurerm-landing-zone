@@ -132,42 +132,42 @@ resource "null_resource" "aks_config" {
     az aks get-credentials --resource-group ${module.resource_group.resource_group_name} --name ${module.resource_group.resource_group_name}-aks-cluster --admin --overwrite-existing;
     kubectl create -f https://raw.githubusercontent.com/Azure/aad-pod-identity/master/deploy/infra/deployment.yaml;
     echo "${templatefile("${path.module}/templates/aadpodidentity.yaml", {
-      name = module.aks_user_assigned_identity.uai_name,
-      identity_resource_id = module.aks_user_assigned_identity.uai_id,
-      identity_client_id = module.aks_user_assigned_identity.uai_client_id
-    })}" | kubectl apply -f -
+    name                 = module.aks_user_assigned_identity.uai_name,
+    identity_resource_id = module.aks_user_assigned_identity.uai_id,
+    identity_client_id   = module.aks_user_assigned_identity.uai_client_id
+})}" | kubectl apply -f -
     EOT
-      }
-      }
+}
+}
 
-      # authentication for helm provider
+# authentication for helm provider
 
-      provider "helm" {
-        kubernetes {
-          host                   = "${module.aks_cluster.aks_kube_config_host}"
-          client_certificate     = "${base64decode(module.aks_cluster.aks_kube_config_client_certificate)}"
-          client_key             = "${base64decode(module.aks_cluster.aks_kube_config_client_key)}"
-          cluster_ca_certificate = "${base64decode(module.aks_cluster.aks_kube_config_cluster_ca_certificate)}"
-        }
-      }
+provider "helm" {
+  kubernetes {
+    host                   = "${module.aks_cluster.aks_kube_config_host}"
+    client_certificate     = "${base64decode(module.aks_cluster.aks_kube_config_client_certificate)}"
+    client_key             = "${base64decode(module.aks_cluster.aks_kube_config_client_key)}"
+    cluster_ca_certificate = "${base64decode(module.aks_cluster.aks_kube_config_cluster_ca_certificate)}"
+  }
+}
 
-      # helm release for waf-ingress
+# helm release for waf-ingress
 
-      resource "helm_release" "ingress-azure" {
-        depends_on = [null_resource.aks_config]
-        name       = "application-gateway-kubernetes-ingress"
-        repository = "https://appgwingress.blob.core.windows.net/ingress-azure-helm-package/"
-        chart      = "ingress-azure"
-        namespace  = "default"
+resource "helm_release" "ingress-azure" {
+  depends_on = [null_resource.aks_config]
+  name       = "application-gateway-kubernetes-ingress"
+  repository = "https://appgwingress.blob.core.windows.net/ingress-azure-helm-package/"
+  chart      = "ingress-azure"
+  namespace  = "default"
 
-        values = [
-          "${templatefile("${path.module}/templates/helm-config.yaml", {
-            subscription_id         = data.azurerm_client_config.current.subscription_id,
-            resource_group_name     = module.resource_group.resource_group_name,
-            applicationgateway_name = "${module.resource_group.resource_group_name}-app-gw",
-            identity_resource_id    = module.aks_user_assigned_identity.uai_id,
-            identity_client_id      = module.aks_user_assigned_identity.uai_client_id,
-            aks-api-server-address  = module.aks_cluster.aks_fqdn
-          })}"
-        ]
-      }
+  values = [
+    "${templatefile("${path.module}/templates/helm-config.yaml", {
+      subscription_id         = data.azurerm_client_config.current.subscription_id,
+      resource_group_name     = module.resource_group.resource_group_name,
+      applicationgateway_name = "${module.resource_group.resource_group_name}-app-gw",
+      identity_resource_id    = module.aks_user_assigned_identity.uai_id,
+      identity_client_id      = module.aks_user_assigned_identity.uai_client_id,
+      aks-api-server-address  = module.aks_cluster.aks_fqdn
+    })}"
+  ]
+}
