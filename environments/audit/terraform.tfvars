@@ -1,5 +1,5 @@
 #################
-# Audit Variables
+# Audit variables
 #################
 
 environment = "audit"

@@ -1,6 +1,6 @@
-#################
-# Audit Variables
-#################
+###
+# Audit variables
+###
 
 #common
 

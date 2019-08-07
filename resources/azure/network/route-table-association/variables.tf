@@ -1,6 +1,6 @@
-###############################
-# Setting up resource variables
-###############################
+###
+# resource variables
+###
 
 #route association
 

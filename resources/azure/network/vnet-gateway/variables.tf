@@ -1,11 +1,11 @@
-###############################
-# Setting up resource variables
-###############################
+###
+# resource variables
+###
 
 #common
 
 variable "resource_group" {
-  description = "Resource Group that vNet Gateway will deploy into, must be same as the vNet's resource gorup"
+  description = "resource Group that vNet Gateway will deploy into, must be same as the vNet's resource gorup"
   type        = string
 }
 
@@ -84,7 +84,7 @@ variable "vpn_client_protocols" {
 
 
 #######################################
-#Setting up Optional Tagging Variables
+# Optional Tagging variables
 #######################################
 variable "tags" {
   description = "Optional tags to be added to resource"

@@ -11,7 +11,7 @@ data "terraform_remote_state" "shared_services" {
   }
 }
 
-# Setting up resource group
+#  resource group
 
 module "resource_group" {
   source          = "../../../resources/azure/resource-group"
@@ -20,7 +20,7 @@ module "resource_group" {
   environment     = var.environment
 }
 
-#Setting up vnet
+# vnet
 
 module "vnet_spoke" {
   source              = "../../../resources/azure/network/vnet"
@@ -29,7 +29,7 @@ module "vnet_spoke" {
   tags                = var.tags
 }
 
-#Setting up subnets
+# subnets
 
 module "subnet_frontend" {
   source                = "../../../resources/azure/network/vnet-subnet"
@@ -47,7 +47,7 @@ module "subnet_backend" {
   subnet_address_prefix = var.subnet_backend_address_prefix
 }
 
-#Setting up vnet peering
+# vnet peering
 
 module "vnet_peering" {
   source                      = "../../../resources/azure/network/vnet-peering"

@@ -1,6 +1,6 @@
-###########################
-# Shared Services Variables
-###########################
+###
+# Shared Services variables
+###
 
 #common
 

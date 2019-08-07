@@ -1,6 +1,9 @@
-###############################
-# Setting up Resource Variables
-###############################
+###
+# resource variables
+###
+
+# key vault
+
 variable "key_vault_id" {
   description = "ID for the Key Vault that the certificate will be generated in"
   type        = string
@@ -11,7 +14,6 @@ variable "certificate_name" {
   type        = string
   default     = "imported-cert"
 }
-
 
 variable "certificate_contents" {
   description = "The base64-encoded certificate contents. Changing this forces a new resource to be created."

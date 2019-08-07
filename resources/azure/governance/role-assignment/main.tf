@@ -1,5 +1,5 @@
 ############################
-# Setting up role assignment
+#  role assignment
 ############################
 
 resource "azurerm_role_assignment" "base" {

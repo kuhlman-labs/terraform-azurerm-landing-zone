@@ -1,6 +1,6 @@
-###############################
-# Setting up Resource Variables
-###############################
+###
+#  key-vault-with-p2s-cert module variables
+###
 
 
 #common

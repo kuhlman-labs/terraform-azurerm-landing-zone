@@ -1,6 +1,6 @@
-###########################
-# Shared Services Variables
-###########################
+###
+# Test variables
+###
 
 #common
 

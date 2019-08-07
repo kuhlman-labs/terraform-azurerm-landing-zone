@@ -1,5 +1,5 @@
 ############################
-# Setting up P2S Certificate
+#  P2S Certificate
 ############################
 
 resource "azurerm_key_vault_certificate" "base" {

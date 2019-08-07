@@ -1,5 +1,5 @@
 ###########################
-# Setting up Resource Group
+#  Resource Group
 ###########################
 
 data "azurerm_resource_group" "base" {
@@ -7,7 +7,7 @@ data "azurerm_resource_group" "base" {
 }
 
 ####################################
-# Setting up Recovery Services Vault
+#  Recovery Services Vault
 ####################################
 
 resource "azurerm_recovery_services_vault" "base" {

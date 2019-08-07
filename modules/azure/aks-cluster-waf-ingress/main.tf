@@ -1,7 +1,7 @@
 data "azurerm_client_config" "current" {
 }
 
-# Setting up resource group
+#  resource group
 
 module "resource_group" {
   source          = "../../../resources/azure/resource-group"
@@ -10,7 +10,7 @@ module "resource_group" {
   environment     = var.environment
 }
 
-#Setting up aks managed identity
+# aks managed identity
 
 module "aks_user_assigned_identity" {
   source         = "../../../resources/azure/governance/user-assigned-identity"
@@ -18,7 +18,7 @@ module "aks_user_assigned_identity" {
   uai_name       = "aks-cluster-id"
 }
 
-#Setting up role assignments for AD integration
+# role assignments for AD integration
 
 module "aks_role_assignment_1" {
   source               = "../../../resources/azure/governance/role-assignment"
@@ -48,7 +48,7 @@ module "aks_role_assignment_4" {
   principal_id         = module.aks_user_assigned_identity.uai_principal_id
 }
 
-#Setting up WAF
+# WAF
 
 module "waf_subnet" {
   source                = "../../../resources/azure/network/vnet-subnet"
@@ -76,7 +76,7 @@ module "waf" {
   tags                 = var.tags
 }
 
-#Setting up AKS Cluster
+# AKS Cluster
 
 module "aks_subnet" {
   source                = "../../../resources/azure/network/vnet-subnet"
@@ -122,7 +122,7 @@ module "aks_cluster" {
   tags = var.tags
 }
 
-#Setting up aapodidentity for ARM integration
+# aapodidentity for ARM integration
 
 resource "null_resource" "aks_config" {
   depends_on = [module.aks_cluster]
@@ -140,7 +140,7 @@ resource "null_resource" "aks_config" {
       }
       }
 
-      #Setting up authentication for helm provider
+      # authentication for helm provider
 
       provider "helm" {
         kubernetes {
@@ -151,7 +151,7 @@ resource "null_resource" "aks_config" {
         }
       }
 
-      #setting up helm release for waf-ingress
+      # helm release for waf-ingress
 
       resource "helm_release" "ingress-azure" {
         depends_on = [null_resource.aks_config]

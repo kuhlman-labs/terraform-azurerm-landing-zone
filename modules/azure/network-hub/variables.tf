@@ -1,6 +1,6 @@
-################################
-## Setting up resource variables
-################################
+###
+# network-hub module variables
+###
 
 #common
 

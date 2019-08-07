@@ -1,5 +1,5 @@
 ###########################
-# Setting up resource group
+#  resource group
 ###########################
 
 data "azurerm_resource_group" "base" {
@@ -7,7 +7,7 @@ data "azurerm_resource_group" "base" {
 }
 
 #####################
-# Setting up firewall
+#  firewall
 #####################
 
 resource "azurerm_firewall" "base" {

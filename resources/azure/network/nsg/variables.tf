@@ -1,8 +1,8 @@
-###############################
-# Setting up resource variables
-###############################
+###
+# resource variables
+###
 
-#common
+# common
 
 variable "resource_group" {
   description = "This is the resource group to which the resources will be deployed"

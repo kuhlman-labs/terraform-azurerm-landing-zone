@@ -1,6 +1,6 @@
-###############################
-# Setting up resource variables
-###############################
+###
+#  network-spoke module variables
+###
 
 #common
 

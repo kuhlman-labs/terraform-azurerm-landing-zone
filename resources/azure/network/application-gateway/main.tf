@@ -1,5 +1,5 @@
 ##################
-#Setting up locals
+# locals
 ##################
 
 locals {
@@ -12,7 +12,7 @@ locals {
 }
 
 ###########################
-# Setting up resource group
+#  resource group
 ###########################
 
 data "azurerm_resource_group" "base" {

@@ -1,5 +1,5 @@
 ###########################
-# Setting up resource group
+#  resource group
 ###########################
 
 data "azurerm_resource_group" "base" {
@@ -7,7 +7,7 @@ data "azurerm_resource_group" "base" {
 }
 
 ######################################
-# Setting up Public IP for VPN Gateway
+#  Public IP for VPN Gateway
 ######################################
 
 resource "azurerm_public_ip" "base" {
@@ -18,7 +18,7 @@ resource "azurerm_public_ip" "base" {
 }
 
 #################################
-# Setting up VPN Gateway Resource
+#  VPN Gateway Resource
 #################################
 
 resource "azurerm_virtual_network_gateway" "base" {

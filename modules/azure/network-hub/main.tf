@@ -1,4 +1,4 @@
-# Setting up resource group
+#  resource group
 
 module "resource_group" {
   source          = "../../../resources/azure/resource-group"
@@ -7,7 +7,7 @@ module "resource_group" {
   environment     = var.environment
 }
 
-#Setting up vnet
+# vnet
 
 module "vnet_hub" {
   source              = "../../../resources/azure/network/vnet"
@@ -16,7 +16,7 @@ module "vnet_hub" {
   tags                = var.tags
 }
 
-#Setting up subnets
+# subnets
 
 module "subnet_dmz" {
   source                    = "../../../resources/azure/network/vnet-subnet"
@@ -27,7 +27,7 @@ module "subnet_dmz" {
   network_security_group_id = element(module.nsg_dmz.nsg_id, 0)
 }
 
-#setting up nsg
+# nsg
 
 module "nsg_dmz" {
   source         = "../../../resources/azure/network/nsg"

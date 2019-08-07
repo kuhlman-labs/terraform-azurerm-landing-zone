@@ -1,6 +1,6 @@
-########################################
-# Setting up resource variables for VNet
-########################################
+###
+# resource variables
+###
 
 #common
 

@@ -1,5 +1,5 @@
 ########################################################
-# Setting up Infra Modules for Key Vault with a P2S cert
+#  Infra Modules for Key Vault with a P2S cert
 ########################################################
 
 module "resource_group" {

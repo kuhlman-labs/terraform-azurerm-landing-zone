@@ -1,3 +1,7 @@
+###
+# resource variables
+###
+
 #common
 
 variable "resource_group" {
