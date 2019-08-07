@@ -1,6 +1,14 @@
+###
+# resource composition
+###
+
+#resource group
+
 data "azurerm_resource_group" "base" {
   name = var.resource_group
 }
+
+#network security group
 
 resource "azurerm_network_security_group" "base" {
   count               = length(var.subnet_names)
@@ -8,6 +16,8 @@ resource "azurerm_network_security_group" "base" {
   location            = data.azurerm_resource_group.base.location
   resource_group_name = data.azurerm_resource_group.base.name
 }
+
+#network security rule
 
 resource "azurerm_network_security_rule" "base" {
   count                       = length(var.nsg_rules)

@@ -1,3 +1,7 @@
+###
+# resource outputs
+###
+
 output "nsg_id" {
   value       = azurerm_network_security_group.base.*.id
   description = "Network security group resource id"

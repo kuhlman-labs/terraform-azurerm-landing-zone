@@ -1,3 +1,7 @@
+###
+# resource outputs
+###
+
 output "subnet_id" {
   value = azurerm_subnet.base.id
 }

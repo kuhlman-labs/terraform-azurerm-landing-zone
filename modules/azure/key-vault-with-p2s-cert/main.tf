@@ -1,6 +1,6 @@
-########################################################
-#  Infra Modules for Key Vault with a P2S cert
-########################################################
+###
+#  module composition
+###
 
 module "resource_group" {
   source          = "../../../resources/azure/resource-group"

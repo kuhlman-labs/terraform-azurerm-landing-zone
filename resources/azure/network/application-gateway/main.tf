@@ -1,6 +1,8 @@
-##################
-# locals
-##################
+###
+# resource composition
+###
+
+#local variables
 
 locals {
   backend_address_pool_name      = "${data.azurerm_resource_group.base.name}-${var.resource_prefix}-beap"
@@ -11,13 +13,13 @@ locals {
   request_routing_rule_name      = "${data.azurerm_resource_group.base.name}-${var.resource_prefix}-rqrt"
 }
 
-###########################
-#  resource group
-###########################
+#resource group
 
 data "azurerm_resource_group" "base" {
   name = var.resource_group
 }
+
+#application gateway
 
 resource "azurerm_application_gateway" "base" {
   name                = "${data.azurerm_resource_group.base.name}-${var.resource_prefix}"

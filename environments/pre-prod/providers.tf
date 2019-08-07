@@ -1,6 +1,6 @@
-##########
-# Provider
-##########
+###
+# environment providers
+###
 
 terraform {
   required_version = ">= 0.12"

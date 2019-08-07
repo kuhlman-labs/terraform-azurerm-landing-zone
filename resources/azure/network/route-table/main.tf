@@ -1,13 +1,14 @@
+###
+# resource composition
+###
 
-###########################
-#  resource group
-###########################
+#resource group
 
 data "azurerm_resource_group" "base" {
   name = var.resource_group
 }
 
-# Route Table
+#route table
 
 resource "azurerm_route_table" "base" {
   name                          = "${data.azurerm_resource_group.base.name}-${var.resource_prefix}"

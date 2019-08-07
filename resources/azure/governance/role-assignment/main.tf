@@ -1,6 +1,6 @@
-############################
-#  role assignment
-############################
+###
+# resource composition
+###
 
 resource "azurerm_role_assignment" "base" {
   scope                = var.scope

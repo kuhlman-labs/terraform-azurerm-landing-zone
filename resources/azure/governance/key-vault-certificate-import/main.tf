@@ -1,6 +1,6 @@
-############################
-#  P2S Certificate
-############################
+###
+# resource composition
+###
 
 resource "azurerm_key_vault_certificate" "base" {
   name         = var.certificate_name

@@ -1,3 +1,9 @@
+###
+# resource composition
+###
+
+#virtual network peering
+
 resource "azurerm_virtual_network_peering" "hub_to_spoke" {
   name                         = "${var.hub_vnet_name}-to-${var.spoke_vnet_name}"
   resource_group_name          = var.hub_vnet_rg

@@ -1,14 +1,14 @@
-###########################
-#  Resource Group
-###########################
+###
+#  resource composition
+###
+
+#resource group
 
 data "azurerm_resource_group" "base" {
   name = var.resource_group
 }
 
-####################################
-#  Recovery Services Vault
-####################################
+#recovery services vault
 
 resource "azurerm_recovery_services_vault" "base" {
   name                = "${data.azurerm_resource_group.base.name}-${var.resource_prefix}"

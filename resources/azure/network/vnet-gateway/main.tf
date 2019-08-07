@@ -1,14 +1,14 @@
-###########################
-#  resource group
-###########################
+###
+# resource composition
+###
+
+#resource group
 
 data "azurerm_resource_group" "base" {
   name = var.resource_group
 }
 
-######################################
-#  Public IP for VPN Gateway
-######################################
+#public ip
 
 resource "azurerm_public_ip" "base" {
   name                = "${data.azurerm_resource_group.base.name}-${var.resource_prefix}-ip"
@@ -17,9 +17,7 @@ resource "azurerm_public_ip" "base" {
   allocation_method   = var.ip_allocation
 }
 
-#################################
-#  VPN Gateway Resource
-#################################
+#virtual network gateway
 
 resource "azurerm_virtual_network_gateway" "base" {
   name                = "${data.azurerm_resource_group.base.name}-${var.resource_prefix}"

@@ -1,6 +1,14 @@
+###
+# resource composition
+###
+
+#resource group
+
 data "azurerm_resource_group" "base" {
   name = var.resource_group
 }
+
+#subnet
 
 resource "azurerm_subnet" "base" {
   name                      = var.subnet_name

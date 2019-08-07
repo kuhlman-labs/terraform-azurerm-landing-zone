@@ -1,3 +1,7 @@
+###
+# environment outputs
+###
+
 output "prod_vnet_spoke_name" {
   value       = module.network_spoke.vnet_spoke_name
   description = "Generated name of the Virtual Network"

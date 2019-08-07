@@ -1,3 +1,7 @@
+###
+# environment outputs
+###
+
 output "shared_services_vnet_name" {
   value       = module.network_hub.vnet_hub_name
   description = "Generated name of the hub virtual network"

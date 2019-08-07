@@ -1,14 +1,26 @@
+###
+# resource composition
+###
+
+#data source to access the configuration of the AzureRM provider
+
 data "azurerm_client_config" "current" {
 }
+
+#resource group
 
 data "azurerm_resource_group" "base" {
   name = var.resource_group
 }
 
+#random permutation of alphanumeric characters
+
 resource "random_string" "base" {
   length  = 8
   special = false
 }
+
+#key vault
 
 resource "azurerm_key_vault" "base" {
   name                = "${data.azurerm_resource_group.base.name}-${var.resource_prefix}-${random_string.base.result}"

@@ -1,3 +1,7 @@
+###
+#  module composition
+###
+
 #Pulling in outputs form shared-services stack for peering
 
 data "terraform_remote_state" "shared_services" {

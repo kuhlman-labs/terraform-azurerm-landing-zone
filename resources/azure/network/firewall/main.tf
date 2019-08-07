@@ -1,14 +1,14 @@
-###########################
-#  resource group
-###########################
+###
+# resource composition
+###
+
+#resource group
 
 data "azurerm_resource_group" "base" {
   name = var.resource_group
 }
 
-#####################
-#  firewall
-#####################
+#firewall
 
 resource "azurerm_firewall" "base" {
   name                = "${data.azurerm_resource_group.base.name}-${var.resource_prefix}"

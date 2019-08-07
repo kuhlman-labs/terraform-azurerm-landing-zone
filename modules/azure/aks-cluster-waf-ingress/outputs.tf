@@ -1,3 +1,7 @@
+###
+#  module outputs
+###
+
 output "aks_id" {
   value       = module.aks_cluster.aks_id
   description = "The ID of the Kubernetes Managed Cluster."

@@ -1,3 +1,7 @@
+###
+#  module composition
+###
+
 #  resource group
 
 module "resource_group" {
@@ -7,7 +11,7 @@ module "resource_group" {
   environment     = var.environment
 }
 
-# vnet
+#vnet
 
 module "vnet_hub" {
   source              = "../../../resources/azure/network/vnet"
@@ -16,7 +20,7 @@ module "vnet_hub" {
   tags                = var.tags
 }
 
-# subnets
+#subnets
 
 module "subnet_dmz" {
   source                    = "../../../resources/azure/network/vnet-subnet"
@@ -27,7 +31,7 @@ module "subnet_dmz" {
   network_security_group_id = element(module.nsg_dmz.nsg_id, 0)
 }
 
-# nsg
+#nsg
 
 module "nsg_dmz" {
   source         = "../../../resources/azure/network/nsg"
