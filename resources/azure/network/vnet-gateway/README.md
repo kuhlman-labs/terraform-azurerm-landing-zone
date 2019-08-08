@@ -1,8 +1,11 @@
 
 # Module `resources/azure/network/vnet-gateway`
 
+Core Version Constraints:
+* `>= 0.12`
+
 Provider Requirements:
-* **azurerm:** (any version)
+* **azurerm:** `~> 1.32.0`
 
 ## Input Variables
 * `certificate_data` (required): Certificate Information generated from Key Vault that the vNet gateway will use for the P2S connections

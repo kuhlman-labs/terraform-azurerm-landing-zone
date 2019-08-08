@@ -1,8 +1,11 @@
 
 # Module `resources/azure/network/firewall`
 
+Core Version Constraints:
+* `>= 0.12`
+
 Provider Requirements:
-* **azurerm:** (any version)
+* **azurerm:** `~> 1.32.0`
 
 ## Input Variables
 * `public_ip_address_id` (required): (Optional) The ID of a Public IP Address which the Firewall should use.

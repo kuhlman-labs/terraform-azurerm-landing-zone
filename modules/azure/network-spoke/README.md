@@ -1,7 +1,11 @@
 
 # Module `modules/azure/network-spoke`
 
+Core Version Constraints:
+* `>= 0.12`
+
 Provider Requirements:
+* **azurerm:** `~> 1.32.0`
 * **terraform:** (any version)
 
 ## Input Variables

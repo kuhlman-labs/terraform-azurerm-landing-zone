@@ -1,8 +1,11 @@
 
 # Module `modules/azure/aks-cluster-waf-ingress`
 
+Core Version Constraints:
+* `>= 0.12`
+
 Provider Requirements:
-* **azurerm:** (any version)
+* **azurerm:** `~> 1.32.0`
 * **helm:** (any version)
 * **null:** (any version)
 

@@ -1,6 +1,9 @@
 
 # Module `resources/github/repository`
 
+Core Version Constraints:
+* `>= 0.12`
+
 Provider Requirements:
 * **github:** (any version)
 

@@ -1,8 +1,11 @@
 
 # Module `resources/azure/network/application-gateway`
 
+Core Version Constraints:
+* `>= 0.12`
+
 Provider Requirements:
-* **azurerm:** (any version)
+* **azurerm:** `~> 1.32.0`
 
 ## Input Variables
 * `private_ip_address` (required): (Optional) The Private IP Address to use for the Application Gateway.

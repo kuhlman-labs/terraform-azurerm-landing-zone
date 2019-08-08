@@ -1,8 +1,11 @@
 
 # Module `resources/azure/network/vnet-peering`
 
+Core Version Constraints:
+* `>= 0.12`
+
 Provider Requirements:
-* **azurerm:** (any version)
+* **azurerm:** `~> 1.32.0`
 
 ## Input Variables
 * `allow_forwarded_traffic` (default `"true"`): Controls if forwarded traffic from VMs in the remote virtual network is allowed. Defaults to true.

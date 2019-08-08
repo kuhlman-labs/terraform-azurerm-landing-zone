@@ -1,8 +1,11 @@
 
 # Module `resources/azure/network/firewall-network-rule-collection`
 
+Core Version Constraints:
+* `>= 0.12`
+
 Provider Requirements:
-* **azurerm:** (any version)
+* **azurerm:** `~> 1.32.0`
 
 ## Input Variables
 * `azure_firewall_name` (required): (Required) Specifies the name of the Firewall in which the Network Rule Collection should be created. Changing this forces a new resource to be created.

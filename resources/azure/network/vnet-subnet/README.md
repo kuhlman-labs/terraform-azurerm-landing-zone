@@ -1,8 +1,11 @@
 
 # Module `resources/azure/network/vnet-subnet`
 
+Core Version Constraints:
+* `>= 0.12`
+
 Provider Requirements:
-* **azurerm:** (any version)
+* **azurerm:** `~> 1.32.0`
 
 ## Input Variables
 * `delegations` (required): A List of delegation blocks to associate with the subnet.

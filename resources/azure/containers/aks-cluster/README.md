@@ -1,8 +1,11 @@
 
 # Module `resources/azure/containers/aks-cluster`
 
+Core Version Constraints:
+* `>= 0.12`
+
 Provider Requirements:
-* **azurerm:** (any version)
+* **azurerm:** `~> 1.32.0`
 
 ## Input Variables
 * `addon_profile` (required): https://www.terraform.io/docs/providers/azurerm/r/kubernetes_cluster.html#addon_profile

@@ -1,8 +1,11 @@
 
 # Module `resources/azure/network/nsg-association`
 
+Core Version Constraints:
+* `>= 0.12`
+
 Provider Requirements:
-* **azurerm:** (any version)
+* **azurerm:** `~> 1.32.0`
 
 ## Input Variables
 * `network_security_group_id` (required): Subnet names the NSG will apply to. Used for count

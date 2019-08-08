@@ -1,8 +1,11 @@
 
 # Module `resources/azure/governance/user-assigned-identity`
 
+Core Version Constraints:
+* `>= 0.12`
+
 Provider Requirements:
-* **azurerm:** (any version)
+* **azurerm:** `~> 1.32.0`
 
 ## Input Variables
 * `resource_group` (required): The name of the target resource group
