@@ -38,6 +38,6 @@ variable "nsg_rules" {
 }
 
 variable "nsg_name" {
-  
+
 }
 
