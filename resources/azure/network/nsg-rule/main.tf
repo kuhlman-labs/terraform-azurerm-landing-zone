@@ -3,7 +3,7 @@ data "azurerm_resource_group" "base" {
 }
 
 resource "azurerm_network_security_rule" "base" {
-  for_each                    = var.nsg_rules
+  #for_each                    = var.nsg_rules
   name                        = nsg_rules.value.name
   priority                    = nsg_rules.value.priority
   direction                   = nsg_rules.value.direction
