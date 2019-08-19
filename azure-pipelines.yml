@@ -16,15 +16,15 @@ resources:
 
 stages:
       
-- stage: Terraform_Fmt
-  displayName: Check Terraform Format
-  jobs:
-  - job: Format_Terraform
-    pool:
-      vmImage: 'ubuntu-16.04'
-    container: terraform  
-    steps:
-      - script: terraform fmt -recursive -check -list=true
+#- stage: Terraform_Fmt
+#  displayName: Check Terraform Format
+#  jobs:
+#  - job: Format_Terraform
+#    pool:
+#      vmImage: 'ubuntu-16.04'
+#    container: terraform  
+#    steps:
+#      - script: terraform fmt -recursive -check -list=true
 
 - stage: Terraform_Validate
   displayName: Validate Terraform Syntax 
