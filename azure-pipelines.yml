@@ -37,7 +37,7 @@ stages:
     - task: Bash@3  
       inputs:
         filePath: './scripts/pipeline/validate_terraform.sh'
-  dependsOn: Terraform_Fmt        
+  #dependsOn: Terraform_Fmt        
 
 - stage: Terraform_Apply
   displayName: Run Terraform apply for solutions 
