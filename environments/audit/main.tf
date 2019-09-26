@@ -1,6 +1,6 @@
-####################
-# Audit Composistion
-####################
+###
+# environment composition
+###
 
 module "log_analytics" {
   source           = "../../modules/azure/log-analytics"

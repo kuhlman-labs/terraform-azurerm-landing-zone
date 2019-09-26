@@ -1,6 +1,6 @@
-###############################
-# Setting up resource variables
-###############################
+###
+# resource variables
+###
 
 #common
 
@@ -48,7 +48,7 @@ variable "api_server_authorized_ip_ranges" {
 }
 
 variable "node_resource_group" {
-  description = "(Optional) The name of the Resource Group where the the Kubernetes Nodes should exist. Changing this forces a new resource to be created."
+  description = "(Optional) The name of the resource Group where the the Kubernetes Nodes should exist. Changing this forces a new resource to be created."
   type        = string
   default     = null
 }

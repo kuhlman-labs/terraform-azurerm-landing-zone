@@ -1,14 +1,14 @@
-###########################
-# Setting up resource group
-###########################
+###
+#  resource composition
+###
+
+#resource group
 
 data "azurerm_resource_group" "base" {
   name = var.resource_group
 }
 
-################
-# Setting up AKS
-################
+#aks
 
 resource "azurerm_kubernetes_cluster" "base" {
   name                            = "${data.azurerm_resource_group.base.name}-${var.resource_prefix}"
@@ -105,4 +105,3 @@ resource "azurerm_kubernetes_cluster" "base" {
 
   tags = var.tags
 }
-

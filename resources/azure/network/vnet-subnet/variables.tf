@@ -1,11 +1,11 @@
-##########################################
-# Setting up resource variables for Subnet
-##########################################
+###
+# resource variables
+###
 
 #common
 
 variable "resource_group" {
-  description = "Resource Group of vNet"
+  description = "resource Group of vNet"
   type        = string
 }
 

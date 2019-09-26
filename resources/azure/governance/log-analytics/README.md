@@ -1,8 +1,11 @@
 
 # Module `resources/azure/governance/log-analytics`
 
+Core Version Constraints:
+* `>= 0.12`
+
 Provider Requirements:
-* **azurerm:** (any version)
+* **azurerm:** `~> 1.32.0`
 * **random:** (any version)
 
 ## Input Variables

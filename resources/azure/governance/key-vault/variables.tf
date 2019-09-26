@@ -1,6 +1,6 @@
-###############################
-# Setting up Resource Variables
-###############################
+###
+# resource variables
+###
 
 #common
 
@@ -23,6 +23,59 @@ variable "sku_name" {
   default     = "standard"
 }
 
+variable "access_policy" {
+  description = ""
+  type        = list
+  default = [
+    {
+      certificate_permissions = [
+        "create",
+        "delete",
+        "deleteissuers",
+        "get",
+        "getissuers",
+        "import",
+        "list",
+        "listissuers",
+        "managecontacts",
+        "manageissuers",
+        "setissuers",
+        "update",
+      ]
+      key_permissions = [
+        "backup",
+        "create",
+        "decrypt",
+        "delete",
+        "encrypt",
+        "get",
+        "import",
+        "list",
+        "purge",
+        "recover",
+        "restore",
+        "sign",
+        "unwrapKey",
+        "update",
+        "verify",
+        "wrapKey",
+      ]
+      secret_permissions = [
+        "backup",
+        "delete",
+        "get",
+        "list",
+        "purge",
+        "recover",
+        "restore",
+        "set",
+      ]
+    }
+  ]
+
+}
+
+/*
 variable "certificate_permissions" {
   description = "(Optional) List of certificate permissions, must be one or more from the following: backup, create, delete, deleteissuers, get, getissuers, import, list, listissuers, managecontacts, manageissuers, purge, recover, restore, setissuers and update."
   type        = list
@@ -80,7 +133,7 @@ variable "secret_permissions" {
   ]
 
 }
-
+*/
 
 #tags
 

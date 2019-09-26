@@ -1,3 +1,7 @@
+###
+# resource outputs
+###
+
 output "vnet_rg_name" {
   value       = data.azurerm_resource_group.base.name
   description = "Generated vnet resource group name"

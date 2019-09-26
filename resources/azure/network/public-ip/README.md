@@ -1,8 +1,11 @@
 
 # Module `resources/azure/network/public-ip`
 
+Core Version Constraints:
+* `>= 0.12`
+
 Provider Requirements:
-* **azurerm:** (any version)
+* **azurerm:** `~> 1.32.0`
 
 ## Input Variables
 * `allocation_method` (required): (Required) Defines the allocation method for this IP address. Possible values are Static or Dynamic.

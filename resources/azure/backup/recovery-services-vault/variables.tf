@@ -1,6 +1,6 @@
-###############################
-# Setting up Resource Variables
-###############################
+###
+# resource variables
+###
 
 #common
 

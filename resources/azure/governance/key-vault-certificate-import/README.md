@@ -1,8 +1,11 @@
 
 # Module `resources/azure/governance/key-vault-certificate-import`
 
+Core Version Constraints:
+* `>= 0.12`
+
 Provider Requirements:
-* **azurerm:** (any version)
+* **azurerm:** `~> 1.32.0`
 
 ## Input Variables
 * `certificate_contents` (required): The base64-encoded certificate contents. Changing this forces a new resource to be created.

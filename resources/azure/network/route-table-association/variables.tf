@@ -1,8 +1,8 @@
-###############################
-# Setting up resource variables
-###############################
+###
+# resource variables
+###
 
-#route association
+#route table association
 
 variable "subnet_id" {
   description = "The ID of the Subnet. Changing this forces a new resource to be created."

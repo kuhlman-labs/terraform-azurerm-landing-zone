@@ -1,14 +1,14 @@
-###########################
-# Setting up resource group
-###########################
+###
+# resource composition
+###
+
+#resource group
 
 data "azurerm_resource_group" "base" {
   name = var.resource_group
 }
 
-################
-# Setting up NSG
-################
+#network security group
 
 resource "azurerm_network_security_group" "base" {
   count               = length(var.subnet_names)
@@ -17,9 +17,7 @@ resource "azurerm_network_security_group" "base" {
   resource_group_name = data.azurerm_resource_group.base.name
 }
 
-######################
-# Setting up NSG Rules
-######################
+#network security rule
 
 resource "azurerm_network_security_rule" "base" {
   count                       = length(var.nsg_rules)

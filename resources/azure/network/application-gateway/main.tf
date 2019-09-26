@@ -1,6 +1,8 @@
-##################
-#Setting up locals
-##################
+###
+# resource composition
+###
+
+#local variables
 
 locals {
   backend_address_pool_name      = "${data.azurerm_resource_group.base.name}-${var.resource_prefix}-beap"
@@ -11,13 +13,13 @@ locals {
   request_routing_rule_name      = "${data.azurerm_resource_group.base.name}-${var.resource_prefix}-rqrt"
 }
 
-###########################
-# Setting up resource group
-###########################
+#resource group
 
 data "azurerm_resource_group" "base" {
   name = var.resource_group
 }
+
+#application gateway
 
 resource "azurerm_application_gateway" "base" {
   name                = "${data.azurerm_resource_group.base.name}-${var.resource_prefix}"
@@ -33,8 +35,7 @@ resource "azurerm_application_gateway" "base" {
   zones = var.zones
 
   frontend_ip_configuration {
-    name = "appGwPublicFrontendIp"
-    #subnet_id            = var.subnet_id
+    name                 = "appGwPublicFrontendIp"
     public_ip_address_id = var.public_ip_address_id
     private_ip_address   = var.private_ip_address
   }

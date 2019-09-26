@@ -1,11 +1,15 @@
-###############################
-# Setting up resource variables
-###############################
+###
+# resource variables
+###
+
+#common
 
 variable "resource_group" {
   description = "The name of the target resource group"
   type        = string
 }
+
+#public-ip
 
 variable "name" {
   description = "(Required) Specifies the name of the Public IP resource . Changing this forces a new resource to be created."

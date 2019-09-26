@@ -1,14 +1,14 @@
-###########################
-# Setting up resource group
-###########################
+###
+# resource composition
+###
+
+#resource group
 
 data "azurerm_resource_group" "base" {
   name = var.resource_group
 }
 
-####################
-# Setting up Subnets
-####################
+#subnet
 
 resource "azurerm_subnet" "base" {
   name                      = var.subnet_name
@@ -20,12 +20,7 @@ resource "azurerm_subnet" "base" {
   network_security_group_id = var.network_security_group_id
 
   dynamic "delegation" {
-    for_each = [for d in var.delegations : {
-      name                       = d.delegation_name
-      service_deleagion_name     = d.service_delegation_name
-      service_delegation_actions = d.service_delegation_actions
-    }]
-
+    for_each = var.delegations
     content {
       name = delegation.value.name
       service_delegation {

@@ -1,3 +1,7 @@
+###
+# resource outputs
+###
+
 output "vnet_hub_to_spoke_peering_id" {
   value       = azurerm_virtual_network_peering.hub_to_spoke.id
   description = "Resource id for peering between hub and spoke vnet"

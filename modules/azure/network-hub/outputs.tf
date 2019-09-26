@@ -1,3 +1,7 @@
+###
+#  module outputs
+###
+
 output "vnet_hub_name" {
   value       = module.vnet_hub.vnet_name
   description = "resource name of vnet hub"

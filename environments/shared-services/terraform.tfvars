@@ -1,7 +1,6 @@
-###########################
-# Shared Services Variables
-###########################
-
+###
+# environment variables
+###
 
 #common
 environment = "shared-services"

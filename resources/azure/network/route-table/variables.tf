@@ -1,11 +1,15 @@
-###############################
-# Setting up resource variables
-###############################
+###
+# resource variables
+###
+
+#common
 
 variable "resource_group" {
   description = "The name of the target resource group"
   type        = string
 }
+
+#route-table
 
 variable "resource_prefix" {
   description = "A short pre-defined text to identify the resource type"

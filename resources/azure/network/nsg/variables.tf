@@ -1,6 +1,6 @@
-###############################
-# Setting up resource variables
-###############################
+###
+# resource variables
+###
 
 #common
 
@@ -19,6 +19,8 @@ variable "environment" {
   description = "Development environment for resource; prod, non-prod, shared-services"
   type        = string
 }
+
+#nsg
 
 variable "subnet_names" {
   description = "Subnet names the NSG will apply to. Used for count"

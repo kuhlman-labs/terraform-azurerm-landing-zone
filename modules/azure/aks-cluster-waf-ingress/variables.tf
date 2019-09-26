@@ -1,6 +1,6 @@
-##############################################
-# Setting up aks-cluster-waf-ingress variables
-##############################################
+###
+#  module variables
+###
 
 #common
 
@@ -29,7 +29,7 @@ variable "vnet_name" {
 }
 
 variable "vnet_rg" {
-  description = "The Resource Group of the Vnet"
+  description = "The resource Group of the Vnet"
   type        = string
 }
 

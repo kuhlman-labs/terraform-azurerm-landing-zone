@@ -1,3 +1,7 @@
+###
+#  module outputs
+###
+
 output "vnet_spoke_name" {
   value       = module.vnet_spoke.vnet_name
   description = "resource name for spoke vnet"

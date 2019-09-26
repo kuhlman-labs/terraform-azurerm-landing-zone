@@ -1,6 +1,6 @@
-###################
-# Test Composistion
-###################
+###
+# environment composition
+###
 
 module "network_hub" {
   source = "../../modules/azure/network-hub"

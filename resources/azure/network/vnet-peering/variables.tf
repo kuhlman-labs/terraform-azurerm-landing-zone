@@ -1,6 +1,8 @@
-################################################
-# Setting up resource variables for vnet peering
-################################################
+###
+# resource variables
+###
+
+#vnet-peering
 
 variable "hub_vnet_rg" {
   description = "This is the resource group name for the Hub Vnet"
@@ -18,7 +20,7 @@ variable "hub_vnet_name" {
 }
 
 variable "spoke_vnet_rg" {
-  description = "Spoke Vnets Resource Group to be peered with the Hub Vnet"
+  description = "Spoke Vnets resource Group to be peered with the Hub Vnet"
   type        = string
 }
 

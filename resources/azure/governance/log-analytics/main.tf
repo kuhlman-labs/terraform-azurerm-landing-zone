@@ -1,19 +1,21 @@
-###########################
-# Setting up resource group
-###########################
+###
+# resource composition
+###
+
+#resource group
 
 data "azurerm_resource_group" "base" {
   name = var.resource_group
 }
 
-####################################
-# Setting up Log Analytics Workspace
-####################################
+#random permutation of alphanumeric characters
 
 resource "random_string" "base" {
   length  = 8
   special = false
 }
+
+#log analytics workspace
 
 resource "azurerm_log_analytics_workspace" "base" {
   name                = "${data.azurerm_resource_group.base.name}-${var.resource_prefix}-${random_string.base.result}"

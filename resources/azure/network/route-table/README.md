@@ -1,8 +1,11 @@
 
 # Module `resources/azure/network/route-table`
 
+Core Version Constraints:
+* `>= 0.12`
+
 Provider Requirements:
-* **azurerm:** (any version)
+* **azurerm:** `~> 1.32.0`
 
 ## Input Variables
 * `disable_bgp_route_propagation` (required): bool flag which controls propagation of routes learned by BGP on that route table. True means disable.

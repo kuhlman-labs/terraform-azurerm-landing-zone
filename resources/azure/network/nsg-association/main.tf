@@ -1,6 +1,6 @@
-#############################
-# Setting up NSG associations
-#############################
+###
+# resource composition
+###
 
 resource "azurerm_subnet_network_security_group_association" "base" {
   subnet_id                 = var.subnet_id

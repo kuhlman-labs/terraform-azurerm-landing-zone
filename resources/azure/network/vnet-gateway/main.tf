@@ -1,14 +1,14 @@
-###########################
-# Setting up resource group
-###########################
+###
+# resource composition
+###
+
+#resource group
 
 data "azurerm_resource_group" "base" {
   name = var.resource_group
 }
 
-######################################
-# Setting up Public IP for VPN Gateway
-######################################
+#public ip
 
 resource "azurerm_public_ip" "base" {
   name                = "${data.azurerm_resource_group.base.name}-${var.resource_prefix}-ip"
@@ -17,9 +17,7 @@ resource "azurerm_public_ip" "base" {
   allocation_method   = var.ip_allocation
 }
 
-#################################
-# Setting up VPN Gateway Resource
-#################################
+#virtual network gateway
 
 resource "azurerm_virtual_network_gateway" "base" {
   name                = "${data.azurerm_resource_group.base.name}-${var.resource_prefix}"
@@ -37,10 +35,6 @@ resource "azurerm_virtual_network_gateway" "base" {
     private_ip_address_allocation = var.ip_allocation
     subnet_id                     = var.gateway_subnet
   }
-
-  ###############################
-  # Setting up vpn p2s connection
-  ###############################
 
   vpn_client_configuration {
     address_space        = var.client_address_spaces

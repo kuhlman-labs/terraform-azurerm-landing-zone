@@ -3,7 +3,7 @@ set -e
 
 modules="environments/* modules/* resources/*"
 
-for dir in $(find ${modules} -maxdepth 2 -type d); do
+for dir in $(find ${modules} -type d); do
   cd "$dir";
   if [ -f main.tf ]; 
   then

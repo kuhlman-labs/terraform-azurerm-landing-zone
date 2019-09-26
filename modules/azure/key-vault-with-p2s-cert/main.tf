@@ -1,6 +1,6 @@
-########################################################
-# Setting up Infra Modules for Key Vault with a P2S cert
-########################################################
+###
+#  module composition
+###
 
 module "resource_group" {
   source          = "../../../resources/azure/resource-group"
@@ -18,7 +18,7 @@ module "key_vault" {
 module "key_vault_p2s_certificate" {
   source               = "../../../resources/azure/governance/key-vault-certificate-import"
   key_vault_id         = module.key_vault.key_vault_id
-  certificate_contents = "${path.module}/AzureP2SRootCert.pfx"
+  certificate_contents = "${path.module}/files/AzureP2SRootCert.pfx"
   certificate_password = ""
 }
 

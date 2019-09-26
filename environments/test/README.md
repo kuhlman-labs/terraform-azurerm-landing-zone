@@ -5,11 +5,10 @@ Core Version Constraints:
 * `>= 0.12`
 
 Provider Requirements:
-* **azurerm:** (any version)
+* **azurerm:** `~> 1.32.0`
 
 ## Input Variables
 * `access_key` (required): access key for the storage account that contains the Remote Backend
-* `admin_user_name` (required): The Admin Username for the Cluster. Changing this forces a new resource to be created.
 * `app_id` (required): The client ID for the Service Principal
 * `client_secret` (required): The secret for the Service Principal authentication
 * `dns_service_ip` (required): IP address within the Kubernetes service address range that will be used by cluster service discovery (kube-dns). This is required when network_plugin is set to azure. Changing this forces a new resource to be created.

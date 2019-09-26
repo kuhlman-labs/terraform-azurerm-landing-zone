@@ -1,8 +1,11 @@
 
 # Module `resources/azure/network/vnet-gateway`
 
+Core Version Constraints:
+* `>= 0.12`
+
 Provider Requirements:
-* **azurerm:** (any version)
+* **azurerm:** `~> 1.32.0`
 
 ## Input Variables
 * `certificate_data` (required): Certificate Information generated from Key Vault that the vNet gateway will use for the P2S connections
@@ -12,7 +15,7 @@ Provider Requirements:
 * `gateway_type` (default `"VPN"`): Virtual Network Gateway Type; Can be VPN or ExpressRoute
 * `ip_allocation` (default `"Dynamic"`): Allocation method for Public IP Address; Can be Static or Dynamic
 * `region` (required): Geographic region resource will be deployed into
-* `resource_group` (required): Resource Group that vNet Gateway will deploy into, must be same as the vNet's resource gorup
+* `resource_group` (required): resource Group that vNet Gateway will deploy into, must be same as the vNet's resource gorup
 * `resource_prefix` (default `"vnet-gw"`): a short pre-defined text to identify resource type
 * `sku` (default `"Basic"`): Configuration of the size and capacity of the virtual network gateway; Can be are Basic, Standard, HighPerformance, UltraPerformance, ErGw1AZ, ErGw2AZ, ErGw3AZ, VpnGw1, VpnGw2, VpnGw3, VpnGw1AZ, VpnGw2AZ, and VpnGw3AZ and depend on the type and vpn_type arguments. A PolicyBased gateway only supports the Basic sku. Further, the UltraPerformance sku is only supported by an ExpressRoute gateway.
 * `tags` (required): Optional tags to be added to resource

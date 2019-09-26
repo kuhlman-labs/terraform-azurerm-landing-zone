@@ -1,6 +1,12 @@
 
 # Module `modules/azure/network-hub`
 
+Core Version Constraints:
+* `>= 0.12`
+
+Provider Requirements:
+* **azurerm:** `~> 1.32.0`
+
 ## Input Variables
 * `environment` (required): Development environment for resource; prod, non-prod, shared-services
 * `nsg_rules_dmz` (required): List of NSG rules

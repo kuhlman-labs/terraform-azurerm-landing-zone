@@ -1,8 +1,11 @@
 
 # Module `resources/azure/resource-group`
 
+Core Version Constraints:
+* `>= 0.12`
+
 Provider Requirements:
-* **azurerm:** (any version)
+* **azurerm:** `~> 1.32.0`
 
 ## Input Variables
 * `environment` (required): Development environment for resource; prod, non-prod, shared-services

@@ -1,3 +1,7 @@
+###
+# resource outputs
+###
+
 output "firewall_id" {
   value = azurerm_firewall.base.id
 }

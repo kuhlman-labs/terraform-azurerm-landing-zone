@@ -1,6 +1,6 @@
-###################
-# Prod Composistion
-###################
+###
+# environment composition
+###
 
 module "network_spoke" {
   source = "../../modules/azure/network-spoke"

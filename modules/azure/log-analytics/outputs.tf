@@ -1,3 +1,7 @@
+###
+#  module outputs
+###
+
 output "log_analytics_id" {
   value       = module.log-analytics.log_analytics_id
   description = "log analytics resource id"

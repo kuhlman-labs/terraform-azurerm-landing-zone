@@ -1,6 +1,8 @@
-###############################
-# Setting up resource variables
-###############################
+###
+#  module variables
+###
+
+#log-analytics
 
 variable "resource_prefix" {
   description = "a short pre-defined text to identify resource type"
@@ -41,7 +43,7 @@ variable "retention_period" {
 
 
 #######################################
-#Setting up Optional Tagging Variables
+# Optional Tagging variables
 #######################################
 
 variable "tags" {

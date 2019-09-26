@@ -1,3 +1,9 @@
+###
+# resource variables
+###
+
+#resource-group
+
 variable "resource_prefix" {
   description = "A short pre-defined text to identify the resource type"
   type        = string
