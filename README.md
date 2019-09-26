@@ -151,8 +151,6 @@ terraform destroy -auto-approve -var-file=terraform.tfvars -var "subscription_id
     * Takes in the remote state credential information and sets up the azurerm backend. The Terraform and azurerm versions are defined in this file as well.
 * variables.tf
     * Defines the input variables for the environments or module. All variables should have a type and description defined.
-* README-head.md
-    * Defines the manually created header information (`Description, Resource Created`) for the README file that will be combined with the automatically generated terraform-docs content.
 * README.md
     * Contains the contents of README-head.md combined with the output from the terraform-docs command `(cat README-head.md; terraform-docs --no-sort md ./) > README.md` which generates a table of the inputs and outputs specified in the current directory.
 
