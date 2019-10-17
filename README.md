@@ -163,7 +163,7 @@ The naming conventions are established in the Resources, including the Resource 
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
 
 ### How do I request new modules?
 
