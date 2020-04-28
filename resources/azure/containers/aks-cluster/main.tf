@@ -24,11 +24,10 @@ resource "azurerm_kubernetes_cluster" "base" {
     client_secret = var.client_secret
   }
 
-  dynamic "agent_pool_profile" {
+  dynamic "default_node_pool" {
     for_each = var.agent_pool_profile
     content {
       name                = agent_pool_profile.value.name
-      count               = agent_pool_profile.value.count
       vm_size             = agent_pool_profile.value.vm_size
       availability_zones  = agent_pool_profile.value.availability_zones
       enable_auto_scaling = agent_pool_profile.value.enable_auto_scaling
@@ -36,7 +35,6 @@ resource "azurerm_kubernetes_cluster" "base" {
       max_count           = agent_pool_profile.value.max_count
       max_pods            = agent_pool_profile.value.max_pods
       os_disk_size_gb     = agent_pool_profile.value.os_disk_size_gb
-      os_type             = agent_pool_profile.value.os_type
       type                = agent_pool_profile.value.type
       vnet_subnet_id      = agent_pool_profile.value.vnet_subnet_id
       node_taints         = agent_pool_profile.value.node_taints

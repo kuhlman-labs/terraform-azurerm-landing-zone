@@ -14,7 +14,7 @@ module "network_hub" {
   #tags
   tags = var.tags
 }
-/*
+
 module "network_spoke" {
   source = "../../modules/azure/network-spoke"
   #common
@@ -69,5 +69,4 @@ module "log_analytics" {
   tags        = var.tags
 
 }
-*/
 

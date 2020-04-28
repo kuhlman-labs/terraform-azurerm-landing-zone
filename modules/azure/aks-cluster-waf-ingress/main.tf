@@ -28,14 +28,14 @@ module "aks_role_assignment_1" {
   source               = "../../../resources/azure/governance/role-assignment"
   scope                = module.aks_subnet.subnet_id
   role_definition_name = "Network Contributor"
-  principal_id         = data.azurerm_client_config.current.service_principal_object_id
+  principal_id         = data.azurerm_client_config.current.object_id
 }
 
 module "aks_role_assignment_2" {
   source               = "../../../resources/azure/governance/role-assignment"
   scope                = module.aks_user_assigned_identity.uai_id
   role_definition_name = "Managed Identity Operator"
-  principal_id         = data.azurerm_client_config.current.service_principal_object_id
+  principal_id         = data.azurerm_client_config.current.object_id
 }
 
 module "aks_role_assignment_3" {
@@ -148,10 +148,10 @@ resource "null_resource" "aks_config" {
 
 provider "helm" {
   kubernetes {
-    host                   = "${module.aks_cluster.kube_config_host}"
-    client_certificate     = "${base64decode(module.aks_cluster.kube_config_client_certificate)}"
-    client_key             = "${base64decode(module.aks_cluster.kube_config_client_key)}"
-    cluster_ca_certificate = "${base64decode(module.aks_cluster.kube_config_cluster_ca_certificate)}"
+    host                   = module.aks_cluster.kube_config_host
+    client_certificate     = base64decode(module.aks_cluster.kube_config_client_certificate)
+    client_key             = base64decode(module.aks_cluster.kube_config_client_key)
+    cluster_ca_certificate = base64decode(module.aks_cluster.kube_config_cluster_ca_certificate)
   }
 }
 
