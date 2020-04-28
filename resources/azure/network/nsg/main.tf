@@ -31,5 +31,5 @@ resource "azurerm_network_security_rule" "base" {
   source_address_prefix       = var.nsg_rules[count.index]["source_address_prefix"]
   destination_address_prefix  = var.nsg_rules[count.index]["destination_address_prefix"]
   resource_group_name         = data.azurerm_resource_group.base.name
-  network_security_group_name = "${element("${azurerm_network_security_group.base.*.name}", count.index)}"
+  network_security_group_name = element("${azurerm_network_security_group.base.*.name}", count.index)
 }

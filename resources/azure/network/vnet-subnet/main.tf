@@ -16,8 +16,6 @@ resource "azurerm_subnet" "base" {
   resource_group_name       = data.azurerm_resource_group.base.name
   virtual_network_name      = var.vnet_name
   service_endpoints         = var.subnet_service_endpoints
-  route_table_id            = var.route_table_id
-  network_security_group_id = var.network_security_group_id
 
   dynamic "delegation" {
     for_each = var.delegations

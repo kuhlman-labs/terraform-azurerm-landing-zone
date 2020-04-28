@@ -28,7 +28,6 @@ module "subnet_dmz" {
   vnet_name                 = module.vnet_hub.vnet_name
   subnet_name               = "dmz"
   subnet_address_prefix     = var.subnet_dmz_address_prefix
-  network_security_group_id = element(module.nsg_dmz.nsg_id, 0)
 }
 
 #nsg

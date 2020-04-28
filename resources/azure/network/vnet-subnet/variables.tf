@@ -26,18 +26,6 @@ variable "subnet_address_prefix" {
   type        = string
 }
 
-variable "route_table_id" {
-  description = "The ID of the Route Table to associate with the subnet."
-  type        = string
-  default     = null
-}
-
-variable "network_security_group_id" {
-  description = "The ID of the Network Security Group to associate with the subnet."
-  type        = string
-  default     = null
-}
-
 variable "subnet_service_endpoints" {
   description = "The list of Service endpoints to associate with the subnet. Possible values include: Microsoft.AzureActiveDirectory, Microsoft.AzureCosmosDB, Microsoft.EventHub, Microsoft.KeyVault, Microsoft.ServiceBus, Microsoft.Sql and Microsoft.Storage."
   type        = list

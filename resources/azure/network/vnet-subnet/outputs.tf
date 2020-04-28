@@ -10,10 +10,6 @@ output "subnet_name" {
   value = azurerm_subnet.base.name
 }
 
-output "subnet_ip_configurations" {
-  value = azurerm_subnet.base.ip_configurations
-}
-
 output "subnet_resource_group_name" {
   value = azurerm_subnet.base.resource_group_name
 }
