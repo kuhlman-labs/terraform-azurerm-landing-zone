@@ -16,14 +16,14 @@ data "azurerm_resource_group" "base" {
 #random permutation of alphanumeric characters
 
 resource "random_string" "base" {
-  length  = 8
+  length  = 5
   special = false
 }
 
 #key vault
 
 resource "azurerm_key_vault" "base" {
-  name                = "${data.azurerm_resource_group.base.name}-${var.resource_prefix}-${random_string.base.result}"
+  name                = "${var.resource_prefix}-${random_string.base.result}"
   location            = data.azurerm_resource_group.base.location
   resource_group_name = data.azurerm_resource_group.base.name
   tenant_id           = data.azurerm_client_config.current.tenant_id
