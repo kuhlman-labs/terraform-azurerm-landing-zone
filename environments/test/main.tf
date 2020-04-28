@@ -38,7 +38,7 @@ module "network_spoke" {
   #tags
   tags = var.tags
 }
-
+/*
 module "aks_cluster_waf_ingress" {
   source                          = "../../modules/azure/aks-cluster-waf-ingress"
   environment                     = var.environment
@@ -54,7 +54,7 @@ module "aks_cluster_waf_ingress" {
 
   tags = var.tags
 }
-
+*/
 module "key_vault_with_p2s_cert" {
   source      = "../../modules/azure/key-vault-with-p2s-cert"
   environment = var.environment
