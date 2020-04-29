@@ -15,6 +15,17 @@ variable "name_prefix" {
   default     = "vnet"
 }
 
+variable "environment" {
+  description = "Development environment for resource; prod, non-prod, shared-services"
+  type        = string
+}
+
+variable "virtual_network_count" {
+  description = "Number of virtual networks to be created"
+  type        = number
+  default     = 1
+}
+
 #network
 
 variable "vnet_address_ranges" {

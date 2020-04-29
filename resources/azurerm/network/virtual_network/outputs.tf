@@ -2,27 +2,27 @@
 # resource outputs
 ###
 
-output "vnet_rg_name" {
+output "resource_group_name" {
   value       = data.azurerm_resource_group.base.name
-  description = "Generated vnet resource group name"
+  description = "The name of the resource group in which to create the virtual network."
 }
 
-output "vnet_rg_id" {
+output "resource_group_id" {
   value       = data.azurerm_resource_group.base.id
-  description = "Vnet owning resource group id"
+  description = "Resource group id for virtual network"
 }
 
-output "vnet_name" {
-  value       = azurerm_virtual_network.base.name
-  description = "Generated vnet name"
+output "virtual_network_name" {
+  value       = azurerm_virtual_network.base[*].name
+  description = "The name of the virtual network."
 }
 
-output "vnet_id" {
-  value       = azurerm_virtual_network.base.id
-  description = "Vnet resource id"
+output "virtual_netowrk_id" {
+  value       = azurerm_virtual_network.base[*].id
+  description = "The virtual NetworkConfiguration ID."
 }
 
-output "vnet_address_space" {
-  value       = azurerm_virtual_network.base.address_space
+output "virtual_network_address_space" {
+  value       = azurerm_virtual_network.base[*].address_space
   description = "The address space that is used the virtual network."
 }
