@@ -19,6 +19,10 @@ output "vnet_name" {
 
 output "vnet_id" {
   value       = azurerm_virtual_network.base.id
-  description = "vnet resource id"
+  description = "Vnet resource id"
 }
 
+output "vnet_address_space" {
+  value       = azurerm_virtual_network.base.address_space
+  description = "The address space that is used the virtual network."
+}
