@@ -9,7 +9,7 @@ variable "resource_group" {
   type        = string
 }
 
-variable "resource_prefix" {
+variable "name_prefix" {
   description = "Specifies the name of the Firewall. Changing this forces a new resource to be created."
   type        = string
   default     = "firewall"

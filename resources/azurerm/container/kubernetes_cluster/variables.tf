@@ -9,7 +9,7 @@ variable "resource_group" {
   type        = string
 }
 
-variable "resource_prefix" {
+variable "name_prefix" {
   description = "Short prefix to identify resource"
   type        = string
   default     = "aks-cluster"

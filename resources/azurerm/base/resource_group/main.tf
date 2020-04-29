@@ -5,6 +5,6 @@
 #resource group
 
 resource "azurerm_resource_group" "base" {
-  name     = "${var.environment}-${var.region}-${var.resource_prefix}"
+  name     = "rg-${var.name_prefix}-${var.environment}-${var.region}"
   location = var.region
 }

@@ -11,7 +11,7 @@ data "azurerm_resource_group" "base" {
 #public ip
 
 resource "azurerm_public_ip" "base" {
-  name                = "${data.azurerm_resource_group.base.name}-${var.resource_prefix}-ip"
+  name                = "${data.azurerm_resource_group.base.name}-${var.name_prefix}-ip"
   location            = data.azurerm_resource_group.base.location
   resource_group_name = data.azurerm_resource_group.base.name
   allocation_method   = var.ip_allocation
@@ -20,7 +20,7 @@ resource "azurerm_public_ip" "base" {
 #virtual network gateway
 
 resource "azurerm_virtual_network_gateway" "base" {
-  name                = "${data.azurerm_resource_group.base.name}-${var.resource_prefix}"
+  name                = "${data.azurerm_resource_group.base.name}-${var.name_prefix}"
   location            = data.azurerm_resource_group.base.location
   resource_group_name = data.azurerm_resource_group.base.name
 

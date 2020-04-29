@@ -10,7 +10,7 @@ Provider Requirements:
 ## Input Variables
 * `environment` (required): Development environment for resource; prod, non-prod, shared-services
 * `region` (required): Geographic region resource will be deployed into
-* `resource_prefix` (default `"logaw"`): a short pre-defined text to identify resource type
+* `name_prefix` (default `"logaw"`): a short pre-defined text to identify resource type
 * `retention_period` (default `30`): Time in days to retain logs in the log analytics workspace
 * `sku` (default `"PerGB2018"`): SKU for Log Analytics Workspace
 * `tags` (required): Optional tags to be added to resource

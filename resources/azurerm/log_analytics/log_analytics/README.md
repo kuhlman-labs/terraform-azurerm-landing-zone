@@ -10,7 +10,7 @@ Provider Requirements:
 
 ## Input Variables
 * `resource_group` (required): The name of the target resource group
-* `resource_prefix` (default `"log-aw"`): a short pre-defined text to identify resource type
+* `name_prefix` (default `"log-aw"`): a short pre-defined text to identify resource type
 * `retention_period` (default `30`): Time in days to retain logs in the log analytics workspace
 * `sku` (default `"PerGB2018"`): sku for Log Analytics Workspace
 * `tags` (required): Optional tags to be added to resource

@@ -9,7 +9,7 @@ data "azurerm_client_config" "current" {
 
 module "resource_group" {
   source          = "../../../resources/azure/resource-group"
-  resource_prefix = "k8s"
+  name_prefix = "k8s"
   region          = var.region
   environment     = var.environment
 }

@@ -5,12 +5,12 @@
 #local variables
 
 locals {
-  backend_address_pool_name      = "${data.azurerm_resource_group.base.name}-${var.resource_prefix}-beap"
-  frontend_port_name             = "${data.azurerm_resource_group.base.name}-${var.resource_prefix}-feport"
-  frontend_ip_configuration_name = "${data.azurerm_resource_group.base.name}-${var.resource_prefix}-feip"
-  http_setting_name              = "${data.azurerm_resource_group.base.name}-${var.resource_prefix}-be-htst"
-  listener_name                  = "${data.azurerm_resource_group.base.name}-${var.resource_prefix}-httplstn"
-  request_routing_rule_name      = "${data.azurerm_resource_group.base.name}-${var.resource_prefix}-rqrt"
+  backend_address_pool_name      = "${data.azurerm_resource_group.base.name}-${var.name_prefix}-beap"
+  frontend_port_name             = "${data.azurerm_resource_group.base.name}-${var.name_prefix}-feport"
+  frontend_ip_configuration_name = "${data.azurerm_resource_group.base.name}-${var.name_prefix}-feip"
+  http_setting_name              = "${data.azurerm_resource_group.base.name}-${var.name_prefix}-be-htst"
+  listener_name                  = "${data.azurerm_resource_group.base.name}-${var.name_prefix}-httplstn"
+  request_routing_rule_name      = "${data.azurerm_resource_group.base.name}-${var.name_prefix}-rqrt"
 }
 
 #resource group
@@ -22,7 +22,7 @@ data "azurerm_resource_group" "base" {
 #application gateway
 
 resource "azurerm_application_gateway" "base" {
-  name                = "${data.azurerm_resource_group.base.name}-${var.resource_prefix}"
+  name                = "${data.azurerm_resource_group.base.name}-${var.name_prefix}"
   resource_group_name = data.azurerm_resource_group.base.name
   location            = data.azurerm_resource_group.base.location
 

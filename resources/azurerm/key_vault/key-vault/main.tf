@@ -23,7 +23,7 @@ resource "random_string" "base" {
 #key vault
 
 resource "azurerm_key_vault" "base" {
-  name                = "${var.resource_prefix}-${random_string.base.result}"
+  name                = "${var.name_prefix}-${random_string.base.result}"
   location            = data.azurerm_resource_group.base.location
   resource_group_name = data.azurerm_resource_group.base.name
   tenant_id           = data.azurerm_client_config.current.tenant_id

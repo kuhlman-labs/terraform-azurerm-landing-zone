@@ -9,7 +9,7 @@ Provider Requirements:
 
 ## Input Variables
 * `resource_group` (required): The name of the target resource group
-* `resource_prefix` (default `"recovery-services-vault"`): Short prefix to identify resource
+* `name_prefix` (default `"recovery-services-vault"`): Short prefix to identify resource
 * `sku` (default `"Standard"`): SKU for Recovery Services Vault
 * `tags` (required): tags to be added to resource
 

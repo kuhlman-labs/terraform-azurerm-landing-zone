@@ -4,7 +4,7 @@
 
 module "resource_group" {
   source          = "../../../resources/azure/resource-group"
-  resource_prefix = "key-vault"
+  name_prefix = "key-vault"
   region          = var.region
   environment     = var.environment
 }

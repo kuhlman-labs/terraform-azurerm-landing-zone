@@ -18,7 +18,7 @@ resource "random_string" "base" {
 #log analytics workspace
 
 resource "azurerm_log_analytics_workspace" "base" {
-  name                = "${data.azurerm_resource_group.base.name}-${var.resource_prefix}-${random_string.base.result}"
+  name                = "${data.azurerm_resource_group.base.name}-${var.name_prefix}-${random_string.base.result}"
   location            = data.azurerm_resource_group.base.location
   resource_group_name = data.azurerm_resource_group.base.name
   sku                 = var.sku

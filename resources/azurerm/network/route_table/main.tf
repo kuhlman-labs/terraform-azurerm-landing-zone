@@ -11,7 +11,7 @@ data "azurerm_resource_group" "base" {
 #route table
 
 resource "azurerm_route_table" "base" {
-  name                          = "${data.azurerm_resource_group.base.name}-${var.resource_prefix}"
+  name                          = "${data.azurerm_resource_group.base.name}-${var.name_prefix}"
   location                      = data.azurerm_resource_group.base.location
   resource_group_name           = data.azurerm_resource_group.base.name
   disable_bgp_route_propagation = var.disable_bgp_route_propagation

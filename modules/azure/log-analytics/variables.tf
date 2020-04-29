@@ -4,7 +4,7 @@
 
 #log-analytics
 
-variable "resource_prefix" {
+variable "name_prefix" {
   description = "a short pre-defined text to identify resource type"
   type        = string
   default     = "logaw"

@@ -12,7 +12,7 @@ Provider Requirements:
 * `collection_action` (required): Specifies the action the rule will apply to matching traffic. Possible values are Allow and Deny.
 * `collection_priority` (required): Specifies the priority of the rule collection. Possible values are between 100 - 65000.
 * `resource_group` (required): The name of the target resource group
-* `resource_prefix` (default `"firewall-network-rule-collection"`): Specifies the name of the Firewall. Changing this forces a new resource to be created.
+* `name_prefix` (default `"firewall-network-rule-collection"`): Specifies the name of the Firewall. Changing this forces a new resource to be created.
 * `rule` (required)
 * `tags` (required): Optional tags to be added to resource
 

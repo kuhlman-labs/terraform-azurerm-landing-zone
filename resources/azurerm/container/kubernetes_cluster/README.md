@@ -19,7 +19,7 @@ Provider Requirements:
 * `network_profile` (required): https://www.terraform.io/docs/providers/azurerm/r/kubernetes_cluster.html#network_profile
 * `node_resource_group` (required): (Optional) The name of the resource Group where the the Kubernetes Nodes should exist. Changing this forces a new resource to be created.
 * `resource_group` (required): The name of the target resource group
-* `resource_prefix` (default `"aks-cluster"`): Short prefix to identify resource
+* `name_prefix` (default `"aks-cluster"`): Short prefix to identify resource
 * `role_based_access_control` (required): https://www.terraform.io/docs/providers/azurerm/r/kubernetes_cluster.html#role_based_access_control
 * `tags` (required): Optional tags to be added to resource
 * `windows_profile` (required): https://www.terraform.io/docs/providers/azurerm/r/kubernetes_cluster.html#windows_profile

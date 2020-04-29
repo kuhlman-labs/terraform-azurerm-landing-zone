@@ -6,7 +6,7 @@
 
 module "resource_group" {
   source          = "../../../resources/azure/resource-group"
-  resource_prefix = "network-hub"
+  name_prefix = "network-hub"
   region          = var.region
   environment     = var.environment
 }

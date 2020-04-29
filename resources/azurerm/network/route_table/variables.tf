@@ -11,7 +11,7 @@ variable "resource_group" {
 
 #route-table
 
-variable "resource_prefix" {
+variable "name_prefix" {
   description = "A short pre-defined text to identify the resource type"
   type        = string
   default     = "route-table"

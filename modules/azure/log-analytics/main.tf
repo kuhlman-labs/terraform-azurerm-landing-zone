@@ -4,7 +4,7 @@
 
 module "resource_group" {
   source          = "../../../resources/azure/resource-group"
-  resource_prefix = "log-analytics"
+  name_prefix = "log-analytics"
   region          = var.region
   environment     = var.environment
 }

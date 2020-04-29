@@ -12,7 +12,7 @@ data "azurerm_resource_group" "base" {
 
 resource "azurerm_network_security_group" "base" {
   count               = length(var.subnet_names)
-  name                = "${data.azurerm_resource_group.base.name}-${var.resource_prefix}-${element(var.subnet_names, count.index)}"
+  name                = "${data.azurerm_resource_group.base.name}-${var.name_prefix}-${element(var.subnet_names, count.index)}"
   location            = data.azurerm_resource_group.base.location
   resource_group_name = data.azurerm_resource_group.base.name
 }

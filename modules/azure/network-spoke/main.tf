@@ -19,7 +19,7 @@ data "terraform_remote_state" "shared_services" {
 
 module "resource_group" {
   source          = "../../../resources/azure/resource-group"
-  resource_prefix = "network-spoke"
+  name_prefix = "network-spoke"
   region          = var.region
   environment     = var.environment
 }

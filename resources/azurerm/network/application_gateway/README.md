@@ -11,7 +11,7 @@ Provider Requirements:
 * `private_ip_address` (required): (Optional) The Private IP Address to use for the Application Gateway.
 * `public_ip_address_id` (required): (Optional) The ID of a Public IP Address which the Application Gateway should use.
 * `resource_group` (required): The name of the target resource group
-* `resource_prefix` (default `"app-gw"`): Short prefix to identify resource
+* `name_prefix` (default `"app-gw"`): Short prefix to identify resource
 * `sku_capacity` (default `1`): (Required) The Capacity of the SKU to use for this Application Gateway - which must be between 1 and 10, optional if autoscale_configuration is set
 * `sku_name` (required): The Name of the SKU to use for this Application Gateway. Possible values are Standard_Small, Standard_Medium, Standard_Large, Standard_v2, WAF_Medium, WAF_Large, and WAF_v2.
 * `sku_tier` (required): The Tier of the SKU to use for this Application Gateway. Possible values are Standard, Standard_v2, WAF and WAF_v2.
