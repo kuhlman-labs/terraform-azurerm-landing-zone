@@ -11,11 +11,13 @@ data "azurerm_resource_group" "base" {
 #subnet
 
 resource "azurerm_subnet" "base" {
-  name                      = var.subnet_name
-  address_prefix            = var.subnet_address_prefix
-  resource_group_name       = data.azurerm_resource_group.base.name
-  virtual_network_name      = var.vnet_name
-  service_endpoints         = var.subnet_service_endpoints
+  name                                           = var.subnet_name
+  address_prefix                                 = var.subnet_address_prefix
+  resource_group_name                            = data.azurerm_resource_group.base.name
+  virtual_network_name                           = var.vnet_name
+  service_endpoints                              = var.subnet_service_endpoints
+  enforce_private_link_endpoint_network_policies = var.enforce_private_link_endpoint_network_policies
+  enforce_private_link_service_network_policies  = var.enforce_private_link_service_network_policies
 
   dynamic "delegation" {
     for_each = var.delegations
