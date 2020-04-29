@@ -22,6 +22,12 @@ variable "vnet_address_ranges" {
   type        = list
 }
 
+variable "dns_servers" {
+  description = "(Optional) List of IP addresses of DNS servers"
+  type        = list
+  default     = null
+}
+
 #tags
 
 variable "tags" {
