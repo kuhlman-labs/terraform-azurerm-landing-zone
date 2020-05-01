@@ -5,14 +5,19 @@
 #common
 
 variable "resource_group" {
-  description = "resource Group of vNet"
+  description = "(Required) The name of the resource group in which to create the subnet. Changing this forces a new resource to be created."
+  type        = string
+}
+
+variable "environment" {
+  description = "Development environment for resource; prod, non-prod, shared-services"
   type        = string
 }
 
 #subnet
 
-variable "vnet_name" {
-  description = "The name of the virtual network to which to attach the subnet. Changing this forces a new resource to be created."
+variable "virtual_network_name" {
+  description = "(Required) The name of the virtual network to which to attach the subnet. Changing this forces a new resource to be created."
   type        = string
 }
 
@@ -22,12 +27,12 @@ variable "name_prefix" {
   default     = "snet"
 }
 
-variable "subnet_address_prefix" {
-  description = "The address prefix to use for the subnet."
-  type        = string
+variable "address_prefixes" {
+  description = "(Optional) The address prefixes to use for the subnet."
+  type        = list
 }
 
-variable "subnet_service_endpoints" {
+variable "service_endpoints" {
   description = "The list of Service endpoints to associate with the subnet. Possible values include: Microsoft.AzureActiveDirectory, Microsoft.AzureCosmosDB, Microsoft.EventHub, Microsoft.KeyVault, Microsoft.ServiceBus, Microsoft.Sql and Microsoft.Storage."
   type        = list
   default     = null
@@ -45,7 +50,7 @@ variable "enforce_private_link_service_network_policies" {
   default     = null
 }
 
-variable "delegations" {
+variable "delegation" {
   description = "A List of delegation blocks to associate with the subnet."
   type        = list
   default     = []
