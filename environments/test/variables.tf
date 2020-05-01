@@ -58,39 +58,14 @@ variable "storage_account_name" {
 
 #network
 
-variable "hub_vnet_address_ranges" {
+variable "address_space" {
   description = "This is a list of the ip address ranges for the vnet"
   type        = list
 }
 
-variable "spoke_vnet_address_ranges" {
-  description = "This is a list of the ip address ranges for the vnet"
-  type        = list
-}
-
-variable "subnet_frontend_address_prefix" {
+variable "address_prefixes" {
   description = "The address prefix to use for the subnet."
-  type        = string
-}
-
-variable "subnet_backend_address_prefix" {
-  description = "The address prefix to use for the subnet."
-  type        = string
-}
-
-variable "subnet_dmz_address_prefix" {
-  description = "The address prefix to use for the subnet."
-  type        = string
-}
-
-variable "subnet_aks_nodes_address_prefix" {
-  description = "The address prefix to use for the subnet."
-  type        = string
-}
-
-variable "subnet_app_gw_address_prefix" {
-  description = "The address prefix to use for the subnet."
-  type        = string
+  type        = list(string)
 }
 
 #nsg

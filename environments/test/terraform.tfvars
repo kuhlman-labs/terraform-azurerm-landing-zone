@@ -6,16 +6,13 @@
 environment = "test"
 region      = "eastus2"
 
-#network
+#virtual_network
+address_space   = ["10.100.0.0/16"]
 
-hub_vnet_address_ranges   = ["10.100.0.0/16"]
-subnet_dmz_address_prefix = "10.100.1.0/24"
+#subnet
 
-spoke_vnet_address_ranges       = ["10.200.0.0/16"]
-subnet_frontend_address_prefix  = "10.200.1.0/24"
-subnet_backend_address_prefix   = "10.200.2.0/24"
-subnet_aks_nodes_address_prefix = "10.200.3.0/24"
-subnet_app_gw_address_prefix    = "10.200.4.0/24"
+address_prefixes = ["10.100.1.0/24", "10.100.2.0/24"]
+
 
 #aks
 

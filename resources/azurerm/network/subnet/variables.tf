@@ -21,15 +21,15 @@ variable "virtual_network_name" {
   type        = string
 }
 
-variable "name_prefix" {
+variable "name_prefixes" {
   description = "The name of the subnet. Changing this forces a new resource to be created."
-  type        = string
-  default     = "snet"
+  type        = list(string)
+  default     = ["snet"]
 }
 
 variable "address_prefixes" {
   description = "(Optional) The address prefixes to use for the subnet."
-  type        = list
+  type        = list(string)
 }
 
 variable "service_endpoints" {

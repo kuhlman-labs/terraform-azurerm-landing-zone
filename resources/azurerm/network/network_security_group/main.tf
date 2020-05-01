@@ -11,9 +11,9 @@ data "azurerm_resource_group" "base" {
 #network security group
 
 resource "azurerm_network_security_group" "base" {
-  count               = length(var.name_prefixs)
+  count               = length(var.name_prefixes)
 
-  name                = "${data.azurerm_resource_group.base.name}-${var.name_prefix}-${element(var.name_prefixs, count.index)}"
+  name                = "${data.azurerm_resource_group.base.name}-${var.name_prefix}-${element(var.name_prefixes, count.index)}"
   location            = data.azurerm_resource_group.base.location
   resource_group_name = data.azurerm_resource_group.base.name
 }

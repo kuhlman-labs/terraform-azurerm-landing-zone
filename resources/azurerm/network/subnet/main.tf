@@ -11,9 +11,11 @@ data "azurerm_resource_group" "base" {
 #subnet
 
 resource "azurerm_subnet" "base" {
-  name                                           = "${var.name_prefix}-${var.environment}-${data.azurerm_resource_group.base.location}"
+  name                                           = "${element(var.name_prefixes, count.index)}-${var.environment}-${data.azurerm_resource_group.base.location}"
+  count = length(var.name_prefixes)
+
   resource_group_name                            = data.azurerm_resource_group.base.name
-  address_prefixes                               = var.address_prefixes
+  address_prefixes                               = [element(var.address_prefixes, count.index)]
   virtual_network_name                           = var.virtual_network_name
   service_endpoints                              = var.service_endpoints
   enforce_private_link_endpoint_network_policies = var.enforce_private_link_endpoint_network_policies

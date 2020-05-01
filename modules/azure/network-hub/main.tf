@@ -5,8 +5,8 @@
 #  resource group
 
 module "resource_group" {
-  source          = "../../../resources/azure/resource-group"
-  name_prefix = "network-hub"
+  source          = "../../../resources/azurerm/base/resource_group"
+  service_name = "vnet-hub"
   region          = var.region
   environment     = var.environment
 }
@@ -14,26 +14,28 @@ module "resource_group" {
 #vnet
 
 module "vnet_hub" {
-  source              = "../../../resources/azure/network/vnet"
-  resource_group      = module.resource_group.resource_group_name
-  vnet_address_ranges = var.vnet_address_ranges
+  source              = "../../../resources/azurerm/network/virtual_network"
+  resource_group      = module.resource_group.name
+  address_space = var.address_space
   tags                = var.tags
+  environment     = var.environment
 }
 
 #subnets
 
-module "subnet_dmz" {
-  source                    = "../../../resources/azure/network/vnet-subnet"
-  resource_group            = module.resource_group.resource_group_name
-  vnet_name                 = module.vnet_hub.vnet_name
-  name_prefix               = "dmz"
-  subnet_address_prefix     = var.subnet_dmz_address_prefix
+module "snet_dmz" {
+  source                    = "../../../resources/azurerm/network/subnet"
+  resource_group            = module.resource_group.name
+  virtual_network_name                 = module.vnet_hub.virtual_network_name
+  name_prefixes               = ["snet-dmz", "snet-bastion"]
+  address_prefixes     = var.address_prefixes
+  environment     = var.environment
 }
-
+/*
 #nsg
 
 module "nsg_dmz" {
-  source         = "../../../resources/azure/network/nsg"
+  source         = "../../../resources/azurerm/network/network_security_group"
   resource_group = module.resource_group.resource_group_name
   environment    = var.environment
   name_prefixs   = ["dmz"]
@@ -41,7 +43,8 @@ module "nsg_dmz" {
 }
 
 module "nsg_association_dmz" {
-  source                    = "../../../resources/azure/network/nsg-association"
+  source                    = "../../../resources/azurerm/network/subnet_network_security_group_association"
   subnet_id                 = module.subnet_dmz.subnet_id
   network_security_group_id = element(module.nsg_dmz.nsg_id, 0)
 }
+*/

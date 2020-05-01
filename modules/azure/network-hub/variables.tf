@@ -16,16 +16,16 @@ variable "environment" {
 
 #vnet
 
-variable "vnet_address_ranges" {
+variable "address_space" {
   description = "This is a list of the ip address ranges for the vnet"
   type        = list
 }
 
 #subnets
 
-variable "subnet_dmz_address_prefix" {
-  description = "The address prefix to use for the subnet."
-  type        = string
+variable "address_prefixes" {
+  description = "The address prefixes to use for the subnets."
+  type        = list(string)
 }
 
 #nsg
