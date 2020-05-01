@@ -1,21 +1,23 @@
+## Providers
 
-# Module `resources/azure/resource-group`
+| Name | Version |
+|------|---------|
+| azurerm | n/a |
 
-Core Version Constraints:
-* `>= 0.12`
+## Inputs
 
-Provider Requirements:
-* **azurerm:** `~> 1.32.0`
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:-----:|
+| environment | Development environment for resource; prod, non-prod, shared-services | `string` | n/a | yes |
+| name\_prefix | A short pre-defined text to identify the resource type | `string` | `"rg"` | no |
+| region | Geographic region resource will be deployed into | `string` | n/a | yes |
+| service\_name | Name of the application, service, or workload the resource group is housing. | `string` | n/a | yes |
+| tags | (Optional) A mapping of tags which should be assigned to the Resource Group. | `map` | `{}` | no |
 
-## Input Variables
-* `environment` (required): Development environment for resource; prod, non-prod, shared-services
-* `region` (required): Geographic region resource will be deployed into
-* `name_prefix` (required): A short pre-defined text to identify the resource type
+## Outputs
 
-## Output Values
-* `resource_group_id`: resource group id
-* `resource_group_name`: resource group name
-
-## Managed Resources
-* `azurerm_resource_group.base` from `azurerm`
+| Name | Description |
+|------|-------------|
+| id | The ID of the Resource Group. |
+| name | The Name of this Resource Group. |
 

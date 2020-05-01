@@ -2,12 +2,12 @@
 # resource outputs
 ###
 
-output "resource_group_name" {
+output "name" {
   value       = azurerm_resource_group.base.name
-  description = "resource group name"
+  description = "The Name of this Resource Group."
 }
 
-output "resource_group_id" {
+output "id" {
   value       = azurerm_resource_group.base.id
-  description = "resource group id"
+  description = "The ID of the Resource Group."
 }
