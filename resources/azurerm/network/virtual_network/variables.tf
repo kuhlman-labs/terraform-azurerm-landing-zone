@@ -22,7 +22,7 @@ variable "environment" {
 
 #network
 
-variable "vnet_address_ranges" {
+variable "address_space" {
   description = "This is a list of the ip address ranges for the vnet"
   type        = list
 }

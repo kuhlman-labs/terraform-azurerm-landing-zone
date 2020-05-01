@@ -1,33 +1,28 @@
+## Providers
 
-# Module `resources/azure/network/vnet-subnet`
+| Name | Version |
+|------|---------|
+| azurerm | n/a |
 
-Core Version Constraints:
-* `>= 0.12`
+## Inputs
 
-Provider Requirements:
-* **azurerm:** `~> 1.32.0`
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:-----:|
+| delegations | A List of delegation blocks to associate with the subnet. | `list` | `[]` | no |
+| enforce\_private\_link\_endpoint\_network\_policies | (Optional) Enable or Disable network policies for the private link endpoint on the subnet. Default value is false. Conflicts with enforce\_private\_link\_service\_network\_policies. | `bool` | n/a | yes |
+| enforce\_private\_link\_service\_network\_policies | (Optional) Enable or Disable network policies for the private link service on the subnet. Default valule is false. Conflicts with enforce\_private\_link\_endpoint\_network\_policies. | `bool` | n/a | yes |
+| name\_prefix | The name of the subnet. Changing this forces a new resource to be created. | `string` | `"snet"` | no |
+| resource\_group | resource Group of vNet | `string` | n/a | yes |
+| subnet\_address\_prefix | The address prefix to use for the subnet. | `string` | n/a | yes |
+| subnet\_service\_endpoints | The list of Service endpoints to associate with the subnet. Possible values include: Microsoft.AzureActiveDirectory, Microsoft.AzureCosmosDB, Microsoft.EventHub, Microsoft.KeyVault, Microsoft.ServiceBus, Microsoft.Sql and Microsoft.Storage. | `list` | n/a | yes |
+| vnet\_name | The name of the virtual network to which to attach the subnet. Changing this forces a new resource to be created. | `string` | n/a | yes |
 
-## Input Variables
-* `delegations` (required): A List of delegation blocks to associate with the subnet.
-* `network_security_group_id` (required): The ID of the Network Security Group to associate with the subnet.
-* `resource_group` (required): resource Group of vNet
-* `route_table_id` (required): The ID of the Route Table to associate with the subnet.
-* `subnet_address_prefix` (required): The address prefix to use for the subnet.
-* `name_prefix` (required): The name of the subnet. Changing this forces a new resource to be created.
-* `subnet_service_endpoints` (required): The list of Service endpoints to associate with the subnet. Possible values include: Microsoft.AzureActiveDirectory, Microsoft.AzureCosmosDB, Microsoft.EventHub, Microsoft.KeyVault, Microsoft.ServiceBus, Microsoft.Sql and Microsoft.Storage.
-* `vnet_name` (required): The name of the virtual network to which to attach the subnet. Changing this forces a new resource to be created.
+## Outputs
 
-## Output Values
-* `subnet_address_prefix`
-* `subnet_id`
-* `subnet_ip_configurations`
-* `name_prefix`
-* `subnet_resource_group_name`
-* `subnet_virtual_network_name`
-
-## Managed Resources
-* `azurerm_subnet.base` from `azurerm`
-
-## Data Resources
-* `data.azurerm_resource_group.base` from `azurerm`
-
+| Name | Description |
+|------|-------------|
+| name\_prefix | n/a |
+| subnet\_address\_prefix | n/a |
+| subnet\_id | n/a |
+| subnet\_resource\_group\_name | n/a |
+| subnet\_virtual\_network\_name | n/a |

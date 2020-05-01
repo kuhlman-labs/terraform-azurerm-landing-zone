@@ -17,7 +17,7 @@ output "virtual_network_name" {
   description = "The name of the virtual network."
 }
 
-output "virtual_netowrk_id" {
+output "virtual_network_id" {
   value       = azurerm_virtual_network.base.id
   description = "The virtual NetworkConfiguration ID."
 }
