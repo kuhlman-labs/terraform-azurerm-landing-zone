@@ -12,7 +12,7 @@ Provider Requirements:
 * `nsg_rules` (default `[{"access":"Allow","destination_address_prefix":"*","destination_port_range":"22","direction":"Inbound","name":"SSH","priority":100,"protocol":"*","source_address_prefix":"VirtualNetwork","source_port_range":"22"},{"access":"Allow","destination_address_prefix":"*","destination_port_range":"3389","direction":"Inbound","name":"RDP","priority":110,"protocol":"*","source_address_prefix":"VirtualNetwork","source_port_range":"3389"}]`): List of NSG rules
 * `resource_group` (required): This is the resource group to which the resources will be deployed
 * `name_prefix` (default `"nsg"`): A short pre-defined text to identify the resource type
-* `subnet_names` (required): Subnet names the NSG will apply to. Used for count
+* `name_prefixs` (required): Subnet names the NSG will apply to. Used for count
 
 ## Output Values
 * `nsg_id`: Network security group resource id

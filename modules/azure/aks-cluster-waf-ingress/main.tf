@@ -58,7 +58,7 @@ module "waf_subnet" {
   source                = "../../../resources/azure/network/vnet-subnet"
   vnet_name             = var.vnet_name
   resource_group        = var.vnet_rg
-  subnet_name           = "app_gw"
+  name_prefix           = "app_gw"
   subnet_address_prefix = var.subnet_app_gw_address_prefix
 }
 
@@ -86,7 +86,7 @@ module "aks_subnet" {
   source                = "../../../resources/azure/network/vnet-subnet"
   vnet_name             = var.vnet_name
   resource_group        = var.vnet_rg
-  subnet_name           = "aks_nodes"
+  name_prefix           = "aks_nodes"
   subnet_address_prefix = var.subnet_aks_nodes_address_prefix
 }
 

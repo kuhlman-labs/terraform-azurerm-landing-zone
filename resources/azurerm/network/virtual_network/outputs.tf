@@ -13,16 +13,16 @@ output "resource_group_id" {
 }
 
 output "virtual_network_name" {
-  value       = azurerm_virtual_network.base[*].name
+  value       = azurerm_virtual_network.base.name
   description = "The name of the virtual network."
 }
 
 output "virtual_netowrk_id" {
-  value       = azurerm_virtual_network.base[*].id
+  value       = azurerm_virtual_network.base.id
   description = "The virtual NetworkConfiguration ID."
 }
 
 output "virtual_network_address_space" {
-  value       = azurerm_virtual_network.base[*].address_space
+  value       = azurerm_virtual_network.base.address_space
   description = "The address space that is used the virtual network."
 }

@@ -24,8 +24,8 @@ Provider Requirements:
 * `vnet_address_ranges` (required): This is a list of the ip address ranges for the vnet
 
 ## Output Values
-* `pre_prod_vnet_spoke_name`: Generated name of the Virtual Network
-* `pre_prod_vnet_spoke_rg`: Generated name of the Virtual Network resource group
+* `dev_vnet_spoke_name`: Generated name of the Virtual Network
+* `dev_vnet_spoke_rg`: Generated name of the Virtual Network resource group
 
 ## Child Modules
 * `network_spoke` from `../../modules/azure/network-spoke`

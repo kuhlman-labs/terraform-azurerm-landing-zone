@@ -39,7 +39,7 @@ module "subnet_frontend" {
   source                = "../../../resources/azure/network/vnet-subnet"
   resource_group        = module.resource_group.resource_group_name
   vnet_name             = module.vnet_spoke.vnet_name
-  subnet_name           = "frontend"
+  name_prefix           = "frontend"
   subnet_address_prefix = var.subnet_frontend_address_prefix
 }
 
@@ -47,7 +47,7 @@ module "subnet_backend" {
   source                = "../../../resources/azure/network/vnet-subnet"
   resource_group        = module.resource_group.resource_group_name
   vnet_name             = module.vnet_spoke.vnet_name
-  subnet_name           = "backend"
+  name_prefix           = "backend"
   subnet_address_prefix = var.subnet_backend_address_prefix
 }
 

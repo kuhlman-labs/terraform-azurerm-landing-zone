@@ -11,8 +11,9 @@ data "azurerm_resource_group" "base" {
 #network security group
 
 resource "azurerm_network_security_group" "base" {
-  count               = length(var.subnet_names)
-  name                = "${data.azurerm_resource_group.base.name}-${var.name_prefix}-${element(var.subnet_names, count.index)}"
+  count               = length(var.name_prefixs)
+
+  name                = "${data.azurerm_resource_group.base.name}-${var.name_prefix}-${element(var.name_prefixs, count.index)}"
   location            = data.azurerm_resource_group.base.location
   resource_group_name = data.azurerm_resource_group.base.name
 }
@@ -21,6 +22,7 @@ resource "azurerm_network_security_group" "base" {
 
 resource "azurerm_network_security_rule" "base" {
   count                       = length(var.nsg_rules)
+  
   name                        = var.nsg_rules[count.index]["name"]
   priority                    = var.nsg_rules[count.index]["priority"]
   direction                   = var.nsg_rules[count.index]["direction"]

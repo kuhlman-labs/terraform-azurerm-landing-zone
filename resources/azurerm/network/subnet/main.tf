@@ -11,7 +11,7 @@ data "azurerm_resource_group" "base" {
 #subnet
 
 resource "azurerm_subnet" "base" {
-  name                                           = var.subnet_name
+  name                                           = "${var.name_prefix}-${var.environment}-${data.azurerm_resource_group.base.location}"
   address_prefix                                 = var.subnet_address_prefix
   resource_group_name                            = data.azurerm_resource_group.base.name
   virtual_network_name                           = var.vnet_name

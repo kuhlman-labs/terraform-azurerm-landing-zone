@@ -6,7 +6,7 @@ output "subnet_id" {
   value = azurerm_subnet.base.id
 }
 
-output "subnet_name" {
+output "name_prefix" {
   value = azurerm_subnet.base.name
 }
 

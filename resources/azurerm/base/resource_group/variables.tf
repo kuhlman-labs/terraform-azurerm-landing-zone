@@ -7,6 +7,12 @@
 variable "name_prefix" {
   description = "A short pre-defined text to identify the resource type"
   type        = string
+  default     = "rg"
+}
+
+variable "service_name" {
+  description = "Name of the application, service, or workload the resource group is housing."
+  type        = string
 }
 
 variable "region" {

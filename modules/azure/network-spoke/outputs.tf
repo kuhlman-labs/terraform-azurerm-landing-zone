@@ -23,7 +23,7 @@ output "subnet_frontend_id" {
 }
 
 output "subnet_frontend_name" {
-  value       = module.subnet_frontend.subnet_name
+  value       = module.subnet_frontend.name_prefix
   description = "resource name for frontend subnet"
 }
 
@@ -33,6 +33,6 @@ output "subnet_backend_id" {
 }
 
 output "subnet_backend_name" {
-  value       = module.subnet_backend.subnet_name
+  value       = module.subnet_backend.name_prefix
   description = "resource name for backend subnet"
 }

@@ -23,6 +23,6 @@ output "subnet_dmz_id" {
 }
 
 output "subnet_dmz_name" {
-  value       = module.subnet_dmz.subnet_name
+  value       = module.subnet_dmz.name_prefix
   description = "resource name for dmz subnet"
 }

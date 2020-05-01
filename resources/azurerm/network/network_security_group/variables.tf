@@ -22,7 +22,7 @@ variable "environment" {
 
 #nsg
 
-variable "subnet_names" {
+variable "name_prefixs" {
   description = "Subnet names the NSG will apply to. Used for count"
   type        = list
 }

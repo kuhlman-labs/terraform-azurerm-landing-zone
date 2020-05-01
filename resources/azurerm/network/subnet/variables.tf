@@ -16,9 +16,10 @@ variable "vnet_name" {
   type        = string
 }
 
-variable "subnet_name" {
+variable "name_prefix" {
   description = "The name of the subnet. Changing this forces a new resource to be created."
   type        = string
+  default     = "snet"
 }
 
 variable "subnet_address_prefix" {

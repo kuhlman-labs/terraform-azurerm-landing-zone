@@ -13,7 +13,7 @@ Provider Requirements:
 * `resource_group` (required): resource Group of vNet
 * `route_table_id` (required): The ID of the Route Table to associate with the subnet.
 * `subnet_address_prefix` (required): The address prefix to use for the subnet.
-* `subnet_name` (required): The name of the subnet. Changing this forces a new resource to be created.
+* `name_prefix` (required): The name of the subnet. Changing this forces a new resource to be created.
 * `subnet_service_endpoints` (required): The list of Service endpoints to associate with the subnet. Possible values include: Microsoft.AzureActiveDirectory, Microsoft.AzureCosmosDB, Microsoft.EventHub, Microsoft.KeyVault, Microsoft.ServiceBus, Microsoft.Sql and Microsoft.Storage.
 * `vnet_name` (required): The name of the virtual network to which to attach the subnet. Changing this forces a new resource to be created.
 
@@ -21,7 +21,7 @@ Provider Requirements:
 * `subnet_address_prefix`
 * `subnet_id`
 * `subnet_ip_configurations`
-* `subnet_name`
+* `name_prefix`
 * `subnet_resource_group_name`
 * `subnet_virtual_network_name`
 

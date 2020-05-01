@@ -83,7 +83,7 @@ resource "azurerm_kubernetes_cluster" "base" {
       }
       aci_connector_linux {
         enabled     = addon_profile.value.aci_connector_linux_enabled
-        subnet_name = addon_profile.value.aci_connector_linux_subnet_name
+        name_prefix = addon_profile.value.aci_connector_linux_name_prefix
       }
     }
   }

@@ -26,7 +26,7 @@ module "subnet_dmz" {
   source                    = "../../../resources/azure/network/vnet-subnet"
   resource_group            = module.resource_group.resource_group_name
   vnet_name                 = module.vnet_hub.vnet_name
-  subnet_name               = "dmz"
+  name_prefix               = "dmz"
   subnet_address_prefix     = var.subnet_dmz_address_prefix
 }
 
@@ -36,7 +36,7 @@ module "nsg_dmz" {
   source         = "../../../resources/azure/network/nsg"
   resource_group = module.resource_group.resource_group_name
   environment    = var.environment
-  subnet_names   = ["dmz"]
+  name_prefixs   = ["dmz"]
   nsg_rules      = var.nsg_rules_dmz
 }
 

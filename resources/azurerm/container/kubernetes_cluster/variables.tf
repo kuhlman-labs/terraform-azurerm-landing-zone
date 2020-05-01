@@ -159,7 +159,7 @@ variable "addon_profile" {
       oms_agent_enabled               = "false"
       log_analytics_workspace_id = null
       aci_connector_linux_enabled = "false"
-      aci_connector_linux_subnet_name = null
+      aci_connector_linux_name_prefix = null
     }
   ]
   */
