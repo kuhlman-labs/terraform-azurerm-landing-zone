@@ -7,7 +7,7 @@ environment = "test"
 region      = "eastus2"
 
 #virtual_network
-address_space   = ["10.100.0.0/16"]
+address_space = ["10.100.0.0/16"]
 
 #subnet
 

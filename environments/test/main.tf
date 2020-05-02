@@ -8,9 +8,9 @@ module "network_hub" {
   environment = var.environment
   region      = var.region
   #network
-  address_space       = var.address_space
+  address_space    = var.address_space
   address_prefixes = var.address_prefixes
-  nsg_rules_dmz             = var.nsg_rules_dmz
+  nsg_rules_dmz    = var.nsg_rules_dmz
   #tags
   tags = var.tags
 }

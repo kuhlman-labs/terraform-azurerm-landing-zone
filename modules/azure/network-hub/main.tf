@@ -26,7 +26,7 @@ module "virtual_network" {
 module "subnet" {
   source               = "../../../resources/azurerm/network/subnet"
   resource_group       = module.resource_group.name
-  virtual_network_name = module.vnet_hub.virtual_network_name
+  virtual_network_name = module.virtual_network.virtual_network_name
   name_prefixes        = ["snet-dmz", "snet-bastion"]
   address_prefixes     = var.address_prefixes
   environment          = var.environment
@@ -36,16 +36,15 @@ module "subnet" {
 
 module "network_security_group" {
   source         = "../../../resources/azurerm/network/network_security_group"
-  resource_group = module.resource_group.resource_group_name
+  resource_group = module.resource_group.name
   environment    = var.environment
   policy_name    = "RDPallow"
 }
 
 module "network_security_rule" {
   source                      = "../../../resources/azurerm/network/network_security_rule"
-  resource_group              = module.resource_group.resource_group_name
-  environment                 = var.environment
-  network_security_group_name = module.network_security_group_name.name
+  resource_group              = module.resource_group.name
+  network_security_group_name = module.network_security_group.name
   network_security_rules = [
     [
       {

@@ -15,12 +15,12 @@ variable "name_prefix" {
   default     = "nsg"
 }
 
-variable "environment" {
-  description = "Development environment for resource; prod, non-prod, shared-services"
-  type        = string
-}
-
 #nsg
+
+variable "network_security_group_name" {
+  description = "(Required) The name of the Network Security Group that we want to attach the rule to. Changing this forces a new resource to be created."
+  type = string
+}
 
 variable "network_security_rules" {
   description = "List of network security rules"
