@@ -38,12 +38,45 @@ module "network_security_group" {
   source         = "../../../resources/azurerm/network/network_security_group"
   resource_group = module.resource_group.resource_group_name
   environment    = var.environment
-  policy_name   = "RDPallow"
+  policy_name    = "RDPallow"
 }
-/*
-module "nsg_association" {
+
+module "network_security_rule" {
+  source                      = "../../../resources/azurerm/network/network_security_rule"
+  resource_group              = module.resource_group.resource_group_name
+  environment                 = var.environment
+  network_security_group_name = module.network_security_group_name.name
+  network_security_rules = [
+    [
+      {
+        name                       = "SSH"
+        priority                   = 100
+        direction                  = "Inbound"
+        access                     = "Allow"
+        protocol                   = "*"
+        source_port_range          = "22"
+        destination_port_range     = "22"
+        source_address_prefix      = "VirtualNetwork"
+        destination_address_prefix = "*"
+      },
+      {
+        name                       = "RDP"
+        priority                   = 110
+        direction                  = "Inbound"
+        access                     = "Allow"
+        protocol                   = "*"
+        source_port_range          = "3389"
+        destination_port_range     = "3389"
+        source_address_prefix      = "VirtualNetwork"
+        destination_address_prefix = "*"
+      },
+    ]
+  ]
+}
+
+module "subnet_network_security_group_association" {
   source                    = "../../../resources/azurerm/network/subnet_network_security_group_association"
-  subnet_id                 = module.subnet_dmz.subnet_id
-  network_security_group_id = element(module.nsg_dmz.nsg_id, 0)
+  subnet_id                 = module.subnet.id
+  network_security_group_id = module.network_security_group.id
 }
-*/
+
