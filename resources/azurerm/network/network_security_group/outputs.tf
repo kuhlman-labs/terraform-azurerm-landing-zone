@@ -2,13 +2,7 @@
 # resource outputs
 ###
 
-output "nsg_id" {
-  value       = azurerm_network_security_group.base.*.id
-  description = "Network security group resource id"
+output "id" {
+  value       = azurerm_network_security_group.base.id
+  description = "The ID of the Network Security Group."
 }
-
-output "nsg_rules_ids" {
-  value       = azurerm_network_security_rule.base.*.id
-  description = "List of network security group rules ids"
-}
-
