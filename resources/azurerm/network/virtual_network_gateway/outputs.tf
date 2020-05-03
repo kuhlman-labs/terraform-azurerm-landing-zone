@@ -2,8 +2,8 @@
 # resource outputs
 ###
 
-output "vnet_gateway_id" {
+output "id" {
   value       = azurerm_virtual_network_gateway.base.id
-  description = "Virtual network gateway resource id"
+  description = "The ID of the Virtual Network Gateway."
 }
 

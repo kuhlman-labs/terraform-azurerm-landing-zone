@@ -27,7 +27,7 @@ module "subnet" {
   source               = "../../../resources/azurerm/network/subnet"
   resource_group       = module.resource_group.name
   virtual_network_name = module.virtual_network.virtual_network_name
-  name_prefixes        = ["snet-dmz", "snet-bastion"]
+  name_prefixes        = ["snet-dmz", "snet-bastion", "GatewaySubnet"]
   address_prefixes     = var.address_prefixes
   environment          = var.environment
 }
@@ -46,7 +46,6 @@ module "network_security_rule" {
   resource_group              = module.resource_group.name
   network_security_group_name = module.network_security_group.name
   network_security_rules = [
-    [
       {
         name                       = "SSH"
         priority                   = 100
@@ -68,14 +67,30 @@ module "network_security_rule" {
         destination_port_range     = "3389"
         source_address_prefix      = "VirtualNetwork"
         destination_address_prefix = "*"
-      },
-    ]
+      }
   ]
 }
 
 module "subnet_network_security_group_association" {
   source                    = "../../../resources/azurerm/network/subnet_network_security_group_association"
-  subnet_id                 = module.subnet.id
+  subnet_id                 = element(module.subnet.id, 1)
   network_security_group_id = module.network_security_group.id
 }
 
+module "public_ip" {
+  source                    = "../../../resources/azurerm/network/public_ip"
+  service_name = "vgw"
+  allocation_method = "Dynamic"
+  sku = "Basic" 
+}
+
+module "virtual_network_gateway" {
+  source                    = "../../../resources/azurerm/network/virtual_network_gateway"
+  public_ip_name = module.public_ip.name
+  subnet_id = element(module.subnet.id, 2)
+  type = "Vpn"
+  sku = "Basic"
+  address_space = ["192.168.100.0/24"]
+  root_certificate_name = "P2S Self Signed Root Cert"
+  public_cert_data = filebase64("rootcertificate.cer")
+}
