@@ -27,7 +27,7 @@ module "subnet" {
   source               = "../../../resources/azurerm/network/subnet"
   resource_group       = module.resource_group.name
   virtual_network_name = module.virtual_network.virtual_network_name
-  name_prefixes        = ["snet-dmz", "snet-bastion", "GatewaySubnet"]
+  name_prefixes        = ["snet-dmz", "snet-bastion"]
   address_prefixes     = var.address_prefixes
   environment          = var.environment
 }
@@ -89,11 +89,12 @@ module "virtual_network_gateway" {
   source                = "../../../resources/azurerm/network/virtual_network_gateway"
   resource_group        = module.resource_group.name
   environment           = var.environment
+  virtual_network_name  = module.virtual_network.virtual_network_name
   public_ip_name        = module.public_ip.name
-  subnet_id             = element(module.subnet.id, 2)
+  address_prefixes      = var.vgw_address_prefix
   type                  = "Vpn"
   sku                   = "Basic"
   address_space         = ["192.168.100.0/24"]
-  root_certificate_name = "P2S Self Signed Root Cert"
-  public_cert_data      = filebase64("${path.module}/rootcertificate.cer")
+  root_certificate_name = "P2SRootCert"
+  public_cert_data      = file("${path.module}/rootcertificate.cer")
 }

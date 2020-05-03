@@ -68,13 +68,12 @@ variable "address_prefixes" {
   type        = list(string)
 }
 
-#nsg
-
-variable "nsg_rules_dmz" {
-  description = "List of NSG rules for DMZ subnet"
+variable "vgw_address_prefix" {
+  description = "The address prefix to use for the vgw subnet."
   type        = list
 }
 
+/*
 #aks
 
 variable "dns_service_ip" {
@@ -91,7 +90,7 @@ variable "service_cidr" {
   description = "The Network Range used by the Kubernetes service. This is required when network_plugin is set to azure. Changing this forces a new resource to be created."
   type        = string
 }
-
+*/
 #tags
 
 variable "tags" {
@@ -99,4 +98,3 @@ variable "tags" {
   type        = map
   default     = {}
 }
-

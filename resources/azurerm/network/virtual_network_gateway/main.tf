@@ -15,6 +15,15 @@ data "azurerm_public_ip" "base" {
   resource_group_name = data.azurerm_resource_group.base.name
 }
 
+#subnet
+
+resource "azurerm_subnet" "base" {
+  name                 = "GatewaySubnet"
+  resource_group_name  = data.azurerm_resource_group.base.name
+  virtual_network_name = var.virtual_network_name
+  address_prefixes     = var.address_prefixes
+}
+
 #virtual network gateway
 
 resource "azurerm_virtual_network_gateway" "base" {
@@ -35,7 +44,7 @@ resource "azurerm_virtual_network_gateway" "base" {
     name                          = data.azurerm_public_ip.base.name
     public_ip_address_id          = data.azurerm_public_ip.base.id
     private_ip_address_allocation = var.private_ip_address_allocation
-    subnet_id                     = var.subnet_id
+    subnet_id                     = azurerm_subnet.base.id
   }
 
   vpn_client_configuration {

@@ -28,10 +28,8 @@ variable "address_prefixes" {
   type        = list(string)
 }
 
-#nsg
-
-variable "nsg_rules_dmz" {
-  description = "List of NSG rules"
+variable "vgw_address_prefix" {
+  description = "The address prefixes to use for the vgw subnet."
   type        = list
 }
 

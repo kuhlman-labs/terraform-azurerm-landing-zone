@@ -10,7 +10,7 @@ module "network_hub" {
   #network
   address_space    = var.address_space
   address_prefixes = var.address_prefixes
-  nsg_rules_dmz    = var.nsg_rules_dmz
+  vgw_address_prefix = var.vgw_address_prefix
   #tags
   tags = var.tags
 }

@@ -27,9 +27,14 @@ variable "public_ip_name" {
   type        = string
 }
 
-variable "subnet_id" {
-  description = "(Required) The ID of the gateway subnet of a virtual network in which the virtual network gateway will be created. It is mandatory that the associated subnet is named GatewaySubnet. Therefore, each virtual network can contain at most a single Virtual Network Gateway."
-  type        = string
+variable "address_prefixes" {
+  description = "(Required) The address prefixes to use for the vgw subnet."
+  type        = list
+}
+
+variable "virtual_network_name" {
+  description = "(Required) The name of the virtual network to which to attach the subnet. Changing this forces a new resource to be created."
+  type = string
 }
 
 variable "public_cert_data" {
@@ -97,7 +102,7 @@ variable "vpn_client_protocols" {
 variable "revoked_certificate" {
   description = "(Optional) One or more revoked_certificate blocks which are defined below. This setting is incompatible with the use of radius_server_address and radius_server_secret."
   type        = list
-  default     = null
+  default     = []
 }
 
 variable "root_certificate_name" {
