@@ -5,52 +5,57 @@
 #  resource group
 
 module "resource_group" {
-  source          = "../../../resources/azure/resource-group"
-  name_prefix = "network-spoke"
-  region          = var.region
-  environment     = var.environment
+  source       = "../../../resources/azurerm/base/resource_group"
+  service_name = "network-spoke"
+  region       = var.region
+  environment  = var.environment
 }
 
-# vnet
+#vnet
 
-module "vnet_spoke" {
-  source              = "../../../resources/azure/network/vnet"
-  resource_group      = module.resource_group.resource_group_name
-  vnet_address_ranges = var.vnet_address_ranges
-  tags                = var.tags
+module "virtual_network" {
+  source         = "../../../resources/azurerm/network/virtual_network"
+  resource_group = module.resource_group.name
+  address_space  = var.address_space
+  tags           = var.tags
+  environment    = var.environment
 }
 
-# subnets
+#snets
 
-module "subnet_frontend" {
-  source                = "../../../resources/azure/network/vnet-subnet"
-  resource_group        = module.resource_group.resource_group_name
-  vnet_name             = module.vnet_spoke.vnet_name
-  name_prefix           = "frontend"
-  subnet_address_prefix = var.subnet_frontend_address_prefix
+module "subnet" {
+  source               = "../../../resources/azurerm/network/subnet"
+  resource_group       = module.resource_group.name
+  virtual_network_name = module.virtual_network.name
+  name_prefixes        = ["snet-fontend", "snet-backend"]
+  address_prefixes     = var.address_prefixes
+  environment          = var.environment
 }
 
-module "subnet_backend" {
-  source                = "../../../resources/azure/network/vnet-subnet"
-  resource_group        = module.resource_group.resource_group_name
-  vnet_name             = module.vnet_spoke.vnet_name
-  name_prefix           = "backend"
-  subnet_address_prefix = var.subnet_backend_address_prefix
+#peering hub to spoke
+
+module "virtual_network_peering_hub" {
+  source                       = "../../../resources/azurerm/network/virtual_network_peering"
+  resource_group_name          = module.resource_group.name
+  virtual_network_name         = var.virtual_network_hub_name
+  remote_virtual_network_id    = module.virtual_network.id
+  remote_virtual_network_name  = module.virtual_network.name
+  allow_virtual_network_access = true
+  allow_forwarded_traffic      = true
+  allow_gateway_transit        = true
+  use_remote_gateways          = false
 }
 
-# vnet peering
+#peering spoke to hub
 
-module "vnet_peering" {
-  source                      = "../../../resources/azure/network/vnet-peering"
-  hub_vnet_name               = data.terraform_remote_state.shared_services.outputs.shared_services_vnet_name
-  hub_vnet_rg                 = data.terraform_remote_state.shared_services.outputs.shared_services_vnet_rg
-  hub_vnet_id                 = data.terraform_remote_state.shared_services.outputs.shared_services_vnet_id
-  spoke_vnet_name             = module.vnet_spoke.vnet_name
-  spoke_vnet_id               = module.vnet_spoke.vnet_id
-  spoke_vnet_rg               = module.resource_group.resource_group_name
-  allow_forwarded_traffic     = var.allow_forwarded_traffic
-  hub_allow_gateway_transit   = var.hub_allow_gateway_transit
-  hub_use_remote_gateways     = var.hub_use_remote_gateways
-  spoke_allow_gateway_transit = var.spoke_allow_gateway_transit
-  spoke_use_remote_gateways   = var.spoke_use_remote_gateways
+module "virtual_network_peering_spoke" {
+  source                       = "../../../resources/azurerm/network/virtual_network_peering"
+  resource_group_name          = module.resource_group.name
+  virtual_network_name         = module.virtual_network.name
+  remote_virtual_network_id    = var.virtual_network_hub_id
+  remote_virtual_network_name  = var.virtual_network_hub_name
+  allow_virtual_network_access = true
+  allow_forwarded_traffic      = true
+  allow_gateway_transit        = false
+  use_remote_gateways          = true
 }

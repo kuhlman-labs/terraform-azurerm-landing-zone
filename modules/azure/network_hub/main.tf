@@ -26,7 +26,7 @@ module "virtual_network" {
 module "subnet" {
   source               = "../../../resources/azurerm/network/subnet"
   resource_group       = module.resource_group.name
-  virtual_network_name = module.virtual_network.virtual_network_name
+  virtual_network_name = module.virtual_network.name
   name_prefixes        = ["snet-dmz", "snet-bastion"]
   address_prefixes     = var.address_prefixes
   environment          = var.environment
@@ -89,7 +89,7 @@ module "virtual_network_gateway" {
   source                = "../../../resources/azurerm/network/virtual_network_gateway"
   resource_group        = module.resource_group.name
   environment           = var.environment
-  virtual_network_name  = module.virtual_network.virtual_network_name
+  virtual_network_name  = module.virtual_network.name
   public_ip_name        = module.public_ip.name
   address_prefixes      = var.vgw_address_prefix
   type                  = "Vpn"

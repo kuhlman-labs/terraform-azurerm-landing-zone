@@ -3,42 +3,26 @@
 ###
 
 module "network_hub" {
-  source = "../../modules/azure/network-hub"
-  #common
-  environment = var.environment
-  region      = var.region
-  #network
-  address_space    = var.address_space
-  address_prefixes = var.address_prefixes
+  source             = "../../modules/azure/network_hub"
+  environment        = var.environment
+  region             = var.region
+  address_space      = var.address_space
+  address_prefixes   = var.address_prefixes
   vgw_address_prefix = var.vgw_address_prefix
-  #tags
-  tags = var.tags
-}
-/*
-module "network_spoke" {
-  source = "../../modules/azure/network-spoke"
-  #common
-  environment = var.environment
-  region      = var.region
-  #authentication
-  storage_account_name = var.storage_account_name
-  access_key           = var.access_key
-  shared_state_key     = replace(var.state_key, "test", "shared-services")
-  container_name       = "tfstate"
-  #network
-  vnet_address_ranges            = var.spoke_vnet_address_ranges
-  subnet_frontend_address_prefix = var.subnet_frontend_address_prefix
-  subnet_backend_address_prefix  = var.subnet_backend_address_prefix
-  #peering
-  allow_forwarded_traffic     = "true"
-  hub_allow_gateway_transit   = "false"
-  hub_use_remote_gateways     = "false"
-  spoke_allow_gateway_transit = "false"
-  spoke_use_remote_gateways   = "false"
-  #tags
-  tags = var.tags
+  tags               = var.tags
 }
 
+module "network_spoke" {
+  source                        = "../../modules/azure/network_spoke"
+  environment                   = var.environment
+  region                        = var.region
+  address_space                 = var.spoke_address_space
+  address_prefixes              = var.address_prefixes_spoke
+  virtual_network_hub_name      = module.network_hub.virtual_network_name
+  virtual_network_hub_id        = module.network_hub.virtual_network_id
+  tags                          = var.tags
+}
+/*
 module "aks_cluster_waf_ingress" {
   source                          = "../../modules/azure/aks-cluster-waf-ingress"
   environment                     = var.environment

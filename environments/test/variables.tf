@@ -73,6 +73,16 @@ variable "vgw_address_prefix" {
   type        = list
 }
 
+variable "spoke_address_space" {
+  description = "This is a list of the ip address ranges for the vnet"
+  type        = list
+}
+
+variable "address_prefixes_spoke" {
+  description = "The address prefixes to use for the subnets."
+  type        = list(string)
+}
+
 /*
 #aks
 
