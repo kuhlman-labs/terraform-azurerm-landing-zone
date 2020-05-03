@@ -79,6 +79,7 @@ module "subnet_network_security_group_association" {
 
 module "public_ip" {
   source            = "../../../resources/azurerm/network/public_ip"
+  resource_group    = module.resource_group.name
   service_name      = "vgw"
   allocation_method = "Dynamic"
   sku               = "Basic"
@@ -86,11 +87,13 @@ module "public_ip" {
 
 module "virtual_network_gateway" {
   source                = "../../../resources/azurerm/network/virtual_network_gateway"
+  resource_group        = module.resource_group.name
+  environment           = var.environment
   public_ip_name        = module.public_ip.name
   subnet_id             = element(module.subnet.id, 2)
   type                  = "Vpn"
   sku                   = "Basic"
   address_space         = ["192.168.100.0/24"]
   root_certificate_name = "P2S Self Signed Root Cert"
-  public_cert_data      = filebase64("rootcertificate.cer")
+  public_cert_data      = filebase64("${path.module}/rootcertificate.cer")
 }

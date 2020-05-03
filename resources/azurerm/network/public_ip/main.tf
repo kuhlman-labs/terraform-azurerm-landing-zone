@@ -11,7 +11,7 @@ data "azurerm_resource_group" "base" {
 #public ip
 
 resource "azurerm_public_ip" "base" {
-  name                    = "${var.name_prefix}-${service_name}-${data.azurerm_resource_group.base.location}"
+  name                    = "${var.name_prefix}-${var.service_name}-${data.azurerm_resource_group.base.location}"
   resource_group_name     = data.azurerm_resource_group.base.name
   location                = data.azurerm_resource_group.base.location
   allocation_method       = var.allocation_method

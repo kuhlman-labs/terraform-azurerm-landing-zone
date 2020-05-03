@@ -9,12 +9,18 @@ variable "resource_group" {
   type        = string
 }
 
-#public-ip
+variable "name_prefix" {
+  description = "a short pre-defined text to identify resource type"
+  type        = string
+  default     = "pip"
+}
 
-variable "name" {
-  description = "(Required) Specifies the name of the Public IP resource . Changing this forces a new resource to be created."
+variable "service_name" {
+  description = "vm name or app name"
   type        = string
 }
+
+#public-ip
 
 variable "allocation_method" {
   description = "(Required) Defines the allocation method for this IP address. Possible values are Static or Dynamic."
