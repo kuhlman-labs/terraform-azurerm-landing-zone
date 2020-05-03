@@ -2,19 +2,6 @@
 #  module composition
 ###
 
-#Pulling in outputs form shared-services stack for peering
-
-data "terraform_remote_state" "shared_services" {
-  backend = "azurerm"
-
-  config = {
-    storage_account_name = var.storage_account_name
-    container_name       = var.container_name
-    key                  = var.shared_state_key
-    access_key           = var.access_key
-  }
-}
-
 #  resource group
 
 module "resource_group" {
