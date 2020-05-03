@@ -46,28 +46,28 @@ module "network_security_rule" {
   resource_group              = module.resource_group.name
   network_security_group_name = module.network_security_group.name
   network_security_rules = [
-      {
-        name                       = "SSH"
-        priority                   = 100
-        direction                  = "Inbound"
-        access                     = "Allow"
-        protocol                   = "*"
-        source_port_range          = "22"
-        destination_port_range     = "22"
-        source_address_prefix      = "VirtualNetwork"
-        destination_address_prefix = "*"
-      },
-      {
-        name                       = "RDP"
-        priority                   = 110
-        direction                  = "Inbound"
-        access                     = "Allow"
-        protocol                   = "*"
-        source_port_range          = "3389"
-        destination_port_range     = "3389"
-        source_address_prefix      = "VirtualNetwork"
-        destination_address_prefix = "*"
-      }
+    {
+      name                       = "SSH"
+      priority                   = 100
+      direction                  = "Inbound"
+      access                     = "Allow"
+      protocol                   = "*"
+      source_port_range          = "22"
+      destination_port_range     = "22"
+      source_address_prefix      = "VirtualNetwork"
+      destination_address_prefix = "*"
+    },
+    {
+      name                       = "RDP"
+      priority                   = 110
+      direction                  = "Inbound"
+      access                     = "Allow"
+      protocol                   = "*"
+      source_port_range          = "3389"
+      destination_port_range     = "3389"
+      source_address_prefix      = "VirtualNetwork"
+      destination_address_prefix = "*"
+    }
   ]
 }
 
@@ -78,19 +78,19 @@ module "subnet_network_security_group_association" {
 }
 
 module "public_ip" {
-  source                    = "../../../resources/azurerm/network/public_ip"
-  service_name = "vgw"
+  source            = "../../../resources/azurerm/network/public_ip"
+  service_name      = "vgw"
   allocation_method = "Dynamic"
-  sku = "Basic" 
+  sku               = "Basic"
 }
 
 module "virtual_network_gateway" {
-  source                    = "../../../resources/azurerm/network/virtual_network_gateway"
-  public_ip_name = module.public_ip.name
-  subnet_id = element(module.subnet.id, 2)
-  type = "Vpn"
-  sku = "Basic"
-  address_space = ["192.168.100.0/24"]
+  source                = "../../../resources/azurerm/network/virtual_network_gateway"
+  public_ip_name        = module.public_ip.name
+  subnet_id             = element(module.subnet.id, 2)
+  type                  = "Vpn"
+  sku                   = "Basic"
+  address_space         = ["192.168.100.0/24"]
   root_certificate_name = "P2S Self Signed Root Cert"
-  public_cert_data = filebase64("rootcertificate.cer")
+  public_cert_data      = filebase64("rootcertificate.cer")
 }
