@@ -81,9 +81,10 @@ module "subnet_network_security_group_association" {
 module "public_ip" {
   source            = "../../../resources/azurerm/network/public_ip"
   resource_group    = module.resource_group.name
-  service_name      = "vgw"
+  name_prefix       = "pip-vgw"
   allocation_method = "Dynamic"
   sku               = "Basic"
+  environment       = var.environment
 }
 
 module "virtual_network_gateway" {

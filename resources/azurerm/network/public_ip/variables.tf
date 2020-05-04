@@ -15,8 +15,8 @@ variable "name_prefix" {
   default     = "pip"
 }
 
-variable "service_name" {
-  description = "vm name or app name"
+variable "environment" {
+  description = "Development environment for resource; prod, non-prod, shared-services"
   type        = string
 }
 
