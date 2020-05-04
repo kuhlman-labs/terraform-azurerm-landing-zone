@@ -16,6 +16,7 @@ module "resource_group" {
 module "virtual_network" {
   source         = "../../../resources/azurerm/network/virtual_network"
   resource_group = module.resource_group.name
+  name_prefix    = "vnet-spoke"
   address_space  = var.address_space
   tags           = var.tags
   environment    = var.environment
@@ -36,7 +37,7 @@ module "subnet" {
 
 module "virtual_network_peering_hub" {
   source                       = "../../../resources/azurerm/network/virtual_network_peering"
-  resource_group_name          = module.resource_group.name
+  resource_group_name          = var.virtual_network_hub_resource_group_name
   virtual_network_name         = var.virtual_network_hub_name
   remote_virtual_network_id    = module.virtual_network.id
   remote_virtual_network_name  = module.virtual_network.name

@@ -2,7 +2,7 @@
 #  module composition
 ###
 
-#  resource group
+#resource group
 
 module "resource_group" {
   source       = "../../../resources/azurerm/base/resource_group"
@@ -16,6 +16,7 @@ module "resource_group" {
 module "virtual_network" {
   source         = "../../../resources/azurerm/network/virtual_network"
   resource_group = module.resource_group.name
+  name_prefix    = "vnet-hub"
   address_space  = var.address_space
   tags           = var.tags
   environment    = var.environment
@@ -94,6 +95,7 @@ module "virtual_network_gateway" {
   address_prefixes      = var.vgw_address_prefix
   type                  = "Vpn"
   sku                   = "Basic"
+  vpn_client_protocols  = ["SSTP"]
   address_space         = ["192.168.100.0/24"]
   root_certificate_name = "P2SRootCert"
   public_cert_data      = file("${path.module}/rootcertificate.cer")

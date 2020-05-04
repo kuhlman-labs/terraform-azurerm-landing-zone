@@ -18,6 +18,7 @@ module "network_spoke" {
   region                        = var.region
   address_space                 = var.spoke_address_space
   address_prefixes              = var.address_prefixes_spoke
+  virtual_network_hub_resource_group_name = module.network_hub.virtual_network_resource_group_name
   virtual_network_hub_name      = module.network_hub.virtual_network_name
   virtual_network_hub_id        = module.network_hub.virtual_network_id
   tags                          = var.tags

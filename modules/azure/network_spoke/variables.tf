@@ -35,6 +35,11 @@ variable "virtual_network_hub_name" {
   type = string
 }
 
+variable "virtual_network_hub_resource_group_name" {
+  description = "The name of the hub virtual network resource group"
+  type = string
+}
+
 variable "virtual_network_hub_id" {
   description = "The id of the hub virtual network"
   type = string
