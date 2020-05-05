@@ -11,35 +11,61 @@ data "azurerm_resource_group" "base" {
 #aks
 
 resource "azurerm_kubernetes_cluster" "base" {
-  name                            = "${data.azurerm_resource_group.base.name}-${var.name_prefix}"
-  location                        = data.azurerm_resource_group.base.location
-  dns_prefix                      = var.dns_prefix
-  resource_group_name             = data.azurerm_resource_group.base.name
-  api_server_authorized_ip_ranges = var.api_server_authorized_ip_ranges
-  kubernetes_version              = var.kubernetes_version
-  node_resource_group             = var.node_resource_group
+  name                = "${var.name_prefix}-${var.environment}-${data.azurerm_resource_group.base.location}"
+  location            = data.azurerm_resource_group.base.location
+  resource_group_name = data.azurerm_resource_group.base.name
 
-  service_principal {
-    client_id     = var.client_id
-    client_secret = var.client_secret
+  default_node_pool {
+    name                  = var.name
+    vm_size               = var.vm_size
+    availability_zones    = var.availability_zones
+    enable_auto_scaling   = var.enable_auto_scaling
+    max_count             = var.max_count
+    min_count             = var.min_count
+    node_count            = var.node_count
+    enable_node_public_ip = var.enable_node_public_ip
+    max_pods              = var.max_pods
+    node_labels           = var.node_labels
+    node_taints           = var.node_taints
+    os_disk_size_gb       = var.os_disk_size_gb
+    type                  = var.type
+    tags                  = var.tags
+    vnet_subnet_id        = var.vnet_subnet_id
   }
 
-  dynamic "default_node_pool" {
-    for_each = var.agent_pool_profile
+  dns_prefix = var.dns_prefix
+
+  dynamic "addon_profile" {
+    for_each = var.addon_profile
     content {
-      name                = agent_pool_profile.value.name
-      vm_size             = agent_pool_profile.value.vm_size
-      availability_zones  = agent_pool_profile.value.availability_zones
-      enable_auto_scaling = agent_pool_profile.value.enable_auto_scaling
-      min_count           = agent_pool_profile.value.min_count
-      max_count           = agent_pool_profile.value.max_count
-      max_pods            = agent_pool_profile.value.max_pods
-      os_disk_size_gb     = agent_pool_profile.value.os_disk_size_gb
-      type                = agent_pool_profile.value.type
-      vnet_subnet_id      = agent_pool_profile.value.vnet_subnet_id
-      node_taints         = agent_pool_profile.value.node_taints
+      http_application_routing {
+        enabled = addon_profile.value.http_appication_routing_enabled
+      }
+      azure_policy {
+        enabled = addon_profile.value.azure_policy_enabled
+      }
+      kube_dashboard {
+        enabled = addon_profile.value.kube_dashboard_enabled
+      }
+      oms_agent {
+        enabled                    = addon_profile.value.oms_agent_enabled
+        log_analytics_workspace_id = addon_profile.value.log_analytics_workspace_id
+      }
+      aci_connector_linux {
+        enabled     = addon_profile.value.aci_connector_linux_enabled
+        subnet_name = addon_profile.value.aci_connector_linux_subnet_name
+      }
     }
   }
+
+  api_server_authorized_ip_ranges = var.api_server_authorized_ip_ranges
+  enable_pod_security_policy      = var.enable_pod_security_policy
+
+  identity {
+    type = "SystemAssigned"
+  }
+
+  kubernetes_version = var.kubernetes_version
 
   dynamic "linux_profile" {
     for_each = var.linux_profile
@@ -51,42 +77,27 @@ resource "azurerm_kubernetes_cluster" "base" {
     }
   }
 
-  dynamic "windows_profile" {
-    for_each = var.windows_profile
-    content {
-      admin_username = windows_profile.value.admin_username
-      admin_password = windows_profile.value.admin_password
-    }
-  }
-
   dynamic "network_profile" {
     for_each = var.network_profile
     content {
       network_plugin     = network_profile.value.network_plugin
+      network_policy     = network_profile.value.network_policy
       dns_service_ip     = network_profile.value.dns_service_ip
       docker_bridge_cidr = network_profile.value.docker_bridge_cidr
+      outbound_type      = network_profile.value.outbound_type
       pod_cidr           = network_profile.value.pod_cidr
       service_cidr       = network_profile.value.service_cidr
       load_balancer_sku  = network_profile.value.load_balancer_sku
+      load_balancer_profile {
+        managed_outbound_ip_count = network_profile.value.managed_outbound_ip_count
+        outbound_ip_prefix_ids    = network_profile.value.outbound_ip_prefix_ids
+        outbound_ip_address_ids   = network_profile.value.outbound_ip_address_ids
+      }
     }
   }
 
-  dynamic "addon_profile" {
-    for_each = var.addon_profile
-    content {
-      http_application_routing {
-        enabled = addon_profile.value.http_appication_routing_enabled
-      }
-      oms_agent {
-        enabled                    = addon_profile.value.oms_agent_enabled
-        log_analytics_workspace_id = addon_profile.value.log_analytics_workspace_id
-      }
-      aci_connector_linux {
-        enabled     = addon_profile.value.aci_connector_linux_enabled
-        name_prefix = addon_profile.value.aci_connector_linux_name_prefix
-      }
-    }
-  }
+  node_resource_group     = var.node_resource_group
+  private_cluster_enabled = var.private_cluster_enabled
 
   dynamic "role_based_access_control" {
     for_each = var.role_based_access_control
@@ -102,4 +113,12 @@ resource "azurerm_kubernetes_cluster" "base" {
   }
 
   tags = var.tags
+
+  dynamic "windows_profile" {
+    for_each = var.windows_profile
+    content {
+      admin_username = windows_profile.value.admin_username
+      admin_password = windows_profile.value.admin_password
+    }
+  }
 }
