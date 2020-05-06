@@ -87,17 +87,19 @@ module "aks" {
   network_profile = [
     {
       network_plugin     = "azure"
+      network_policy     = null
       dns_service_ip     = var.dns_service_ip
       docker_bridge_cidr = var.docker_bridge_cidr
       service_cidr       = var.service_cidr
       subnet_id          = var.subnet_id_aks
-      /*
       pod_cidr           = null
       load_balancer_sku  = null
+      load_balancer_profile = null
+      managed_outbound_ip_count = null
+      outbound_type = null
       managed_outbound_ip_count = null
       outbound_ip_prefix_ids = null
       outbound_ip_address_ids = null
-      */
     }
   ]
   tags = var.tags
