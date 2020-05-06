@@ -28,6 +28,11 @@ variable "address_prefixes" {
   type        = list(string)
 }
 
+variable "subnet_name_prefixes" {
+  description = "The name of the subnets. Changing this forces a new resource to be created."
+  type        = list(string)
+}
+
 #peering
 
 variable "virtual_network_hub_name" {

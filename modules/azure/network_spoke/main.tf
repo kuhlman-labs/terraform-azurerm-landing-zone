@@ -29,7 +29,7 @@ module "subnet" {
   resource_group       = module.resource_group.name
   virtual_network_name = module.virtual_network.name
   name_prefixes        = var.subnet_name_prefixes
-  address_prefixes     = var.subnet_address_prefixes
+  address_prefixes     = var.address_prefixes
   environment          = var.environment
 }
 

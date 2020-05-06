@@ -19,10 +19,3 @@ variable "environment" {
   description = "Development environment for resource; prod, non-prod, shared-services"
   type        = string
 }
-
-#uai
-
-variable "uai_name" {
-  description = "The name of the user assigned identity. Changing this forces a new identity to be created."
-  type        = string
-}

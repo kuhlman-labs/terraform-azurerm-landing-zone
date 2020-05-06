@@ -68,7 +68,7 @@ variable "address_prefixes" {
   type        = list(string)
 }
 
-variable "vgw_address_prefix" {
+variable "address_prefix_vgw" {
   description = "The address prefix to use for the vgw subnet."
   type        = list
 }
@@ -83,7 +83,16 @@ variable "address_prefixes_spoke" {
   type        = list(string)
 }
 
-/*
+variable "subnet_name_prefixes" {
+  description = "The name of the subnets. Changing this forces a new resource to be created."
+  type        = list(string)
+}
+
+variable "spoke_subnet_name_prefixes" {
+  description = "The name of the subnets. Changing this forces a new resource to be created."
+  type        = list(string)
+}
+
 #aks
 
 variable "dns_service_ip" {
@@ -100,7 +109,7 @@ variable "service_cidr" {
   description = "The Network Range used by the Kubernetes service. This is required when network_plugin is set to azure. Changing this forces a new resource to be created."
   type        = string
 }
-*/
+
 #tags
 
 variable "tags" {

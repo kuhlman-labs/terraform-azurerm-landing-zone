@@ -23,23 +23,13 @@ variable "client_secret" {
 
 #network
 
-variable "vnet_name" {
-  description = "The name of the Vnet."
+variable "subnet_id_aks" {
+  description = "The subnet id to use for aks."
   type        = string
 }
 
-variable "vnet_rg" {
-  description = "The resource Group of the Vnet"
-  type        = string
-}
-
-variable "subnet_aks_nodes_address_prefix" {
-  description = "The address prefix to use for the subnet."
-  type        = string
-}
-
-variable "subnet_app_gw_address_prefix" {
-  description = "The address prefix to use for the subnet."
+variable "subnet_id_agw" {
+  description = "The address prefix to use for agw."
   type        = string
 }
 

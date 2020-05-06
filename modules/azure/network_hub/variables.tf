@@ -28,9 +28,14 @@ variable "address_prefixes" {
   type        = list(string)
 }
 
-variable "vgw_address_prefix" {
-  description = "The address prefixes to use for the vgw subnet."
+variable "address_prefix_vgw" {
+  description = "The address prefixe to use for the vgw subnet."
   type        = list
+}
+
+variable "subnet_name_prefixes" {
+  description = "The name of the subnets. Changing this forces a new resource to be created."
+  type        = list(string)
 }
 
 #tags

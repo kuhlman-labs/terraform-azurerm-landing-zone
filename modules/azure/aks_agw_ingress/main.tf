@@ -20,6 +20,7 @@ module "user_assigned_identity" {
   source         = "../../../resources/azurerm/authorization/user_assigned_identity"
   resource_group = module.resource_group.name
   name_prefix       = "uai-aks"
+  environment     = var.environment
 }
 
 #role assignments for AD integration
@@ -60,6 +61,7 @@ module "public_ip" {
   resource_group    = module.resource_group.name
   allocation_method = "Static"
   sku               = "Standard"
+  environment     = var.environment
 }
 
 module "application_gateway" {
@@ -70,13 +72,14 @@ module "application_gateway" {
   sku_tier             = "Standard_v2"
   subnet_id            = var.subnet_id_agw
   public_ip_address_id = module.public_ip.id
+  environment     = var.environment
   tags                 = var.tags
 }
 
 #aks
 
 module "aks" {
-  source         = "../../../resources/azurerm/containers/kubernetes_cluster"
+  source         = "../../../resources/azurerm/container/kubernetes_cluster"
   resource_group = module.resource_group.name
   vm_size             = "Standard_B2s"
   node_count = 3
@@ -98,6 +101,7 @@ module "aks" {
     }
   ]
   tags = var.tags
+  environment     = var.environment
 }
 
 #aapodidentity for ARM integration
@@ -110,9 +114,9 @@ resource "null_resource" "aks_config" {
     az aks get-credentials --resource-group ${module.resource_group.name} --name ${module.aks.name} --admin --overwrite-existing;
     kubectl create -f https://raw.githubusercontent.com/Azure/aad-pod-identity/master/deploy/infra/deployment.yaml;
     echo "${templatefile("${path.module}/templates/aadpodidentity.yaml", {
-    name                 = module.aks_user_assigned_identity.uai_name,
-    identity_resource_id = module.aks_user_assigned_identity.uai_id,
-    identity_client_id   = module.aks_user_assigned_identity.uai_client_id
+    name                 = module.user_assigned_identity.uai_name,
+    identity_resource_id = module.user_assigned_identity.uai_id,
+    identity_client_id   = module.user_assigned_identity.uai_client_id
 })}" | kubectl apply -f -
     EOT
 }
@@ -122,7 +126,7 @@ resource "null_resource" "aks_config" {
 
 provider "helm" {
   kubernetes {
-    host                   = module.aks_cluster.kube_config_host
+    host                   = module.aks.kube_config_host
     client_certificate     = base64decode(module.aks.kube_config_client_certificate)
     client_key             = base64decode(module.aks.kube_config_client_key)
     cluster_ca_certificate = base64decode(module.aks.kube_config_cluster_ca_certificate)
@@ -142,7 +146,7 @@ resource "helm_release" "ingress-azure" {
     "${templatefile("${path.module}/templates/helm-config.yaml", {
       subscription_id         = data.azurerm_client_config.current.subscription_id,
       resource_group_name     = module.resource_group.name,
-      applicationgateway_name = module.agw.name,
+      applicationgateway_name = module.application_gateway.name,
       identity_resource_id    = module.user_assigned_identity.uai_id,
       identity_client_id      = module.user_assigned_identity.uai_client_id,
       aks-api-server-address  = module.aks.fqdn
