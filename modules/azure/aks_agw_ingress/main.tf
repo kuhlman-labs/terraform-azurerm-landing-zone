@@ -14,25 +14,6 @@ module "resource_group" {
   environment     = var.environment
 }
 
-#network
-
-module "subnet" {
-  source               = "../../../resources/azurerm/network/subnet"
-  resource_group       = module.resource_group.name
-  virtual_network_name = var.virtual_network_name
-  name_prefixes        = ["snet-agw", "snet-aks"]
-  address_prefixes     = var.address_prefixes_aks
-  environment          = var.environment
-}
-
-module "public_ip_agw" {
-  source            = "../../../resources/azurerm/network/public_ip"
-  name_prefix       = "pip-agw"
-  resource_group    = module.resource_group.name
-  allocation_method = "Static"
-  sku               = "Standard"
-}
-
 #managed identity for aks
 
 module "user_assigned_identity" {
@@ -73,14 +54,22 @@ module "role_assignment_aks_3" {
 
 #agw
 
+module "public_ip" {
+  source            = "../../../resources/azurerm/network/public_ip"
+  name_prefix       = "pip-agw"
+  resource_group    = module.resource_group.name
+  allocation_method = "Static"
+  sku               = "Standard"
+}
+
 module "application_gateway" {
   source               = "../../../resources/azurerm/network/application_gateway"
   resource_group       = module.resource_group.name
   name_prefix          = "agw-aks"
-  sku_name             = "WAF_v2"
-  sku_tier             = "WAF_v2"
+  sku_name             = "Standard_v2"
+  sku_tier             = "Standard_v2"
   subnet_id            = var.subnet_id_agw
-  public_ip_address_id = module.public_ip_agw.id
+  public_ip_address_id = module.public_ip.id
   tags                 = var.tags
 }
 
@@ -89,8 +78,6 @@ module "application_gateway" {
 module "aks" {
   source         = "../../../resources/azurerm/containers/kubernetes_cluster"
   resource_group = module.resource_group.name
-  client_id      = data.azurerm_client_config.current.client_id
-  client_secret  = var.client_secret
   vm_size             = "Standard_B2s"
   node_count = 3
   vnet_subnet_id      = var.subnet_id_aks
