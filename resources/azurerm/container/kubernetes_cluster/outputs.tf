@@ -6,6 +6,10 @@ output "id" {
   value = azurerm_kubernetes_cluster.base.id
 }
 
+output "name" {
+  value = azurerm_kubernetes_cluster.base.name
+}
+
 output "fqdn" {
   value = azurerm_kubernetes_cluster.base.fqdn
 }

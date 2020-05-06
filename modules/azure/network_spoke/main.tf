@@ -16,7 +16,7 @@ module "resource_group" {
 module "virtual_network" {
   source         = "../../../resources/azurerm/network/virtual_network"
   resource_group = module.resource_group.name
-  name_prefix    = "vnet-spoke"
+  name_prefix    = "vnet_spoke"
   address_space  = var.address_space
   tags           = var.tags
   environment    = var.environment
@@ -28,8 +28,8 @@ module "subnet" {
   source               = "../../../resources/azurerm/network/subnet"
   resource_group       = module.resource_group.name
   virtual_network_name = module.virtual_network.name
-  name_prefixes        = ["snet-fontend", "snet-backend"]
-  address_prefixes     = var.address_prefixes
+  name_prefixes        = var.subnet_name_prefixes
+  address_prefixes     = var.subnet_address_prefixes
   environment          = var.environment
 }
 

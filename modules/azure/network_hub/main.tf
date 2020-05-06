@@ -28,8 +28,8 @@ module "subnet" {
   source               = "../../../resources/azurerm/network/subnet"
   resource_group       = module.resource_group.name
   virtual_network_name = module.virtual_network.name
-  name_prefixes        = ["snet-dmz", "snet-bastion"]
-  address_prefixes     = var.address_prefixes
+  name_prefixes        = var.subnet_name_prefixes
+  address_prefixes     = var.subnet_address_prefixes
   environment          = var.environment
 }
 
@@ -39,7 +39,7 @@ module "network_security_group" {
   source         = "../../../resources/azurerm/network/network_security_group"
   resource_group = module.resource_group.name
   environment    = var.environment
-  policy_name    = "RDPallow"
+  policy_name    = "rdpallow"
 }
 
 module "network_security_rule" {
@@ -47,17 +47,6 @@ module "network_security_rule" {
   resource_group              = module.resource_group.name
   network_security_group_name = module.network_security_group.name
   network_security_rules = [
-    {
-      name                       = "SSH"
-      priority                   = 100
-      direction                  = "Inbound"
-      access                     = "Allow"
-      protocol                   = "*"
-      source_port_range          = "22"
-      destination_port_range     = "22"
-      source_address_prefix      = "VirtualNetwork"
-      destination_address_prefix = "*"
-    },
     {
       name                       = "RDP"
       priority                   = 110
@@ -74,7 +63,7 @@ module "network_security_rule" {
 
 module "subnet_network_security_group_association" {
   source                    = "../../../resources/azurerm/network/subnet_network_security_group_association"
-  subnet_id                 = element(module.subnet.id, 1)
+  subnet_id                 = var.subnet_id_management
   network_security_group_id = module.network_security_group.id
 }
 
@@ -93,7 +82,7 @@ module "virtual_network_gateway" {
   environment           = var.environment
   virtual_network_name  = module.virtual_network.name
   public_ip_name        = module.public_ip.name
-  address_prefixes      = var.vgw_address_prefix
+  address_prefixes      = var.address_prefix_vgw
   type                  = "Vpn"
   sku                   = "Basic"
   vpn_client_protocols  = ["SSTP"]

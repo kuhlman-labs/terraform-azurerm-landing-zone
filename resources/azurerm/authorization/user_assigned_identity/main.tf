@@ -13,5 +13,5 @@ data "azurerm_resource_group" "base" {
 resource "azurerm_user_assigned_identity" "base" {
   resource_group_name = data.azurerm_resource_group.base.name
   location            = data.azurerm_resource_group.base.location
-  name                = var.uai_name
+  name                = "${var.name_prefix}-${var.environment}-${data.azurerm_resource_group.base.location}"
 }
