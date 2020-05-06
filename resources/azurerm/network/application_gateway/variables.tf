@@ -12,7 +12,12 @@ variable "resource_group" {
 variable "name_prefix" {
   description = "Short prefix to identify resource"
   type        = string
-  default     = "app-gw"
+  default     = "agw"
+}
+
+variable "environment" {
+  description = "Development environment for resource; prod, non-prod, shared-services"
+  type        = string
 }
 
 #app_gw

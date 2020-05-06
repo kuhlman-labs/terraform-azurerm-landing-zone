@@ -142,6 +142,31 @@ variable "private_cluster_enabled" {
   default     = null
 }
 
+variable "identity" {
+  description = "(Optional) A identity block as defined below. Changing this forces a new resource to be created."
+  type        = list
+  default = [
+    {
+      type = "SystemAssigned"
+    }
+  ]
+}
+
+variable "service_principal" {
+  description = "(Optional) A service_principal block as documented below."
+  type        = list
+  default     = []
+  /*
+  [
+    {
+      clientid = ""
+      client_secret = ""
+    }
+  ]
+}
+*/
+}
+
 variable "linux_profile" {
   description = "https://www.terraform.io/docs/providers/azurerm/r/kubernetes_cluster.html#linux_profile"
   type        = list
@@ -238,5 +263,3 @@ variable "tags" {
   type        = map
   default     = {}
 }
-
-

@@ -8,90 +8,93 @@ data "azurerm_client_config" "current" {
 #resource group
 
 module "resource_group" {
-  source          = "../../../resources/azure/resource-group"
-  name_prefix = "k8s"
+  source          = "../../../resources/azurerm/resource_group"
+  service_name = "aks"
   region          = var.region
   environment     = var.environment
 }
 
-#managed identity for aks cluster
+#network
 
-module "aks_user_assigned_identity" {
-  source         = "../../../resources/azure/governance/user-assigned-identity"
-  resource_group = module.aks_cluster.node_resource_group
-  uai_name       = "aks-cluster-id"
-}
-
-#role assignments for AD integration
-
-module "aks_role_assignment_1" {
-  source               = "../../../resources/azure/governance/role-assignment"
-  scope                = module.aks_subnet.subnet_id
-  role_definition_name = "Network Contributor"
-  principal_id         = data.azurerm_client_config.current.object_id
-}
-
-module "aks_role_assignment_2" {
-  source               = "../../../resources/azure/governance/role-assignment"
-  scope                = module.aks_user_assigned_identity.uai_id
-  role_definition_name = "Managed Identity Operator"
-  principal_id         = data.azurerm_client_config.current.object_id
-}
-
-module "aks_role_assignment_3" {
-  source               = "../../../resources/azure/governance/role-assignment"
-  scope                = module.waf_subnet.subnet_id
-  role_definition_name = "Contributor"
-  principal_id         = module.aks_user_assigned_identity.uai_principal_id
-}
-
-module "aks_role_assignment_4" {
-  source               = "../../../resources/azure/governance/role-assignment"
-  scope                = module.resource_group.resource_group_id
-  role_definition_name = "Reader"
-  principal_id         = module.aks_user_assigned_identity.uai_principal_id
-}
-
-#waf
-
-module "waf_subnet" {
-  source                = "../../../resources/azure/network/vnet-subnet"
+module "subnet" {
+  source                = "../../../resources/azurerm/network/subnet"
   vnet_name             = var.vnet_name
   resource_group        = var.vnet_rg
-  name_prefix           = "app_gw"
-  subnet_address_prefix = var.subnet_app_gw_address_prefix
+  name_prefixes           = ["snet-agw", "snet-aks"]
+  subnet_address_prefixes = var.subnet_address_prefixes
 }
 
-module "waf_public_ip" {
-  source            = "../../../resources/azure/network/public-ip"
+module "public_ip_agw" {
+  source            = "../../../resources/azurerm/network/public-ip"
   name              = "${module.resource_group.resource_group_name}-app-gw-ip"
   resource_group    = module.resource_group.resource_group_name
   allocation_method = "Static"
   sku               = "Standard"
 }
 
-module "waf" {
-  source               = "../../../resources/azure/network/application-gateway"
+#managed identity for aks
+
+module "user_assigned_identity" {
+  source         = "../../../resources/azurerm/governance/user_assigned_identity"
+  resource_group = module.aks_cluster.node_resource_group
+  uai_name       = "aks-id-${var.environment}-${module.resource_group.location}"
+}
+
+#role assignments for AD integration
+
+module "role_assignment_aks_0" {
+  source               = "../../../resources/azurerm/governance/role_assignment"
+  scope                = module.subnet_aks.subnet_id
+  role_definition_name = "Network Contributor"
+  principal_id         = data.azurerm_client_config.current.object_id
+}
+
+module "role_assignment_aks_1" {
+  source               = "../../../resources/azurerm/governance/role_assignment"
+  scope                = module.user_assigned_identity_aks.uai_id
+  role_definition_name = "Managed Identity Operator"
+  principal_id         = data.azurerm_client_config.current.object_id
+}
+
+module "role_assignment_aks_2" {
+  source               = "../../../resources/azurerm/governance/role_assignment"
+  scope                = module.subnet_agw.subnet_id
+  role_definition_name = "Contributor"
+  principal_id         = module.aks_user_assigned_identity.uai_principal_id
+}
+
+module "role_assignment_aks_3" {
+  source               = "../../../resources/azurerm/governance/role_assignment"
+  scope                = module.resource_group.resource_group_id
+  role_definition_name = "Reader"
+  principal_id         = module.aks_user_assigned_identity.uai_principal_id
+}
+
+#agw
+
+module "application_gateway" {
+  source               = "../../../resources/azurerm/network/application_gateway"
   resource_group       = module.resource_group.resource_group_name
+  name_prefix          = "agw-aks"
   sku_name             = "WAF_v2"
   sku_tier             = "WAF_v2"
-  subnet_id            = module.waf_subnet.subnet_id
-  public_ip_address_id = module.waf_public_ip.public_ip_id
+  subnet_id            = module.subnet.subnet_id
+  public_ip_address_id = module.public_ip.public_ip_id
   tags                 = var.tags
 }
 
 #aks cluster
 
-module "aks_subnet" {
-  source                = "../../../resources/azure/network/vnet-subnet"
+module "subnet" {
+  source                = "../../../resources/azurerm/network/subnet"
   vnet_name             = var.vnet_name
   resource_group        = var.vnet_rg
-  name_prefix           = "aks_nodes"
+  name_prefix           = "snet-aks-nodes"
   subnet_address_prefix = var.subnet_aks_nodes_address_prefix
 }
 
-module "aks_cluster" {
-  source         = "../../../resources/azure/containers/aks-cluster"
+module "aks" {
+  source         = "../../../resources/azurerm/containers/kubernetes_cluster"
   resource_group = module.resource_group.resource_group_name
   client_id      = data.azurerm_client_config.current.client_id
   client_secret  = var.client_secret

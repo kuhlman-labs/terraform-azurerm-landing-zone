@@ -61,8 +61,19 @@ resource "azurerm_kubernetes_cluster" "base" {
   api_server_authorized_ip_ranges = var.api_server_authorized_ip_ranges
   enable_pod_security_policy      = var.enable_pod_security_policy
 
-  identity {
-    type = "SystemAssigned"
+  dynamic "identity" {
+    for_each = var.identity
+    content {
+      type = identity.value.type
+    }
+  }
+
+  dynamic "service_principal" {
+    for_each = var.service_principal
+    content {
+      client_id     = service_principal.value.client_id
+      client_secret = service_principal.value.client_secret
+    }
   }
 
   kubernetes_version = var.kubernetes_version
