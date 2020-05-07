@@ -34,7 +34,7 @@ variable "address_prefixes" {
 
 variable "virtual_network_name" {
   description = "(Required) The name of the virtual network to which to attach the subnet. Changing this forces a new resource to be created."
-  type = string
+  type        = string
 }
 
 variable "public_cert_data" {

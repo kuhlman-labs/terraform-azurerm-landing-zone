@@ -17,6 +17,11 @@ output "virtual_network_resource_group_name" {
 }
 
 output "subnet_id" {
-  value       = module.subnet[*].id
+  value       = module.subnet.id
+  description = "The subnet ID."
+}
+
+output "subnet_name" {
+  value       = module.subnet.name
   description = "The subnet ID."
 }

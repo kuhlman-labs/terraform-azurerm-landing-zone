@@ -5,7 +5,7 @@
 #local variables
 
 provider "azurerm" {
-  features{}
+  features {}
 }
 
 locals {
@@ -55,8 +55,8 @@ resource "azurerm_application_gateway" "base" {
   }
 
   frontend_port {
-  name = "${local.frontend_port_name}-443"
-  port = 443
+    name = "${local.frontend_port_name}-443"
+    port = 443
   }
 
   backend_address_pool {

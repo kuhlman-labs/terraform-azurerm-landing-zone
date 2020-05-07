@@ -7,9 +7,9 @@ verbosityLevel: 3
 # Specify which application gateway the ingress controller will manage
 #
 appgw:
-    subscriptionId: <subscriptionId>
-    resourceGroup: <resourceGroupName>
-    name: <applicationGatewayName>
+    subscriptionId: ${subscription_id}
+    resourceGroup: ${resource_group_name}
+    name: ${applicationgateway_name}
     usePrivateIP: false
 
     # Setting appgw.shared to "true" will create an AzureIngressProhibitedTarget CRD.
@@ -33,8 +33,8 @@ appgw:
 # - Option 1: AAD-Pod-Identity (https://github.com/Azure/aad-pod-identity)
 armAuth:
     type: aadPodIdentity
-    identityResourceID: <identityResourceId>
-    identityClientID:  <identityClientId>
+    identityResourceID: ${identity_resource_id}
+    identityClientID:  ${identity_client_id}
 
 ## Alternatively you can use Service Principal credentials
 # armAuth:
@@ -48,4 +48,4 @@ rbac:
 
 # Specify aks cluster related information. THIS IS BEING DEPRECATED.
 aksClusterConfiguration:
-    apiServerAddress: <aks-api-server-address>
+    apiServerAddress: ${aks-api-server-address}

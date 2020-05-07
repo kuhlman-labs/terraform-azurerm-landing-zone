@@ -21,6 +21,11 @@ variable "client_secret" {
   type        = string
 }
 
+variable "app_id" {
+  description = "The client ID for the Service Principal"
+  type        = string
+}
+
 #network
 
 variable "subnet_id_aks" {

@@ -24,6 +24,6 @@ variable "environment" {
 
 variable "policy_name" {
   description = "policy name or app name"
-  type = string
+  type        = string
 }
 

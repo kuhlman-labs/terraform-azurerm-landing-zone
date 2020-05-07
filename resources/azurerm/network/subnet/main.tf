@@ -11,7 +11,7 @@ data "azurerm_resource_group" "base" {
 #subnet
 
 resource "azurerm_subnet" "base" {
-  name                                           = "${element(var.name_prefixes, count.index)}-${var.environment}-${data.azurerm_resource_group.base.location}"
+  name  = "${element(var.name_prefixes, count.index)}-${var.environment}-${data.azurerm_resource_group.base.location}"
   count = length(var.name_prefixes)
 
   resource_group_name                            = data.azurerm_resource_group.base.name

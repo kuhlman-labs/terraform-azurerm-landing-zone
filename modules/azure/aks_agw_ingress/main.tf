@@ -8,10 +8,10 @@ data "azurerm_client_config" "current" {
 #resource group
 
 module "resource_group" {
-  source          = "../../../resources/azurerm/base/resource_group"
+  source       = "../../../resources/azurerm/base/resource_group"
   service_name = "aks"
-  region          = var.region
-  environment     = var.environment
+  region       = var.region
+  environment  = var.environment
 }
 
 #managed identity for aks
@@ -19,8 +19,8 @@ module "resource_group" {
 module "user_assigned_identity" {
   source         = "../../../resources/azurerm/authorization/user_assigned_identity"
   resource_group = module.resource_group.name
-  name_prefix       = "uai-aks"
-  environment     = var.environment
+  name_prefix    = "mi-aks"
+  environment    = var.environment
 }
 
 #role assignments for AD integration
@@ -61,7 +61,7 @@ module "public_ip" {
   resource_group    = module.resource_group.name
   allocation_method = "Static"
   sku               = "Standard"
-  environment     = var.environment
+  environment       = var.environment
 }
 
 module "application_gateway" {
@@ -72,7 +72,7 @@ module "application_gateway" {
   sku_tier             = "Standard_v2"
   subnet_id            = var.subnet_id_agw
   public_ip_address_id = module.public_ip.id
-  environment     = var.environment
+  environment          = var.environment
   tags                 = var.tags
 }
 
@@ -81,29 +81,33 @@ module "application_gateway" {
 module "aks" {
   source         = "../../../resources/azurerm/container/kubernetes_cluster"
   resource_group = module.resource_group.name
-  vm_size             = "Standard_B2s"
-  node_count = 3
-  vnet_subnet_id      = var.subnet_id_aks
+  vm_size        = "Standard_B2s"
+  node_count     = 3
+  vnet_subnet_id = var.subnet_id_aks
+  # service_principal = [{
+  #  client_id = var.app_id
+  #  client_secret = var.client_secret
+  #}]
   network_profile = [
     {
-      network_plugin     = "azure"
-      network_policy     = null
-      dns_service_ip     = var.dns_service_ip
-      docker_bridge_cidr = var.docker_bridge_cidr
-      service_cidr       = var.service_cidr
-      subnet_id          = var.subnet_id_aks
-      pod_cidr           = null
-      load_balancer_sku  = null
-      load_balancer_profile = null
+      network_plugin            = "azure"
+      network_policy            = null
+      dns_service_ip            = var.dns_service_ip
+      docker_bridge_cidr        = var.docker_bridge_cidr
+      service_cidr              = var.service_cidr
+      subnet_id                 = var.subnet_id_aks
+      pod_cidr                  = null
+      load_balancer_sku         = null
+      load_balancer_profile     = null
       managed_outbound_ip_count = null
-      outbound_type = null
+      outbound_type             = null
       managed_outbound_ip_count = null
-      outbound_ip_prefix_ids = null
-      outbound_ip_address_ids = null
+      outbound_ip_prefix_ids    = null
+      outbound_ip_address_ids   = null
     }
   ]
-  tags = var.tags
-  environment     = var.environment
+  tags        = var.tags
+  environment = var.environment
 }
 
 #aapodidentity for ARM integration
@@ -154,4 +158,12 @@ resource "helm_release" "ingress-azure" {
       aks-api-server-address  = module.aks.fqdn
     })}"
   ]
+}
+
+#deply test app
+resource "null_resource" "aks__test_app" {
+  depends_on = [helm_release.ingress-azure]
+  provisioner "local-exec" {
+    command = "kubectl apply -f ${path.module}/templates/aspnetapp.yaml"
+  }
 }

@@ -13,7 +13,7 @@ terraform {
 }
 
 provider "azurerm" {
-  version         = ">= 2.7.0"
+  version = ">= 2.7.0"
   features {}
   subscription_id = var.subscription_id
   client_id       = var.app_id

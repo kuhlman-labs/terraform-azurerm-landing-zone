@@ -11,8 +11,8 @@ data "azurerm_resource_group" "base" {
 #network security rule
 
 resource "azurerm_network_security_rule" "base" {
-  count                       = length(var.network_security_rules)
-  
+  count = length(var.network_security_rules)
+
   name                        = var.network_security_rules[count.index]["name"]
   priority                    = var.network_security_rules[count.index]["priority"]
   direction                   = var.network_security_rules[count.index]["direction"]

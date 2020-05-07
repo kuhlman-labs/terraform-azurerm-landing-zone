@@ -37,17 +37,17 @@ variable "subnet_name_prefixes" {
 
 variable "virtual_network_hub_name" {
   description = "The name of the hub virtual network"
-  type = string
+  type        = string
 }
 
 variable "virtual_network_hub_resource_group_name" {
   description = "The name of the hub virtual network resource group"
-  type = string
+  type        = string
 }
 
 variable "virtual_network_hub_id" {
   description = "The id of the hub virtual network"
-  type = string
+  type        = string
 }
 
 #tags
