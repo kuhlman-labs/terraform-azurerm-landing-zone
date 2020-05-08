@@ -39,7 +39,7 @@ resource "azurerm_application_gateway" "base" {
   zones = var.zones
 
   frontend_ip_configuration {
-    name                 = "${local.frontend_ip_configuration_name}-public"
+    name                 = local.frontend_ip_configuration_name
     public_ip_address_id = var.public_ip_address_id
     private_ip_address   = var.private_ip_address
   }
@@ -50,7 +50,7 @@ resource "azurerm_application_gateway" "base" {
   }
 
   frontend_port {
-    name = "${local.frontend_port_name}-80"
+    name = local.frontend_port_name
     port = 80
   }
 
@@ -73,8 +73,8 @@ resource "azurerm_application_gateway" "base" {
 
   http_listener {
     name                           = local.listener_name
-    frontend_ip_configuration_name = "${local.frontend_ip_configuration_name}-private"
-    frontend_port_name             = "${local.frontend_port_name}-80"
+    frontend_ip_configuration_name = local.frontend_ip_configuration_name
+    frontend_port_name             = local.frontend_port_name
     protocol                       = "Http"
   }
 

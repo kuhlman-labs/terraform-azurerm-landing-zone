@@ -84,39 +84,17 @@ module "aks" {
   vm_size        = "Standard_B2s"
   node_count     = 3
   vnet_subnet_id = var.subnet_id_aks
-  # service_principal = [{
-  #  client_id = var.app_id
-  #  client_secret = var.client_secret
-  #}]
-  network_profile = [
-    {
-      network_plugin            = "azure"
-      network_policy            = null
-      dns_service_ip            = var.dns_service_ip
-      docker_bridge_cidr        = var.docker_bridge_cidr
-      service_cidr              = var.service_cidr
-      subnet_id                 = var.subnet_id_aks
-      pod_cidr                  = null
-      load_balancer_sku         = null
-      load_balancer_profile     = null
-      managed_outbound_ip_count = null
-      outbound_type             = null
-      managed_outbound_ip_count = null
-      outbound_ip_prefix_ids    = null
-      outbound_ip_address_ids   = null
-    }
-  ]
   tags        = var.tags
   environment = var.environment
 }
 
 #aapodidentity for ARM integration
+//az login --service-principal -u ${var.app_id} -p ${var.client_secret} --tenant ${data.azurerm_client_config.current.tenant_id};
 
 resource "null_resource" "aks_config" {
   depends_on = [module.aks]
   provisioner "local-exec" {
     command = <<EOT
-    az login --service-principal -u ${data.azurerm_client_config.current.client_id} -p ${var.client_secret} --tenant ${data.azurerm_client_config.current.tenant_id};
     az aks get-credentials --resource-group ${module.resource_group.name} --name ${module.aks.name} --admin --overwrite-existing;
     kubectl create -f https://raw.githubusercontent.com/Azure/aad-pod-identity/master/deploy/infra/deployment.yaml;
     echo "${templatefile("${path.module}/templates/aadpodidentity.yaml", {
@@ -141,7 +119,7 @@ provider "helm" {
 
 #helm release for waf-ingress
 
-resource "helm_release" "ingress-azure" {
+resource "helm_release" "ingress_azure" {
   depends_on = [null_resource.aks_config]
   name       = "application-gateway-kubernetes-ingress"
   repository = "https://appgwingress.blob.core.windows.net/ingress-azure-helm-package/"
@@ -161,8 +139,8 @@ resource "helm_release" "ingress-azure" {
 }
 
 #deply test app
-resource "null_resource" "aks__test_app" {
-  depends_on = [helm_release.ingress-azure]
+resource "null_resource" "aks_test_app" {
+  depends_on = [helm_release.ingress_azure]
   provisioner "local-exec" {
     command = "kubectl apply -f ${path.module}/templates/aspnetapp.yaml"
   }
