@@ -9,7 +9,7 @@ for dir in $(find ${modules} -type d); do
   then
     cd -;
     echo "$dir";
-    echo | terraform-config-inspect "$dir"  > "$dir/"README.md
+    echo | terraform-docs md "$dir"  > "$dir/"README.md
   else
   cd -;
   echo skipping $dir, because it does not contain a terraform module

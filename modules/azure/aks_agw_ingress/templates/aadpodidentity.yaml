@@ -4,5 +4,5 @@ metadata:
   name: ${name}
 spec:
   type: 0
-  ResourceID: ${identity_resource_id}
-  ClientID: ${identity_client_id}
+  resourceID: ${identity_resource_id}
+  clientID: ${identity_client_id}

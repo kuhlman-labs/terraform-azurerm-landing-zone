@@ -1,31 +1,29 @@
+## Requirements
 
-# Module `resources/azure/network/vnet-peering`
+No requirements.
 
-Core Version Constraints:
-* `>= 0.12`
+## Providers
 
-Provider Requirements:
-* **azurerm:** `~> 1.32.0`
+| Name | Version |
+|------|---------|
+| azurerm | n/a |
 
-## Input Variables
-* `allow_forwarded_traffic` (default `"true"`): Controls if forwarded traffic from VMs in the remote virtual network is allowed. Defaults to true.
-* `allow_vnet_access` (default `"true"`): Controls if the VMs in the remote virtual network can access VMs in the local virtual network. Defaults to true.
-* `hub_allow_gateway_transit` (required): Controls gatewayLinks can be used in the remote virtual network’s link to the local virtual network.
-* `hub_use_remote_gateways` (required): Controls if remote gateways can be used on the local virtual network. If the flag is set to true, and allow_gateway_transit on the remote peering is also true, virtual network will use gateways of remote virtual network for transit. Only one peering can have this flag set to true. This flag cannot be set if virtual network already has a gateway. Defaults to false.
-* `hub_vnet_id` (required): This is the ID for the Hub Vnet
-* `hub_vnet_name` (required): This is the Hub Vnet name
-* `hub_vnet_rg` (required): This is the resource group name for the Hub Vnet
-* `spoke_allow_gateway_transit` (required): Controls gatewayLinks can be used in the remote virtual network’s link to the local virtual network.
-* `spoke_use_remote_gateways` (required): Controls if remote gateways can be used on the local virtual network. If the flag is set to true, and allow_gateway_transit on the remote peering is also true, virtual network will use gateways of remote virtual network for transit. Only one peering can have this flag set to true. This flag cannot be set if virtual network already has a gateway. Defaults to false.
-* `spoke_vnet_id` (required): Spoke Vnets ID to be peered with the Hub Vnet
-* `spoke_vnet_name` (required): Spoke Vnets Name to be peered with the Hub Vnet
-* `spoke_vnet_rg` (required): Spoke Vnets resource Group to be peered with the Hub Vnet
+## Inputs
 
-## Output Values
-* `vnet_hub_to_spoke_peering_id`: Resource id for peering between hub and spoke vnet
-* `vnet_spoke_to_hub_peering_id`: Resource id for peering between spoke and hub vnet
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| allow\_forwarded\_traffic | (Optional) Controls if forwarded traffic from VMs in the remote virtual network is allowed. Defaults to false. | `bool` | `null` | no |
+| allow\_gateway\_transit | (Optional) Controls gatewayLinks can be used in the remote virtual network’s link to the local virtual network. | `bool` | `null` | no |
+| allow\_virtual\_network\_access | (Optional) Controls if the VMs in the remote virtual network can access VMs in the local virtual network. Defaults to true. | `bool` | `null` | no |
+| remote\_virtual\_network\_id | (Required) The full Azure resource ID of the remote virtual network. Changing this forces a new resource to be created. | `string` | n/a | yes |
+| remote\_virtual\_network\_name | (Required) The name of the remote virtual network. Changing this forces a new resource to be created. | `string` | n/a | yes |
+| resource\_group\_name | (Required) The name of the resource group in which to create the virtual network. Changing this forces a new resource to be created. | `string` | n/a | yes |
+| use\_remote\_gateways | (Optional) Controls if remote gateways can be used on the local virtual network. If the flag is set to true, and allow\_gateway\_transit on the remote peering is also true, virtual network will use gateways of remote virtual network for transit. Only one peering can have this flag set to true. This flag cannot be set if virtual network already has a gateway. Defaults to false. | `bool` | `null` | no |
+| virtual\_network\_name | (Required) The name of the virtual network. Changing this forces a new resource to be created. | `string` | n/a | yes |
 
-## Managed Resources
-* `azurerm_virtual_network_peering.hub_to_spoke` from `azurerm`
-* `azurerm_virtual_network_peering.spoke_to_hub` from `azurerm`
+## Outputs
+
+| Name | Description |
+|------|-------------|
+| virtual\_network\_peering\_id | The ID of the Virtual Network Peering. |
 

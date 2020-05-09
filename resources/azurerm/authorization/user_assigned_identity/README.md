@@ -1,25 +1,27 @@
+## Requirements
 
-# Module `resources/azure/governance/user-assigned-identity`
+No requirements.
 
-Core Version Constraints:
-* `>= 0.12`
+## Providers
 
-Provider Requirements:
-* **azurerm:** `~> 1.32.0`
+| Name | Version |
+|------|---------|
+| azurerm | n/a |
 
-## Input Variables
-* `resource_group` (required): The name of the target resource group
-* `uai_name` (required): The name of the user assigned identity. Changing this forces a new identity to be created.
+## Inputs
 
-## Output Values
-* `uai_client_id`
-* `uai_id`
-* `uai_name`
-* `uai_principal_id`
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| environment | Development environment for resource; prod, non-prod, shared-services | `string` | n/a | yes |
+| name\_prefix | A short pre-defined text to identify the resource type | `string` | `"uai"` | no |
+| resource\_group | The name of the target resource group | `string` | n/a | yes |
 
-## Managed Resources
-* `azurerm_user_assigned_identity.base` from `azurerm`
+## Outputs
 
-## Data Resources
-* `data.azurerm_resource_group.base` from `azurerm`
+| Name | Description |
+|------|-------------|
+| uai\_client\_id | n/a |
+| uai\_id | n/a |
+| uai\_name | n/a |
+| uai\_principal\_id | n/a |
 

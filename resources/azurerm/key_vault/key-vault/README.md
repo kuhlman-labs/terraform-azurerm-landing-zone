@@ -1,28 +1,27 @@
+## Requirements
 
-# Module `resources/azure/governance/key-vault`
+No requirements.
 
-Core Version Constraints:
-* `>= 0.12`
+## Providers
 
-Provider Requirements:
-* **azurerm:** `~> 1.32.0`
-* **random:** (any version)
+| Name | Version |
+|------|---------|
+| azurerm | n/a |
+| random | n/a |
 
-## Input Variables
-* `access_policy` (default `[{"certificate_permissions":["create","delete","deleteissuers","get","getissuers","import","list","listissuers","managecontacts","manageissuers","setissuers","update"],"key_permissions":["backup","create","decrypt","delete","encrypt","get","import","list","purge","recover","restore","sign","unwrapKey","update","verify","wrapKey"],"secret_permissions":["backup","delete","get","list","purge","recover","restore","set"]}]`)
-* `resource_group` (required): The name of the target resource group
-* `name_prefix` (default `"key-vault"`): a short pre-defined text to identify resource type
-* `sku_name` (default `"standard"`): The Name of the sku used for this Key Vault. Possible values are standard and premium.
-* `tags` (required): tags to be added to resource
+## Inputs
 
-## Output Values
-* `key_vault_id`: Key Vault resource id
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| access\_policy | n/a | `list` | <pre>[<br>  {<br>    "certificate_permissions": [<br>      "create",<br>      "delete",<br>      "deleteissuers",<br>      "get",<br>      "getissuers",<br>      "import",<br>      "list",<br>      "listissuers",<br>      "managecontacts",<br>      "manageissuers",<br>      "setissuers",<br>      "update"<br>    ],<br>    "key_permissions": [<br>      "backup",<br>      "create",<br>      "decrypt",<br>      "delete",<br>      "encrypt",<br>      "get",<br>      "import",<br>      "list",<br>      "purge",<br>      "recover",<br>      "restore",<br>      "sign",<br>      "unwrapKey",<br>      "update",<br>      "verify",<br>      "wrapKey"<br>    ],<br>    "secret_permissions": [<br>      "backup",<br>      "delete",<br>      "get",<br>      "list",<br>      "purge",<br>      "recover",<br>      "restore",<br>      "set"<br>    ]<br>  }<br>]</pre> | no |
+| name\_prefix | a short pre-defined text to identify resource type | `string` | `"key-vault"` | no |
+| resource\_group | The name of the target resource group | `string` | n/a | yes |
+| sku\_name | The Name of the sku used for this Key Vault. Possible values are standard and premium. | `string` | `"standard"` | no |
+| tags | tags to be added to resource | `map` | `{}` | no |
 
-## Managed Resources
-* `azurerm_key_vault.base` from `azurerm`
-* `random_string.base` from `random`
+## Outputs
 
-## Data Resources
-* `data.azurerm_client_config.current` from `azurerm`
-* `data.azurerm_resource_group.base` from `azurerm`
+| Name | Description |
+|------|-------------|
+| key\_vault\_id | Key Vault resource id |
 

@@ -29,14 +29,14 @@ module "role_assignment_aks_0" {
   source               = "../../../resources/azurerm/authorization/role_assignment"
   scope                = var.subnet_id_aks
   role_definition_name = "Network Contributor"
-  principal_id         = data.azurerm_client_config.current.object_id
+  principal_id         = var.object_id
 }
 
 module "role_assignment_aks_1" {
   source               = "../../../resources/azurerm/authorization/role_assignment"
   scope                = module.user_assigned_identity.uai_id
   role_definition_name = "Managed Identity Operator"
-  principal_id         = data.azurerm_client_config.current.object_id
+  principal_id         = var.object_id
 }
 
 module "role_assignment_aks_2" {
@@ -84,12 +84,33 @@ module "aks" {
   vm_size        = "Standard_B2s"
   node_count     = 3
   vnet_subnet_id = var.subnet_id_aks
+  service_principal = [{
+    client_id = var.app_id
+    client_secret = var.client_secret
+  }]
+  network_profile = [
+    {
+      network_plugin     = "azure"
+      network_policy     = null
+      dns_service_ip     = var.dns_service_ip
+      docker_bridge_cidr = var.docker_bridge_cidr
+      outbound_type      = null
+      pod_cidr           = null
+      service_cidr       = var.service_cidr
+      load_balancer_sku  = "Basic"      
+    }
+  ]
   tags        = var.tags
   environment = var.environment
 }
 
 #aapodidentity for ARM integration
 //az login --service-principal -u ${var.app_id} -p ${var.client_secret} --tenant ${data.azurerm_client_config.current.tenant_id};
+//    echo "${templatefile("${path.module}/templates/aadpodidentity.yaml", {
+//    name                 = module.user_assigned_identity.uai_name,
+//    identity_resource_id = module.user_assigned_identity.uai_id,
+//    identity_client_id   = module.user_assigned_identity.uai_client_id
+//})}" | kubectl apply -f -
 
 resource "null_resource" "aks_config" {
   depends_on = [module.aks]
@@ -97,13 +118,8 @@ resource "null_resource" "aks_config" {
     command = <<EOT
     az aks get-credentials --resource-group ${module.resource_group.name} --name ${module.aks.name} --admin --overwrite-existing;
     kubectl create -f https://raw.githubusercontent.com/Azure/aad-pod-identity/master/deploy/infra/deployment.yaml;
-    echo "${templatefile("${path.module}/templates/aadpodidentity.yaml", {
-    name                 = module.user_assigned_identity.uai_name,
-    identity_resource_id = module.user_assigned_identity.uai_id,
-    identity_client_id   = module.user_assigned_identity.uai_client_id
-})}" | kubectl apply -f -
     EOT
-}
+  }
 }
 
 #authentication for helm provider
@@ -119,12 +135,16 @@ provider "helm" {
 
 #helm release for waf-ingress
 
+data "helm_repository" "ingress_azure" {
+  name = "application-gateway-kubernetes-ingress"
+  url  = "https://appgwingress.blob.core.windows.net/ingress-azure-helm-package/"
+}
+
 resource "helm_release" "ingress_azure" {
   depends_on = [null_resource.aks_config]
   name       = "application-gateway-kubernetes-ingress"
-  repository = "https://appgwingress.blob.core.windows.net/ingress-azure-helm-package/"
+  repository = data.helm_repository.ingress_azure.metadata[0].name
   chart      = "ingress-azure"
-  namespace  = "default"
 
   values = [
     "${templatefile("${path.module}/templates/helm-config.yaml", {

@@ -60,14 +60,14 @@ resource "azurerm_kubernetes_cluster" "base" {
 
   api_server_authorized_ip_ranges = var.api_server_authorized_ip_ranges
   enable_pod_security_policy      = var.enable_pod_security_policy
-
+/*
   dynamic "identity" {
     for_each = var.identity
     content {
       type = identity.value.type
     }
   }
-
+*/
   dynamic "service_principal" {
     for_each = var.service_principal
     content {
@@ -99,11 +99,11 @@ resource "azurerm_kubernetes_cluster" "base" {
       pod_cidr           = network_profile.value.pod_cidr
       service_cidr       = network_profile.value.service_cidr
       load_balancer_sku  = network_profile.value.load_balancer_sku
-      load_balancer_profile {
+      /*load_balancer_profile {
         managed_outbound_ip_count = network_profile.value.managed_outbound_ip_count
         outbound_ip_prefix_ids    = network_profile.value.outbound_ip_prefix_ids
         outbound_ip_address_ids   = network_profile.value.outbound_ip_address_ids
-      }
+      }*/
     }
   }
 

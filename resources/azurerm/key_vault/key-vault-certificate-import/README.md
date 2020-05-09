@@ -1,27 +1,31 @@
+## Requirements
 
-# Module `resources/azure/governance/key-vault-certificate-import`
+No requirements.
 
-Core Version Constraints:
-* `>= 0.12`
+## Providers
 
-Provider Requirements:
-* **azurerm:** `~> 1.32.0`
+| Name | Version |
+|------|---------|
+| azurerm | n/a |
 
-## Input Variables
-* `certificate_contents` (required): The base64-encoded certificate contents. Changing this forces a new resource to be created.
-* `certificate_name` (default `"imported-cert"`):  (Required) Specifies the name of the Key Vault Certificate. Changing this forces a new resource to be created.
-* `certificate_password` (required): The password associated with the certificate. Changing this forces a new resource to be created.
-* `issuer_name` (default `"Self"`): (Required) The name of the Certificate Issuer. Possible values include Self, or the name of a certificate issuing authority supported by Azure. Changing this forces a new resource to be created.
-* `key_exportable` (default `true`): (Required) Is this Certificate Exportable? Changing this forces a new resource to be created.
-* `key_reuse` (default `true`): (Required) Is the key reusable? Changing this forces a new resource to be created.
-* `key_size` (default `"2048"`): (Required) The size of the Key used in the Certificate. Possible values include 2048 and 4096. Changing this forces a new resource to be created.
-* `key_type` (default `"RSA"`): (Required) Specifies the Type of Key, such as RSA. Changing this forces a new resource to be created.
-* `key_vault_id` (required): ID for the Key Vault that the certificate will be generated in
-* `secret_content_type` (default `"application/x-pkcs12"`): (Required) The Content-Type of the Certificate, such as application/x-pkcs12 for a PFX or application/x-pem-file for a PEM. Changing this forces a new resource to be created.
+## Inputs
 
-## Output Values
-* `key_vault_import_certificate_data`: Raw Key Vault certificate data
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| certificate\_contents | The base64-encoded certificate contents. Changing this forces a new resource to be created. | `string` | n/a | yes |
+| certificate\_name | (Required) Specifies the name of the Key Vault Certificate. Changing this forces a new resource to be created. | `string` | `"imported-cert"` | no |
+| certificate\_password | The password associated with the certificate. Changing this forces a new resource to be created. | `string` | n/a | yes |
+| issuer\_name | (Required) The name of the Certificate Issuer. Possible values include Self, or the name of a certificate issuing authority supported by Azure. Changing this forces a new resource to be created. | `string` | `"Self"` | no |
+| key\_exportable | (Required) Is this Certificate Exportable? Changing this forces a new resource to be created. | `bool` | `true` | no |
+| key\_reuse | (Required) Is the key reusable? Changing this forces a new resource to be created. | `bool` | `true` | no |
+| key\_size | (Required) The size of the Key used in the Certificate. Possible values include 2048 and 4096. Changing this forces a new resource to be created. | `string` | `"2048"` | no |
+| key\_type | (Required) Specifies the Type of Key, such as RSA. Changing this forces a new resource to be created. | `string` | `"RSA"` | no |
+| key\_vault\_id | ID for the Key Vault that the certificate will be generated in | `string` | n/a | yes |
+| secret\_content\_type | (Required) The Content-Type of the Certificate, such as application/x-pkcs12 for a PFX or application/x-pem-file for a PEM. Changing this forces a new resource to be created. | `string` | `"application/x-pkcs12"` | no |
 
-## Managed Resources
-* `azurerm_key_vault_certificate.base` from `azurerm`
+## Outputs
+
+| Name | Description |
+|------|-------------|
+| key\_vault\_import\_certificate\_data | Raw Key Vault certificate data |
 

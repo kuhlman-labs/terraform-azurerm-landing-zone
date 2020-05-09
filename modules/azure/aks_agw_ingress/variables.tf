@@ -26,6 +26,11 @@ variable "app_id" {
   type        = string
 }
 
+variable "object_id" {
+  description = "The object ID for the Service Principal"
+  type        = string
+}
+
 #network
 
 variable "subnet_id_aks" {

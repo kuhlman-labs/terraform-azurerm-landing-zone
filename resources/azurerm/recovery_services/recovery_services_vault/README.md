@@ -1,24 +1,25 @@
+## Requirements
 
-# Module `resources/azure/backup/recovery-services-vault`
+No requirements.
 
-Core Version Constraints:
-* `>= 0.12`
+## Providers
 
-Provider Requirements:
-* **azurerm:** `~> 1.32.0`
+| Name | Version |
+|------|---------|
+| azurerm | n/a |
 
-## Input Variables
-* `resource_group` (required): The name of the target resource group
-* `name_prefix` (default `"recovery-services-vault"`): Short prefix to identify resource
-* `sku` (default `"Standard"`): SKU for Recovery Services Vault
-* `tags` (required): tags to be added to resource
+## Inputs
 
-## Output Values
-* `recovery_services_id`: Recovery Services Vault resource id
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| name\_prefix | Short prefix to identify resource | `string` | `"recovery-services-vault"` | no |
+| resource\_group | The name of the target resource group | `string` | n/a | yes |
+| sku | SKU for Recovery Services Vault | `string` | `"Standard"` | no |
+| tags | tags to be added to resource | `map` | `{}` | no |
 
-## Managed Resources
-* `azurerm_recovery_services_vault.base` from `azurerm`
+## Outputs
 
-## Data Resources
-* `data.azurerm_resource_group.base` from `azurerm`
+| Name | Description |
+|------|-------------|
+| recovery\_services\_id | Recovery Services Vault resource id |
 

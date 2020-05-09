@@ -21,3 +21,6 @@ provider "azurerm" {
   tenant_id       = var.tenant_id
 }
 
+provider "helm" {
+  version = "1.1.1"
+}

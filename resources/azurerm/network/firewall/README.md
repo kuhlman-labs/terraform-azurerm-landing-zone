@@ -1,26 +1,27 @@
+## Requirements
 
-# Module `resources/azure/network/firewall`
+No requirements.
 
-Core Version Constraints:
-* `>= 0.12`
+## Providers
 
-Provider Requirements:
-* **azurerm:** `~> 1.32.0`
+| Name | Version |
+|------|---------|
+| azurerm | n/a |
 
-## Input Variables
-* `public_ip_address_id` (required): (Optional) The ID of a Public IP Address which the Firewall should use.
-* `resource_group` (required): The name of the target resource group
-* `name_prefix` (default `"firewall"`): Specifies the name of the Firewall. Changing this forces a new resource to be created.
-* `subnet_id` (required): Reference to the subnet associated with the IP Configuration.
-* `tags` (required): Optional tags to be added to resource
+## Inputs
 
-## Output Values
-* `firewall_id`
-* `firewall_private_ip`
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| name\_prefix | Specifies the name of the Firewall. Changing this forces a new resource to be created. | `string` | `"firewall"` | no |
+| public\_ip\_address\_id | (Optional) The ID of a Public IP Address which the Firewall should use. | `string` | n/a | yes |
+| resource\_group | The name of the target resource group | `string` | n/a | yes |
+| subnet\_id | Reference to the subnet associated with the IP Configuration. | `string` | n/a | yes |
+| tags | Optional tags to be added to resource | `map` | `{}` | no |
 
-## Managed Resources
-* `azurerm_firewall.base` from `azurerm`
+## Outputs
 
-## Data Resources
-* `data.azurerm_resource_group.base` from `azurerm`
+| Name | Description |
+|------|-------------|
+| firewall\_id | n/a |
+| firewall\_private\_ip | n/a |
 

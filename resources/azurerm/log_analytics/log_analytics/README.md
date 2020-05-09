@@ -1,29 +1,29 @@
+## Requirements
 
-# Module `resources/azure/governance/log-analytics`
+No requirements.
 
-Core Version Constraints:
-* `>= 0.12`
+## Providers
 
-Provider Requirements:
-* **azurerm:** `~> 1.32.0`
-* **random:** (any version)
+| Name | Version |
+|------|---------|
+| azurerm | n/a |
+| random | n/a |
 
-## Input Variables
-* `resource_group` (required): The name of the target resource group
-* `name_prefix` (default `"log-aw"`): a short pre-defined text to identify resource type
-* `retention_period` (default `30`): Time in days to retain logs in the log analytics workspace
-* `sku` (default `"PerGB2018"`): sku for Log Analytics Workspace
-* `tags` (required): Optional tags to be added to resource
+## Inputs
 
-## Output Values
-* `log_analytics_id`: Log Analytics Workspace id
-* `log_analytics_primary_shared_key`: Primary shared key for the Log Analytics Workspace
-* `log_analytics_workspace_id`: Workspace (or Customer) ID for the Log Analytics Workspace
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| name\_prefix | a short pre-defined text to identify resource type | `string` | `"log-aw"` | no |
+| resource\_group | The name of the target resource group | `string` | n/a | yes |
+| retention\_period | Time in days to retain logs in the log analytics workspace | `string` | `30` | no |
+| sku | sku for Log Analytics Workspace | `string` | `"PerGB2018"` | no |
+| tags | Optional tags to be added to resource | `map` | `{}` | no |
 
-## Managed Resources
-* `azurerm_log_analytics_workspace.base` from `azurerm`
-* `random_string.base` from `random`
+## Outputs
 
-## Data Resources
-* `data.azurerm_resource_group.base` from `azurerm`
+| Name | Description |
+|------|-------------|
+| log\_analytics\_id | Log Analytics Workspace id |
+| log\_analytics\_primary\_shared\_key | Primary shared key for the Log Analytics Workspace |
+| log\_analytics\_workspace\_id | Workspace (or Customer) ID for the Log Analytics Workspace |
 

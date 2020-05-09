@@ -1,27 +1,25 @@
+## Requirements
 
-# Module `resources/azure/network/nsg`
+No requirements.
 
-Core Version Constraints:
-* `>= 0.12`
+## Providers
 
-Provider Requirements:
-* **azurerm:** `~> 1.32.0`
+| Name | Version |
+|------|---------|
+| azurerm | n/a |
 
-## Input Variables
-* `environment` (required): Development environment for resource; prod, non-prod, shared-services
-* `nsg_rules` (default `[{"access":"Allow","destination_address_prefix":"*","destination_port_range":"22","direction":"Inbound","name":"SSH","priority":100,"protocol":"*","source_address_prefix":"VirtualNetwork","source_port_range":"22"},{"access":"Allow","destination_address_prefix":"*","destination_port_range":"3389","direction":"Inbound","name":"RDP","priority":110,"protocol":"*","source_address_prefix":"VirtualNetwork","source_port_range":"3389"}]`): List of NSG rules
-* `resource_group` (required): This is the resource group to which the resources will be deployed
-* `name_prefix` (default `"nsg"`): A short pre-defined text to identify the resource type
-* `name_prefixs` (required): Subnet names the NSG will apply to. Used for count
+## Inputs
 
-## Output Values
-* `nsg_id`: Network security group resource id
-* `nsg_rules_ids`: List of network security group rules ids
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| name\_prefix | A short pre-defined text to identify the resource type | `string` | `"nsg"` | no |
+| network\_security\_group\_name | (Required) The name of the Network Security Group that we want to attach the rule to. Changing this forces a new resource to be created. | `string` | n/a | yes |
+| network\_security\_rules | List of network security rules | `list` | `[]` | no |
+| resource\_group | This is the resource group to which the resources will be deployed | `string` | n/a | yes |
 
-## Managed Resources
-* `azurerm_network_security_group.base` from `azurerm`
-* `azurerm_network_security_rule.base` from `azurerm`
+## Outputs
 
-## Data Resources
-* `data.azurerm_resource_group.base` from `azurerm`
+| Name | Description |
+|------|-------------|
+| id | The ID of the Network Security Rule. |
 

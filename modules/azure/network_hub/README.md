@@ -1,31 +1,30 @@
+## Requirements
 
-# Module `modules/azure/network-hub`
+| Name | Version |
+|------|---------|
+| terraform | >= 0.12 |
 
-Core Version Constraints:
-* `>= 0.12`
+## Providers
 
-Provider Requirements:
-* **azurerm:** `~> 1.32.0`
+No provider.
 
-## Input Variables
-* `environment` (required): Development environment for resource; prod, non-prod, shared-services
-* `nsg_rules_dmz` (required): List of NSG rules
-* `region` (required): Geographic Region resource will be deployed into
-* `subnet_dmz_address_prefix` (required): The address prefix to use for the subnet.
-* `tags` (required): A map of tags to add to all resources
-* `vnet_address_ranges` (required): This is a list of the ip address ranges for the vnet
+## Inputs
 
-## Output Values
-* `subnet_dmz_id`: resource id for dmz subnet
-* `subnet_dmz_name`: resource name for dmz subnet
-* `vnet_hub_id`: resource id of vnet hub
-* `vnet_hub_name`: resource name of vnet hub
-* `vnet_hub_rg`: resource group name of vnet hub
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| address\_prefix\_vgw | The address prefixe to use for the vgw subnet. | `list` | n/a | yes |
+| address\_prefixes | The address prefixes to use for the subnets. | `list(string)` | n/a | yes |
+| address\_space | This is a list of the ip address ranges for the vnet | `list` | n/a | yes |
+| environment | Development environment for resource; prod, non-prod, shared-services | `string` | n/a | yes |
+| region | Geographic Region resource will be deployed into | `string` | n/a | yes |
+| subnet\_name\_prefixes | The name of the subnets. Changing this forces a new resource to be created. | `list(string)` | n/a | yes |
+| tags | A map of tags to add to all resources | `map` | `{}` | no |
 
-## Child Modules
-* `nsg_association_dmz` from `../../../resources/azure/network/nsg-association`
-* `nsg_dmz` from `../../../resources/azure/network/nsg`
-* `resource_group` from `../../../resources/azure/resource-group`
-* `subnet_dmz` from `../../../resources/azure/network/vnet-subnet`
-* `vnet_hub` from `../../../resources/azure/network/vnet`
+## Outputs
+
+| Name | Description |
+|------|-------------|
+| virtual\_network\_id | resource id of vnet hub |
+| virtual\_network\_name | resource name of vnet hub |
+| virtual\_network\_resource\_group\_name | n/a |
 

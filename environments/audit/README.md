@@ -1,30 +1,35 @@
+## Requirements
 
-# Module `environments/audit`
+| Name | Version |
+|------|---------|
+| terraform | >= 0.12 |
+| azurerm | ~> 1.32.0 |
 
-Core Version Constraints:
-* `>= 0.12`
+## Providers
 
-Provider Requirements:
-* **azurerm:** `~> 1.32.0`
+No provider.
 
-## Input Variables
-* `access_key` (required): access key for the storage account that contains the Remote Backend
-* `app_id` (required): The client ID for the Service Principal
-* `client_secret` (required): The secret for the Service Principal authentication
-* `environment` (required): Development environment for resource; prod, non-prod, shared-services
-* `region` (required): Geographic region resource will be deployed into
-* `shared_services_subscription_id` (required): subscription id of shared-services env
-* `state_key` (required): Key for the state file of the solution, e.g. pre-prod.tfstate
-* `storage_account_name` (required): Storage account that contains Remote Backend, e.g. terraformdata24321
-* `subscription_id` (required): The Id of the Subscription that should contain the created resources
-* `tags` (required): A map of tags to add to all resources
-* `tenant_id` (required): The tenant ID for the Service Principal
+## Inputs
 
-## Output Values
-* `log_analytics_id`: Log Analytics Workspace id
-* `log_analytics_primary_shared_key`: Primary shared key for the Log Analytics Workspace
-* `log_analytics_workspace_id`: Workspace (or Customer) ID for the Log Analytics Workspace
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| access\_key | access key for the storage account that contains the Remote Backend | `string` | n/a | yes |
+| app\_id | The client ID for the Service Principal | `string` | n/a | yes |
+| client\_secret | The secret for the Service Principal authentication | `string` | n/a | yes |
+| environment | Development environment for resource; prod, non-prod, shared-services | `string` | n/a | yes |
+| region | Geographic region resource will be deployed into | `string` | n/a | yes |
+| shared\_services\_subscription\_id | subscription id of shared-services env | `string` | n/a | yes |
+| state\_key | Key for the state file of the solution, e.g. pre-prod.tfstate | `string` | n/a | yes |
+| storage\_account\_name | Storage account that contains Remote Backend, e.g. terraformdata24321 | `string` | n/a | yes |
+| subscription\_id | The Id of the Subscription that should contain the created resources | `string` | n/a | yes |
+| tags | A map of tags to add to all resources | `map` | `{}` | no |
+| tenant\_id | The tenant ID for the Service Principal | `string` | n/a | yes |
 
-## Child Modules
-* `log_analytics` from `../../modules/azure/log-analytics`
+## Outputs
+
+| Name | Description |
+|------|-------------|
+| log\_analytics\_id | Log Analytics Workspace id |
+| log\_analytics\_primary\_shared\_key | Primary shared key for the Log Analytics Workspace |
+| log\_analytics\_workspace\_id | Workspace (or Customer) ID for the Log Analytics Workspace |
 
