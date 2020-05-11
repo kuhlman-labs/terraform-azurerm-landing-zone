@@ -60,7 +60,7 @@ resource "azurerm_kubernetes_cluster" "base" {
 
   api_server_authorized_ip_ranges = var.api_server_authorized_ip_ranges
   enable_pod_security_policy      = var.enable_pod_security_policy
-/*
+  /*
   dynamic "identity" {
     for_each = var.identity
     content {

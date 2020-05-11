@@ -85,7 +85,7 @@ module "aks" {
   node_count     = 3
   vnet_subnet_id = var.subnet_id_aks
   service_principal = [{
-    client_id = var.app_id
+    client_id     = var.app_id
     client_secret = var.client_secret
   }]
   network_profile = [
@@ -97,7 +97,7 @@ module "aks" {
       outbound_type      = null
       pod_cidr           = null
       service_cidr       = var.service_cidr
-      load_balancer_sku  = "Basic"      
+      load_balancer_sku  = "Basic"
     }
   ]
   tags        = var.tags
@@ -118,6 +118,14 @@ resource "null_resource" "aks_config" {
     command = <<EOT
     az aks get-credentials --resource-group ${module.resource_group.name} --name ${module.aks.name} --admin --overwrite-existing;
     kubectl create -f https://raw.githubusercontent.com/Azure/aad-pod-identity/master/deploy/infra/deployment.yaml;
+    echo "${templatefile("${path.module}/templates/aadpodidentity.yaml", {
+    name                 = module.user_assigned_identity.uai_name,
+    identity_resource_id = module.user_assigned_identity.uai_id,
+    identity_client_id   = module.user_assigned_identity.uai_client_id
+    })}" | kubectl apply -f -;
+    echo "${templatefile("${path.module}/templates/aadpodbinding.yaml", {
+    name                 = module.user_assigned_identity.uai_name
+    })}" | kubectl apply -f -
     EOT
   }
 }
@@ -133,7 +141,7 @@ provider "helm" {
   }
 }
 
-#helm release for waf-ingress
+#helm release for ingress-azure
 
 data "helm_repository" "ingress_azure" {
   name = "application-gateway-kubernetes-ingress"
