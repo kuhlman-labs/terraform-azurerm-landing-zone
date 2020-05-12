@@ -20,8 +20,8 @@ spoke_subnet_name_prefixes = ["snet-agw", "snet-aks"]
 
 #aks
 
-service_cidr       = "10.200.10.0/24"
-dns_service_ip     = "10.200.10.10"
+service_cidr       = "10.200.3.0/24"
+dns_service_ip     = "10.200.3.10"
 docker_bridge_cidr = "172.17.0.1/16"
 
 #tags

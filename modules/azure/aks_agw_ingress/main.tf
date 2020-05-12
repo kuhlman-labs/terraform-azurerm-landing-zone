@@ -41,7 +41,7 @@ module "role_assignment_aks_1" {
 
 module "role_assignment_aks_2" {
   source               = "../../../resources/azurerm/authorization/role_assignment"
-  scope                = var.subnet_id_agw
+  scope                = module.application_gateway.id
   role_definition_name = "Contributor"
   principal_id         = module.user_assigned_identity.uai_principal_id
 }
@@ -150,7 +150,7 @@ data "helm_repository" "ingress_azure" {
 
 resource "helm_release" "ingress_azure" {
   depends_on = [null_resource.aks_config]
-  name       = "application-gateway-kubernetes-ingress"
+  name       = "application-gateway-kubernetes"
   repository = data.helm_repository.ingress_azure.metadata[0].name
   chart      = "ingress-azure"
 
@@ -166,7 +166,7 @@ resource "helm_release" "ingress_azure" {
   ]
 }
 
-#deply test app
+#deploy test app
 resource "null_resource" "aks_test_app" {
   depends_on = [helm_release.ingress_azure]
   provisioner "local-exec" {

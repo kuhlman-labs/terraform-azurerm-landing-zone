@@ -4,4 +4,4 @@ metadata:
   name: ${name}-binding
 spec:
   azureIdentity: ${name}
-  selector: ${name}
+  selector: application-gateway-kubernetes-ingress-azure
