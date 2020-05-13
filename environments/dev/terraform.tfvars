@@ -2,16 +2,26 @@
 # environment variables
 ###
 
-#commmon
+#common
 
-environment = "pre-prod"
+environment = "dev"
 region      = "eastus"
 
-#network
+#virtual_network
 
-vnet_address_ranges            = ["10.1.0.0/16"]
-subnet_frontend_address_prefix = "10.1.0.0/24"
-subnet_backend_address_prefix  = "10.1.1.0/24"
+address_space = ["10.1.0.0/16"]
+
+#subnet
+
+subnet_name_prefixes = ["snet-agw", "snet-aks"]
+address_prefixes     = ["10.1.1.0/24", "10.1.2.0/24"]
+
+#aks
+
+service_cidr       = "10.1.3.0/24"
+dns_service_ip     = "10.1.3.10"
+docker_bridge_cidr = "172.17.0.1/16"
+
 
 #tags
 

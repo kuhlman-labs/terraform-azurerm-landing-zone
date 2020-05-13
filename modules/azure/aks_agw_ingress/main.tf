@@ -124,10 +124,10 @@ resource "null_resource" "aks_config" {
     identity_client_id   = module.user_assigned_identity.uai_client_id
     })}" | kubectl apply -f -;
     echo "${templatefile("${path.module}/templates/aadpodbinding.yaml", {
-    name                 = module.user_assigned_identity.uai_name
-    })}" | kubectl apply -f -
+    name = module.user_assigned_identity.uai_name
+})}" | kubectl apply -f -
     EOT
-  }
+}
 }
 
 #authentication for helm provider

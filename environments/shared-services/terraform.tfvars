@@ -3,40 +3,20 @@
 ###
 
 #common
+
 environment = "shared-services"
 region      = "eastus"
 
-#network
+#virtual_network
 
-vnet_address_ranges       = ["10.0.0.0/16"]
-subnet_dmz_address_prefix = "10.0.1.0/24"
+address_space = ["10.0.0.0/16"]
 
-#nsg
+#subnet
 
-nsg_rules_dmz = [
-  {
-    name                       = "SSH"
-    priority                   = 100
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "*"
-    source_port_range          = "22"
-    destination_port_range     = "22"
-    source_address_prefix      = "VirtualNetwork"
-    destination_address_prefix = "*"
-  },
-  {
-    name                       = "RDP"
-    priority                   = 110
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "*"
-    source_port_range          = "3389"
-    destination_port_range     = "3389"
-    source_address_prefix      = "VirtualNetwork"
-    destination_address_prefix = "*"
-  },
-]
+subnet_name_prefixes = ["management"]
+address_prefixes     = ["10.0.0.0/24"]
+address_prefix_vgw   = ["10.0.10.0/27"]
+
 
 #tags
 

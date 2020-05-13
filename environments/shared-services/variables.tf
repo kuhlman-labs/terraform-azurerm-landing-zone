@@ -26,6 +26,11 @@ variable "app_id" {
   type        = string
 }
 
+variable "object_id" {
+  description = "The object ID for the Service Principal"
+  type        = string
+}
+
 variable "client_secret" {
   description = "The secret for the Service Principal authentication"
   type        = string
@@ -58,21 +63,24 @@ variable "storage_account_name" {
 
 #network
 
-variable "vnet_address_ranges" {
+variable "address_space" {
   description = "This is a list of the ip address ranges for the vnet"
   type        = list
 }
 
-variable "subnet_dmz_address_prefix" {
+variable "address_prefixes" {
   description = "The address prefix to use for the subnet."
-  type        = string
+  type        = list(string)
 }
 
-#nsg
-
-variable "nsg_rules_dmz" {
-  description = "List of NSG rules for DMZ subnet"
+variable "address_prefix_vgw" {
+  description = "The address prefix to use for the vgw subnet."
   type        = list
+}
+
+variable "subnet_name_prefixes" {
+  description = "The name of the subnets. Changing this forces a new resource to be created."
+  type        = list(string)
 }
 
 #tags

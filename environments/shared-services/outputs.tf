@@ -2,17 +2,17 @@
 # environment outputs
 ###
 
-output "shared_services_vnet_name" {
-  value       = module.network_hub.vnet_hub_name
+output "network_hub_name" {
+  value       = module.network_hub.virtual_network_name
   description = "Generated name of the hub virtual network"
 }
 
-output "shared_services_vnet_id" {
-  value       = module.network_hub.vnet_hub_id
+output "network_hub_id" {
+  value       = module.network_hub.virtual_network_id
   description = "Resource id of the hub virtual network"
 }
 
-output "shared_services_vnet_rg" {
-  value       = module.network_hub.vnet_hub_rg
+output "network_hub_resource_group_name" {
+  value       = module.network_hub.virtual_network_resource_group_name
   description = "Generated name of the resource group for hub virtual network"
 }
