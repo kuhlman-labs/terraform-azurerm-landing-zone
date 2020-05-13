@@ -21,13 +21,13 @@ variable "subscription_id" {
   type        = string
 }
 
-variable "shared_services_subscription_id" {
-  description = "subscription id of shared-services env"
+variable "app_id" {
+  description = "The client ID for the Service Principal"
   type        = string
 }
 
-variable "app_id" {
-  description = "The client ID for the Service Principal"
+variable "object_id" {
+  description = "The object ID for the Service Principal"
   type        = string
 }
 
@@ -41,6 +41,16 @@ variable "tenant_id" {
   type        = string
 }
 
+variable "shared_services_subscription_id" {
+  description = "subscription id of shared-services env"
+  type        = string
+}
+
+variable "state_key" {
+  description = "Key for the state file of the solution, e.g. pre-prod.tfstate"
+  type        = string
+}
+
 variable "access_key" {
   description = "access key for the storage account that contains the Remote Backend"
   type        = string
@@ -51,27 +61,40 @@ variable "storage_account_name" {
   type        = string
 }
 
-variable "state_key" {
-  description = "Key for the state file of the solution, e.g. pre-prod.tfstate"
-  type        = string
-}
-
 #network
 
-variable "vnet_address_ranges" {
+variable "address_space" {
   description = "This is a list of the ip address ranges for the vnet"
   type        = list
 }
 
-variable "subnet_frontend_address_prefix" {
+variable "address_prefixes" {
   description = "The address prefix to use for the subnet."
+  type        = list(string)
+}
+
+variable "subnet_name_prefixes" {
+  description = "The name of the subnets. Changing this forces a new resource to be created."
+  type        = list(string)
+}
+
+#aks
+
+variable "dns_service_ip" {
+  description = "IP address within the Kubernetes service address range that will be used by cluster service discovery (kube-dns). This is required when network_plugin is set to azure. Changing this forces a new resource to be created."
   type        = string
 }
 
-variable "subnet_backend_address_prefix" {
-  description = "The address prefix to use for the subnet."
+variable "docker_bridge_cidr" {
+  description = "IP address (in CIDR notation) used as the Docker bridge IP address on nodes. This is required when network_plugin is set to azure. Changing this forces a new resource to be created."
   type        = string
 }
+
+variable "service_cidr" {
+  description = "The Network Range used by the Kubernetes service. This is required when network_plugin is set to azure. Changing this forces a new resource to be created."
+  type        = string
+}
+
 
 #tags
 
