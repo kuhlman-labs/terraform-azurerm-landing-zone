@@ -11,7 +11,9 @@ data "azurerm_resource_group" "base" {
 #network interface
 
 resource "azurerm_network_interface" "base" {
-  name                          = var.name_prefix
+  count = var.nic_count
+
+  name                          = "${var.name_prefix}-${count.index}"
   location                      = data.azurerm_resource_group.base.location
   resource_group_name           = data.azurerm_resource_group.base.name
   dns_servers                   = var.dns_servers

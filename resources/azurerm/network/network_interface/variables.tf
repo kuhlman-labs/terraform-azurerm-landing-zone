@@ -22,6 +22,12 @@ variable "name_prefix" {
 
 #network interface
 
+variable "nic_count" {
+  description = "Number of nic resources to create"
+  type        = number
+  default     = 1
+}
+
 variable "dns_servers" {
   description = "(Optional) A list of IP Addresses defining the DNS Servers which should be used for this Network Interface."
   type        = list
@@ -80,4 +86,12 @@ variable "public_ip_address_id" {
 variable "subnet_id" {
   description = "(Required) The ID of the Subnet where this Network Interface should be located in."
   type        = string
+}
+
+#tags
+
+variable "tags" {
+  description = "A map of tags to add to all resources"
+  type        = map
+  default     = {}
 }
