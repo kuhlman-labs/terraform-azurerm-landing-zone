@@ -11,14 +11,14 @@ data "azurerm_resource_group" "base" {
 #random string
 
 resource "random_string" "random" {
-  length  = 8
+  length  = 4
   special = false
 }
 
 #storage account
 
 resource "azurerm_storage_account" "example" {
-  name                      = "${var.name_prefix}${random_string.random.result}"
+  name                      = "${var.name_prefix}${substr(${var.environment}, 0, 2)}${random_string.random.result}${trim(${data.azurerm_resource_group.base.location}, "-")}"
   resource_group_name       = data.azurerm_resource_group.base.name
   location                  = data.azurerm_resource_group.base.location
   account_kind              = var.account_kind

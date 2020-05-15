@@ -69,6 +69,8 @@ module "subnet_network_security_group_association" {
   network_security_group_id = module.network_security_group.id
 }
 
+#vgw
+
 module "public_ip" {
   source            = "../../../resources/azurerm/network/public_ip"
   resource_group    = module.resource_group.name
