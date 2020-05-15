@@ -45,6 +45,8 @@ variable "account_tier" {
 
 variable "blob_properties" {
   description = "(Optional) A blob_properties block as defined below."
+  type        = list
+  default     = []
 }
 
 variable "custom_domain" {

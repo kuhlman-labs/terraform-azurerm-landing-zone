@@ -26,11 +26,6 @@ variable "app_id" {
   type        = string
 }
 
-variable "object_id" {
-  description = "The object ID for the Service Principal"
-  type        = string
-}
-
 variable "client_secret" {
   description = "The secret for the Service Principal authentication"
   type        = string

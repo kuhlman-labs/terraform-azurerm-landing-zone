@@ -17,7 +17,7 @@ resource "random_string" "random" {
 
 #storage account
 
-resource "azurerm_storage_account" "example" {
+resource "azurerm_storage_account" "base" {
   name                      = "${var.name_prefix}${substr(var.environment, 0, 2)}${random_string.random.result}${data.azurerm_resource_group.base.location}"
   resource_group_name       = data.azurerm_resource_group.base.name
   location                  = data.azurerm_resource_group.base.location

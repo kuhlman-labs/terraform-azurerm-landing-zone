@@ -12,3 +12,20 @@ module "network_hub" {
   subnet_name_prefixes = var.subnet_name_prefixes
   tags                 = var.tags
 }
+
+module "diagnostic_storage_account" {
+  source      = "../../modules/azure/diagnostic_storage_account"
+  environment = var.environment
+  region      = var.region
+}
+
+
+module "windows_jumpbox" {
+  source = "../../modules/azure/windows_jumpbox"
+  environment = var.environment
+  region      = var.region
+  subnet_id = element(matchkeys(module.network_hub.subnet_id,
+    module.network_hub.subnet_name,
+  list("management-${var.environment}-${var.region}")), 0)
+  storage_account_uri = module.diagnostic_storage_account.id
+}

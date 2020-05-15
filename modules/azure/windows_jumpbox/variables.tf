@@ -1,22 +1,28 @@
 ###
-# resource variables
+#  module variables
 ###
 
 #common
 
-variable "resource_group" {
-  description = "The name of the target resource group"
+variable "region" {
+  description = "Geographic Region resource will be deployed into"
   type        = string
-}
-
-variable "name_prefix" {
-  description = "A short pre-defined text to identify the resource type"
-  type        = string
-  default     = ""
 }
 
 variable "environment" {
   description = "Development environment for resource; prod, non-prod, shared-services"
+  type        = string
+}
+
+#windows jumpbox
+
+variable "storage_account_uri" {
+  description = "(Required) The Primary/Secondary Endpoint for the Azure Storage Account which should be used to store Boot Diagnostics, including Console Output and Screenshots from the Hypervisor."
+  type        = string
+}
+
+variable "subnet_id" {
+  description = "(Required) The ID of the Subnet where this Network Interface should be located in."
   type        = string
 }
 

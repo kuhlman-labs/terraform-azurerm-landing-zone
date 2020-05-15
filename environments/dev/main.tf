@@ -26,21 +26,19 @@ module "network_spoke" {
 }
 
 module "aks_agw_ingress" {
-  source        = "../../modules/azure/aks_agw_ingress"
+  source = "../../modules/azure/aks_agw_ingress"
+
   environment   = var.environment
   region        = var.region
   client_secret = var.client_secret
   app_id        = var.app_id
   object_id     = var.object_id
-
   subnet_id_agw = element(matchkeys(module.network_spoke.subnet_id,
     module.network_spoke.subnet_name,
   list("snet-agw-${var.environment}-${var.region}")), 0)
-
   subnet_id_aks = element(matchkeys(module.network_spoke.subnet_id,
     module.network_spoke.subnet_name,
   list("snet-aks-${var.environment}-${var.region}")), 0)
-
   dns_service_ip     = var.dns_service_ip
   docker_bridge_cidr = var.docker_bridge_cidr
   service_cidr       = var.service_cidr
