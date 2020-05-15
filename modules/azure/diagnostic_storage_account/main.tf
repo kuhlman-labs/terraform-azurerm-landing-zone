@@ -6,7 +6,7 @@
 
 module "resource_group" {
   source       = "../../../resources/azurerm/base/resource_group"
-  service_name = "vm-diagnostic-storage"
+  service_name = "diagnostic-storage"
   region       = var.region
   environment  = var.environment
 }
@@ -19,7 +19,7 @@ module "diagnostic_storage_account" {
   resource_group           = module.resource_group.name
   environment              = var.environment
   name_prefix              = "stdiag"
-  access_tier              = "StorageV2"
+  access_tier              = "Hot"
   account_tier             = "Standard"
   account_replication_type = "LRS"
 }

@@ -29,8 +29,9 @@ module "virtual_machine" {
   resource_group                   = module.resource_group.name
   environment                      = var.environment
   name_prefix                      = "wvm-jumpbox"
+  computer_name                    = "jumpbox"
   admin_username                   = "kuhlmanlabs"
-  admin_password                   = ""
+  admin_password                   = "P@ssWord098"
   os_disk_storage_account_type     = "Standard_LRS"
   os_disk_caching                  = "None"
   size                             = "Standard_F2"

@@ -23,7 +23,7 @@ resource "azurerm_windows_virtual_machine" "base" {
   allow_extension_operations   = var.allow_extension_operations
   availability_set_id          = var.availability_set_id
   computer_name                = var.computer_name
-  custom_data                  = base64encode(var.custom_data)
+  custom_data                  = var.custom_data
   dedicated_host_id            = var.dedicated_host_id
   enable_automatic_updates     = var.enable_automatic_updates
   eviction_policy              = var.eviction_policy

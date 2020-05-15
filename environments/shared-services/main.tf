@@ -27,5 +27,5 @@ module "windows_jumpbox" {
   subnet_id = element(matchkeys(module.network_hub.subnet_id,
     module.network_hub.subnet_name,
   list("management-${var.environment}-${var.region}")), 0)
-  storage_account_uri = module.diagnostic_storage_account.id
+  storage_account_uri = module.diagnostic_storage_account.primary_blob_endpoint
 }
