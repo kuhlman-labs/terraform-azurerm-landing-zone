@@ -18,9 +18,9 @@ module "diagnostic_storage_account" {
   region      = var.region
 }
 
-/*
+
 module "windows_jumpbox" {
-  source = "../../modules/azure/windows_jumpbox"
+  source      = "../../modules/azure/windows_jumpbox"
   environment = var.environment
   region      = var.region
   subnet_id = element(matchkeys(module.network_isolated.subnet_id,
@@ -29,7 +29,7 @@ module "windows_jumpbox" {
   storage_account_uri = module.diagnostic_storage_account.primary_blob_endpoint
 }
 
-*
+/*
 
 module "network_hub" {
   source               = "../../modules/azure/network_hub"
