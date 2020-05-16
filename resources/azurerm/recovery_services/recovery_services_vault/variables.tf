@@ -15,6 +15,10 @@ variable "name_prefix" {
   default     = "recovery-services-vault"
 }
 
+variable "region" {
+  description = "Geographic Region resource will be deployed into"
+  type        = string
+}
 
 #rsv
 

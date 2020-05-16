@@ -15,6 +15,11 @@ variable "name_prefix" {
   default     = "key-vault"
 }
 
+variable "region" {
+  description = "Geographic Region resource will be deployed into"
+  type        = string
+}
+
 #key vault
 
 variable "sku_name" {

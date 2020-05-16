@@ -25,6 +25,8 @@ variable "environment" {
   type        = string
 }
 
+#tags
+
 variable "tags" {
   description = "(Optional) A mapping of tags which should be assigned to the Resource Group."
   type        = map

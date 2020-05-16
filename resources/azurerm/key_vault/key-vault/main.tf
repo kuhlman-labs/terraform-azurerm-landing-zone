@@ -2,18 +2,10 @@
 # resource composition
 ###
 
-#data source to access the configuration of the AzureRM provider
-
 data "azurerm_client_config" "current" {
 }
 
-#resource group
-
-data "azurerm_resource_group" "base" {
-  name = var.resource_group
-}
-
-#random permutation of alphanumeric characters
+#random
 
 resource "random_string" "base" {
   length  = 5
@@ -24,8 +16,8 @@ resource "random_string" "base" {
 
 resource "azurerm_key_vault" "base" {
   name                = "${var.name_prefix}-${random_string.base.result}"
-  location            = data.azurerm_resource_group.base.location
-  resource_group_name = data.azurerm_resource_group.base.name
+  location            = var.region
+  resource_group_name = var.resource_group
   tenant_id           = data.azurerm_client_config.current.tenant_id
   sku_name            = var.sku_name
   dynamic "access_policy" {

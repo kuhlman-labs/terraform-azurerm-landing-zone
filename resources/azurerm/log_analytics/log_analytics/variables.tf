@@ -15,6 +15,11 @@ variable "name_prefix" {
   default     = "log-aw"
 }
 
+variable "region" {
+  description = "Geographic Region resource will be deployed into"
+  type        = string
+}
+
 #log analytics
 
 variable "sku" {

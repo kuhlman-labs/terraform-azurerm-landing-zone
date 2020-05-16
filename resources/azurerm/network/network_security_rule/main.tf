@@ -2,12 +2,6 @@
 # resource composition
 ###
 
-#resource group
-
-data "azurerm_resource_group" "base" {
-  name = var.resource_group
-}
-
 #network security rule
 
 resource "azurerm_network_security_rule" "base" {
@@ -22,6 +16,6 @@ resource "azurerm_network_security_rule" "base" {
   destination_port_range      = var.network_security_rules[count.index]["destination_port_range"]
   source_address_prefix       = var.network_security_rules[count.index]["source_address_prefix"]
   destination_address_prefix  = var.network_security_rules[count.index]["destination_address_prefix"]
-  resource_group_name         = data.azurerm_resource_group.base.name
+  resource_group_name         = var.resource_group
   network_security_group_name = var.network_security_group_name
 }

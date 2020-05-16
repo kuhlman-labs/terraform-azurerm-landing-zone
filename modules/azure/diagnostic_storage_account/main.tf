@@ -17,6 +17,7 @@ module "resource_group" {
 module "diagnostic_storage_account" {
   source                   = "../../../resources/azurerm/storage/storage_account"
   resource_group           = module.resource_group.name
+  region                   = module.resource_group.location
   environment              = var.environment
   name_prefix              = "stdiag"
   access_tier              = "Hot"

@@ -20,6 +20,11 @@ variable "environment" {
   type        = string
 }
 
+variable "region" {
+  description = "Geographic Region resource will be deployed into"
+  type        = string
+}
+
 #app_gw
 
 variable "sku_name" {

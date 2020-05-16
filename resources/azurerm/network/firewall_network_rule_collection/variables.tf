@@ -15,6 +15,11 @@ variable "name_prefix" {
   default     = "firewall-network-rule-collection"
 }
 
+variable "region" {
+  description = "Geographic Region resource will be deployed into"
+  type        = string
+}
+
 #firewall network rule collection
 
 variable "azure_firewall_name" {

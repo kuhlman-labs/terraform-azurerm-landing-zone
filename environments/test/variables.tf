@@ -15,7 +15,7 @@ variable "region" {
 }
 
 #authentication
-
+/*
 variable "subscription_id" {
   description = "The Id of the Subscription that should contain the created resources"
   type        = string
@@ -60,6 +60,8 @@ variable "storage_account_name" {
   description = "Storage account that contains Remote Backend, e.g. terraformdata24321"
   type        = string
 }
+
+*/
 
 #network
 

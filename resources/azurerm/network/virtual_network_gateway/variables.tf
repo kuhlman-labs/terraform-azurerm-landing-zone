@@ -20,6 +20,11 @@ variable "environment" {
   type        = string
 }
 
+variable "region" {
+  description = "Geographic Region resource will be deployed into"
+  type        = string
+}
+
 #vnet-gateway
 
 variable "public_ip_name" {

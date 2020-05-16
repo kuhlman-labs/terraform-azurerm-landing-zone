@@ -2,18 +2,12 @@
 # resource composition
 ###
 
-#resource group
-
-data "azurerm_resource_group" "base" {
-  name = var.resource_group
-}
-
 #public ip
 
 resource "azurerm_public_ip" "base" {
-  name                    = "${var.name_prefix}-${var.environment}-${data.azurerm_resource_group.base.location}"
-  resource_group_name     = data.azurerm_resource_group.base.name
-  location                = data.azurerm_resource_group.base.location
+  name                    = "${var.name_prefix}-${var.environment}-${var.region}"
+  resource_group_name     = var.resource_group
+  location                = var.region
   allocation_method       = var.allocation_method
   sku                     = var.sku
   ip_version              = var.ip_version

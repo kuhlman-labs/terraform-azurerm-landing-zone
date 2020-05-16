@@ -2,13 +2,7 @@
 # resource composition
 ###
 
-#resource group
-
-data "azurerm_resource_group" "base" {
-  name = var.resource_group
-}
-
-#random permutation of alphanumeric characters
+#random 
 
 resource "random_string" "base" {
   length  = 8
@@ -18,9 +12,9 @@ resource "random_string" "base" {
 #log analytics workspace
 
 resource "azurerm_log_analytics_workspace" "base" {
-  name                = "${data.azurerm_resource_group.base.name}-${var.name_prefix}-${random_string.base.result}"
-  location            = data.azurerm_resource_group.base.location
-  resource_group_name = data.azurerm_resource_group.base.name
+  name                = "${var.resource_group}-${var.name_prefix}-${random_string.base.result}"
+  location            = var.region
+  resource_group_name = var.resource_group
   sku                 = var.sku
   retention_in_days   = var.retention_period
   tags                = var.tags

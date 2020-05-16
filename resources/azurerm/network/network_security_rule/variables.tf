@@ -15,6 +15,11 @@ variable "name_prefix" {
   default     = "nsg"
 }
 
+variable "region" {
+  description = "Geographic Region resource will be deployed into"
+  type        = string
+}
+
 #nsg
 
 variable "network_security_group_name" {

@@ -15,6 +15,11 @@ variable "name_prefix" {
   default     = "firewall"
 }
 
+variable "region" {
+  description = "Geographic Region resource will be deployed into"
+  type        = string
+}
+
 #firewall
 
 variable "subnet_id" {

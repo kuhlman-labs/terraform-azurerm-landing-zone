@@ -2,18 +2,12 @@
 #  resource composition
 ###
 
-#resource group
-
-data "azurerm_resource_group" "base" {
-  name = var.resource_group
-}
-
 #recovery services vault
 
 resource "azurerm_recovery_services_vault" "base" {
-  name                = "${data.azurerm_resource_group.base.name}-${var.name_prefix}"
-  location            = data.azurerm_resource_group.base.location
-  resource_group_name = data.azurerm_resource_group.base.name
+  name                = "${var.resource_group}-${var.name_prefix}"
+  location            = var.region
+  resource_group_name = var.resource_group
   sku                 = var.sku
 
   tags = var.tags

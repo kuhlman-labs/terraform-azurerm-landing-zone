@@ -9,6 +9,11 @@ variable "resource_group" {
   type        = string
 }
 
+variable "region" {
+  description = "Geographic Region resource will be deployed into"
+  type        = string
+}
+
 #route-table
 
 variable "name_prefix" {

@@ -2,20 +2,14 @@
 # resource composition
 ###
 
-#resource group
-
-data "azurerm_resource_group" "base" {
-  name = var.resource_group
-}
-
 #network interface
 
 resource "azurerm_network_interface" "base" {
   count = var.nic_count
 
   name                          = "${var.name_prefix}-${count.index}-${var.environment}"
-  location                      = data.azurerm_resource_group.base.location
-  resource_group_name           = data.azurerm_resource_group.base.name
+  location                      = var.region
+  resource_group_name           = var.resource_group
   dns_servers                   = var.dns_servers
   enable_ip_forwarding          = var.enable_ip_forwarding
   enable_accelerated_networking = var.enable_accelerated_networking

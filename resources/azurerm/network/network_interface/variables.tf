@@ -20,6 +20,11 @@ variable "name_prefix" {
   default     = "nic"
 }
 
+variable "region" {
+  description = "Geographic Region resource will be deployed into"
+  type        = string
+}
+
 #network interface
 
 variable "nic_count" {

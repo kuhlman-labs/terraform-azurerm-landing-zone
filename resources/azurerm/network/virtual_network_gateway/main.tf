@@ -2,24 +2,18 @@
 # resource composition
 ###
 
-#resource group
-
-data "azurerm_resource_group" "base" {
-  name = var.resource_group
-}
-
 #public ip
 
 data "azurerm_public_ip" "base" {
   name                = var.public_ip_name
-  resource_group_name = data.azurerm_resource_group.base.name
+  resource_group_name = var.resource_group
 }
 
 #subnet
 
 resource "azurerm_subnet" "base" {
   name                 = "GatewaySubnet"
-  resource_group_name  = data.azurerm_resource_group.base.name
+  resource_group_name  = var.resource_group
   virtual_network_name = var.virtual_network_name
   address_prefixes     = var.address_prefixes
 }
@@ -27,9 +21,9 @@ resource "azurerm_subnet" "base" {
 #virtual network gateway
 
 resource "azurerm_virtual_network_gateway" "base" {
-  name                = "${var.name_prefix}-${var.environment}-${data.azurerm_resource_group.base.location}"
-  location            = data.azurerm_resource_group.base.location
-  resource_group_name = data.azurerm_resource_group.base.name
+  name                = "${var.name_prefix}-${var.environment}-${var.region}"
+  location            = var.region
+  resource_group_name = var.resource_group
 
   type     = var.type
   vpn_type = var.vpn_type

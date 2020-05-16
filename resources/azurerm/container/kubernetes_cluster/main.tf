@@ -2,18 +2,12 @@
 #  resource composition
 ###
 
-#resource group
-
-data "azurerm_resource_group" "base" {
-  name = var.resource_group
-}
-
-#aks
+#kubernetes_cluster
 
 resource "azurerm_kubernetes_cluster" "base" {
-  name                = "${var.name_prefix}-${var.environment}-${data.azurerm_resource_group.base.location}"
-  location            = data.azurerm_resource_group.base.location
-  resource_group_name = data.azurerm_resource_group.base.name
+  name                = "${var.name_prefix}-${var.environment}-${var.region}"
+  location            = var.region
+  resource_group_name = var.resource_group
 
   default_node_pool {
     name                  = var.name

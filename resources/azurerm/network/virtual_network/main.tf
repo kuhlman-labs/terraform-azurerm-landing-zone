@@ -2,19 +2,13 @@
 # resource composition
 ###
 
-#resource group
-
-data "azurerm_resource_group" "base" {
-  name = var.resource_group
-}
-
 #vnet
 
 resource "azurerm_virtual_network" "base" {
-  name                = "${var.name_prefix}-${var.environment}-${data.azurerm_resource_group.base.location}"
-  resource_group_name = data.azurerm_resource_group.base.name
+  name                = "${var.name_prefix}-${var.environment}-${var.region}"
+  resource_group_name = var.resource_group
   address_space       = var.address_space
-  location            = data.azurerm_resource_group.base.location
+  location            = var.region
   dns_servers         = var.dns_servers
 
   tags = var.tags

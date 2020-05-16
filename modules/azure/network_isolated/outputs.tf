@@ -13,7 +13,7 @@ output "virtual_network_id" {
 }
 
 output "virtual_network_resource_group_name" {
-  value = module.virtual_network.resource_group_name
+  value       = module.virtual_network.resource_group_name
   description = "resource group name of virtual network"
 }
 

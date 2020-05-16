@@ -2,12 +2,6 @@
 # resource composition
 ###
 
-#resource group
-
-data "azurerm_resource_group" "base" {
-  name = var.resource_group
-}
-
 #random string
 
 resource "random_string" "random" {
@@ -18,9 +12,9 @@ resource "random_string" "random" {
 #storage account
 
 resource "azurerm_storage_account" "base" {
-  name                      = lower("${var.name_prefix}${substr(var.environment, 0, 2)}${random_string.random.result}${data.azurerm_resource_group.base.location}")
-  resource_group_name       = data.azurerm_resource_group.base.name
-  location                  = data.azurerm_resource_group.base.location
+  name                      = lower("${var.name_prefix}${substr(var.environment, 0, 2)}${random_string.random.result}${var.region}")
+  resource_group_name       = var.resource_group
+  location                  = var.region
   account_kind              = var.account_kind
   account_tier              = var.account_tier
   account_replication_type  = var.account_replication_type
