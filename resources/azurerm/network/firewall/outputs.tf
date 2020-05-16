@@ -2,9 +2,9 @@
 # resource outputs
 ###
 
-output "firewall_id" {
+output "id" {
   value = azurerm_firewall.base.id
 }
-output "firewall_private_ip" {
+output "private_ip_address" {
   value = azurerm_firewall.base.ip_configuration.0.private_ip_address
 }
