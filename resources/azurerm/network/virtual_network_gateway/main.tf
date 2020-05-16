@@ -49,13 +49,15 @@ resource "azurerm_virtual_network_gateway" "base" {
       name             = var.root_certificate_name
       public_cert_data = base64encode(var.public_cert_data)
     }
+    /*
     dynamic "revoked_certificate" {
       for_each = var.revoked_certificate
       content {
         name       = var.revoked_certificate.value.name
         thumbprint = var.revoked_certificate.value.thumbprint
-      }
+      }      
     }
+  */
   }
   tags = var.tags
 }
