@@ -4,7 +4,7 @@
 
 #resource group
 
-module "resource_group_jumpbox" {
+module "resource_group" {
   source       = "../../../resources/azurerm/base/resource_group"
   service_name = "jumpbox"
   region       = var.region
@@ -15,7 +15,7 @@ module "resource_group_jumpbox" {
 
 module "network_interface" {
   source                        = "../../../resources/azurerm/network/network_interface"
-  resource_group                = module.resource_group_jumpbox.name
+  resource_group                = module.resource_group.name
   environment                   = var.environment
   name_prefix                   = "nic-wvm-jumpbox"
   subnet_id                     = var.subnet_id
@@ -26,7 +26,7 @@ module "network_interface" {
 
 module "virtual_machine" {
   source                           = "../../../resources/azurerm/compute/windows_virtual_machine"
-  resource_group                   = module.resource_group_jumpbox.name
+  resource_group                   = module.resource_group.name
   environment                      = var.environment
   name_prefix                      = "wvm-jumpbox"
   computer_name                    = "jumpbox"
