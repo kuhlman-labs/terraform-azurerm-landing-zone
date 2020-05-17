@@ -12,7 +12,7 @@ variable "resource_group" {
 variable "name_prefix" {
   description = "a short pre-defined text to identify resource type"
   type        = string
-  default     = "log-aw"
+  default     = "log"
 }
 
 variable "region" {
@@ -23,15 +23,14 @@ variable "region" {
 #log analytics
 
 variable "sku" {
-  description = "sku for Log Analytics Workspace"
+  description = "(Required) Specifies the Sku of the Log Analytics Workspace. Possible values are Free, PerNode, Premium, Standard, Standalone, Unlimited, and PerGB2018 (new Sku as of 2018-04-03)."
   type        = string
-  default     = "PerGB2018"
 }
 
-variable "retention_period" {
-  description = "Time in days to retain logs in the log analytics workspace"
-  type        = string
-  default     = 30
+variable "retention_in_days" {
+  description = "(Optional) The workspace data retention in days. Possible values are either 7 (Free Tier only) or range between 30 and 730."
+  type        = number
+  default     = null
 }
 
 #tags
