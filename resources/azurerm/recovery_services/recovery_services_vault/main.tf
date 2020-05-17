@@ -5,11 +5,11 @@
 #recovery services vault
 
 resource "azurerm_recovery_services_vault" "base" {
-  name                = "${var.resource_group}-${var.name_prefix}"
+  name                = "${var.name_prefix}-${var.environment}-${var.region}"
   location            = var.region
   resource_group_name = var.resource_group
   sku                 = var.sku
-
-  tags = var.tags
+  soft_delete_enabled = var.soft_delete_enabled
+  tags                = var.tags
 }
 

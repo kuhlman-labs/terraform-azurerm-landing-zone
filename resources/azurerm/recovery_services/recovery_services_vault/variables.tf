@@ -12,7 +12,7 @@ variable "resource_group" {
 variable "name_prefix" {
   description = "Short prefix to identify resource"
   type        = string
-  default     = "recovery-services-vault"
+  default     = "rsv"
 }
 
 variable "region" {
@@ -20,12 +20,17 @@ variable "region" {
   type        = string
 }
 
-#rsv
+#recovery services vault
 
 variable "sku" {
-  description = "SKU for Recovery Services Vault"
+  description = "(Required) Sets the vault's SKU. Possible values include: Standard, RS0."
   type        = string
-  default     = "Standard"
+}
+
+variable "soft_delete_enabled" {
+  description = "(Optional) Is soft delete enable for this Vault? Defaults to true."
+  type        = bool
+  default     = null
 }
 
 #tags
