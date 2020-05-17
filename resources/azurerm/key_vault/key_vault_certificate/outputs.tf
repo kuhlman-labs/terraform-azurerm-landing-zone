@@ -12,3 +12,7 @@ output "certificate_data" {
   description = "Raw Key Vault certificate data"
 }
 
+output "thumbprint" {
+  value       = azurerm_key_vault_certificate.base.thumbprint
+  description = "The X509 Thumbprint of the Key Vault Certificate represented as a hexadecimal string."
+}
