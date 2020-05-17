@@ -12,7 +12,7 @@ variable "resource_group" {
 variable "name_prefix" {
   description = "a short pre-defined text to identify resource type"
   type        = string
-  default     = "key-vault"
+  default     = "kv"
 }
 
 variable "region" {
@@ -28,117 +28,50 @@ variable "sku_name" {
   default     = "standard"
 }
 
-variable "access_policy" {
-  description = ""
+variable "network_acls" {
+  description = "(Optional) A network_acls block as defined below."
   type        = list
-  default = [
-    {
-      certificate_permissions = [
-        "create",
-        "delete",
-        "deleteissuers",
-        "get",
-        "getissuers",
-        "import",
-        "list",
-        "listissuers",
-        "managecontacts",
-        "manageissuers",
-        "setissuers",
-        "update",
-      ]
-      key_permissions = [
-        "backup",
-        "create",
-        "decrypt",
-        "delete",
-        "encrypt",
-        "get",
-        "import",
-        "list",
-        "purge",
-        "recover",
-        "restore",
-        "sign",
-        "unwrapKey",
-        "update",
-        "verify",
-        "wrapKey",
-      ]
-      secret_permissions = [
-        "backup",
-        "delete",
-        "get",
-        "list",
-        "purge",
-        "recover",
-        "restore",
-        "set",
-      ]
-    }
-  ]
-
-}
-
-/*
-variable "certificate_permissions" {
-  description = "(Optional) List of certificate permissions, must be one or more from the following: backup, create, delete, deleteissuers, get, getissuers, import, list, listissuers, managecontacts, manageissuers, purge, recover, restore, setissuers and update."
-  type        = list
-  default = [
-    "create",
-    "delete",
-    "deleteissuers",
-    "get",
-    "getissuers",
-    "import",
-    "list",
-    "listissuers",
-    "managecontacts",
-    "manageissuers",
-    "setissuers",
-    "update",
-  ]
-}
-
-variable "key_permissions" {
-  description = "(Optional) List of key permissions, must be one or more from the following: backup, create, decrypt, delete, encrypt, get, import, list, purge, recover, restore, sign, unwrapKey, update, verify and wrapKey."
-  type        = list
-  default = [
-    "backup",
-    "create",
-    "decrypt",
-    "delete",
-    "encrypt",
-    "get",
-    "import",
-    "list",
-    "purge",
-    "recover",
-    "restore",
-    "sign",
-    "unwrapKey",
-    "update",
-    "verify",
-    "wrapKey",
-  ]
-}
-
-variable "secret_permissions" {
-  description = "(Optional) List of secret permissions, must be one or more from the following: backup, delete, get, list, purge, recover, restore and set."
-  type        = list
-  default = [
-    "backup",
-    "delete",
-    "get",
-    "list",
-    "purge",
-    "recover",
-    "restore",
-    "set",
-  ]
-
-}
+  default     = []
+  /*
+A network_acls block supports the following:
+bypass                     - (Required) Specifies which traffic can bypass the network rules. Possible values are AzureServices and None.
+default_action             - (Required) The Default Action to use when no rules match from ip_rules / virtual_network_subnet_ids. Possible values are Allow and Deny.
+ip_rules                   - (Optional) One or more IP Addresses, or CIDR Blocks which should be able to access the Key Vault.
+virtual_network_subnet_ids - (Optional) One or more Subnet ID's which should be able to access this Key Vault.
 */
+}
+
+variable "enabled_for_deployment" {
+  description = "(Optional) Boolean flag to specify whether Azure Virtual Machines are permitted to retrieve certificates stored as secrets from the key vault. Defaults to false."
+  type        = bool
+  default     = null
+}
+
+variable "enabled_for_disk_encryption" {
+  description = "(Optional) Boolean flag to specify whether Azure Disk Encryption is permitted to retrieve secrets from the vault and unwrap keys. Defaults to false."
+  type        = bool
+  default     = null
+
+}
+
+variable "enabled_for_template_deployment" {
+  description = "(Optional) Boolean flag to specify whether Azure Resource Manager is permitted to retrieve secrets from the key vault. Defaults to false."
+  type        = bool
+  default     = null
+}
+
+variable "purge_protection_enabled" {
+  description = "(Optional) Is Purge Protection enabled for this Key Vault? Defaults to false."
+  type        = bool
+  default     = null
+}
+
+#Once Soft Delete has been Enabled it's not possible to Disable it.
+variable "soft_delete_enabled" {
+  description = "(Optional) Should Soft Delete be enabled for this Key Vault? Defaults to false."
+  type        = bool
+  default     = null
+}
 
 #tags
 

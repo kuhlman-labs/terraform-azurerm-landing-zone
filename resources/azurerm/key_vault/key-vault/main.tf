@@ -5,41 +5,37 @@
 data "azurerm_client_config" "current" {
 }
 
-#random
+#random string
 
 resource "random_string" "base" {
-  length  = 5
+  length  = 4
   special = false
 }
 
 #key vault
 
 resource "azurerm_key_vault" "base" {
-  name                = "${var.name_prefix}-${random_string.base.result}"
-  location            = var.region
-  resource_group_name = var.resource_group
-  tenant_id           = data.azurerm_client_config.current.tenant_id
-  sku_name            = var.sku_name
-  dynamic "access_policy" {
-    for_each = var.access_policy
+  name                            = lower("${var.name_prefix}${random_string.base.result}-${var.enviornment}-${var.region}")
+  location                        = var.region
+  resource_group_name             = var.resource_group
+  tenant_id                       = data.azurerm_client_config.current.tenant_id
+  enabled_for_deployment          = var.enabled_for_deployment
+  enabled_for_disk_encryption     = var.enabled_for_disk_encryption
+  enabled_for_template_deployment = var.enabled_for_template_deployment
+  sku_name                        = var.sku_name
+  dynamic "network_acls" {
+    for_each = var.network_acls
     content {
-      tenant_id               = data.azurerm_client_config.current.tenant_id
-      object_id               = data.azurerm_client_config.current.object_id
-      certificate_permissions = access_policy.value.certificate_permissions
-      key_permissions         = access_policy.value.key_permissions
-      secret_permissions      = access_policy.value.secret_permissions
+      bypass                     = network_acls.value.bypass
+      default_action             = network_acls.value.default_action
+      ip_rules                   = network_acls.value.ip_rules
+      virtual_network_subnet_ids = network_acls.value.virtual_network_subnet_ids
     }
   }
+  purge_protection_enabled = var.purge_protection_enabled
+  soft_delete_enabled      = var.soft_delete_enabled
 
-  /*
-  access_policy {
-    tenant_id               = data.azurerm_client_config.current.tenant_id
-    object_id               = data.azurerm_client_config.current.service_principal_object_id
-    certificate_permissions = var.certificate_permissions
-    key_permissions         = var.key_permissions
-    secret_permissions      = var.secret_permissions
-  }
-*/
+
   tags = var.tags
 }
 
