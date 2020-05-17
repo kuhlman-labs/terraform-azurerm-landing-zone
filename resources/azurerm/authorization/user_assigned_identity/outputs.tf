@@ -2,18 +2,18 @@
 # resource outputs
 ###
 
-output "uai_id" {
+output "id" {
   value = azurerm_user_assigned_identity.base.id
 }
 
-output "uai_principal_id" {
+output "principal_id" {
   value = azurerm_user_assigned_identity.base.principal_id
 }
 
-output "uai_client_id" {
+output "client_id" {
   value = azurerm_user_assigned_identity.base.client_id
 }
 
-output "uai_name" {
+output "name" {
   value = azurerm_user_assigned_identity.base.name
 }

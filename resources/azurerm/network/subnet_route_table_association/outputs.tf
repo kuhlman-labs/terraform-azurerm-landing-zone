@@ -2,6 +2,6 @@
 # resource outputs
 ###
 
-output "route_association_id" {
+output "id" {
   value = azurerm_subnet_route_table_association.base.id
 }

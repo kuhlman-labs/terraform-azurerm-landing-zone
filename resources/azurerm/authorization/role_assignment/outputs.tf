@@ -2,6 +2,6 @@
 # resource outputs
 ###
 
-output "role_assignment_id" {
+output "id" {
   value = azurerm_role_assignment.base.id
 }

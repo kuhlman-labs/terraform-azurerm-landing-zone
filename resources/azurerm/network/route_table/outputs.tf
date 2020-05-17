@@ -2,10 +2,10 @@
 # resource outputs
 ###
 
-output "route_table_id" {
+output "id" {
   value = azurerm_route_table.base.id
 }
 
-output "route_table_subnets" {
+output "subnets" {
   value = azurerm_route_table.base.subnets
 }
