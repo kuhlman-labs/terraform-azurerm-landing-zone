@@ -39,5 +39,5 @@ variable "secret_permissions" {
 variable "storage_permissions" {
   description = "(Optional) List of storage permissions, must be one or more from the following: backup, delete, deletesas, get, getsas, list, listsas, purge, recover, regeneratekey, restore, set, setsas and update."
   type        = list
-  default = null
+  default     = null
 }
