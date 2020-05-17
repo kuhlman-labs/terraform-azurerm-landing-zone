@@ -5,11 +5,11 @@
 #firewall network rule collection
 
 resource "azurerm_firewall_network_rule_collection" "base" {
-  name                = "${var.resource_group}-${var.name_prefix}"
+  name                = "${var.name_prefix}-${var.environment}-${var.region}"
   azure_firewall_name = var.azure_firewall_name
   resource_group_name = var.resource_group
-  priority            = var.collection_priority
-  action              = var.collection_action
+  priority            = var.priority
+  action              = var.action
 
   dynamic "rule" {
     for_each = var.rule

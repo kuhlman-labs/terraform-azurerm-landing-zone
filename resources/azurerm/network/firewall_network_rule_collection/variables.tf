@@ -27,20 +27,29 @@ variable "azure_firewall_name" {
   type        = string
 }
 
-variable "collection_priority" {
-  description = "Specifies the priority of the rule collection. Possible values are between 100 - 65000."
+variable "priority" {
+  description = "(Required) Specifies the priority of the rule collection. Possible values are between 100 - 65000."
   type        = string
 }
 
-variable "collection_action" {
-  description = "Specifies the action the rule will apply to matching traffic. Possible values are Allow and Deny."
+variable "action" {
+  description = "(Required) Specifies the action the rule will apply to matching traffic. Possible values are Allow and Deny."
   type        = string
 }
 
 variable "rule" {
-  description = ""
+  description = "(Required) One or more rule blocks as defined below."
   type        = list
   default     = []
+  /*
+  A rule block supports the following:
+name - (Required) Specifies the name of the rule.
+description - (Optional) Specifies a description for the rule.
+source_addresses - (Required) A list of source IP addresses and/or IP ranges.
+destination_addresses - (Required) A list of destination IP addresses and/or IP ranges.
+destination_ports - (Required) A list of destination ports.
+protocols - (Required) A list of protocols. Possible values are Any, ICMP, TCP and UDP.
+*/
 }
 
 #tags
