@@ -25,5 +25,5 @@ No requirements.
 
 | Name | Description |
 |------|-------------|
-| virtual\_network\_peering\_id | The ID of the Virtual Network Peering. |
+| id | The ID of the Virtual Network Peering. |
 

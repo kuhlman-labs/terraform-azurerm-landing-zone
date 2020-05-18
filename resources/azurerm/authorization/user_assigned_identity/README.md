@@ -13,15 +13,16 @@ No requirements.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | environment | Development environment for resource; prod, non-prod, shared-services | `string` | n/a | yes |
-| name\_prefix | A short pre-defined text to identify the resource type | `string` | `"uai"` | no |
+| name\_prefix | A short pre-defined text to identify the resource type | `string` | `"umi"` | no |
+| region | Geographic Region resource will be deployed into | `string` | n/a | yes |
 | resource\_group | The name of the target resource group | `string` | n/a | yes |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| uai\_client\_id | n/a |
-| uai\_id | n/a |
-| uai\_name | n/a |
-| uai\_principal\_id | n/a |
+| client\_id | n/a |
+| id | n/a |
+| name | n/a |
+| principal\_id | n/a |
 

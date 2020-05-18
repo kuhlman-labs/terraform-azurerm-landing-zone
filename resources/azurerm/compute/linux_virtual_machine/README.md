@@ -4,9 +4,7 @@ No requirements.
 
 ## Providers
 
-| Name | Version |
-|------|---------|
-| azurerm | n/a |
+No provider.
 
 ## Inputs
 

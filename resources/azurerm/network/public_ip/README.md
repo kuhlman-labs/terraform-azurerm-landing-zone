@@ -19,6 +19,7 @@ No requirements.
 | ip\_version | (Optional) The IP Version to use, IPv6 or IPv4. | `string` | `null` | no |
 | name\_prefix | a short pre-defined text to identify resource type | `string` | `"pip"` | no |
 | public\_ip\_prefix\_id | (Optional) If specified then public IP address allocated will be provided from the public IP prefix resource. | `string` | `null` | no |
+| region | Geographic Region resource will be deployed into | `string` | n/a | yes |
 | resource\_group | The name of the target resource group | `string` | n/a | yes |
 | reverse\_fqdn | (Optional) A fully qualified domain name that resolves to this public IP address. If the reverseFqdn is specified, then a PTR DNS record is created pointing from the IP address in the in-addr.arpa domain to the reverse FQDN. | `string` | `null` | no |
 | sku | (Optional) The SKU of the Public IP. Accepted values are Basic and Standard. Defaults to Basic. | `string` | `"Basic"` | no |

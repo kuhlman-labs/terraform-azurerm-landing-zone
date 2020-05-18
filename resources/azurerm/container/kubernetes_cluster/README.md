@@ -35,6 +35,7 @@ No requirements.
 | node\_taints | (Optional) A list of Kubernetes taints which should be applied to nodes in the agent pool (e.g key=value:NoSchedule). | `list` | `null` | no |
 | os\_disk\_size\_gb | (Optional) The size of the OS Disk which should be used for each agent in the Node Pool. Changing this forces a new resource to be created. | `number` | `null` | no |
 | private\_cluster\_enabled | Should this Kubernetes Cluster have it's API server only exposed on internal IP addresses? This provides a Private IP Address for the Kubernetes API on the Virtual Network where the Kubernetes Cluster is located. Defaults to false. Changing this forces a new resource to be created. | `bool` | `null` | no |
+| region | Geographic Region resource will be deployed into | `string` | n/a | yes |
 | resource\_group | The name of the target resource group | `string` | n/a | yes |
 | role\_based\_access\_control | https://www.terraform.io/docs/providers/azurerm/r/kubernetes_cluster.html#role_based_access_control | `list` | `[]` | no |
 | service\_principal | (Optional) A service\_principal block as documented below. | `list` | `[]` | no |

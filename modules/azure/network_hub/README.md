@@ -1,8 +1,6 @@
 ## Requirements
 
-| Name | Version |
-|------|---------|
-| terraform | >= 0.12 |
+No requirements.
 
 ## Providers
 
@@ -24,6 +22,8 @@ No provider.
 
 | Name | Description |
 |------|-------------|
+| subnet\_id | The subnet ID. |
+| subnet\_name | The subnet ID. |
 | virtual\_network\_id | resource id of vnet hub |
 | virtual\_network\_name | resource name of vnet hub |
 | virtual\_network\_resource\_group\_name | n/a |

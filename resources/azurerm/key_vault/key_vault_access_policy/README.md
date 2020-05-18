@@ -7,21 +7,22 @@ No requirements.
 | Name | Version |
 |------|---------|
 | azurerm | n/a |
-| random | n/a |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| access\_policy | n/a | `list` | <pre>[<br>  {<br>    "certificate_permissions": [<br>      "create",<br>      "delete",<br>      "deleteissuers",<br>      "get",<br>      "getissuers",<br>      "import",<br>      "list",<br>      "listissuers",<br>      "managecontacts",<br>      "manageissuers",<br>      "setissuers",<br>      "update"<br>    ],<br>    "key_permissions": [<br>      "backup",<br>      "create",<br>      "decrypt",<br>      "delete",<br>      "encrypt",<br>      "get",<br>      "import",<br>      "list",<br>      "purge",<br>      "recover",<br>      "restore",<br>      "sign",<br>      "unwrapKey",<br>      "update",<br>      "verify",<br>      "wrapKey"<br>    ],<br>    "secret_permissions": [<br>      "backup",<br>      "delete",<br>      "get",<br>      "list",<br>      "purge",<br>      "recover",<br>      "restore",<br>      "set"<br>    ]<br>  }<br>]</pre> | no |
-| name\_prefix | a short pre-defined text to identify resource type | `string` | `"key-vault"` | no |
-| resource\_group | The name of the target resource group | `string` | n/a | yes |
-| sku\_name | The Name of the sku used for this Key Vault. Possible values are standard and premium. | `string` | `"standard"` | no |
-| tags | tags to be added to resource | `map` | `{}` | no |
+| application\_id | (Optional) The object ID of an Application in Azure Active Directory. | `string` | `null` | no |
+| certificate\_permissions | (Optional) List of certificate permissions, must be one or more from the following: backup, create, delete, deleteissuers, get, getissuers, import, list, listissuers, managecontacts, manageissuers, purge, recover, restore, setissuers and update. | `list` | `null` | no |
+| key\_permissions | (Required) List of key permissions, must be one or more from the following: backup, create, decrypt, delete, encrypt, get, import, list, purge, recover, restore, sign, unwrapKey, update, verify and wrapKey. | `list` | n/a | yes |
+| key\_vault\_id | (Required) Specifies the id of the Key Vault resource. Changing this forces a new resource to be created. | `string` | n/a | yes |
+| object\_id | (Required) The object ID of a user, service principal or security group in the Azure Active Directory tenant for the vault. The object ID must be unique for the list of access policies. Changing this forces a new resource to be created. | `string` | n/a | yes |
+| secret\_permissions | (Required) List of secret permissions, must be one or more from the following: backup, delete, get, list, purge, recover, restore and set. | `list` | n/a | yes |
+| storage\_permissions | (Optional) List of storage permissions, must be one or more from the following: backup, delete, deletesas, get, getsas, list, listsas, purge, recover, regeneratekey, restore, set, setsas and update. | `list` | `null` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| key\_vault\_id | Key Vault resource id |
+| id | Key Vault Access Policy ID. |
 

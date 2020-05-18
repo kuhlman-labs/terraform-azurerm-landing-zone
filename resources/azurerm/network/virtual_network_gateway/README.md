@@ -23,6 +23,7 @@ No requirements.
 | private\_ip\_address\_allocation | (Optional) Defines how the private IP address of the gateways virtual interface is assigned. Valid options are Static or Dynamic. Defaults to Dynamic. | `string` | `null` | no |
 | public\_cert\_data | (Required) The public certificate of the root certificate authority. The certificate must be provided in Base-64 encoded X.509 format (PEM). In particular, this argument must not include the -----BEGIN CERTIFICATE----- or -----END CERTIFICATE----- markers. | `string` | n/a | yes |
 | public\_ip\_name | (Required) Name of the public ip associated with the vgw | `string` | n/a | yes |
+| region | Geographic Region resource will be deployed into | `string` | n/a | yes |
 | resource\_group | resource Group that vNet Gateway will deploy into, must be same as the vNet's resource gorup | `string` | n/a | yes |
 | revoked\_certificate | (Optional) One or more revoked\_certificate blocks which are defined below. This setting is incompatible with the use of radius\_server\_address and radius\_server\_secret. | `list` | `[]` | no |
 | root\_certificate\_name | (Required) A user-defined name of the root certificate. | `string` | n/a | yes |

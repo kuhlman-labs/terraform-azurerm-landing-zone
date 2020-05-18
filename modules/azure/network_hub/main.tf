@@ -20,7 +20,7 @@ module "virtual_network" {
   address_space  = var.address_space
   tags           = var.tags
   environment    = var.environment
-  region       = var.region
+  region         = var.region
 }
 
 #snets
@@ -32,7 +32,7 @@ module "subnet" {
   name_prefixes        = var.subnet_name_prefixes
   address_prefixes     = var.address_prefixes
   environment          = var.environment
-  region       = var.region
+  region               = var.region
 }
 
 #nsg
@@ -41,14 +41,14 @@ module "network_security_group" {
   source         = "../../../resources/azurerm/network/network_security_group"
   resource_group = module.resource_group.name
   environment    = var.environment
-  region       = var.region
+  region         = var.region
   policy_name    = "rdpallow"
 }
 
 module "network_security_rule" {
   source                      = "../../../resources/azurerm/network/network_security_rule"
   resource_group              = module.resource_group.name
-  region       = var.region
+  region                      = var.region
   network_security_group_name = module.network_security_group.name
   network_security_rules = [
     {
@@ -82,14 +82,14 @@ module "public_ip" {
   allocation_method = "Dynamic"
   sku               = "Basic"
   environment       = var.environment
-  region       = var.region
+  region            = var.region
 }
 
 module "virtual_network_gateway" {
   source                = "../../../resources/azurerm/network/virtual_network_gateway"
   resource_group        = module.resource_group.name
   environment           = var.environment
-  region       = var.region
+  region                = var.region
   virtual_network_name  = module.virtual_network.name
   public_ip_name        = module.public_ip.name
   address_prefixes      = var.address_prefix_vgw

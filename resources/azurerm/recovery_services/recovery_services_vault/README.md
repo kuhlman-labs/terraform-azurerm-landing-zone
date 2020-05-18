@@ -12,14 +12,16 @@ No requirements.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| name\_prefix | Short prefix to identify resource | `string` | `"recovery-services-vault"` | no |
+| name\_prefix | Short prefix to identify resource | `string` | `"rsv"` | no |
+| region | Geographic Region resource will be deployed into | `string` | n/a | yes |
 | resource\_group | The name of the target resource group | `string` | n/a | yes |
-| sku | SKU for Recovery Services Vault | `string` | `"Standard"` | no |
+| sku | (Required) Sets the vault's SKU. Possible values include: Standard, RS0. | `string` | n/a | yes |
+| soft\_delete\_enabled | (Optional) Is soft delete enable for this Vault? Defaults to true. | `bool` | `null` | no |
 | tags | tags to be added to resource | `map` | `{}` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| recovery\_services\_id | Recovery Services Vault resource id |
+| id | The ID of the Recovery Services Vault. |
 

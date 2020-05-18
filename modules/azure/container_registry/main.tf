@@ -17,6 +17,6 @@ module "container_registry" {
   source         = "../../../resources/azurerm/container/container_registry"
   resource_group = module.resource_group.name
   region         = module.resource_group.location
-  environment  = var.environment
-  sku = "Standard"
+  environment    = var.environment
+  sku            = "Standard"
 }

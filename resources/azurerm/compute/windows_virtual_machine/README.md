@@ -38,6 +38,7 @@ No requirements.
 | priority | (Optional) Specifies the priority of this Virtual Machine. Possible values are Regular and Spot. Defaults to Regular. Changing this forces a new resource to be created. | `string` | `null` | no |
 | provision\_vm\_agent | (Optional) Should the Azure VM Agent be provisioned on this Virtual Machine? Defaults to true. Changing this forces a new resource to be created. | `bool` | `null` | no |
 | proximity\_placement\_group\_id | (Optional) The ID of the Proximity Placement Group which the Virtual Machine should be assigned to. Changing this forces a new resource to be created. | `string` | `null` | no |
+| region | Geographic Region resource will be deployed into | `string` | n/a | yes |
 | resource\_group | The name of the target resource group | `string` | n/a | yes |
 | secret | (Optional) One or more secret blocks as defined below. | `list` | `[]` | no |
 | size | (Required) The SKU which should be used for this Virtual Machine, such as Standard\_F2. | `string` | n/a | yes |
@@ -46,8 +47,7 @@ No requirements.
 | source\_image\_reference\_publisher | publisher type, ex. MicrosoftWindowsServer | `string` | n/a | yes |
 | source\_image\_reference\_sku | sku type, ex. 2016-Datacenter | `string` | n/a | yes |
 | source\_image\_reference\_version | version type, ex. latest | `string` | n/a | yes |
-| storage\_account\_uri | (Required) The Primary/Secondary Endpoint for the Azure Storage Account which should be used to store Boot Diagnostics, including Console Output and Screenshots from the Hypervisor. | `string` | n/a 
-| yes |
+| storage\_account\_uri | (Required) The Primary/Secondary Endpoint for the Azure Storage Account which should be used to store Boot Diagnostics, including Console Output and Screenshots from the Hypervisor. | `string` | n/a | yes |
 | tags | A map of tags to add to all resources | `map` | `{}` | no |
 | timezone | (Optional) Specifies the Time Zone which should be used by the Virtual Machine, the possible values are defined here. | `string` | `null` | no |
 | vm\_count | (Optional) number of VMs to create | `number` | `1` | no |
@@ -59,3 +59,4 @@ No requirements.
 | Name | Description |
 |------|-------------|
 | id | The ID of the Windows Virtual Machine. |
+

@@ -13,15 +13,22 @@ No requirements.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| access\_policy | n/a | `list` | <pre>[<br>  {<br>    "certificate_permissions": [<br>      "create",<br>      "delete",<br>      "deleteissuers",<br>      "get",<br>      "getissuers",<br>      "import",<br>      "list",<br>      "listissuers",<br>      "managecontacts",<br>      "manageissuers",<br>      "setissuers",<br>      "update"<br>    ],<br>    "key_permissions": [<br>      "backup",<br>      "create",<br>      "decrypt",<br>      "delete",<br>      "encrypt",<br>      "get",<br>      "import",<br>      "list",<br>      "purge",<br>      "recover",<br>      "restore",<br>      "sign",<br>      "unwrapKey",<br>      "update",<br>      "verify",<br>      "wrapKey"<br>    ],<br>    "secret_permissions": [<br>      "backup",<br>      "delete",<br>      "get",<br>      "list",<br>      "purge",<br>      "recover",<br>      "restore",<br>      "set"<br>    ]<br>  }<br>]</pre> | no |
-| name\_prefix | a short pre-defined text to identify resource type | `string` | `"key-vault"` | no |
+| enabled\_for\_deployment | (Optional) Boolean flag to specify whether Azure Virtual Machines are permitted to retrieve certificates stored as secrets from the key vault. Defaults to false. | `bool` | `null` | no |
+| enabled\_for\_disk\_encryption | (Optional) Boolean flag to specify whether Azure Disk Encryption is permitted to retrieve secrets from the vault and unwrap keys. Defaults to false. | `bool` | `null` | no |
+| enabled\_for\_template\_deployment | (Optional) Boolean flag to specify whether Azure Resource Manager is permitted to retrieve secrets from the key vault. Defaults to false. | `bool` | `null` | no |
+| name\_prefix | a short pre-defined text to identify resource type | `string` | `"kv"` | no |
+| network\_acls | (Optional) A network\_acls block as defined below. | `list` | `[]` | no |
+| purge\_protection\_enabled | (Optional) Is Purge Protection enabled for this Key Vault? Defaults to false. | `bool` | `null` | no |
+| region | Geographic Region resource will be deployed into | `string` | n/a | yes |
 | resource\_group | The name of the target resource group | `string` | n/a | yes |
 | sku\_name | The Name of the sku used for this Key Vault. Possible values are standard and premium. | `string` | `"standard"` | no |
+| soft\_delete\_enabled | (Optional) Should Soft Delete be enabled for this Key Vault? Defaults to false. | `bool` | `null` | no |
 | tags | tags to be added to resource | `map` | `{}` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| key\_vault\_id | Key Vault resource id |
+| id | Key Vault resource id |
+| vault\_uri | The URI of the Key Vault, used for performing operations on keys and secrets. |
 
