@@ -13,6 +13,12 @@ module "network_hub" {
   tags                 = var.tags
 }
 
+module "container_registry" {
+  source      = "../../modules/azure/container_registry"
+  environment = var.environment
+  region      = var.region
+}
+
 module "diagnostic_storage_account" {
   source      = "../../modules/azure/diagnostic_storage_account"
   environment = var.environment
