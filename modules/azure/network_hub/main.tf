@@ -65,7 +65,7 @@ module "subnet_network_security_group_association" {
   source = "../../../resources/azurerm/network/subnet_network_security_group_association"
   subnet_id = element(matchkeys(module.subnet.id,
     module.subnet.name,
-  list("management-${var.environment}-${module.resource_group.location}")), 0)
+  list("snet-management-${var.environment}-${module.resource_group.location}")), 0)
   network_security_group_id = module.network_security_group.id
 }
 
