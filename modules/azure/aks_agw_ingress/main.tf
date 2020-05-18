@@ -19,6 +19,7 @@ module "resource_group" {
 module "user_assigned_identity" {
   source         = "../../../resources/azurerm/authorization/user_assigned_identity"
   resource_group = module.resource_group.name
+  region         = module.resource_group.location
   name_prefix    = "mi-aks"
   environment    = var.environment
 }
@@ -34,7 +35,7 @@ module "role_assignment_aks_0" {
 
 module "role_assignment_aks_1" {
   source               = "../../../resources/azurerm/authorization/role_assignment"
-  scope                = module.user_assigned_identity.uai_id
+  scope                = module.user_assigned_identity.id
   role_definition_name = "Managed Identity Operator"
   principal_id         = var.object_id
 }
@@ -43,14 +44,14 @@ module "role_assignment_aks_2" {
   source               = "../../../resources/azurerm/authorization/role_assignment"
   scope                = module.application_gateway.id
   role_definition_name = "Contributor"
-  principal_id         = module.user_assigned_identity.uai_principal_id
+  principal_id         = module.user_assigned_identity.principal_id
 }
 
 module "role_assignment_aks_3" {
   source               = "../../../resources/azurerm/authorization/role_assignment"
   scope                = module.resource_group.id
   role_definition_name = "Reader"
-  principal_id         = module.user_assigned_identity.uai_principal_id
+  principal_id         = module.user_assigned_identity.principal_id
 }
 
 #agw
@@ -59,6 +60,7 @@ module "public_ip" {
   source            = "../../../resources/azurerm/network/public_ip"
   name_prefix       = "pip-agw"
   resource_group    = module.resource_group.name
+  region            = module.resource_group.location
   allocation_method = "Static"
   sku               = "Standard"
   environment       = var.environment
@@ -67,6 +69,7 @@ module "public_ip" {
 module "application_gateway" {
   source               = "../../../resources/azurerm/network/application_gateway"
   resource_group       = module.resource_group.name
+  region               = module.resource_group.location
   name_prefix          = "agw-aks"
   sku_name             = "Standard_v2"
   sku_tier             = "Standard_v2"
@@ -81,6 +84,7 @@ module "application_gateway" {
 module "aks" {
   source         = "../../../resources/azurerm/container/kubernetes_cluster"
   resource_group = module.resource_group.name
+  region         = module.resource_group.location
   vm_size        = "Standard_B2s"
   node_count     = 3
   vnet_subnet_id = var.subnet_id_aks
@@ -119,12 +123,12 @@ resource "null_resource" "aks_config" {
     az aks get-credentials --resource-group ${module.resource_group.name} --name ${module.aks.name} --admin --overwrite-existing;
     kubectl create -f https://raw.githubusercontent.com/Azure/aad-pod-identity/master/deploy/infra/deployment.yaml;
     echo "${templatefile("${path.module}/templates/aadpodidentity.yaml", {
-    name                 = module.user_assigned_identity.uai_name,
-    identity_resource_id = module.user_assigned_identity.uai_id,
-    identity_client_id   = module.user_assigned_identity.uai_client_id
+    name                 = module.user_assigned_identity.name,
+    identity_resource_id = module.user_assigned_identity.id,
+    identity_client_id   = module.user_assigned_identity.client_id
     })}" | kubectl apply -f -;
     echo "${templatefile("${path.module}/templates/aadpodbinding.yaml", {
-    name = module.user_assigned_identity.uai_name
+    name = module.user_assigned_identity.name
 })}" | kubectl apply -f -
     EOT
 }
@@ -159,8 +163,8 @@ resource "helm_release" "ingress_azure" {
       subscription_id         = data.azurerm_client_config.current.subscription_id,
       resource_group_name     = module.resource_group.name,
       applicationgateway_name = module.application_gateway.name,
-      identity_resource_id    = module.user_assigned_identity.uai_id,
-      identity_client_id      = module.user_assigned_identity.uai_client_id,
+      identity_resource_id    = module.user_assigned_identity.id,
+      identity_client_id      = module.user_assigned_identity.client_id,
       aks-api-server-address  = module.aks.fqdn
     })}"
   ]
