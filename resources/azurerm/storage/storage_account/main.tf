@@ -4,7 +4,7 @@
 
 #random string
 
-resource "random_string" "random" {
+resource "random_string" "base" {
   length  = 4
   special = false
 }
@@ -12,7 +12,7 @@ resource "random_string" "random" {
 #storage account
 
 resource "azurerm_storage_account" "base" {
-  name                      = lower("${var.name_prefix}${substr(var.environment, 0, 2)}${random_string.random.result}${var.region}")
+  name                      = lower("${var.name_prefix}${substr(var.environment, 0, 2)}${random_string.base.result}${var.region}")
   resource_group_name       = var.resource_group
   location                  = var.region
   account_kind              = var.account_kind

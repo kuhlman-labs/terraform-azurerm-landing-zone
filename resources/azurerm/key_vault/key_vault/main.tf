@@ -15,7 +15,7 @@ resource "random_string" "base" {
 #key vault
 
 resource "azurerm_key_vault" "base" {
-  name                            = lower("${var.name_prefix}${random_string.base.result}-${var.enviornment}-${var.region}")
+  name                            = lower("${var.name_prefix}${substr(var.environment, 0, 2)}${random_string.base.result}${var.region}")
   location                        = var.region
   resource_group_name             = var.resource_group
   tenant_id                       = data.azurerm_client_config.current.tenant_id

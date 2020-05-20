@@ -25,7 +25,6 @@ module "diagnostic_storage_account" {
   region      = var.region
 }
 
-
 module "windows_jumpbox" {
   source      = "../../modules/azure/windows_jumpbox"
   environment = var.environment
@@ -34,4 +33,11 @@ module "windows_jumpbox" {
     module.network_hub.subnet_name,
   list("management-${var.environment}-${var.region}")), 0)
   storage_account_uri = module.diagnostic_storage_account.primary_blob_endpoint
+}
+
+module "key_vault" {
+  source      = "../../modules/azure/key_vault"
+  environment = var.environment
+  region      = var.region
+  object_id   = var.object_id
 }

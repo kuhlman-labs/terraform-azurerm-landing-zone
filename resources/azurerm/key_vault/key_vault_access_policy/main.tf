@@ -7,7 +7,7 @@ data "azurerm_client_config" "current" {
 
 #key vault access policy
 
-resource "azurerm_key_vault_access_policy" "example" {
+resource "azurerm_key_vault_access_policy" "base" {
   key_vault_id            = var.key_vault_id
   tenant_id               = data.azurerm_client_config.current.tenant_id
   object_id               = var.object_id

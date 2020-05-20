@@ -14,6 +14,12 @@ variable "environment" {
   type        = string
 }
 
+#key vault policy
+
+variable "object_id" {
+  description = "The object ID for the Service Principal"
+  type        = string
+}
 
 #tags
 

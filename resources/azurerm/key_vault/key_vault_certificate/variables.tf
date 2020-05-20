@@ -34,12 +34,11 @@ variable "issuer_name" {
 variable "exportable" {
   description = "(Required) Is this Certificate Exportable? Changing this forces a new resource to be created."
   type        = bool
-  default     = true
 }
 
 variable "key_size" {
   description = "(Required) The size of the Key used in the Certificate. Possible values include 2048 and 4096. Changing this forces a new resource to be created."
-  type        = string
+  type        = number
 }
 
 variable "key_type" {
@@ -47,7 +46,7 @@ variable "key_type" {
   type        = string
 }
 
-variable "reuse" {
+variable "reuse_key" {
   description = "(Required) Is the key reusable? Changing this forces a new resource to be created."
   type        = bool
 }
@@ -60,6 +59,7 @@ variable "content_type" {
 variable "action_type" {
   description = "(Required) The Type of action to be performed when the lifetime trigger is triggerec. Possible values include AutoRenew and EmailContacts. Changing this forces a new resource to be created."
   type        = string
+  default     = "AutoRenew"
 }
 
 variable "lifetime_percentage" {
@@ -83,6 +83,7 @@ variable "extended_key_usage" {
 variable "key_usage" {
   description = "(Required) A list of uses associated with this Key. Possible values include cRLSign, dataEncipherment, decipherOnly, digitalSignature, encipherOnly, keyAgreement, keyCertSign, keyEncipherment and nonRepudiation and are case-sensitive. Changing this forces a new resource to be created."
   type        = list
+  default     = []
 }
 
 variable "subject" {
