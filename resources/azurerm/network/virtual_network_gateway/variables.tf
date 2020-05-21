@@ -32,6 +32,11 @@ variable "public_ip_name" {
   type        = string
 }
 
+variable "public_ip_address_id" {
+  description = "(Required) ID of the public ip associated with the vgw"
+  type        = string
+}
+
 variable "address_prefixes" {
   description = "(Required) The address prefixes to use for the vgw subnet."
   type        = list

@@ -92,6 +92,7 @@ module "virtual_network_gateway" {
   environment           = var.environment
   virtual_network_name  = module.virtual_network.name
   public_ip_name        = module.public_ip_vgw.name
+  public_ip_address_id  = module.public_ip_vgw.id
   address_prefixes      = var.address_prefix_vgw
   type                  = "Vpn"
   sku                   = "Basic"

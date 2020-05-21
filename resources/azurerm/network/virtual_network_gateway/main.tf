@@ -2,13 +2,6 @@
 # resource composition
 ###
 
-#public ip
-
-data "azurerm_public_ip" "base" {
-  name                = var.public_ip_name
-  resource_group_name = var.resource_group
-}
-
 #subnet
 
 resource "azurerm_subnet" "base" {
@@ -35,8 +28,8 @@ resource "azurerm_virtual_network_gateway" "base" {
   generation                       = var.generation
 
   ip_configuration {
-    name                          = data.azurerm_public_ip.base.name
-    public_ip_address_id          = data.azurerm_public_ip.base.id
+    name                          = var.public_ip_name
+    public_ip_address_id          = var.public_ip_address_id
     private_ip_address_allocation = var.private_ip_address_allocation
     subnet_id                     = azurerm_subnet.base.id
   }
