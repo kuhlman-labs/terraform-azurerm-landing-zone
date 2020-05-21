@@ -75,7 +75,7 @@ module "subnet_network_security_group_association" {
 
 #vgw
 
-module "public_ip" {
+module "public_ip_vgw" {
   source            = "../../../resources/azurerm/network/public_ip"
   resource_group    = module.resource_group.name
   region            = module.resource_group.location
@@ -91,7 +91,7 @@ module "virtual_network_gateway" {
   region                = module.resource_group.location
   environment           = var.environment
   virtual_network_name  = module.virtual_network.name
-  public_ip_name        = module.public_ip.name
+  public_ip_name        = module.public_ip_vgw.name
   address_prefixes      = var.address_prefix_vgw
   type                  = "Vpn"
   sku                   = "Basic"
