@@ -100,3 +100,26 @@ module "virtual_network_gateway" {
   root_certificate_name = "P2SRootCert"
   public_cert_data      = file("${path.module}/rootcertificate.cer")
 }
+
+#firewall
+
+module "public_ip_fw" {
+  source            = "../../../resources/azurerm/network/public_ip"
+  resource_group    = module.resource_group.name
+  region            = module.resource_group.location
+  name_prefix       = "pip-fw"
+  allocation_method = "Static"
+  sku               = "Standard"
+  environment       = var.environment
+}
+
+module "firewall" {
+  source               = "../../../resources/azurerm/network/firewall"
+  resource_group       = module.resource_group.name
+  region               = module.resource_group.location
+  environment          = var.environment
+  virtual_network_name = module.virtual_network.name
+  public_ip_address_id = module.public_ip_fw.id
+  address_prefixes     = var.address_prefix_fw
+}
+

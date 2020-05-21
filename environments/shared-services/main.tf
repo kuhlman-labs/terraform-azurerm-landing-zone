@@ -9,6 +9,7 @@ module "network_hub" {
   address_space        = var.address_space
   address_prefixes     = var.address_prefixes
   address_prefix_vgw   = var.address_prefix_vgw
+  address_prefix_fw    = var.address_prefix_fw
   subnet_name_prefixes = var.subnet_name_prefixes
   tags                 = var.tags
 }
