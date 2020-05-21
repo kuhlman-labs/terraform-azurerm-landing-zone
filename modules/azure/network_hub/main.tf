@@ -11,7 +11,7 @@ module "resource_group" {
   environment  = var.environment
 }
 
-#vnet
+#virtual network
 
 module "virtual_network" {
   source         = "../../../resources/azurerm/network/virtual_network"
@@ -23,7 +23,7 @@ module "virtual_network" {
   region         = module.resource_group.location
 }
 
-#snets
+#subnets
 
 module "subnet" {
   source               = "../../../resources/azurerm/network/subnet"
@@ -35,7 +35,7 @@ module "subnet" {
   region               = module.resource_group.location
 }
 
-#nsg
+#network security groups
 
 module "network_security_group" {
   source         = "../../../resources/azurerm/network/network_security_group"
@@ -73,7 +73,7 @@ module "subnet_network_security_group_association" {
   network_security_group_id = module.network_security_group.id
 }
 
-#vgw
+#virtual gateway
 
 module "public_ip_vgw" {
   source            = "../../../resources/azurerm/network/public_ip"
@@ -124,3 +124,32 @@ module "firewall" {
   address_prefixes     = var.address_prefix_fw
 }
 
+#firewall route table
+
+module "route_table" {
+  source         = "../../../resources/azurerm/network/route_table"
+  resource_group = module.resource_group.name
+  region         = module.resource_group.location
+  environment    = var.environment
+  name_prefix    = "route-firewall"
+}
+
+module "route" {
+  source                 = "../../../resources/azurerm/network/route"
+  resource_group         = module.resource_group.name
+  region                 = module.resource_group.location
+  environment            = var.environment
+  route_table_name       = module.route_table.name
+  route_name             = "firewall"
+  address_prefix         = "0.0.0.0/0"
+  next_hop_type          = "VirtualAppliance"
+  next_hop_in_ip_address = module.firewall.private_ip_address
+}
+
+module "subnet_route_table_association" {
+  source         = "../../../resources/azurerm/network/subnet_route_table_association"
+  route_table_id = module.route_table.id
+  subnet_id = element(matchkeys(module.subnet.id,
+    module.subnet.name,
+  list("management-${var.environment}-${module.resource_group.location}")), 0)
+}
