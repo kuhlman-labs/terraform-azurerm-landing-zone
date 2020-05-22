@@ -13,9 +13,9 @@ module "resource_group" {
 
 module "log_analytics" {
   source            = "../../../resources/azurerm/log_analytics/log_analytics"
-  name_prefix       = "log"
-  resource_group           = module.resource_group.name
-  region                   = module.resource_group.location
+  name_prefix       = "log-activity"
+  resource_group    = module.resource_group.name
+  region            = module.resource_group.location
   environment       = var.environment
   sku               = "PerGB2018"
   retention_in_days = 30
