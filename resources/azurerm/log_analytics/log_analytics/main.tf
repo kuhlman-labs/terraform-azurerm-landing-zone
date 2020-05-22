@@ -12,7 +12,7 @@ resource "random_string" "base" {
 #log analytics workspace
 
 resource "azurerm_log_analytics_workspace" "base" {
-  name                = lower("${var.name_prefix}${random_string.base.result}-${var.enviornment}-${var.region}")
+  name                = lower("${var.name_prefix}${random_string.base.result}-${var.environment}-${var.region}")
   location            = var.region
   resource_group_name = var.resource_group
   sku                 = var.sku
