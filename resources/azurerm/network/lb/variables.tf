@@ -29,14 +29,14 @@ variable "region" {
 
 variable "sku" {
   description = "(Optional) The SKU of the Azure Load Balancer. Accepted values are Basic and Standard. Defaults to Basic."
-  type = string
-  default = null
+  type        = string
+  default     = null
 }
 
 variable "frontend_ip_configuration" {
   description = "(Optional) One or multiple frontend_ip_configuration blocks as documented below."
-  type = list
-  default = []
+  type        = list
+  default     = []
   /*
   frontend_ip_configuration supports the following:
   name - (Required) Specifies the name of the frontend ip configuration.
