@@ -2,7 +2,7 @@
 # resource composition
 ###
 
-resource "azurerm_app_service_plan" "example" {
+resource "azurerm_app_service_plan" "base" {
   name                         = "${var.name_prefix}-${var.environment}-${var.region}"
   location                     = var.region
   resource_group_name          = var.resource_group

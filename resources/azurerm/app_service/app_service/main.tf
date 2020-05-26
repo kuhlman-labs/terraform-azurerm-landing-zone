@@ -2,10 +2,17 @@
 # resource composition
 ###
 
+#random string
+
+resource "random_string" "base" {
+  length  = 4
+  special = false
+}
+
 #app service
 
 resource "azurerm_app_service" "base" {
-  name                    = "example-app-service"
+  name                    = lower("${var.name_prefix}${random_string.base.result}-${var.environment}-${var.region}")
   location                = var.region
   resource_group_name     = var.resource_group
   app_service_plan_id     = var.app_service_plan_id
@@ -99,7 +106,7 @@ resource "azurerm_app_service" "base" {
       default_documents         = site_config.value.default_documents
       dotnet_framework_version  = site_config.value.dotnet_framework_version
       ftps_state                = site_config.value.ftps_state
-      health_check_plan         = site_config.value.health_check_plan
+      #health_check_plan         = site_config.value.health_check_plan
       http2_enabled             = site_config.value.http2_enabled
       ip_restriction            = site_config.value.ip_restriction
       java_version              = site_config.value.java_version
@@ -144,7 +151,7 @@ resource "azurerm_app_service" "base" {
 
         }
         azure_blob_storage {
-          level             = logs.http_logs_azure_blob_storage_level
+          #level             = logs.http_logs_azure_blob_storage_level
           sas_url           = logs.http_logs_azure_blob_storage_sas_url
           retention_in_days = logs.http_logs_azure_blob_storage_retention_in_days
         }
