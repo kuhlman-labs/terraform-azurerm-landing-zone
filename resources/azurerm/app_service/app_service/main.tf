@@ -103,9 +103,9 @@ resource "azurerm_app_service" "base" {
         allowed_origins     = site_config.value.cors_allowed_origins
         support_credentials = site_config.value.cors_support_credentials
       }
-      default_documents         = site_config.value.default_documents
-      dotnet_framework_version  = site_config.value.dotnet_framework_version
-      ftps_state                = site_config.value.ftps_state
+      default_documents        = site_config.value.default_documents
+      dotnet_framework_version = site_config.value.dotnet_framework_version
+      ftps_state               = site_config.value.ftps_state
       #health_check_plan         = site_config.value.health_check_plan
       http2_enabled             = site_config.value.http2_enabled
       ip_restriction            = site_config.value.ip_restriction
