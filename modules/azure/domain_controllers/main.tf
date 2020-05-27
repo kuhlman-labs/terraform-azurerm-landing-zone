@@ -6,7 +6,7 @@
 
 module "resource_group" {
   source       = "../../../resources/azurerm/base/resource_group"
-  service_name = "domain-controllers"
+  service_name = "active-directory"
   region       = var.region
   environment  = var.environment
 }
@@ -16,8 +16,8 @@ module "subnet" {
   resource_group       = module.resource_group.name
   region               = module.resource_group.location
   virtual_network_name = var.virtual_network_name
-  name_prefixes        = ["snet-active-directory"]
-  address_prefixes     = var.address_prefixes
+  name_prefixes        = ["snet-adds"]
+  address_prefixes     = var.address_prefix_adds
   environment          = var.environment
 }
 
@@ -232,13 +232,13 @@ module "network_security_rule" {
       destination_port_range     = "139"
       source_address_prefix      = "VirtualNetwork"
       destination_address_prefix = "*"
-    }  
+    }
   ]
 }
 
 module "subnet_network_security_group_association" {
-  source = "../../../resources/azurerm/network/subnet_network_security_group_association"
-  subnet_id = module.subnet.id
+  source                    = "../../../resources/azurerm/network/subnet_network_security_group_association"
+  subnet_id                 = module.subnet.id
   network_security_group_id = module.network_security_group.id
 }
 
@@ -279,25 +279,33 @@ module "virtual_machine" {
 }
 
 module "managed_disk_1" {
-  source                           = "../../../resources/azurerm/compute/managed_disk"
-  resource_group                   = module.resource_group.name
-  region                           = module.resource_group.location
-  environment                      = var.environment
-  name_prefix                      = "data-disk-${module.virtual_machine[0].name}"
+  source               = "../../../resources/azurerm/compute/managed_disk"
+  resource_group       = module.resource_group.name
+  region               = module.resource_group.location
+  environment          = var.environment
+  name_prefix          = "data-disk-${module.virtual_machine[0].name}"
+  create_option        = "Empty"
+  storage_account_type = "Standard_LRS"
 }
 
 module "managed_disk_2" {
-  source                           = "../../../resources/azurerm/compute/managed_disk"
-  resource_group                   = module.resource_group.name
-  region                           = module.resource_group.location
-  environment                      = var.environment
-  name_prefix                      = "data-disk-${module.virtual_machine[1].name}"
+  source         = "../../../resources/azurerm/compute/managed_disk"
+  resource_group = module.resource_group.name
+  region         = module.resource_group.location
+  environment    = var.environment
+  name_prefix    = "data-disk-${module.virtual_machine[1].name}"
 }
 
-module "virtual_machine_data_disk_attachment" {
-  source                           = "../../../resources/azurerm/compute/virtual_machine_data_disk_attachment"
-  resource_group                   = module.resource_group.name
-  region                           = module.resource_group.location
-  environment                      = var.environment
-  name_prefix                      = "data-disk-${module.virtual_machine[1].name}"
+module "virtual_machine_data_disk_attachment_1" {
+  source             = "../../../resources/azurerm/compute/virtual_machine_data_disk_attachment"
+  managed_disk_id    = module.managed_disk_1.id
+  virtual_machine_id = module.virtual_machine[0].id
+  lun                = "0"
+}
+
+module "virtual_machine_data_disk_attachment_2" {
+  source             = "../../../resources/azurerm/compute/virtual_machine_data_disk_attachment"
+  managed_disk_id    = module.managed_disk_2.id
+  virtual_machine_id = module.virtual_machine[1].id
+  lun                = "0"
 }
