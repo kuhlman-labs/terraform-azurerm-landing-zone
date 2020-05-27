@@ -28,7 +28,7 @@ resource "azurerm_windows_virtual_machine" "base" {
   proximity_placement_group_id = var.proximity_placement_group_id
   source_image_id              = var.source_image_id
   timezone                     = var.timezone
-  zone                         = var.zone
+  zone                         = var.zone[count.index]
   tags                         = var.tags
 
   os_disk {
