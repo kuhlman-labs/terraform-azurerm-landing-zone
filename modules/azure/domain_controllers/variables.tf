@@ -21,8 +21,13 @@ variable "storage_account_uri" {
   type        = string
 }
 
-variable "subnet_id" {
-  description = "(Required) The ID of the Subnet where this Network Interface should be located in."
+variable "virtual_network_name" {
+  description = "(Required) The Name of the Virtual Network where this subnet should be located in."
+  type        = string
+}
+
+variable "address_prefix_adds" {
+  description = "(Required) The address prefix for the aads subnet"
   type        = string
 }
 

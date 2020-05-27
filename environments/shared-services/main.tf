@@ -42,3 +42,12 @@ module "key_vault" {
   region      = var.region
   object_id   = var.object_id
 }
+
+module "domain_controllers" {
+  source               = "../../modules/azure/domain_controllers"
+  environment          = var.environment
+  region               = var.region
+  virtual_network_name = module.network_hub.virtual_network_name
+  address_prefix_aads  = var.address_prefix_aads
+  storage_account_uri  = module.diagnostic_storage_account.primary_blob_endpoint
+}
