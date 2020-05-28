@@ -13,6 +13,7 @@ No requirements.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| environment | Development environment for resource; prod, non-prod, shared-services | `string` | n/a | yes |
 | name\_prefix | a short pre-defined text to identify resource type | `string` | `"log"` | no |
 | region | Geographic Region resource will be deployed into | `string` | n/a | yes |
 | resource\_group | The name of the target resource group | `string` | n/a | yes |

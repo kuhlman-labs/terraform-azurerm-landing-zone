@@ -16,6 +16,7 @@ No requirements.
 | enabled\_for\_deployment | (Optional) Boolean flag to specify whether Azure Virtual Machines are permitted to retrieve certificates stored as secrets from the key vault. Defaults to false. | `bool` | `null` | no |
 | enabled\_for\_disk\_encryption | (Optional) Boolean flag to specify whether Azure Disk Encryption is permitted to retrieve secrets from the vault and unwrap keys. Defaults to false. | `bool` | `null` | no |
 | enabled\_for\_template\_deployment | (Optional) Boolean flag to specify whether Azure Resource Manager is permitted to retrieve secrets from the key vault. Defaults to false. | `bool` | `null` | no |
+| environment | Development environment for resource; prod, non-prod, shared-services | `string` | n/a | yes |
 | name\_prefix | a short pre-defined text to identify resource type | `string` | `"kv"` | no |
 | network\_acls | (Optional) A network\_acls block as defined below. | `list` | `[]` | no |
 | purge\_protection\_enabled | (Optional) Is Purge Protection enabled for this Key Vault? Defaults to false. | `bool` | `null` | no |

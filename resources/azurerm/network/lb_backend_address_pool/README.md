@@ -4,19 +4,21 @@ No requirements.
 
 ## Providers
 
-No provider.
+| Name | Version |
+|------|---------|
+| azurerm | n/a |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| environment | Development environment for resource; prod, non-prod, shared-services | `string` | n/a | yes |
-| name\_prefix | A short pre-defined text to identify the resource type | `string` | `""` | no |
-| region | Geographic Region resource will be deployed into | `string` | n/a | yes |
+| load\_balancer\_id | (Required) The ID of the Load Balancer in which to create the Backend Address Pool. | `string` | n/a | yes |
+| name | (Required) Specifies the name of the Backend Address Pool. | `string` | n/a | yes |
 | resource\_group | The name of the target resource group | `string` | n/a | yes |
-| tags | A map of tags to add to all resources | `map` | `{}` | no |
 
 ## Outputs
 
-No output.
+| Name | Description |
+|------|-------------|
+| id | The ID of the Backend Address Pool. |
 

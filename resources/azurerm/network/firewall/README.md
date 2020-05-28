@@ -13,6 +13,7 @@ No requirements.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | address\_prefixes | (Required) The address prefixes to use for the azfw subnet. | `list` | n/a | yes |
+| environment | Development environment for resource; prod, non-prod, shared-services | `string` | n/a | yes |
 | name\_prefix | Specifies the name of the Firewall. Changing this forces a new resource to be created. | `string` | `"azfw"` | no |
 | public\_ip\_address\_id | (Required) The Resource ID of the Public IP Address associated with the firewall. | `string` | n/a | yes |
 | region | Geographic Region resource will be deployed into | `string` | n/a | yes |

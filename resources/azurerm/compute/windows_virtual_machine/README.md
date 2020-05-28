@@ -22,6 +22,7 @@ No requirements.
 | custom\_data | (Optional) The Base64-Encoded Custom Data which should be used for this Virtual Machine. Changing this forces a new resource to be created. | `string` | `null` | no |
 | dedicated\_host\_id | (Optional) The ID of a Dedicated Host where this machine should be run on. Changing this forces a new resource to be created. | `string` | `null` | no |
 | enable\_automatic\_updates | (Optional) Specifies if Automatic Updates are Enabled for the Windows Virtual Machine. Changing this forces a new resource to be created. | `bool` | `null` | no |
+| enable\_zone | n/a | `bool` | `false` | no |
 | environment | Development environment for resource; prod, non-prod, shared-services | `string` | n/a | yes |
 | eviction\_policy | (Optional) Specifies what should happen when the Virtual Machine is evicted for price reasons when using a Spot instance. At this time the only supported value is Deallocate. Changing this forces a new resource to be created. | `string` | `null` | no |
 | identity | (Optional) An identity block as defined below. | `list` | `[]` | no |
@@ -52,11 +53,12 @@ No requirements.
 | timezone | (Optional) Specifies the Time Zone which should be used by the Virtual Machine, the possible values are defined here. | `string` | `null` | no |
 | vm\_count | (Optional) number of VMs to create | `number` | `1` | no |
 | winrm\_listener | (Optional) One or more winrm\_listener blocks as defined below. | `list` | `[]` | no |
-| zone | (Optional) The Zone in which this Virtual Machine should be created. Changing this forces a new resource to be created. | `number` | `null` | no |
+| zone | (Optional) The Zone in which this Virtual Machine should be created. Changing this forces a new resource to be created. | `list` | `[]` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
 | id | The ID of the Windows Virtual Machine. |
+| name | The Name of the Windows Virtual Machine. |
 

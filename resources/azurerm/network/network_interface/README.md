@@ -20,7 +20,7 @@ No requirements.
 | name\_prefix | A short pre-defined text to identify the resource type | `string` | `"nic"` | no |
 | nic\_count | Number of nic resources to create | `number` | `1` | no |
 | primary | (Optional) Is this the Primary IP Configuration? Must be true for the first ip\_configuration when multiple are specified. Defaults to false. | `bool` | `null` | no |
-| private\_ip\_address | (Optional) The Static IP Address which should be used. | `string` | `null` | no |
+| private\_ip\_address | (Optional) The Static IP Address which should be used. | `list` | `[]` | no |
 | private\_ip\_address\_allocation | (Required) The allocation method used for the Private IP Address. Possible values are Dynamic and Static. | `string` | n/a | yes |
 | private\_ip\_address\_version | (Optional) The IP Version to use. Possible values are IPv4 or IPv6. Defaults to IPv4. | `string` | `null` | no |
 | public\_ip\_address\_id | (Optional) Reference to a Public IP Address to associate with this NIC | `string` | `null` | no |

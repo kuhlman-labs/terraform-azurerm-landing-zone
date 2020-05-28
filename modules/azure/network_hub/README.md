@@ -10,6 +10,7 @@ No provider.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| address\_prefix\_fw | The address prefixe to use for the fw subnet. | `list` | n/a | yes |
 | address\_prefix\_vgw | The address prefixe to use for the vgw subnet. | `list` | n/a | yes |
 | address\_prefixes | The address prefixes to use for the subnets. | `list(string)` | n/a | yes |
 | address\_space | This is a list of the ip address ranges for the vnet | `list` | n/a | yes |
