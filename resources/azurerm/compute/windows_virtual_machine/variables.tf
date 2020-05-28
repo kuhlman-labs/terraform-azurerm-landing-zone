@@ -226,10 +226,15 @@ variable "winrm_listener" {
   default     = []
 }
 
+variable "enable_zone" {
+  type = bool
+  default = false
+}
+
 variable "zone" {
   description = "(Optional) The Zone in which this Virtual Machine should be created. Changing this forces a new resource to be created."
-  type        = number
-  default     = null
+  type        = list
+  default     = []
 }
 
 #tags

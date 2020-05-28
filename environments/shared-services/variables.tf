@@ -83,7 +83,7 @@ variable "address_prefix_fw" {
   type        = list
 }
 
-variable "address_prefix_aads" {
+variable "address_prefix_adds" {
   description = "The address prefixe to use for the aads subnet."
   type        = list
 }

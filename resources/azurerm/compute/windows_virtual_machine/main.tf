@@ -13,7 +13,7 @@ resource "azurerm_windows_virtual_machine" "base" {
   size                         = var.size
   admin_username               = var.admin_username
   admin_password               = var.admin_password
-  network_interface_ids        = var.network_interface_ids
+  network_interface_ids        = [element(var.network_interface_ids, count.index)]
   allow_extension_operations   = var.allow_extension_operations
   availability_set_id          = var.availability_set_id
   computer_name                = var.computer_name
@@ -28,7 +28,7 @@ resource "azurerm_windows_virtual_machine" "base" {
   proximity_placement_group_id = var.proximity_placement_group_id
   source_image_id              = var.source_image_id
   timezone                     = var.timezone
-  zone                         = var.zone[count.index]
+  zone                         = var.enable_zone == false ? null : element(var.zone, count.index)
   tags                         = var.tags
 
   os_disk {

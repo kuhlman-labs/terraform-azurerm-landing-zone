@@ -28,7 +28,7 @@ variable "virtual_network_name" {
 
 variable "address_prefix_adds" {
   description = "(Required) The address prefix for the aads subnet"
-  type        = string
+  type        = list
 }
 
 #tags

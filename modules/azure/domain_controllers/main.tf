@@ -238,7 +238,7 @@ module "network_security_rule" {
 
 module "subnet_network_security_group_association" {
   source                    = "../../../resources/azurerm/network/subnet_network_security_group_association"
-  subnet_id                 = module.subnet.id
+  subnet_id                 = element(module.subnet.id, 0)
   network_security_group_id = module.network_security_group.id
 }
 
@@ -251,7 +251,7 @@ module "network_interface" {
   environment                   = var.environment
   name_prefix                   = "nic-wvm-dc"
   nic_count                     = 2
-  subnet_id                     = module.subnet.id
+  subnet_id                     = element(module.subnet.id, 0)
   private_ip_address_allocation = "Static"
 }
 
@@ -270,7 +270,7 @@ module "virtual_machine" {
   os_disk_storage_account_type     = "Standard_LRS"
   os_disk_caching                  = "None"
   size                             = "Standard_F2"
-  network_interface_ids            = module.network_interface[count.index].id
+  network_interface_ids            = module.network_interface.id
   storage_account_uri              = var.storage_account_uri
   source_image_reference_publisher = "MicrosoftWindowsServer"
   source_image_reference_offer     = "WindowsServer"
@@ -294,6 +294,8 @@ module "managed_disk_2" {
   region         = module.resource_group.location
   environment    = var.environment
   name_prefix    = "data-disk-${module.virtual_machine[1].name}"
+  create_option        = "Empty"
+  storage_account_type = "Standard_LRS"
 }
 
 module "virtual_machine_data_disk_attachment_1" {
@@ -301,6 +303,7 @@ module "virtual_machine_data_disk_attachment_1" {
   managed_disk_id    = module.managed_disk_1.id
   virtual_machine_id = module.virtual_machine[0].id
   lun                = "0"
+  caching            = "None"
 }
 
 module "virtual_machine_data_disk_attachment_2" {
@@ -308,4 +311,5 @@ module "virtual_machine_data_disk_attachment_2" {
   managed_disk_id    = module.managed_disk_2.id
   virtual_machine_id = module.virtual_machine[1].id
   lun                = "0"
+  caching            = "None"
 }
