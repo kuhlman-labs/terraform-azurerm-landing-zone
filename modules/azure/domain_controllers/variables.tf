@@ -26,6 +26,16 @@ variable "virtual_network_name" {
   type        = string
 }
 
+variable "virtual_network_resource_group" {
+  description = "(Required) The Name of the Virtual Network where this subnet should be located in."
+  type        = string
+}
+
+variable "private_ip_address_adds" {
+  description = "(Required) The Static IP address for the aads Servers"
+  type        = list
+}
+
 variable "address_prefix_adds" {
   description = "(Required) The address prefix for the aads subnet"
   type        = list

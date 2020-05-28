@@ -22,6 +22,6 @@ resource "azurerm_network_interface" "base" {
     private_ip_address_allocation = var.private_ip_address_allocation
     public_ip_address_id          = var.public_ip_address_id
     primary                       = var.primary
-    private_ip_address            = var.private_ip_address
+    private_ip_address            = var.private_ip_address_allocation != "Static" ? null : element(var.private_ip_address, count.index)
   }
 }

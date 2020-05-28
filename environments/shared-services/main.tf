@@ -47,7 +47,9 @@ module "domain_controllers" {
   source               = "../../modules/azure/domain_controllers"
   environment          = var.environment
   region               = var.region
+  virtual_network_resource_group = module.network_hub.virtual_network_resource_group_name
   virtual_network_name = module.network_hub.virtual_network_name
   address_prefix_adds  = var.address_prefix_adds
   storage_account_uri  = module.diagnostic_storage_account.primary_blob_endpoint
+  private_ip_address_adds = var.private_ip_address_adds
 }

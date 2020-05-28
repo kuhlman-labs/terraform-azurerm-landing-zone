@@ -88,6 +88,11 @@ variable "address_prefix_adds" {
   type        = list
 }
 
+variable "private_ip_address_adds" {
+  description = "(Required) The Static IP address for the aads Servers"
+  type        = list
+}
+
 variable "subnet_name_prefixes" {
   description = "The name of the subnets. Changing this forces a new resource to be created."
   type        = list(string)

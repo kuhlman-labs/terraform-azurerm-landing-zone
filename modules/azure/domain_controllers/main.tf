@@ -13,7 +13,7 @@ module "resource_group" {
 
 module "subnet" {
   source               = "../../../resources/azurerm/network/subnet"
-  resource_group       = module.resource_group.name
+  resource_group       = var.virtual_network_resource_group
   region               = module.resource_group.location
   virtual_network_name = var.virtual_network_name
   name_prefixes        = ["snet-adds"]
@@ -41,7 +41,7 @@ module "network_security_rule" {
       direction                  = "Inbound"
       access                     = "Allow"
       protocol                   = "*"
-      source_port_range          = "389"
+      source_port_range          = "*"
       destination_port_range     = "389"
       source_address_prefix      = "VirtualNetwork"
       destination_address_prefix = "*"
@@ -52,7 +52,7 @@ module "network_security_rule" {
       direction                  = "Inbound"
       access                     = "Allow"
       protocol                   = "TCP"
-      source_port_range          = "636"
+      source_port_range          = "*"
       destination_port_range     = "636"
       source_address_prefix      = "VirtualNetwork"
       destination_address_prefix = "*"
@@ -63,7 +63,7 @@ module "network_security_rule" {
       direction                  = "Inbound"
       access                     = "Allow"
       protocol                   = "TCP"
-      source_port_range          = "3268"
+      source_port_range          = "*"
       destination_port_range     = "3268"
       source_address_prefix      = "VirtualNetwork"
       destination_address_prefix = "*"
@@ -74,7 +74,7 @@ module "network_security_rule" {
       direction                  = "Inbound"
       access                     = "Allow"
       protocol                   = "TCP"
-      source_port_range          = "3269"
+      source_port_range          = "*"
       destination_port_range     = "3269"
       source_address_prefix      = "VirtualNetwork"
       destination_address_prefix = "*"
@@ -85,7 +85,7 @@ module "network_security_rule" {
       direction                  = "Inbound"
       access                     = "Allow"
       protocol                   = "*"
-      source_port_range          = "88"
+      source_port_range          = "*"
       destination_port_range     = "88"
       source_address_prefix      = "VirtualNetwork"
       destination_address_prefix = "*"
@@ -96,7 +96,7 @@ module "network_security_rule" {
       direction                  = "Inbound"
       access                     = "Allow"
       protocol                   = "*"
-      source_port_range          = "53"
+      source_port_range          = "*"
       destination_port_range     = "53"
       source_address_prefix      = "VirtualNetwork"
       destination_address_prefix = "*"
@@ -107,7 +107,7 @@ module "network_security_rule" {
       direction                  = "Inbound"
       access                     = "Allow"
       protocol                   = "*"
-      source_port_range          = "445"
+      source_port_range          = "*"
       destination_port_range     = "445"
       source_address_prefix      = "VirtualNetwork"
       destination_address_prefix = "*"
@@ -118,7 +118,7 @@ module "network_security_rule" {
       direction                  = "Inbound"
       access                     = "Allow"
       protocol                   = "TCP"
-      source_port_range          = "25"
+      source_port_range          = "*"
       destination_port_range     = "25"
       source_address_prefix      = "VirtualNetwork"
       destination_address_prefix = "*"
@@ -129,7 +129,7 @@ module "network_security_rule" {
       direction                  = "Inbound"
       access                     = "Allow"
       protocol                   = "*"
-      source_port_range          = "135"
+      source_port_range          = "*"
       destination_port_range     = "135"
       source_address_prefix      = "VirtualNetwork"
       destination_address_prefix = "*"
@@ -140,7 +140,7 @@ module "network_security_rule" {
       direction                  = "Inbound"
       access                     = "Allow"
       protocol                   = "TCP"
-      source_port_range          = "49152-65535"
+      source_port_range          = "*"
       destination_port_range     = "49152-65535"
       source_address_prefix      = "VirtualNetwork"
       destination_address_prefix = "*"
@@ -151,7 +151,7 @@ module "network_security_rule" {
       direction                  = "Inbound"
       access                     = "Allow"
       protocol                   = "TCP"
-      source_port_range          = "5722"
+      source_port_range          = "*"
       destination_port_range     = "5722"
       source_address_prefix      = "VirtualNetwork"
       destination_address_prefix = "*"
@@ -162,18 +162,18 @@ module "network_security_rule" {
       direction                  = "Inbound"
       access                     = "Allow"
       protocol                   = "UDP"
-      source_port_range          = "123"
+      source_port_range          = "*"
       destination_port_range     = "123"
       source_address_prefix      = "VirtualNetwork"
       destination_address_prefix = "*"
     },
     {
-      name                       = "Kerberos change/set password"
+      name                       = "Kerberos change and set password"
       priority                   = 220
       direction                  = "Inbound"
       access                     = "Allow"
       protocol                   = "*"
-      source_port_range          = "464"
+      source_port_range          = "*"
       destination_port_range     = "464"
       source_address_prefix      = "VirtualNetwork"
       destination_address_prefix = "*"
@@ -184,7 +184,7 @@ module "network_security_rule" {
       direction                  = "Inbound"
       access                     = "Allow"
       protocol                   = "UDP"
-      source_port_range          = "49152-65535"
+      source_port_range          = "*"
       destination_port_range     = "49152-65535"
       source_address_prefix      = "VirtualNetwork"
       destination_address_prefix = "*"
@@ -195,7 +195,7 @@ module "network_security_rule" {
       direction                  = "Inbound"
       access                     = "Allow"
       protocol                   = "UDP"
-      source_port_range          = "138"
+      source_port_range          = "*"
       destination_port_range     = "138"
       source_address_prefix      = "VirtualNetwork"
       destination_address_prefix = "*"
@@ -206,7 +206,7 @@ module "network_security_rule" {
       direction                  = "Inbound"
       access                     = "Allow"
       protocol                   = "TCP"
-      source_port_range          = "9389"
+      source_port_range          = "*"
       destination_port_range     = "9389"
       source_address_prefix      = "VirtualNetwork"
       destination_address_prefix = "*"
@@ -217,7 +217,7 @@ module "network_security_rule" {
       direction                  = "Inbound"
       access                     = "Allow"
       protocol                   = "UDP"
-      source_port_range          = "137"
+      source_port_range          = "*"
       destination_port_range     = "137"
       source_address_prefix      = "VirtualNetwork"
       destination_address_prefix = "*"
@@ -228,7 +228,7 @@ module "network_security_rule" {
       direction                  = "Inbound"
       access                     = "Allow"
       protocol                   = "TCP"
-      source_port_range          = "139"
+      source_port_range          = "*"
       destination_port_range     = "139"
       source_address_prefix      = "VirtualNetwork"
       destination_address_prefix = "*"
@@ -253,6 +253,7 @@ module "network_interface" {
   nic_count                     = 2
   subnet_id                     = element(module.subnet.id, 0)
   private_ip_address_allocation = "Static"
+  private_ip_address            = var.private_ip_address_adds
 }
 
 #vm
@@ -264,6 +265,7 @@ module "virtual_machine" {
   environment                      = var.environment
   name_prefix                      = "wvm-dc"
   vm_count                         = 2
+  enable_zone                      = true
   zone                             = [1, 2]
   admin_username                   = "kuhlmanlabs"
   admin_password                   = "P@ssWord098"
@@ -283,9 +285,11 @@ module "managed_disk_1" {
   resource_group       = module.resource_group.name
   region               = module.resource_group.location
   environment          = var.environment
-  name_prefix          = "data-disk-${module.virtual_machine[0].name}"
+  name_prefix          = "data-disk-wvm-dc-0"
   create_option        = "Empty"
   storage_account_type = "Standard_LRS"
+  disk_size_gb         = 60
+  zones                = [1]
 }
 
 module "managed_disk_2" {
@@ -293,15 +297,17 @@ module "managed_disk_2" {
   resource_group = module.resource_group.name
   region         = module.resource_group.location
   environment    = var.environment
-  name_prefix    = "data-disk-${module.virtual_machine[1].name}"
+  name_prefix    = "data-disk-wvm-dc-1"
   create_option        = "Empty"
   storage_account_type = "Standard_LRS"
+  disk_size_gb         = 60
+  zones                = [2]
 }
 
 module "virtual_machine_data_disk_attachment_1" {
   source             = "../../../resources/azurerm/compute/virtual_machine_data_disk_attachment"
   managed_disk_id    = module.managed_disk_1.id
-  virtual_machine_id = module.virtual_machine[0].id
+  virtual_machine_id = element(module.virtual_machine.id, 0)
   lun                = "0"
   caching            = "None"
 }
@@ -309,7 +315,7 @@ module "virtual_machine_data_disk_attachment_1" {
 module "virtual_machine_data_disk_attachment_2" {
   source             = "../../../resources/azurerm/compute/virtual_machine_data_disk_attachment"
   managed_disk_id    = module.managed_disk_2.id
-  virtual_machine_id = module.virtual_machine[1].id
+  virtual_machine_id = element(module.virtual_machine.id, 1)
   lun                = "0"
   caching            = "None"
 }

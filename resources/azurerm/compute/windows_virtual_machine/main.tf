@@ -16,7 +16,7 @@ resource "azurerm_windows_virtual_machine" "base" {
   network_interface_ids        = [element(var.network_interface_ids, count.index)]
   allow_extension_operations   = var.allow_extension_operations
   availability_set_id          = var.availability_set_id
-  computer_name                = var.computer_name
+  computer_name                = "${substr(var.name_prefix, 4, 8)}-${count.index}-${substr(var.environment, 0, 2)}${substr(var.region, 0, 2)}"
   custom_data                  = var.custom_data
   dedicated_host_id            = var.dedicated_host_id
   enable_automatic_updates     = var.enable_automatic_updates

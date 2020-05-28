@@ -66,8 +66,8 @@ variable "primary" {
 #When private_ip_address_allocation is set to Static the following field can be configured:
 variable "private_ip_address" {
   description = "(Optional) The Static IP Address which should be used."
-  type        = string
-  default     = null
+  type        = list
+  default     = []
 }
 
 variable "private_ip_address_allocation" {
