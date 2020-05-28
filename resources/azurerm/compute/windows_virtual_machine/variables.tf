@@ -227,7 +227,7 @@ variable "winrm_listener" {
 }
 
 variable "enable_zone" {
-  type = bool
+  type    = bool
   default = false
 }
 

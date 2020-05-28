@@ -293,11 +293,11 @@ module "managed_disk_1" {
 }
 
 module "managed_disk_2" {
-  source         = "../../../resources/azurerm/compute/managed_disk"
-  resource_group = module.resource_group.name
-  region         = module.resource_group.location
-  environment    = var.environment
-  name_prefix    = "data-disk-wvm-dc-1"
+  source               = "../../../resources/azurerm/compute/managed_disk"
+  resource_group       = module.resource_group.name
+  region               = module.resource_group.location
+  environment          = var.environment
+  name_prefix          = "data-disk-wvm-dc-1"
   create_option        = "Empty"
   storage_account_type = "Standard_LRS"
   disk_size_gb         = 60

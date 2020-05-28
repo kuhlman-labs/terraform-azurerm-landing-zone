@@ -20,13 +20,13 @@ resource "azurerm_managed_disk" "base" {
   dynamic "encryption_settings" {
     for_each = var.encryption_settings
     content {
-      enabled             = encryption_settings.value.enabled
+      enabled = encryption_settings.value.enabled
       disk_encryption_key {
-        secret_url = encryption_settings.value.disk_encryption_key_secret_url
+        secret_url      = encryption_settings.value.disk_encryption_key_secret_url
         source_vault_id = encryption_settings.value.disk_encryption_key_source_vault_id
       }
       key_encryption_key {
-        key_url = encryption_settings.value.key_encryption_key_key_url
+        key_url         = encryption_settings.value.key_encryption_key_key_url
         source_vault_id = encryption_settings.value.key_encryption_key_source_vault_id
       }
     }
