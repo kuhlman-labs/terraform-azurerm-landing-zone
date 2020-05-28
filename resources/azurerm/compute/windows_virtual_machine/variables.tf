@@ -227,6 +227,7 @@ variable "winrm_listener" {
 }
 
 variable "enable_zone" {
+  description = "(Optional) Enable zone deployment for this Virtual Machine."
   type    = bool
   default = false
 }
