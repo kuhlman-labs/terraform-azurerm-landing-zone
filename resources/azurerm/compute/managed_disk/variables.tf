@@ -32,6 +32,12 @@ variable "create_option" {
   type        = string
 }
 
+variable "disk_count" {
+  description = "(Optional) number of VMs to create"
+  type        = number
+  default     = 1
+}
+
 #The Disk Encryption Set must have the Reader Role Assignment scoped on the Key Vault - in addition to an Access Policy to the Key Vault
 variable "disk_encryption_set_id" {
   description = "(Optional) The ID of a Disk Encryption Set which should be used to encrypt this Managed Disk. Changing this forces a new resource to be created."
@@ -90,6 +96,12 @@ variable "storage_account_id" {
 variable "storage_account_type" {
   description = "(Required) The type of storage to use for the managed disk. Possible values are Standard_LRS, Premium_LRS, StandardSSD_LRS or UltraSSD_LRS."
   type        = string
+}
+
+variable "enable_zones" {
+  description = "(Optional) Enable zone deployment for this Virtual Machine."
+  type        = bool
+  default     = false
 }
 
 variable "zones" {

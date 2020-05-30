@@ -21,18 +21,6 @@ variable "address_space" {
   type        = list
 }
 
-#subnets
-
-variable "address_prefixes" {
-  description = "The address prefixes to use for the subnets."
-  type        = list(string)
-}
-
-variable "subnet_name_prefixes" {
-  description = "The name of the subnets. Changing this forces a new resource to be created."
-  type        = list(string)
-}
-
 #tags
 
 variable "tags" {

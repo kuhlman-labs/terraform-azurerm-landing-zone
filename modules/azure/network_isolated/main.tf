@@ -22,15 +22,3 @@ module "virtual_network" {
   tags           = var.tags
   environment    = var.environment
 }
-
-#snets
-
-module "subnet" {
-  source               = "../../../resources/azurerm/network/subnet"
-  resource_group       = module.resource_group.name
-  region               = module.resource_group.location
-  virtual_network_name = module.virtual_network.name
-  name_prefixes        = var.subnet_name_prefixes
-  address_prefixes     = var.address_prefixes
-  environment          = var.environment
-}

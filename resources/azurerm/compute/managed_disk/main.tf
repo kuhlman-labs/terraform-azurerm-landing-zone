@@ -3,7 +3,9 @@
 ###
 
 resource "azurerm_managed_disk" "base" {
-  name                   = var.name_prefix
+  count = var.disk_count
+
+  name                   = "${var.name_prefix}-${count.index}-${var.environment}-${var.region}"
   location               = var.region
   resource_group_name    = var.resource_group
   storage_account_type   = var.storage_account_type
@@ -16,7 +18,7 @@ resource "azurerm_managed_disk" "base" {
   source_resource_id     = var.source_resource_id
   source_uri             = var.source_uri
   storage_account_id     = var.storage_account_id
-  zones                  = var.zones
+  zones                  = var.enable_zones == false ? null : [element(var.zones, count.index)]
   dynamic "encryption_settings" {
     for_each = var.encryption_settings
     content {
