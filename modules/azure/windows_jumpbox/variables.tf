@@ -21,9 +21,25 @@ variable "storage_account_uri" {
   type        = string
 }
 
-variable "subnet_id" {
-  description = "(Required) The ID of the Subnet where this Network Interface should be located in."
+variable "virtual_network_name" {
+  description = "(Required) The Name of the Virtual Network where this subnet should be located in."
   type        = string
+}
+
+variable "virtual_network_resource_group" {
+  description = "(Required) The Name of the Virtual Network where this subnet should be located in."
+  type        = string
+}
+
+variable "vm_size" {
+  description = "(Required) The SKU which should be used for this Virtual Machine, such as Standard_F2."
+  type        = string
+  default     = "Standard_B2s"
+}
+
+variable "address_prefix_jumpbox" {
+  description = "(Required) The address prefix for the aads subnet"
+  type        = list
 }
 
 #tags

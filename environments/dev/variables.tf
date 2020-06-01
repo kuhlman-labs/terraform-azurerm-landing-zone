@@ -68,13 +68,13 @@ variable "address_space" {
   type        = list
 }
 
-variable "address_prefixes" {
-  description = "The address prefix to use for the subnet."
+variable "address_prefix_agw" {
+  description = "The address prefixe to use for the agw subnet."
   type        = list(string)
 }
 
-variable "subnet_name_prefixes" {
-  description = "The name of the subnets. Changing this forces a new resource to be created."
+variable "address_prefix_aks" {
+  description = "The address prefixe to use for the aks subnet."
   type        = list(string)
 }
 

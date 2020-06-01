@@ -26,6 +26,6 @@ No requirements.
 
 | Name | Description |
 |------|-------------|
-| id | n/a |
-| private\_ip\_address | n/a |
+| id | The Resource ID of the Azure Firewall. |
+| private\_ip\_address | The private IP address of the Azure Firewall. |
 

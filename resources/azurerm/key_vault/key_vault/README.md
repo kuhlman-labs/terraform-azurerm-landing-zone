@@ -22,7 +22,7 @@ No requirements.
 | purge\_protection\_enabled | (Optional) Is Purge Protection enabled for this Key Vault? Defaults to false. | `bool` | `null` | no |
 | region | Geographic Region resource will be deployed into | `string` | n/a | yes |
 | resource\_group | The name of the target resource group | `string` | n/a | yes |
-| sku\_name | The Name of the sku used for this Key Vault. Possible values are standard and premium. | `string` | `"standard"` | no |
+| sku\_name | The Name of the sku used for this Key Vault. Possible values are standard and premium. | `string` | n/a | yes |
 | soft\_delete\_enabled | (Optional) Should Soft Delete be enabled for this Key Vault? Defaults to false. | `bool` | `null` | no |
 | tags | tags to be added to resource | `map` | `{}` | no |
 

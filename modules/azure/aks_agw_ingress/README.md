@@ -16,17 +16,21 @@
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| address\_prefix\_agw | The subnet address prefix to use for the agw. | `list(string)` | n/a | yes |
+| address\_prefix\_aks | The subnet address prefix to use for the aks. | `list(string)` | n/a | yes |
 | app\_id | The client ID for the Service Principal | `string` | n/a | yes |
 | client\_secret | The Client Secret for the Service Principal. Changing this forces a new resource to be created. | `string` | n/a | yes |
 | dns\_service\_ip | IP address within the Kubernetes service address range that will be used by cluster service discovery (kube-dns). This is required when network\_plugin is set to azure. Changing this forces a new resource to be created. | `string` | n/a | yes |
 | docker\_bridge\_cidr | IP address (in CIDR notation) used as the Docker bridge IP address on nodes. This is required when network\_plugin is set to azure. Changing this forces a new resource to be created. | `string` | n/a | yes |
 | environment | Development environment for resource; prod, non-prod, shared-services | `string` | n/a | yes |
+| node\_count | (Required) The number of nodes which should exist in this Node Pool. If specified this must be between 1 and 100. | `number` | `1` | no |
 | object\_id | The object ID for the Service Principal | `string` | n/a | yes |
 | region | Geographic Region resource will be deployed into | `string` | n/a | yes |
 | service\_cidr | The Network Range used by the Kubernetes service. This is required when network\_plugin is set to azure. Changing this forces a new resource to be created. | `string` | n/a | yes |
-| subnet\_id\_agw | The address prefix to use for agw. | `string` | n/a | yes |
-| subnet\_id\_aks | The subnet id to use for aks. | `string` | n/a | yes |
 | tags | Optional tags to be added to resource | `map` | `{}` | no |
+| virtual\_network\_name | (Required) The Name of the Virtual Network where this subnet should be located in. | `string` | n/a | yes |
+| virtual\_network\_resource\_group | (Required) The Name of the Virtual Network where this subnet should be located in. | `string` | n/a | yes |
+| vm\_size | (Required) The size of the Virtual Machine, such as Standard\_DS2\_v2. | `string` | `"Standard_B2s"` | no |
 
 ## Outputs
 

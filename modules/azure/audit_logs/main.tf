@@ -9,6 +9,7 @@ module "resource_group" {
   service_name = "audit-logs"
   region       = var.region
   environment  = var.environment
+  tags         = var.tags
 }
 
 module "log_analytics" {
@@ -19,6 +20,7 @@ module "log_analytics" {
   environment       = var.environment
   sku               = "PerGB2018"
   retention_in_days = 30
+  tags              = var.tags
 }
 
 module "archive_storage_account" {
@@ -30,4 +32,5 @@ module "archive_storage_account" {
   access_tier              = "Hot"
   account_tier             = "Standard"
   account_replication_type = "LRS"
+  tags                     = var.tags
 }

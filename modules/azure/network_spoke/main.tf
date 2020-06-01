@@ -9,33 +9,22 @@ module "resource_group" {
   service_name = "network-spoke"
   region       = var.region
   environment  = var.environment
+  tags         = var.tags
 }
 
-#vnet
+#virtual network
 
 module "virtual_network" {
   source         = "../../../resources/azurerm/network/virtual_network"
   resource_group = module.resource_group.name
   region         = module.resource_group.location
+  environment    = var.environment
   name_prefix    = "vnet-spoke"
   address_space  = var.address_space
   tags           = var.tags
-  environment    = var.environment
 }
 
-#snets
-
-module "subnet" {
-  source               = "../../../resources/azurerm/network/subnet"
-  resource_group       = module.resource_group.name
-  region               = module.resource_group.location
-  virtual_network_name = module.virtual_network.name
-  name_prefixes        = var.subnet_name_prefixes
-  address_prefixes     = var.address_prefixes
-  environment          = var.environment
-}
-
-#peering hub to spoke
+#peering hub netowork to spoke network
 
 module "virtual_network_peering_hub" {
   source                       = "../../../resources/azurerm/network/virtual_network_peering"
@@ -43,13 +32,13 @@ module "virtual_network_peering_hub" {
   virtual_network_name         = var.virtual_network_hub_name
   remote_virtual_network_id    = module.virtual_network.id
   remote_virtual_network_name  = module.virtual_network.name
-  allow_virtual_network_access = true
-  allow_forwarded_traffic      = true
-  allow_gateway_transit        = true
-  use_remote_gateways          = false
+  allow_virtual_network_access = var.allow_virtual_network_access_hub
+  allow_forwarded_traffic      = var.allow_forwarded_traffic_hub
+  allow_gateway_transit        = var.allow_gateway_transit_hub
+  use_remote_gateways          = var.use_remote_gateways_hub
 }
 
-#peering spoke to hub
+#peering spoke network to hub network
 
 module "virtual_network_peering_spoke" {
   source                       = "../../../resources/azurerm/network/virtual_network_peering"
@@ -57,8 +46,8 @@ module "virtual_network_peering_spoke" {
   virtual_network_name         = module.virtual_network.name
   remote_virtual_network_id    = var.virtual_network_hub_id
   remote_virtual_network_name  = var.virtual_network_hub_name
-  allow_virtual_network_access = true
-  allow_forwarded_traffic      = true
-  allow_gateway_transit        = false
-  use_remote_gateways          = true
+  allow_virtual_network_access = var.allow_forwarded_traffic_spoke
+  allow_forwarded_traffic      = var.allow_forwarded_traffic_spoke
+  allow_gateway_transit        = var.allow_gateway_transit_spoke
+  use_remote_gateways          = var.use_remote_gateways_spoke
 }

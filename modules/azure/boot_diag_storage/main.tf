@@ -9,6 +9,7 @@ module "resource_group" {
   service_name = "diagnostic-storage"
   region       = var.region
   environment  = var.environment
+  tags         = var.tags
 }
 
 
@@ -23,4 +24,5 @@ module "diagnostic_storage_account" {
   access_tier              = "Hot"
   account_tier             = "Standard"
   account_replication_type = "LRS"
+  tags                     = var.tags
 }

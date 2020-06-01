@@ -18,6 +18,7 @@ No provider.
 | tags | A map of tags to add to all resources | `map` | `{}` | no |
 | virtual\_network\_name | (Required) The Name of the Virtual Network where this subnet should be located in. | `string` | n/a | yes |
 | virtual\_network\_resource\_group | (Required) The Name of the Virtual Network where this subnet should be located in. | `string` | n/a | yes |
+| vm\_size | (Required) The SKU which should be used for this Virtual Machine, such as Standard\_F2. | `string` | `"Standard_B2s"` | no |
 
 ## Outputs
 

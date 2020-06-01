@@ -13,8 +13,8 @@ address_space = ["10.1.0.0/16"]
 
 #subnet
 
-subnet_name_prefixes = ["snet-agw", "snet-aks"]
-address_prefixes     = ["10.1.1.0/24", "10.1.2.0/24"]
+address_prefix_aks = ["10.1.1.0/24"]
+address_prefix_agw = ["10.1.2.0/24"]
 
 #aks
 
@@ -25,4 +25,6 @@ docker_bridge_cidr = "172.17.0.1/16"
 
 #tags
 
-tags = {}
+tags = {
+  terraform_managed = true
+}
