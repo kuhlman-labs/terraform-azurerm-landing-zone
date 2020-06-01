@@ -69,6 +69,7 @@ module "managed_disk" {
   create_option        = "Empty"
   storage_account_type = "Standard_LRS"
   disk_size_gb         = 60
+  enable_zones         = true
   zones                = [1, 2]
 }
 
@@ -79,15 +80,7 @@ module "virtual_machine_data_disk_attachment" {
   lun                = "0"
   caching            = "None"
 }
-/*
-module "virtual_machine_data_disk_attachment_2" {
-  source             = "../../../resources/azurerm/compute/virtual_machine_data_disk_attachment"
-  managed_disk_id    = element(module.managed_disk.id, 1)
-  virtual_machine_id = element(module.virtual_machine.id, 1)
-  lun                = "0"
-  caching            = "None"
-}
-*/
+
 #network security group
 
 module "network_security_group" {

@@ -14,13 +14,22 @@ variable "environment" {
   type        = string
 }
 
-#irtual network
+#virtual network
 
 variable "address_space" {
   description = "This is a list of the ip address ranges for the vnet"
   type        = list
 }
 
+variable "address_prefix_vgw" {
+  description = "The address prefixe to use for the vgw subnet."
+  type        = list
+}
+
+variable "address_prefix_fw" {
+  description = "The address prefixe to use for the fw subnet."
+  type        = list
+}
 
 #virtual network gateway
 

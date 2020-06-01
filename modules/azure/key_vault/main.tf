@@ -16,6 +16,7 @@ module "key_vault" {
   resource_group = module.resource_group.name
   region         = module.resource_group.location
   environment    = var.environment
+  sku_name       = var.sku_name
 }
 
 module "key_vault_access_policy" {

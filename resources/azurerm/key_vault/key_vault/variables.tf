@@ -30,7 +30,6 @@ variable "region" {
 variable "sku_name" {
   description = "The Name of the sku used for this Key Vault. Possible values are standard and premium."
   type        = string
-  default     = "standard"
 }
 
 variable "network_acls" {

@@ -19,8 +19,8 @@ module "app_service_plan" {
   environment    = var.environment
   reserved       = true
   kind           = "Linux"
-  sku_tier       = var.asp_sku_tier
-  sku_size       = var.asp_sku_size
+  sku_tier       = var.sku_tier
+  sku_size       = var.sku_size
 }
 
 module "app_service" {

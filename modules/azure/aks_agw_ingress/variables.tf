@@ -31,15 +31,25 @@ variable "object_id" {
   type        = string
 }
 
-#network
+#subnet
 
-variable "subnet_id_aks" {
-  description = "The subnet id to use for aks."
+variable "address_prefix_agw" {
+  description = "The subnet address prefix to use for the agw."
+  type        = list(string)
+}
+
+variable "address_prefix_aks" {
+  description = "The subnet address prefix to use for the aks."
+  type        = list(string)
+}
+
+variable "virtual_network_name" {
+  description = "(Required) The Name of the Virtual Network where this subnet should be located in."
   type        = string
 }
 
-variable "subnet_id_agw" {
-  description = "The address prefix to use for agw."
+variable "virtual_network_resource_group" {
+  description = "(Required) The Name of the Virtual Network where this subnet should be located in."
   type        = string
 }
 
@@ -58,6 +68,18 @@ variable "docker_bridge_cidr" {
 variable "service_cidr" {
   description = "The Network Range used by the Kubernetes service. This is required when network_plugin is set to azure. Changing this forces a new resource to be created."
   type        = string
+}
+
+variable "vm_size" {
+  description = "(Required) The size of the Virtual Machine, such as Standard_DS2_v2."
+  type        = string
+  default     = "Standard_B2s"
+}
+
+variable "node_count" {
+  description = "(Required) The number of nodes which should exist in this Node Pool. If specified this must be between 1 and 100."
+  type        = number
+  default     = 1
 }
 
 #tags

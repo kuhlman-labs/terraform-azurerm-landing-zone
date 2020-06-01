@@ -14,6 +14,20 @@ variable "environment" {
   type        = string
 }
 
+#asp
+
+variable "sku_tier" {
+  description = "(Required) Specifies the plan's pricing tier."
+  type        = string
+  default     = "Free"
+}
+
+variable "sku_size" {
+  description = "(Required) Specifies the plan's instance size."
+  type        = string
+  default     = "F1"
+}
+
 #tags
 
 variable "tags" {

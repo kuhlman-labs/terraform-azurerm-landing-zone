@@ -28,7 +28,7 @@ module "user_assigned_identity" {
 
 module "role_assignment_aks_0" {
   source               = "../../../resources/azurerm/authorization/role_assignment"
-  scope                = var.subnet_id_aks
+  scope                = element(module.subnet.id, 1)
   role_definition_name = "Network Contributor"
   principal_id         = var.object_id
 }
@@ -54,6 +54,18 @@ module "role_assignment_aks_3" {
   principal_id         = module.user_assigned_identity.principal_id
 }
 
+#subnet
+
+module "subnet" {
+  source               = "../../../resources/azurerm/network/subnet"
+  resource_group       = var.virtual_network_resource_group
+  region               = module.resource_group.location
+  virtual_network_name = var.virtual_network_name
+  name_prefixes        = ["snet-agw", "snet-aks"]
+  address_prefixes     = concat(var.address_prefix_agw, var.address_prefix_aks)
+  environment          = var.environment
+}
+
 #agw
 
 module "public_ip" {
@@ -73,7 +85,7 @@ module "application_gateway" {
   name_prefix          = "agw-aks"
   sku_name             = "Standard_v2"
   sku_tier             = "Standard_v2"
-  subnet_id            = var.subnet_id_agw
+  subnet_id            = element(module.subnet.id, 0)
   public_ip_address_id = module.public_ip.id
   environment          = var.environment
   tags                 = var.tags
@@ -85,9 +97,9 @@ module "aks" {
   source         = "../../../resources/azurerm/container/kubernetes_cluster"
   resource_group = module.resource_group.name
   region         = module.resource_group.location
-  vm_size        = "Standard_B2s"
-  node_count     = 3
-  vnet_subnet_id = var.subnet_id_aks
+  vm_size        = var.vm_size
+  node_count     = var.node_count
+  vnet_subnet_id = element(module.subnet.id, 1)
   service_principal = [{
     client_id     = var.app_id
     client_secret = var.client_secret
@@ -109,12 +121,6 @@ module "aks" {
 }
 
 #aapodidentity for ARM integration
-//az login --service-principal -u ${var.app_id} -p ${var.client_secret} --tenant ${data.azurerm_client_config.current.tenant_id};
-//    echo "${templatefile("${path.module}/templates/aadpodidentity.yaml", {
-//    name                 = module.user_assigned_identity.uai_name,
-//    identity_resource_id = module.user_assigned_identity.uai_id,
-//    identity_client_id   = module.user_assigned_identity.uai_client_id
-//})}" | kubectl apply -f -
 
 resource "null_resource" "aks_config" {
   depends_on = [module.aks]

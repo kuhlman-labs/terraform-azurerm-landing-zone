@@ -14,6 +14,14 @@ variable "environment" {
   type        = string
 }
 
+#key vault
+
+variable "sku_name" {
+  description = "The Name of the sku used for this Key Vault. Possible values are standard and premium."
+  type        = string
+  default     = "standard"
+}
+
 #key vault policy
 
 variable "object_id" {

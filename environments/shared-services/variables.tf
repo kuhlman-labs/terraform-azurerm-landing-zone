@@ -68,11 +68,6 @@ variable "address_space" {
   type        = list
 }
 
-variable "address_prefixes" {
-  description = "The address prefix to use for the subnet."
-  type        = list(string)
-}
-
 variable "address_prefix_vgw" {
   description = "The address prefix to use for the vgw subnet."
   type        = list
@@ -80,6 +75,11 @@ variable "address_prefix_vgw" {
 
 variable "address_prefix_fw" {
   description = "The address prefixe to use for the fw subnet."
+  type        = list
+}
+
+variable "address_prefix_jumpbox" {
+  description = "The address prefixe to use for the jumpbox subnet."
   type        = list
 }
 
@@ -91,11 +91,6 @@ variable "address_prefix_adds" {
 variable "private_ip_address_adds" {
   description = "(Required) The Static IP address for the aads Servers"
   type        = list
-}
-
-variable "subnet_name_prefixes" {
-  description = "The name of the subnets. Changing this forces a new resource to be created."
-  type        = list(string)
 }
 
 #tags

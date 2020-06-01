@@ -31,7 +31,7 @@ module "network_interface" {
   region                        = module.resource_group.location
   environment                   = var.environment
   name_prefix                   = "nic-wvm-jumpbox"
-  subnet_id                     = var.subnet_id
+  subnet_id                     = element(module.subnet.id, 0)
   private_ip_address_allocation = "Dynamic"
 }
 

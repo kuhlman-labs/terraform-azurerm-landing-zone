@@ -16,7 +16,7 @@ module "resource_group" {
 module "virtual_network" {
   source         = "../../../resources/azurerm/network/virtual_network"
   resource_group = module.resource_group.name
-  name_prefix    = "vnet-hub"
+  name_prefix    = "vnet-transit-hub"
   address_space  = var.address_space
   tags           = var.tags
   environment    = var.environment
