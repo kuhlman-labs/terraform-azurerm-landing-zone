@@ -1,4 +1,4 @@
-# Azure Terraform Service Catelog
+# Azure Terraform Service Catalog
 
 ## Purpose
 
