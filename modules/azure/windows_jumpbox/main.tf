@@ -9,6 +9,7 @@ module "resource_group" {
   service_name = "jumpbox"
   region       = var.region
   environment  = var.environment
+  tags         = var.tags
 }
 
 #subnet
@@ -33,6 +34,7 @@ module "network_interface" {
   name_prefix                   = "nic-wvm-jumpbox"
   subnet_id                     = element(module.subnet.id, 0)
   private_ip_address_allocation = "Dynamic"
+  tags                          = var.tags
 }
 
 module "virtual_machine" {
@@ -53,6 +55,7 @@ module "virtual_machine" {
   source_image_reference_offer     = "WindowsServer"
   source_image_reference_sku       = "2019-Datacenter"
   source_image_reference_version   = "latest"
+  tags                             = var.tags
 }
 
 #network security group
@@ -63,6 +66,7 @@ module "network_security_group" {
   environment    = var.environment
   region         = module.resource_group.location
   policy_name    = "rdpallow"
+  tags           = var.tags
 }
 
 module "network_security_rule" {

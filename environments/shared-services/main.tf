@@ -16,6 +16,7 @@ module "container_registry" {
   source      = "../../modules/azure/container_registry"
   environment = var.environment
   region      = var.region
+  tags        = var.tags
 }
 
 module "key_vault" {
@@ -23,12 +24,14 @@ module "key_vault" {
   environment = var.environment
   region      = var.region
   object_id   = var.object_id
+  tags        = var.tags
 }
 
 module "boot_diag_storage" {
   source      = "../../modules/azure/boot_diag_storage"
   environment = var.environment
   region      = var.region
+  tags        = var.tags
 }
 
 module "windows_jumpbox" {
@@ -39,6 +42,7 @@ module "windows_jumpbox" {
   virtual_network_name           = module.network_transit_hub.virtual_network_name
   address_prefix_jumpbox         = var.address_prefix_jumpbox
   storage_account_uri            = module.boot_diag_storage.primary_blob_endpoint
+  tags                           = var.tags
 }
 
 module "domain_controllers" {
@@ -50,4 +54,5 @@ module "domain_controllers" {
   address_prefix_adds            = var.address_prefix_adds
   storage_account_uri            = module.boot_diag_storage.primary_blob_endpoint
   private_ip_address_adds        = var.private_ip_address_adds
+  tags                           = var.tags
 }

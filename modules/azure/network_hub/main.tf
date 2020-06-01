@@ -9,6 +9,7 @@ module "resource_group" {
   service_name = "network-hub"
   region       = var.region
   environment  = var.environment
+  tags         = var.tags
 }
 
 #virtual network

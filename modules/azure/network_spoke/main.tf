@@ -9,6 +9,7 @@ module "resource_group" {
   service_name = "network-spoke"
   region       = var.region
   environment  = var.environment
+  tags         = var.tags
 }
 
 #virtual network
@@ -17,10 +18,10 @@ module "virtual_network" {
   source         = "../../../resources/azurerm/network/virtual_network"
   resource_group = module.resource_group.name
   region         = module.resource_group.location
+  environment    = var.environment
   name_prefix    = "vnet-spoke"
   address_space  = var.address_space
   tags           = var.tags
-  environment    = var.environment
 }
 
 #peering hub netowork to spoke network

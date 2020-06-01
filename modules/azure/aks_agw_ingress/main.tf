@@ -12,6 +12,7 @@ module "resource_group" {
   service_name = "aks"
   region       = var.region
   environment  = var.environment
+  tags         = var.tags
 }
 
 #managed identity for aks
@@ -70,12 +71,13 @@ module "subnet" {
 
 module "public_ip" {
   source            = "../../../resources/azurerm/network/public_ip"
-  name_prefix       = "pip-agw"
   resource_group    = module.resource_group.name
   region            = module.resource_group.location
+  environment       = var.environment
+  name_prefix       = "pip-agw"
   allocation_method = "Static"
   sku               = "Standard"
-  environment       = var.environment
+  tags              = var.tags
 }
 
 module "application_gateway" {
@@ -97,6 +99,7 @@ module "aks" {
   source         = "../../../resources/azurerm/container/kubernetes_cluster"
   resource_group = module.resource_group.name
   region         = module.resource_group.location
+  environment    = var.environment
   vm_size        = var.vm_size
   node_count     = var.node_count
   vnet_subnet_id = element(module.subnet.id, 1)
@@ -116,8 +119,7 @@ module "aks" {
       load_balancer_sku  = "Basic"
     }
   ]
-  tags        = var.tags
-  environment = var.environment
+  tags = var.tags
 }
 
 #aapodidentity for ARM integration

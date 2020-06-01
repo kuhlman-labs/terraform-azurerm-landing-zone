@@ -9,6 +9,7 @@ module "resource_group" {
   service_name = "active-directory"
   region       = var.region
   environment  = var.environment
+  tags         = var.tags
 }
 
 #network
@@ -35,6 +36,7 @@ module "network_interface" {
   subnet_id                     = element(module.subnet.id, 0)
   private_ip_address_allocation = "Static"
   private_ip_address            = var.private_ip_address_adds
+  tags                          = var.tags
 }
 
 module "virtual_machine" {
@@ -57,6 +59,7 @@ module "virtual_machine" {
   source_image_reference_offer     = "WindowsServer"
   source_image_reference_sku       = "2019-Datacenter"
   source_image_reference_version   = "latest"
+  tags                             = var.tags
 }
 
 module "managed_disk" {
@@ -71,6 +74,7 @@ module "managed_disk" {
   disk_size_gb         = 60
   enable_zones         = true
   zones                = [1, 2]
+  tags                 = var.tags
 }
 
 module "virtual_machine_data_disk_attachment" {
@@ -89,6 +93,7 @@ module "network_security_group" {
   environment    = var.environment
   region         = module.resource_group.location
   policy_name    = "addsallow"
+  tags           = var.tags
 }
 
 module "network_security_rule" {

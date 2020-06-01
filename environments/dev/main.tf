@@ -48,4 +48,5 @@ module "linux_web_app" {
   source      = "../../modules/azure/linux_web_app"
   environment = var.environment
   region      = var.region
+  tags        = var.tags
 }

@@ -9,6 +9,7 @@ module "resource_group" {
   service_name = "container-registry"
   region       = var.region
   environment  = var.environment
+  tags         = var.tags
 }
 
 #container registry
@@ -19,4 +20,5 @@ module "container_registry" {
   region         = module.resource_group.location
   environment    = var.environment
   sku            = var.sku
+  tags           = var.tags
 }

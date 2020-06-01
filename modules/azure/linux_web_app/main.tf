@@ -9,6 +9,7 @@ module "resource_group" {
   service_name = "linux-web-app"
   region       = var.region
   environment  = var.environment
+  tags         = var.tags
 }
 
 module "app_service_plan" {
@@ -21,6 +22,7 @@ module "app_service_plan" {
   kind           = "Linux"
   sku_tier       = var.sku_tier
   sku_size       = var.sku_size
+  tags           = var.tags
 }
 
 module "app_service" {
@@ -30,4 +32,5 @@ module "app_service" {
   region              = module.resource_group.location
   environment         = var.environment
   app_service_plan_id = module.app_service_plan.id
+  tags                = var.tags
 }
