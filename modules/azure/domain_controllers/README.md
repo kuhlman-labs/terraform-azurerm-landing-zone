@@ -10,7 +10,7 @@ No provider.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| address\_prefix\_adds | (Required) The address prefix for the aads subnet | `list` | n/a | yes |
+| address\_prefix\_adds | (Required) The address prefix for the adds subnet | `list` | n/a | yes |
 | environment | Development environment for resource; prod, non-prod, shared-services | `string` | n/a | yes |
 | private\_ip\_address\_adds | (Required) The Static IP address for the aads Servers | `list` | n/a | yes |
 | region | Geographic Region resource will be deployed into | `string` | n/a | yes |

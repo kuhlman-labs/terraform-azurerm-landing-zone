@@ -43,7 +43,7 @@ variable "private_ip_address_adds" {
 }
 
 variable "address_prefix_adds" {
-  description = "(Required) The address prefix for the aads subnet"
+  description = "(Required) The address prefix for the adds subnet"
   type        = list
 }
 
