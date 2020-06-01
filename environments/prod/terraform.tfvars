@@ -26,5 +26,5 @@ docker_bridge_cidr = "172.18.0.1/16"
 #tags
 
 tags = {
-    terraform_managed = true
+  terraform_managed = true
 }
