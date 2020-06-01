@@ -1,8 +1,6 @@
-# Azure Pipelines container requirements
-# https://docs.microsoft.com/en-us/azure/devops/pipelines/process/container-phases?view=azure-devops&tabs=yaml#requirements
 FROM ubuntu:16.04
 
-ENV TERRAFORM_VERSION=0.12.6
+ENV TERRAFORM_VERSION=0.12.24
 
 
 RUN apt-get update && \

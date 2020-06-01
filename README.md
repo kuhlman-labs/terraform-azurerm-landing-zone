@@ -1,13 +1,10 @@
-# Azure Landing Zone Template 
-[![Build Status](https://dev.azure.com/Kuhlman-Labs/azure-landing-zone-template/_apis/build/status/brettkuhlman.azure-landing-zone-template?branchName=develop)](https://dev.azure.com/Kuhlman-Labs/azure-landing-zone-template/_build/latest?definitionId=1&branchName=develop)
-[![Board Status](https://dev.azure.com/Kuhlman-Labs/040ac2ad-6e3c-4ed0-9fa7-9bd937d86ea0/dc26cefa-1675-4c37-bcca-b1ee83a15af2/_apis/work/boardbadge/0c1c1325-bfc5-4ade-81c7-98c1561e46fb)](https://dev.azure.com/kuhlman-labs/040ac2ad-6e3c-4ed0-9fa7-9bd937d86ea0/_boards/board/t/dc26cefa-1675-4c37-bcca-b1ee83a15af2/Microsoft.RequirementCategory)
+# Azure Terraform Service Catelog
 
 ## Purpose
 
 This repository itself is meant to provide curated, reusable [Terraform](https://www.terraform.io/) content for the deployment of an [Azure Landing Zone](https://docs.microsoft.com/en-us/azure/architecture/cloud-adoption/ready/considerations/).
 
 Landing zones are the basic building blocks of any cloud adoption environment. The term landing zone is used to describe an environment that has been provisioned and prepared to host workloads in a cloud environment, such as Azure. A fully functioning landing zone is the final deliverable of any iteration of the Cloud Adoption Framework's Ready methodology.
-
 
 ## Deployment
 
@@ -91,8 +88,8 @@ The order in which the environments should be deployed based upon interdependenc
     * Deploys log analytics for storage audit logs  
 *  shared-services
     * Deploys hub network for hub and spoke model, other shared infrastructure
-*  pre-prod
-    * Deploys spoke network designated for pre-prod workloads
+*  dev
+    * Deploys spoke network designated for dev workloads
 *  prod
     * Deploys spoke network designated for prod workloads
 * (Optional) test
@@ -121,10 +118,10 @@ terraform destroy -auto-approve -var-file=terraform.tfvars -var "subscription_id
 ### environments
 * Definition: The top level composition that deploys all resources necessary for a single environment. Each environment is composed of one or more modules.
 * Extending:
-    * An Existing environments
-         * An existing environments can be extended by referencing additional Modules.
+    * An Existing environment
+         * An existing environment can be extended by referencing additional Modules.
     * Creating a New environments
-         * To create a new environments a new directory should be created with the standard files (`main.tf, outputs.tf, providers.tf, terraform.tfvars, variables.tf, README-head.md, README.md`). Inside the `main.tf` the required Module(s) should be called. If new modules need to be created the instructions for Modules should be consulted.
+         * To create a new environment a new directory should be created with the standard files (`main.tf, outputs.tf, providers.tf, terraform.tfvars, variables.tf, README.md`). Inside the `main.tf` the required Module(s) should be called. If new modules need to be created the instructions for Modules should be consulted.
 
 ### modules
 * Definition: Composes a logical portion of infrastructure by composing one or more resources.
@@ -132,7 +129,7 @@ terraform destroy -auto-approve -var-file=terraform.tfvars -var "subscription_id
     * An Existing Module
         * Adding additional resources can be accomplished by referencing additional Resources
     * Create a New Module
-        * To create a new Module a new directory should be created in a child folder of the infrastructure-modules directory with the standard files (`main.tf, outputs.tf, variables.tf, README-head.md, README.md`). Inside the `main.tf` the required Resource(s) should be called. If new modules need to be created the instructions for Resources should be consulted.
+        * To create a new Module a new directory should be created in a child folder of the modules directory with the standard files (`main.tf, outputs.tf, variables.tf, README.md`). Inside the `main.tf` the required Resource(s) should be called. If new modules need to be created the instructions for Resources should be consulted.
 
 ### resources
 * Defintion: Represents, in most cases, the deployment of a single resource.
@@ -140,7 +137,7 @@ terraform destroy -auto-approve -var-file=terraform.tfvars -var "subscription_id
     * An Existing Resource
         * Adjusting existing Resources should be kept to a minimum because they are not currently being versioned.
     * Create a New Resource
-        * To create a new Resource a new directory should be created in a child folder of the resource-modules directory with the standard files (`main.tf, outputs.tf, variables.tf, README-head.md, README.md`). It is recommended that a single resource is created in the `main.tf` to keep the module simple and reuseable. 
+        * To create a new Resource a new directory should be created in a child folder of the resource directory with the standard files (`main.tf, outputs.tf, variables.tf, README.md`). It is recommended that a single resource is created in the `main.tf` to keep the module simple and reuseable. 
 
 ### File Definitions
 * main.tf
@@ -152,11 +149,11 @@ terraform destroy -auto-approve -var-file=terraform.tfvars -var "subscription_id
 * variables.tf
     * Defines the input variables for the environments or module. All variables should have a type and description defined.
 * README.md
-    * Contains the contents of README-head.md combined with the output from the terraform-docs command `(cat README-head.md; terraform-docs --no-sort md ./) > README.md` which generates a table of the inputs and outputs specified in the current directory.
+    * Contains the contents the output from the terraform-docs command `(terraform-docs md ./) > README.md` which generates a table of the inputs and outputs specified in the current directory.
 
 ### Adjusting Naming Conventions
 
-The naming conventions are established in the Resources, including the Resource Group module that builds out the name based upon variable inputs to the calling environments.
+The naming conventions are established in the Resources that builds out the name based upon variable inputs to the calling environments.
 
 ## FAQs
 

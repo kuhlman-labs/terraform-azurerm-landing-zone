@@ -13,9 +13,11 @@ No requirements.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | create\_option | (Required) The method to use when creating the managed disk. Changing this forces a new resource to be created.Possible values include:Import,Empty,Copy,FromImage,Restore | `string` | n/a | yes |
+| disk\_count | (Optional) number of VMs to create | `number` | `1` | no |
 | disk\_encryption\_set\_id | (Optional) The ID of a Disk Encryption Set which should be used to encrypt this Managed Disk. Changing this forces a new resource to be created. | `string` | `null` | no |
 | disk\_iops\_read\_write | (Optional) The number of IOPS allowed for this disk; only settable for UltraSSD disks. One operation can transfer between 4k and 256k bytes. | `string` | `null` | no |
 | disk\_size\_gb | (Optional, Required for a new managed disk) Specifies the size of the managed disk to create in gigabytes. If create\_option is Copy or FromImage, then the value must be equal to or greater than the source's size. | `string` | `null` | no |
+| enable\_zones | (Optional) Enable zone deployment for this Virtual Machine. | `bool` | `false` | no |
 | encryption\_settings | (Optional) A encryption\_settings block as defined below. | `list` | `[]` | no |
 | environment | Development environment for resource; prod, non-prod, shared-services | `string` | n/a | yes |
 | image\_reference\_id | (Optional) ID of an existing platform/marketplace disk image to copy when create\_option is FromImage. | `string` | `null` | no |
