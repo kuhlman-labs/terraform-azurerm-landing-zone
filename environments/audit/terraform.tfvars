@@ -9,4 +9,6 @@ region      = "eastus"
 
 #tags
 
-tags = {}
+tags = {
+    terraform_managed = true
+}
