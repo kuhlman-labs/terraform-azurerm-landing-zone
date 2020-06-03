@@ -1,10 +1,10 @@
 name: 'Terraform CI'
 on: push
 env:
-  ARM_CLIENT_ID: {{ secrets.APP_ID }}
-  ARM_CLIENT_SECRET: {{  secrets.CLIENT_SECRET  }}
-  ARM_SUBSCRIPTION_ID: {{  secrets.SUBSCRIPTION_ID  }}
-  ARM_TENANT_ID: {{  secrets.TENANT_ID  }}
+  ARM_CLIENT_ID: ${{ secrets.APP_ID }}
+  ARM_CLIENT_SECRET: ${{  secrets.CLIENT_SECRET  }}
+  ARM_SUBSCRIPTION_ID: ${{  secrets.SUBSCRIPTION_ID  }}
+  ARM_TENANT_ID: ${{  secrets.TENANT_ID  }}
 defaults:
   run:
     shell: bash
@@ -13,6 +13,7 @@ jobs:
     name: Terraform CI
     runs-on: ubuntu-latest
     steps:
-    - name: Terraform Fmt
+    - name: Terraform format check
+      id: Terraform_Fmt
       run: |
       terraform fmt -recursive -check -diff
