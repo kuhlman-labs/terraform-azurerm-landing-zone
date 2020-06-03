@@ -1,4 +1,4 @@
-name: 'Terraform CI'
+name: Terraform CI
 on: push
 env:
   ARM_CLIENT_ID: ${{ secrets.APP_ID }}
@@ -9,11 +9,13 @@ defaults:
   run:
     shell: bash
 jobs:
-  Terraform_CI:
-    name: Terraform CI
+  build:
     runs-on: ubuntu-latest
     steps:
-    - name: Terraform format check
-      id: Terraform_Fmt
+    - uses: actions/checkout@v2
+    - name: Format check
+      run: terraform fmt -check -diff -recursive
+    - name: Run a multi-line script
       run: |
-      terraform fmt -recursive -check -diff
+        echo Add other actions to build,
+        echo test, and deploy your project.
