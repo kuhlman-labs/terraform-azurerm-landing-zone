@@ -16,4 +16,3 @@ jobs:
     - name: Terraform Fmt
       run: |
       terraform fmt -recursive -check -diff
- 
