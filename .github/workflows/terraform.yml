@@ -1,5 +1,4 @@
 name: 'Terraform'
-description: 'Terraform CI'
 on:
   push:
     branches: [ features/githubactions ]
