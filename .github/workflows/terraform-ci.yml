@@ -27,4 +27,8 @@ jobs:
         terraform validate ./environments/audit
     - name: Terraform Plan
       run: |
-        terraform plan -input=false -var-file=./environments/audit/terraform.tfvars ./environments/audit 
+        terraform plan -input=false -var-file=./environments/audit/terraform.tfvars -out=./audit.tfplan ./environments/audit 
+    - name: Publish Plan Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        path: ./*.tfplan
