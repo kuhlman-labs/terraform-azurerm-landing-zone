@@ -17,4 +17,4 @@ jobs:
       run: terraform fmt -check -diff -recursive
     - name: Run a multi-line script
       run: |
-        terraform init -input=false -upgrade=true /environments/audit
+        terraform init -input=false -upgrade=true ./environments/audit
