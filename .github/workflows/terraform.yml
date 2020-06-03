@@ -1,30 +1,34 @@
-name: 'Terraform'
-description: 'Terraform CI'
+name: 'Terraform GitHub Actions'
 on:
-  push:
-    branches: [ features/githubactions ]
-  pull_request:
-    branches: [ master ]
-runs:
-  using: 'docker'
-  image: 'Dockerfile'
-  args:
-    - ${{  secrets.ACCESS_KEY  }}
-    - ${{  secrets.APP_ID  }}
-    - ${{  secrets.CLIENT_SECRET  }}
-    - ${{  secrets.OBJECT_ID  }}
-    - ${{  secrets.SUBSCRIPTION_ID  }}
-    - ${{  secrets.TENANT_ID  }}
+  - pull_request
 jobs:
-  terraform_validate:
+  directory1:
+    name: 'Terraform Shared-Services'
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-
-    - name: Run a one-line script
-      run: echo Hello, world!
-    - name: Run a multi-line script
-      run: |
-        echo Add other actions to build,
-        echo test, and deploy your project.
+      - name: 'Checkout'
+        uses: actions/checkout@master
+      - name: 'Terraform Init'
+        uses: hashicorp/terraform-github-actions@master
+        with:
+          tf_actions_version: 0.12.26
+          tf_actions_subcommand: 'init'
+          tf_actions_working_dir: 'environment/shared-services'
+          tf_actions_comment: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  directory2:
+    name: 'Terraform Dev'
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@master
+      - name: 'Terraform Init'
+        uses: hashicorp/terraform-github-actions@master
+        with:
+          tf_actions_version: 0.12.26
+          tf_actions_subcommand: 'init'
+          tf_actions_working_dir: 'environments/dev'
+          tf_actions_comment: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
