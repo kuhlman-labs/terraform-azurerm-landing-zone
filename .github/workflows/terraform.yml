@@ -2,7 +2,7 @@ name: 'Terraform'
 description: 'Terraform CI'
 on:
   push:
-    branches: [ dev ]
+    branches: [ features/githubactions ]
   pull_request:
     branches: [ master ]
 runs:
