@@ -27,4 +27,4 @@ jobs:
         terraform validate ./environments/audit
     - name: Terraform Plan
       run: |
-        terraform plan -input=false ./environments/audit -var-file=./environments/audit/terraform.tfvars
+        terraform plan -input=false -var-file=./environments/audit/terraform.tfvars ./environments/audit 
