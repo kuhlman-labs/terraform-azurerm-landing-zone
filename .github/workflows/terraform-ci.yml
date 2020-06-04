@@ -77,11 +77,14 @@ jobs:
   provision:
     needs: building
     runs-on: ubuntu-latest
-
+    strategy:
+      matrix:
+        environment: ["shared-services"]
+    steps:
     - name: Download Plan Artifact
       uses: actions/download-artifact@v1
       with:
-        name: shared-servicestfplan
+        name: ${{ matrix.environment }}tfplan
 
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
@@ -90,7 +93,7 @@ jobs:
     
     - name: Terraform Apply
       id: apply
-      run: terraform apply shared-servicestfplan
+      run: terraform apply ${{ matrix.environment }}tfplan
 
   provisioning:
     needs: provision
@@ -98,7 +101,7 @@ jobs:
     strategy:
       matrix:
         environment: ["audit", "shared-services", "dev", "prod"]
-
+    steps:
     - name: Download Plan Artifact
       uses: actions/download-artifact@v1
       with:
