@@ -20,6 +20,8 @@ jobs:
       uses: hashicorp/setup-terraform@v1
       with:
         terraform_version: 0.12.26
+    - name: Kubectl tool installer
+      uses: Azure/setup-kubectl@v1      
     - name: Format check
       run: terraform fmt -check -diff -recursive
     - name: Initialize Terraform Directories
