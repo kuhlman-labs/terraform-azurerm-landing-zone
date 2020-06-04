@@ -9,7 +9,7 @@ defaults:
   run:
     shell: bash
 jobs:
-  Terraform:
+  building:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -21,9 +21,6 @@ jobs:
       uses: hashicorp/setup-terraform@v1
       with:
         terraform_version: 0.12.26
-
-    - name: Kubectl tool installer
-      uses: Azure/setup-kubectl@v1
 
     - name: Format check
       id: fmt
@@ -77,4 +74,43 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         path: ./${{ matrix.environment }}tfplan
+  provision:
+    needs: building
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        environment: ["shared-services"]
+    - name: Download Plan Artifact
+      uses: actions/download-artifact@v1
+      with:
+        name: ${{ matrix.environment }}tfplan
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1
+      with:
+        terraform_version: 0.12.26
     
+    - name: Terraform Apply
+      id: apply
+      run: terraform apply ${{ matrix.environment }}tfplan
+
+  provisioning:
+    needs: provision
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        environment: ["audit", "shared-services", "dev", "prod"]
+
+    - name: Download Plan Artifact
+      uses: actions/download-artifact@v1
+      with:
+        name: ${{ matrix.environment }}tfplan
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1
+      with:
+        terraform_version: 0.12.26
+      
+    - name: Terraform Apply
+      id: apply
+      run: terraform apply ${{ matrix.environment }}tfplan
