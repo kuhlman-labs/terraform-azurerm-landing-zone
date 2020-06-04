@@ -11,6 +11,9 @@ defaults:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        environment: ["audit", "shared-services", "dev", "prod"]
     steps:
     - uses: actions/checkout@v2
     - name: Setup Terraform
@@ -21,13 +24,13 @@ jobs:
       run: terraform fmt -check -diff -recursive
     - name: Initialize Terraform Directories
       run: |
-        terraform init -input=false -upgrade=true ./environments/audit
+        terraform init -input=false -upgrade=true ./environments/${{ matrix.environment }}
     - name: Validate Terraform syntax
       run: |
-        terraform validate ./environments/audit
+        terraform validate ./environments/${{ matrix.environment }}
     - name: Terraform Plan
       run: |
-        terraform plan -input=false -var-file=./environments/audit/terraform.tfvars -out=./audit.tfplan ./environments/audit 
+        terraform plan -input=false -var-file=./environments/${{ matrix.environment }}/terraform.tfvars -out=./${{ matrix.environment }}tfplan ./environments/${{ matrix.environment }} 
     - name: Publish Plan Artifact
       uses: actions/upload-artifact@v2
       with:
