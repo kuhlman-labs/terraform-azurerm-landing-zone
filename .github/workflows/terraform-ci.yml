@@ -9,7 +9,7 @@ defaults:
   run:
     shell: bash
 jobs:
-  build:
+  Terraform:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -30,7 +30,7 @@ jobs:
         terraform validate ./environments/${{ matrix.environment }}
     - name: Terraform Plan
       run: |
-        terraform plan -input=false -var-file=./environments/${{ matrix.environment }}/terraform.tfvars -out=./${{ matrix.environment }}tfplan ./environments/${{ matrix.environment }} 
+        terraform plan -input=false -var 'client_secret={{ secrets.CLIENT_SECRET }}' -var 'app_id={{  secrets.APP_ID  }}' -var 'object_id={{  secrets.OBJECT_ID  }}' -var-file=./environments/${{ matrix.environment }}/terraform.tfvars -out=./${{ matrix.environment }}tfplan ./environments/${{ matrix.environment }} 
     - name: Publish Plan Artifact
       uses: actions/upload-artifact@v2
       with:
