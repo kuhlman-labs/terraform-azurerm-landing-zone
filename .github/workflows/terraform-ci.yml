@@ -83,7 +83,7 @@ jobs:
         environment: ["shared-services"]
     steps:
     - name: Download Plan Artifact
-      uses: actions/download-artifact@v1
+      uses: actions/download-artifact@v2
       with:
         name: ${{ matrix.environment }}tfplan
 
@@ -104,7 +104,7 @@ jobs:
         environment: ["audit", "shared-services", "dev", "prod"]
     steps:
     - name: Download Plan Artifact
-      uses: actions/download-artifact@v1
+      uses: actions/download-artifact@v2
       with:
         name: ${{ matrix.environment }}tfplan
 
