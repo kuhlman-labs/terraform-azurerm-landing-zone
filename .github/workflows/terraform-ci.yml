@@ -94,7 +94,7 @@ jobs:
     
     - name: Terraform Apply
       id: apply
-      run: terraform apply ${{ matrix.environment }}tfplan
+      run: terraform apply ./${{ matrix.environment }}tfplan
 
   provisioning:
     needs: provision
