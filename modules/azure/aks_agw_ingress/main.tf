@@ -146,6 +146,7 @@ resource "null_resource" "aks_config" {
 
 provider "helm" {
   kubernetes {
+    load_config_file       = false
     host                   = module.aks.kube_config_host
     client_certificate     = base64decode(module.aks.kube_config_client_certificate)
     client_key             = base64decode(module.aks.kube_config_client_key)
