@@ -34,8 +34,8 @@ jobs:
         app_id: ${{  secrets.APP_ID  }}
         client_secret: ${{  secrets.CLIENT_SECRET  }}
       run: |
-        terraform plan -input=false -var 'client_secret=$client_secret' -var 'app_id=$app_id' -var 'object_id=$object_id' -var-file=./environments/${{ matrix.environment }}/terraform.tfvars -out=./${{ matrix.environment }}tfplan ./environments/${{ matrix.environment }} 
+        terraform plan -input=false -var 'client_secret="$client_secret"' -var 'app_id="$app_id"' -var 'object_id="$object_id"' -var-file=./environments/${{ matrix.environment }}/terraform.tfvars -out=./${{ matrix.environment }}tfplan ./environments/${{ matrix.environment }} 
     - name: Publish Plan Artifact
       uses: actions/upload-artifact@v2
       with:
-        path: ./*.tfplan
+        path: ./${{ matrix.environment }}tfplan
