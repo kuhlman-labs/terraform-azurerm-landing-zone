@@ -14,6 +14,23 @@ variable "environment" {
   type        = string
 }
 
+#authentication
+
+variable "app_id" {
+  description = "The client ID for the Service Principal"
+  type        = string
+}
+
+variable "object_id" {
+  description = "The object ID for the Service Principal"
+  type        = string
+}
+
+variable "client_secret" {
+  description = "The secret for the Service Principal authentication"
+  type        = string
+}
+
 #tags
 
 variable "tags" {
