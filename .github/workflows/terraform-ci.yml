@@ -113,10 +113,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - uses: azure/login@v1.1
-    with:
-      creds: ${{ secrets.AZURE_CREDENTIALS }}
-
     - name: Download Plan Artifact
       uses: actions/download-artifact@v2
       with:
@@ -133,5 +129,8 @@ jobs:
       run: terraform init -input=false -upgrade=true ./environments/${{ matrix.environment }}
     
     - name: Terraform Apply
-      id: apply
+      id: apply    
+      uses: azure/login@v1.1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
       run: terraform apply ./environments/${{ matrix.environment }}/${{ matrix.environment }}tfplan
