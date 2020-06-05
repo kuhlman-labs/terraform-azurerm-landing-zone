@@ -86,16 +86,20 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: ${{ matrix.environment }}tfplan
-        path: ${{ env.tf_actions_working_dir }}
+        path: ${{ env.tf_actions_working_dir }}./environments/${{ matrix.environment }}
 
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
       with:
         terraform_version: 0.12.26
     
+    - name: Initialize Terraform Directory
+      id: init
+      run: terraform init -input=false -upgrade=true ./environments/${{ matrix.environment }}
+    
     - name: Terraform Apply
       id: apply
-      run: terraform apply ./${{ matrix.environment }}tfplan
+      run: terraform apply ./environments/${{ matrix.environment }}/${{ matrix.environment }}tfplan
 
   provisioning:
     needs: provision
