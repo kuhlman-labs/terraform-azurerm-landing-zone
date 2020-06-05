@@ -86,6 +86,7 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: ${{ matrix.environment }}tfplan
+        path: ${{ env.tf_actions_working_dir }}
 
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
