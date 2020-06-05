@@ -129,6 +129,12 @@ jobs:
       with:
         terraform_version: 0.12.26
 
+    - name: Setup Kubectl
+      uses: azure/setup-kubectl@v1
+
+    - name: Setup Helm
+      uses: azure/setup-helm@v1
+
     - name: Initialize Terraform Directory
       id: init
       run: terraform init -input=false -upgrade=true ./environments/${{ matrix.environment }}
