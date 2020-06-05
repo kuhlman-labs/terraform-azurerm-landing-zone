@@ -113,6 +113,11 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - name: Login to AZ CLI
+      uses: azure/login@v1.1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
     - name: Download Plan Artifact
       uses: actions/download-artifact@v2
       with:
@@ -123,14 +128,11 @@ jobs:
       uses: hashicorp/setup-terraform@v1
       with:
         terraform_version: 0.12.26
-    
+
     - name: Initialize Terraform Directory
       id: init
       run: terraform init -input=false -upgrade=true ./environments/${{ matrix.environment }}
-    
+
     - name: Terraform Apply
-      id: apply    
-      uses: azure/login@v1.1
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
+      id: apply
       run: terraform apply ./environments/${{ matrix.environment }}/${{ matrix.environment }}tfplan
