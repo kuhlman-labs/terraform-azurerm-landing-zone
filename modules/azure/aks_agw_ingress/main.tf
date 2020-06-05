@@ -166,6 +166,7 @@ resource "helm_release" "ingress_azure" {
   name       = "application-gateway-kubernetes"
   repository = data.helm_repository.ingress_azure.metadata[0].name
   chart      = "ingress-azure"
+  version    = "1.0.0"
 
   values = [
     "${templatefile("${path.module}/templates/helm-config.yaml", {
