@@ -75,12 +75,13 @@ jobs:
       with:
         name: ${{ matrix.environment }}tfplan
         path: ./${{ matrix.environment }}tfplan
-  provision:
+
+  provisioning_level_1:
     needs: building
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        environment: ["shared-services"]
+        environment: ["shared-services", "audit"]
     steps:
     - uses: actions/checkout@v2
 
@@ -103,12 +104,12 @@ jobs:
       id: apply
       run: terraform apply ./environments/${{ matrix.environment }}/${{ matrix.environment }}tfplan
 
-  provisioning:
-    needs: provision
+  provisioning_level_2:
+    needs: provisioning_level_1
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        environment: ["audit", "shared-services", "dev", "prod"]
+        environment: ["dev", "prod"]
     steps:
     - uses: actions/checkout@v2
 
