@@ -113,6 +113,10 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - uses: azure/login@v1.1
+    with:
+      creds: ${{ secrets.AZURE_CREDENTIALS }}
+
     - name: Download Plan Artifact
       uses: actions/download-artifact@v2
       with:

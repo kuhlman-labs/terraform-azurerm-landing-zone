@@ -49,4 +49,6 @@ module "linux_web_app" {
   environment = var.environment
   region      = var.region
   tags        = var.tags
+  sku_size    = "B1"
+  sku_tier    = "Basic"
 }
