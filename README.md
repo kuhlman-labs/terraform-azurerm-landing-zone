@@ -1,3 +1,5 @@
+![Terraform CI/CD](https://github.com/kuhlman-labs/azure-terraform-service-catalog/workflows/Terraform%20CI/CD/badge.svg)
+
 # Azure Terraform Service Catalog
 
 ## Purpose
