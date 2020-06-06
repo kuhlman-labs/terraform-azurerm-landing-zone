@@ -146,6 +146,7 @@ resource "null_resource" "aks_config" {
 
 provider "helm" {
   kubernetes {
+    load_config_file       = false
     host                   = module.aks.kube_config_host
     client_certificate     = base64decode(module.aks.kube_config_client_certificate)
     client_key             = base64decode(module.aks.kube_config_client_key)
@@ -165,6 +166,7 @@ resource "helm_release" "ingress_azure" {
   name       = "application-gateway-kubernetes"
   repository = data.helm_repository.ingress_azure.metadata[0].name
   chart      = "ingress-azure"
+  version    = "1.0.0"
 
   values = [
     "${templatefile("${path.module}/templates/helm-config.yaml", {

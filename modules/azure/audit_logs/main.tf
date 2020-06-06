@@ -6,7 +6,7 @@
 
 module "resource_group" {
   source       = "../../../resources/azurerm/base/resource_group"
-  service_name = "audit-logs"
+  service_name = "logs"
   region       = var.region
   environment  = var.environment
   tags         = var.tags
@@ -14,7 +14,7 @@ module "resource_group" {
 
 module "log_analytics" {
   source            = "../../../resources/azurerm/log_analytics/log_analytics"
-  name_prefix       = "log-activity"
+  name_prefix       = "log"
   resource_group    = module.resource_group.name
   region            = module.resource_group.location
   environment       = var.environment

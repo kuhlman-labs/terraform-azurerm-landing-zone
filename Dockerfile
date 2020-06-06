@@ -1,6 +1,6 @@
-FROM ubuntu:16.04
+FROM ubuntu:latest
 
-ENV TERRAFORM_VERSION=0.12.24
+ENV TERRAFORM_VERSION=0.12.26
 
 
 RUN apt-get update && \

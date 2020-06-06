@@ -1,0 +1,146 @@
+name: Terraform CI/CD
+on: [push, pull_request]
+env:
+  ARM_CLIENT_ID: ${{ secrets.APP_ID }}
+  ARM_CLIENT_SECRET: ${{  secrets.CLIENT_SECRET  }}
+  ARM_SUBSCRIPTION_ID: ${{  secrets.SUBSCRIPTION_ID  }}
+  ARM_TENANT_ID: ${{  secrets.TENANT_ID  }}
+defaults:
+  run:
+    shell: bash
+jobs:
+  building:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        environment: ["audit", "shared-services", "dev", "prod"]
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1
+      with:
+        terraform_version: 0.12.26
+
+    - name: Format check
+      id: fmt
+      run: terraform fmt -check -diff -recursive
+
+    - name: Initialize Terraform Directories
+      id: init
+      run: |
+        terraform init -input=false -upgrade=true ./environments/${{ matrix.environment }}
+
+    - name: Validate Terraform syntax
+      id: validate
+      run: |
+        terraform validate ./environments/${{ matrix.environment }}
+
+    - name: Terraform Plan
+      id: plan
+      env:
+        OBJECT_ID: ${{  secrets.OBJECT_ID  }}
+        APP_ID: ${{  secrets.APP_ID  }}
+        CLIENT_SECRET: ${{  secrets.CLIENT_SECRET  }}
+      run: terraform plan -input=false -var "client_secret=$CLIENT_SECRET" -var "app_id=$APP_ID" -var "object_id=$OBJECT_ID" -var-file=./environments/${{ matrix.environment }}/terraform.tfvars -out=./${{ matrix.environment }}tfplan ./environments/${{ matrix.environment }}
+    - uses: actions/github-script@0.9.0
+      if: github.event_name == 'pull_request'
+      env:
+        PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          const output = `#### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`
+          #### ${{ matrix.environment }} Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
+          #### ${{ matrix.environment }} Terraform Validation 🤖${{ steps.validate.outputs.stdout }}
+          #### ${{ matrix.environment }} Terraform Plan 📖\`${{ steps.plan.outcome }}\`
+          
+          <details><summary>Show Plan</summary>
+          
+          \`\`\`${process.env.PLAN}\`\`\`
+          
+          </details>
+          
+          *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`, Working Directory: \`${{ env.tf_actions_working_dir }}\`, Workflow: \`${{ github.workflow }}\`*`;
+            
+          github.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: output
+          })
+     
+    - name: Publish Plan Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: ${{ matrix.environment }}tfplan
+        path: ./${{ matrix.environment }}tfplan
+
+  provisioning_level_1:
+    needs: building
+    if: github.ref == 'master'
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        environment: ["shared-services", "audit"]
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Download Plan Artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: ${{ matrix.environment }}tfplan
+        path: ./environments/${{ matrix.environment }}
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1
+      with:
+        terraform_version: 0.12.26
+    
+    - name: Initialize Terraform Directory
+      id: init
+      run: terraform init -input=false -upgrade=true ./environments/${{ matrix.environment }}
+    
+    - name: Terraform Apply
+      id: apply
+      run: terraform apply ./environments/${{ matrix.environment }}/${{ matrix.environment }}tfplan
+
+  provisioning_level_2:
+    needs: provisioning_level_1
+    if: github.ref == 'master'
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        environment: ["dev", "prod"]
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Login to AZ CLI
+      uses: azure/login@v1.1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Download Plan Artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: ${{ matrix.environment }}tfplan
+        path: ./environments/${{ matrix.environment }}
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1
+      with:
+        terraform_version: 0.12.26
+
+    - name: Setup Kubectl
+      uses: azure/setup-kubectl@v1
+
+    - name: Setup Helm
+      uses: azure/setup-helm@v1
+
+    - name: Initialize Terraform Directory
+      id: init
+      run: terraform init -input=false -upgrade=true ./environments/${{ matrix.environment }}
+
+    - name: Terraform Apply
+      id: apply
+      run: terraform apply ./environments/${{ matrix.environment }}/${{ matrix.environment }}tfplan

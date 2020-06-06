@@ -16,11 +16,6 @@ variable "environment" {
 
 #authentication
 
-variable "subscription_id" {
-  description = "The Id of the Subscription that should contain the created resources"
-  type        = string
-}
-
 variable "app_id" {
   description = "The client ID for the Service Principal"
   type        = string
@@ -36,31 +31,6 @@ variable "client_secret" {
   type        = string
 }
 
-variable "tenant_id" {
-  description = "The tenant ID for the Service Principal"
-  type        = string
-}
-
-variable "shared_services_subscription_id" {
-  description = "subscription id of shared-services env"
-  type        = string
-}
-
-variable "state_key" {
-  description = "Key for the state file of the solution, e.g. pre-prod.tfstate"
-  type        = string
-}
-
-variable "access_key" {
-  description = "access key for the storage account that contains the Remote Backend"
-  type        = string
-}
-
-variable "storage_account_name" {
-  description = "Storage account that contains Remote Backend, e.g. terraformdata24321"
-  type        = string
-}
-
 #network
 
 variable "address_space" {
@@ -68,13 +38,13 @@ variable "address_space" {
   type        = list
 }
 
-variable "address_prefixes" {
-  description = "The address prefix to use for the subnet."
+variable "address_prefix_agw" {
+  description = "The address prefixe to use for the agw subnet."
   type        = list(string)
 }
 
-variable "subnet_name_prefixes" {
-  description = "The name of the subnets. Changing this forces a new resource to be created."
+variable "address_prefix_aks" {
+  description = "The address prefixe to use for the aks subnet."
   type        = list(string)
 }
 
