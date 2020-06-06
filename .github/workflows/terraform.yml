@@ -1,4 +1,4 @@
-name: Terraform CI
+name: Terraform CI/CD
 on: push
 env:
   ARM_CLIENT_ID: ${{ secrets.APP_ID }}
@@ -78,6 +78,7 @@ jobs:
 
   provisioning_level_1:
     needs: building
+    if: github.ref == 'master'
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -106,6 +107,7 @@ jobs:
 
   provisioning_level_2:
     needs: provisioning_level_1
+    if: github.ref == 'master'
     runs-on: ubuntu-latest
     strategy:
       matrix:
