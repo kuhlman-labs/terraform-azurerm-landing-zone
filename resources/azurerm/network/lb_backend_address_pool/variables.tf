@@ -16,9 +16,7 @@ variable "name" {
   type        = string
 }
 
-variable "load_balancer_id" {
+variable "loadbalancer_id" {
   description = "(Required) The ID of the Load Balancer in which to create the Backend Address Pool."
   type        = string
 }
-
-
