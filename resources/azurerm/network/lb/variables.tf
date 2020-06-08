@@ -33,6 +33,48 @@ variable "sku" {
   default     = null
 }
 
+variable "subnet_id" {
+  description = "The ID of the Subnet which should be associated with the IP Configuration."
+  type        = string
+  default     = null
+}
+
+variable "private_ip_address" {
+  description = "(Optional) Private IP Address to assign to the Load Balancer. The last one and first four IPs in any range are reserved and cannot be manually assigned."
+  type        = string
+  default     = null
+}
+
+variable "private_ip_address_allocation" {
+  description = "(Optional) The allocation method for the Private IP Address used by this Load Balancer. Possible values as Dynamic and Static."
+  type        = string
+  default     = null
+}
+
+variable "private_ip_address_version" {
+  description = "The version of IP that the Private IP Address is. Possible values are IPv4 or IPv6."
+  type        = string
+  default     = "IPv4"
+}
+
+variable "public_ip_address_id" {
+  description = "(Optional) The ID of a Public IP Address which should be associated with the Load Balancer."
+  type        = string
+  default     = null
+}
+
+variable "public_ip_prefix_id" {
+  description = "(Optional) The ID of a Public IP Prefix which should be associated with the Load Balancer. Public IP Prefix can only be used with outbound rules."
+  type        = string
+  default     = null
+}
+
+variable "zones" {
+  description = "(Optional) A list of Availability Zones which the Load Balancer's IP Addresses should be created in."
+  type        = list
+  default     = null
+}
+
 variable "frontend_ip_configuration" {
   description = "(Optional) One or multiple frontend_ip_configuration blocks as documented below."
   type        = list
