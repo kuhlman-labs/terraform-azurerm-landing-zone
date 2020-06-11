@@ -8,7 +8,7 @@ data "azurerm_client_config" "current" {
 #resource group
 
 module "resource_group" {
-  source       = "../../../resources/azurerm/base/resource_group"
+  source       = "../resources/base/resource_group"
   service_name = "aks"
   region       = var.region
   environment  = var.environment
@@ -18,7 +18,7 @@ module "resource_group" {
 #managed identity for aks
 
 module "user_assigned_identity" {
-  source         = "../../../resources/azurerm/authorization/user_assigned_identity"
+  source         = "../resources/authorization/user_assigned_identity"
   resource_group = module.resource_group.name
   region         = module.resource_group.location
   name_prefix    = "mi-aks"
@@ -28,28 +28,28 @@ module "user_assigned_identity" {
 #role assignments for AD integration
 
 module "role_assignment_aks_0" {
-  source               = "../../../resources/azurerm/authorization/role_assignment"
+  source               = "../resources/authorization/role_assignment"
   scope                = element(module.subnet.id, 1)
   role_definition_name = "Network Contributor"
   principal_id         = var.object_id
 }
 
 module "role_assignment_aks_1" {
-  source               = "../../../resources/azurerm/authorization/role_assignment"
+  source               = "../resources/authorization/role_assignment"
   scope                = module.user_assigned_identity.id
   role_definition_name = "Managed Identity Operator"
   principal_id         = var.object_id
 }
 
 module "role_assignment_aks_2" {
-  source               = "../../../resources/azurerm/authorization/role_assignment"
+  source               = "../resources/authorization/role_assignment"
   scope                = module.application_gateway.id
   role_definition_name = "Contributor"
   principal_id         = module.user_assigned_identity.principal_id
 }
 
 module "role_assignment_aks_3" {
-  source               = "../../../resources/azurerm/authorization/role_assignment"
+  source               = "../resources/authorization/role_assignment"
   scope                = module.resource_group.id
   role_definition_name = "Reader"
   principal_id         = module.user_assigned_identity.principal_id
@@ -58,7 +58,7 @@ module "role_assignment_aks_3" {
 #subnet
 
 module "subnet" {
-  source               = "../../../resources/azurerm/network/subnet"
+  source               = "../resources/network/subnet"
   resource_group       = var.virtual_network_resource_group
   region               = module.resource_group.location
   virtual_network_name = var.virtual_network_name
@@ -70,7 +70,7 @@ module "subnet" {
 #agw
 
 module "public_ip" {
-  source            = "../../../resources/azurerm/network/public_ip"
+  source            = "../resources/network/public_ip"
   resource_group    = module.resource_group.name
   region            = module.resource_group.location
   environment       = var.environment
@@ -81,7 +81,7 @@ module "public_ip" {
 }
 
 module "application_gateway" {
-  source               = "../../../resources/azurerm/network/application_gateway"
+  source               = "../resources/network/application_gateway"
   resource_group       = module.resource_group.name
   region               = module.resource_group.location
   name_prefix          = "agw-aks"
@@ -96,7 +96,7 @@ module "application_gateway" {
 #aks
 
 module "aks" {
-  source         = "../../../resources/azurerm/container/kubernetes_cluster"
+  source         = "../resources/container/kubernetes_cluster"
   resource_group = module.resource_group.name
   region         = module.resource_group.location
   environment    = var.environment

@@ -5,7 +5,7 @@
 #resource group
 
 module "resource_group" {
-  source       = "../../../resources/azurerm/base/resource_group"
+  source       = "../resources/base/resource_group"
   service_name = "network-transit-hub"
   region       = var.region
   environment  = var.environment
@@ -15,7 +15,7 @@ module "resource_group" {
 #virtual network
 
 module "virtual_network" {
-  source         = "../../../resources/azurerm/network/virtual_network"
+  source         = "../resources/network/virtual_network"
   resource_group = module.resource_group.name
   region         = module.resource_group.location
   environment    = var.environment
@@ -27,7 +27,7 @@ module "virtual_network" {
 #virtual gateway
 
 module "public_ip_vgw" {
-  source            = "../../../resources/azurerm/network/public_ip"
+  source            = "../resources/network/public_ip"
   resource_group    = module.resource_group.name
   region            = module.resource_group.location
   environment       = var.environment
@@ -38,7 +38,7 @@ module "public_ip_vgw" {
 }
 
 module "virtual_network_gateway" {
-  source                = "../../../resources/azurerm/network/virtual_network_gateway"
+  source                = "../resources/network/virtual_network_gateway"
   resource_group        = module.resource_group.name
   region                = module.resource_group.location
   environment           = var.environment
@@ -58,7 +58,7 @@ module "virtual_network_gateway" {
 #firewall
 
 module "public_ip_fw" {
-  source            = "../../../resources/azurerm/network/public_ip"
+  source            = "../resources/network/public_ip"
   resource_group    = module.resource_group.name
   region            = module.resource_group.location
   environment       = var.environment
@@ -69,7 +69,7 @@ module "public_ip_fw" {
 }
 
 module "firewall" {
-  source               = "../../../resources/azurerm/network/firewall"
+  source               = "../resources/network/firewall"
   resource_group       = module.resource_group.name
   region               = module.resource_group.location
   environment          = var.environment

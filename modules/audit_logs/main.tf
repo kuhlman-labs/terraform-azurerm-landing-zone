@@ -5,7 +5,7 @@
 #resource group
 
 module "resource_group" {
-  source       = "../../../resources/azurerm/base/resource_group"
+  source       = "../resources/base/resource_group"
   service_name = "logs"
   region       = var.region
   environment  = var.environment
@@ -13,7 +13,7 @@ module "resource_group" {
 }
 
 module "log_analytics" {
-  source            = "../../../resources/azurerm/log_analytics/log_analytics"
+  source            = "../resources/log_analytics/log_analytics"
   name_prefix       = "log"
   resource_group    = module.resource_group.name
   region            = module.resource_group.location
@@ -24,7 +24,7 @@ module "log_analytics" {
 }
 
 module "archive_storage_account" {
-  source                   = "../../../resources/azurerm/storage/storage_account"
+  source                   = "../resources/storage/storage_account"
   resource_group           = module.resource_group.name
   region                   = module.resource_group.location
   environment              = var.environment

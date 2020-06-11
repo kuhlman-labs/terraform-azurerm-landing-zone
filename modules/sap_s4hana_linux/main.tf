@@ -5,7 +5,7 @@
 #resource group
 
 module "resource_group" {
-  source       = "../../../resources/azurerm/base/resource_group"
+  source       = "../resources/base/resource_group"
   service_name = "sap-s4hana"
   region       = var.region
   environment  = var.environment
@@ -15,7 +15,7 @@ module "resource_group" {
 #subnets
 
 module "subnet" {
-  source               = "../../../resources/azurerm/network/subnet"
+  source               = "../resources/network/subnet"
   resource_group       = var.virtual_network_resource_group
   region               = module.resource_group.location
   virtual_network_name = var.virtual_network_name
@@ -27,7 +27,7 @@ module "subnet" {
 ##web dispatcher
 
 module "lb_web_dispatcher" {
-  source                        = "../../../resources/azurerm/network/lb"
+  source                        = "../resources/network/lb"
   resource_group                = module.resource_group.name
   region                        = module.resource_group.location
   environment                   = var.environment
@@ -39,14 +39,14 @@ module "lb_web_dispatcher" {
 }
 
 module "lb_backend_address_pool_web_dispatcher" {
-  source          = "../../../resources/azurerm/network/lb_backend_address_pool"
+  source          = "../resources/network/lb_backend_address_pool"
   resource_group  = module.resource_group.name
   name            = "beap-web-dispatcher"
   loadbalancer_id = module.lb_web_dispatcher.id
 }
 
 module "network_interface_web_dispatcher" {
-  source                        = "../../../resources/azurerm/network/network_interface"
+  source                        = "../resources/network/network_interface"
   resource_group                = module.resource_group.name
   region                        = module.resource_group.location
   environment                   = var.environment
@@ -58,14 +58,14 @@ module "network_interface_web_dispatcher" {
 }
 
 module "network_interface_backend_address_pool_association_web_dispatcher" {
-  source                  = "../../../resources/azurerm/network/network_interface_backend_address_pool_association"
+  source                  = "../resources/network/network_interface_backend_address_pool_association"
   network_interface_id    = module.network_interface_web_dispatcher.id
   ip_configuration_name   = module.network_interface_web_dispatcher.ip_configuration_name
   backend_address_pool_id = module.lb_backend_address_pool_web_dispatcher.id
 }
 
 module "virtual_machine_web_dispatcher" {
-  source                           = "../../../resources/azurerm/compute/linux_virtual_machine"
+  source                           = "../resources/compute/linux_virtual_machine"
   resource_group                   = module.resource_group.name
   region                           = module.resource_group.location
   environment                      = var.environment
@@ -91,7 +91,7 @@ module "virtual_machine_web_dispatcher" {
 ##applicaiton server
 
 module "network_interface_app_server" {
-  source                        = "../../../resources/azurerm/network/network_interface"
+  source                        = "../resources/network/network_interface"
   resource_group                = module.resource_group.name
   region                        = module.resource_group.location
   environment                   = var.environment
@@ -103,7 +103,7 @@ module "network_interface_app_server" {
 }
 
 module "virtual_machine_app_server" {
-  source                           = "../../../resources/azurerm/compute/linux_virtual_machine"
+  source                           = "../resources/compute/linux_virtual_machine"
   resource_group                   = module.resource_group.name
   region                           = module.resource_group.location
   environment                      = var.environment
@@ -129,7 +129,7 @@ module "virtual_machine_app_server" {
 ##central services
 
 module "lb_central_services" {
-  source                        = "../../../resources/azurerm/network/lb"
+  source                        = "../resources/network/lb"
   resource_group                = module.resource_group.name
   region                        = module.resource_group.location
   environment                   = var.environment
@@ -141,14 +141,14 @@ module "lb_central_services" {
 }
 
 module "lb_backend_address_pool_central_services" {
-  source          = "../../../resources/azurerm/network/lb_backend_address_pool"
+  source          = "../resources/network/lb_backend_address_pool"
   resource_group  = module.resource_group.name
   name            = "beap-central_services"
   loadbalancer_id = module.lb_central_services.id
 }
 
 module "network_interface_central_services" {
-  source                        = "../../../resources/azurerm/network/network_interface"
+  source                        = "../resources/network/network_interface"
   resource_group                = module.resource_group.name
   region                        = module.resource_group.location
   environment                   = var.environment
@@ -160,14 +160,14 @@ module "network_interface_central_services" {
 }
 
 module "network_interface_backend_address_pool_association_central_services" {
-  source                  = "../../../resources/azurerm/network/network_interface_backend_address_pool_association"
+  source                  = "../resources/network/network_interface_backend_address_pool_association"
   network_interface_id    = module.network_interface_central_services.id
   ip_configuration_name   = module.network_interface_central_services.ip_configuration_name
   backend_address_pool_id = module.lb_backend_address_pool_central_services.id
 }
 
 module "virtual_machine_central_services" {
-  source                           = "../../../resources/azurerm/compute/linux_virtual_machine"
+  source                           = "../resources/compute/linux_virtual_machine"
   resource_group                   = module.resource_group.name
   region                           = module.resource_group.location
   environment                      = var.environment
@@ -193,7 +193,7 @@ module "virtual_machine_central_services" {
 ##database
 
 module "lb_database" {
-  source                        = "../../../resources/azurerm/network/lb"
+  source                        = "../resources/network/lb"
   resource_group                = module.resource_group.name
   region                        = module.resource_group.location
   environment                   = var.environment
@@ -205,14 +205,14 @@ module "lb_database" {
 }
 
 module "lb_backend_address_pool_database" {
-  source          = "../../../resources/azurerm/network/lb_backend_address_pool"
+  source          = "../resources/network/lb_backend_address_pool"
   resource_group  = module.resource_group.name
   name            = "beap-database"
   loadbalancer_id = module.lb_database.id
 }
 
 module "network_interface_database" {
-  source                        = "../../../resources/azurerm/network/network_interface"
+  source                        = "../resources/network/network_interface"
   resource_group                = module.resource_group.name
   region                        = module.resource_group.location
   environment                   = var.environment
@@ -224,14 +224,14 @@ module "network_interface_database" {
 }
 
 module "network_interface_backend_address_pool_association_database" {
-  source                  = "../../../resources/azurerm/network/network_interface_backend_address_pool_association"
+  source                  = "../resources/network/network_interface_backend_address_pool_association"
   network_interface_id    = module.network_interface_database.id
   ip_configuration_name   = module.network_interface_database.ip_configuration_name
   backend_address_pool_id = module.lb_backend_address_pool_database.id
 }
 
 module "virtual_machine_database" {
-  source                           = "../../../resources/azurerm/compute/linux_virtual_machine"
+  source                           = "../resources/compute/linux_virtual_machine"
   resource_group                   = module.resource_group.name
   region                           = module.resource_group.location
   environment                      = var.environment

@@ -5,7 +5,7 @@
 #resource group
 
 module "resource_group" {
-  source       = "../../../resources/azurerm/base/resource_group"
+  source       = "../resources/base/resource_group"
   service_name = "jumpbox"
   region       = var.region
   environment  = var.environment
@@ -15,7 +15,7 @@ module "resource_group" {
 #subnet
 
 module "subnet" {
-  source               = "../../../resources/azurerm/network/subnet"
+  source               = "../resources/network/subnet"
   resource_group       = var.virtual_network_resource_group
   region               = module.resource_group.location
   virtual_network_name = var.virtual_network_name
@@ -27,7 +27,7 @@ module "subnet" {
 #virtual machine
 
 module "network_interface" {
-  source                        = "../../../resources/azurerm/network/network_interface"
+  source                        = "../resources/network/network_interface"
   resource_group                = module.resource_group.name
   region                        = module.resource_group.location
   environment                   = var.environment
@@ -38,7 +38,7 @@ module "network_interface" {
 }
 
 module "virtual_machine" {
-  source                           = "../../../resources/azurerm/compute/windows_virtual_machine"
+  source                           = "../resources/compute/windows_virtual_machine"
   resource_group                   = module.resource_group.name
   region                           = module.resource_group.location
   environment                      = var.environment
@@ -61,7 +61,7 @@ module "virtual_machine" {
 #network security group
 
 module "network_security_group" {
-  source         = "../../../resources/azurerm/network/network_security_group"
+  source         = "../resources/network/network_security_group"
   resource_group = module.resource_group.name
   environment    = var.environment
   region         = module.resource_group.location
@@ -70,7 +70,7 @@ module "network_security_group" {
 }
 
 module "network_security_rule" {
-  source                      = "../../../resources/azurerm/network/network_security_rule"
+  source                      = "../resources/network/network_security_rule"
   resource_group              = module.resource_group.name
   region                      = module.resource_group.location
   network_security_group_name = module.network_security_group.name
@@ -101,7 +101,7 @@ module "network_security_rule" {
 }
 
 module "subnet_network_security_group_association" {
-  source                    = "../../../resources/azurerm/network/subnet_network_security_group_association"
+  source                    = "../resources/network/subnet_network_security_group_association"
   subnet_id                 = element(module.subnet.id, 0)
   network_security_group_id = module.network_security_group.id
 }

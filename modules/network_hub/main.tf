@@ -5,7 +5,7 @@
 #resource group
 
 module "resource_group" {
-  source       = "../../../resources/azurerm/base/resource_group"
+  source       = "../resources/base/resource_group"
   service_name = "network-hub"
   region       = var.region
   environment  = var.environment
@@ -15,7 +15,7 @@ module "resource_group" {
 #virtual network
 
 module "virtual_network" {
-  source         = "../../../resources/azurerm/network/virtual_network"
+  source         = "../resources/network/virtual_network"
   resource_group = module.resource_group.name
   region         = module.resource_group.location
   environment    = var.environment
@@ -30,7 +30,7 @@ module "virtual_network" {
 #peering hub to spoke
 
 module "virtual_network_peering_hub" {
-  source                       = "../../../resources/azurerm/network/virtual_network_peering"
+  source                       = "../resources/network/virtual_network_peering"
   resource_group_name          = var.virtual_network_hub_resource_group_name
   virtual_network_name         = var.virtual_network_hub_name
   remote_virtual_network_id    = module.virtual_network.id
@@ -44,7 +44,7 @@ module "virtual_network_peering_hub" {
 #peering spoke to hub
 
 module "virtual_network_peering_spoke" {
-  source                       = "../../../resources/azurerm/network/virtual_network_peering"
+  source                       = "../resources/network/virtual_network_peering"
   resource_group_name          = module.resource_group.name
   virtual_network_name         = module.virtual_network.name
   remote_virtual_network_id    = var.virtual_network_hub_id
