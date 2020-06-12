@@ -34,4 +34,5 @@ No requirements.
 | Name | Description |
 |------|-------------|
 | id | The ID of the Network Interface. |
+| ip\_configuration\_name | The name used for this IP Configuration. |
 

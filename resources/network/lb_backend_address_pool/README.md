@@ -12,7 +12,7 @@ No requirements.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| load\_balancer\_id | (Required) The ID of the Load Balancer in which to create the Backend Address Pool. | `string` | n/a | yes |
+| loadbalancer\_id | (Required) The ID of the Load Balancer in which to create the Backend Address Pool. | `string` | n/a | yes |
 | name | (Required) Specifies the name of the Backend Address Pool. | `string` | n/a | yes |
 | resource\_group | The name of the target resource group | `string` | n/a | yes |
 

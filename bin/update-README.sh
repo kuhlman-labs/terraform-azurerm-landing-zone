@@ -5,7 +5,7 @@ modules="environments/* modules/* resources/*"
 
 for dir in $(find ${modules} -type d); do
   cd "$dir/";
-  if [ -f main.tf ]; 
+  if [ -f main.tf ];
   then
     cd -;
     echo "$dir";
