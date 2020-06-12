@@ -1,10 +1,10 @@
 ![Terraform CI/CD](https://github.com/kuhlman-labs/azure-terraform-service-catalog/workflows/Terraform%20CI/CD/badge.svg)
 
-# Terraform AzureRM Service Catalog
+# Terraform AzureRM Landing Zone
 
 ## Purpose
 
-This repository is meant to provide a curated collection of [Terraform](https://www.terraform.io/)  `azurerm` modules. These modules were designed to be able to build off each other, allowing the user to quickly build Azure enviornments.
+This repository is meant to provide a curated collection of [Terraform](https://www.terraform.io/)  `azurerm` modules. These modules were designed to be able to build off each other, allowing a user to quickly build out an [Azure Landing Zone](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/)
 
 ## How to use
 
