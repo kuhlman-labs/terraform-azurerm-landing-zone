@@ -2,8 +2,7 @@
 
 | Name | Version |
 |------|---------|
-| terraform | >= 0.12 |
-| azurerm | >= 2.0.0 |
+| terraform | >= 0.13 |
 
 ## Providers
 
@@ -13,7 +12,6 @@ No provider.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| access\_key | access key for the storage account that contains the Remote Backend | `string` | n/a | yes |
 | address\_prefix\_adds | The address prefixe to use for the aads subnet. | `list` | n/a | yes |
 | address\_prefix\_fw | The address prefixe to use for the fw subnet. | `list` | n/a | yes |
 | address\_prefix\_jumpbox | The address prefixe to use for the jumpbox subnet. | `list` | n/a | yes |
@@ -25,12 +23,7 @@ No provider.
 | object\_id | The object ID for the Service Principal | `string` | n/a | yes |
 | private\_ip\_address\_adds | (Required) The Static IP address for the aads Servers | `list` | n/a | yes |
 | region | Geographic region resource will be deployed into | `string` | n/a | yes |
-| shared\_services\_subscription\_id | subscription id of shared-services env | `string` | n/a | yes |
-| state\_key | Key for the state file of the solution, e.g. pre-prod.tfstate | `string` | n/a | yes |
-| storage\_account\_name | Storage account that contains Remote Backend, e.g. terraformdata24321 | `string` | n/a | yes |
-| subscription\_id | The Id of the Subscription that should contain the created resources | `string` | n/a | yes |
 | tags | A map of tags to add to all resources | `map` | `{}` | no |
-| tenant\_id | The tenant ID for the Service Principal | `string` | n/a | yes |
 
 ## Outputs
 

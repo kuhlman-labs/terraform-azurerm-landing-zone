@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        environment: ["audit", "shared-services", "dev", "prod"]
+        environment: ["shared-services", "dev", "prod"]
     steps:
     - uses: actions/checkout@v2
 
@@ -82,7 +82,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        environment: ["shared-services", "audit"]
+        environment: ["shared-services"]
     steps:
     - uses: actions/checkout@v2
 
