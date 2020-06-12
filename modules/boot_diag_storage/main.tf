@@ -5,7 +5,7 @@
 #resource group
 
 module "resource_group" {
-  source       = "../resources/base/resource_group"
+  source       = "../../resources/base/resource_group"
   service_name = "diagnostic-storage"
   region       = var.region
   environment  = var.environment
@@ -16,7 +16,7 @@ module "resource_group" {
 #diagnostic storage account
 
 module "diagnostic_storage_account" {
-  source                   = "../resources/storage/storage_account"
+  source                   = "../../resources/storage/storage_account"
   resource_group           = module.resource_group.name
   region                   = module.resource_group.location
   environment              = var.environment

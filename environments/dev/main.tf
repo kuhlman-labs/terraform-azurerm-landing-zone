@@ -13,7 +13,7 @@ data "terraform_remote_state" "shared_services" {
 }
 
 module "network_spoke" {
-  source                                  = "../modules/network_spoke"
+  source                                  = "../../modules/network_spoke"
   environment                             = var.environment
   region                                  = var.region
   address_space                           = var.address_space
@@ -28,7 +28,7 @@ module "network_spoke" {
 }
 
 module "aks_agw_ingress" {
-  source                         = "../modules/aks_agw_ingress"
+  source                         = "../../modules/aks_agic"
   environment                    = var.environment
   region                         = var.region
   virtual_network_resource_group = module.network_spoke.virtual_network_resource_group_name
@@ -45,7 +45,7 @@ module "aks_agw_ingress" {
 }
 
 module "linux_web_app" {
-  source      = "../modules/linux_web_app"
+  source      = "../../modules/linux_web_app"
   environment = var.environment
   region      = var.region
   tags        = var.tags

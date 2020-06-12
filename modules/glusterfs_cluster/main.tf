@@ -5,7 +5,7 @@
 #resource group
 
 module "resource_group" {
-  source       = "../resources/base/resource_group"
+  source       = "../../resources/base/resource_group"
   service_name = "glusterfs"
   region       = var.region
   environment  = var.environment
@@ -15,7 +15,7 @@ module "resource_group" {
 #subnet
 
 module "subnet" {
-  source               = "../resources/network/subnet"
+  source               = "../../resources/network/subnet"
   resource_group       = var.virtual_network_resource_group
   region               = module.resource_group.location
   virtual_network_name = var.virtual_network_name
@@ -27,7 +27,7 @@ module "subnet" {
 ##glusterfs cluster
 
 module "lb_glusterfs" {
-  source                        = "../resources/network/lb"
+  source                        = "../../resources/network/lb"
   resource_group                = module.resource_group.name
   region                        = module.resource_group.location
   environment                   = var.environment
@@ -39,14 +39,14 @@ module "lb_glusterfs" {
 }
 
 module "lb_backend_address_pool_glusterfs" {
-  source          = "../resources/network/lb_backend_address_pool"
+  source          = "../../resources/network/lb_backend_address_pool"
   resource_group  = module.resource_group.name
   name            = "beap-glusterfs"
   loadbalancer_id = module.lb_glusterfs.id
 }
 
 module "network_interface_glusterfs" {
-  source                        = "../resources/network/network_interface"
+  source                        = "../../resources/network/network_interface"
   resource_group                = module.resource_group.name
   region                        = module.resource_group.location
   environment                   = var.environment
@@ -58,14 +58,14 @@ module "network_interface_glusterfs" {
 }
 
 module "network_interface_backend_address_pool_association_glusterfs" {
-  source                  = "../resources/network/network_interface_backend_address_pool_association"
+  source                  = "../../resources/network/network_interface_backend_address_pool_association"
   network_interface_id    = module.network_interface_glusterfs.id
   ip_configuration_name   = module.network_interface_glusterfs.ip_configuration_name
   backend_address_pool_id = module.lb_backend_address_pool_glusterfs.id
 }
 
 module "virtual_machine_glusterfs" {
-  source                           = "../resources/compute/linux_virtual_machine"
+  source                           = "../../resources/compute/linux_virtual_machine"
   resource_group                   = module.resource_group.name
   region                           = module.resource_group.location
   environment                      = var.environment

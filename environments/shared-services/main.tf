@@ -3,7 +3,7 @@
 ###
 
 module "network_transit_hub" {
-  source             = "../modules/network_transit_hub"
+  source             = "../../modules/network_transit_hub"
   environment        = var.environment
   region             = var.region
   address_space      = var.address_space
@@ -13,14 +13,14 @@ module "network_transit_hub" {
 }
 
 module "container_registry" {
-  source      = "../modules/container_registry"
+  source      = "../../modules/container_registry"
   environment = var.environment
   region      = var.region
   tags        = var.tags
 }
 
 module "key_vault" {
-  source      = "../modules/key_vault"
+  source      = "../../modules/key_vault"
   environment = var.environment
   region      = var.region
   object_id   = var.object_id
@@ -28,14 +28,14 @@ module "key_vault" {
 }
 
 module "boot_diag_storage" {
-  source      = "../modules/boot_diag_storage"
+  source      = "../../modules/boot_diag_storage"
   environment = var.environment
   region      = var.region
   tags        = var.tags
 }
 
 module "windows_jumpbox" {
-  source                         = "../modules/windows_jumpbox"
+  source                         = "../../modules/windows_jumpbox"
   environment                    = var.environment
   region                         = var.region
   virtual_network_resource_group = module.network_transit_hub.virtual_network_resource_group_name
@@ -46,7 +46,7 @@ module "windows_jumpbox" {
 }
 
 module "domain_controllers" {
-  source                         = "../modules/domain_controllers"
+  source                         = "../../modules/domain_controllers"
   environment                    = var.environment
   region                         = var.region
   virtual_network_resource_group = module.network_transit_hub.virtual_network_resource_group_name

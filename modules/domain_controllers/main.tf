@@ -5,7 +5,7 @@
 #resource group
 
 module "resource_group" {
-  source       = "../resources/base/resource_group"
+  source       = "../../resources/base/resource_group"
   service_name = "active-directory"
   region       = var.region
   environment  = var.environment
@@ -15,7 +15,7 @@ module "resource_group" {
 #network
 
 module "subnet" {
-  source               = "../resources/network/subnet"
+  source               = "../../resources/network/subnet"
   resource_group       = var.virtual_network_resource_group
   region               = module.resource_group.location
   virtual_network_name = var.virtual_network_name
@@ -27,7 +27,7 @@ module "subnet" {
 #virtual machine
 
 module "network_interface" {
-  source                        = "../resources/network/network_interface"
+  source                        = "../../resources/network/network_interface"
   resource_group                = module.resource_group.name
   region                        = module.resource_group.location
   environment                   = var.environment
@@ -40,7 +40,7 @@ module "network_interface" {
 }
 
 module "virtual_machine" {
-  source                           = "../resources/compute/windows_virtual_machine"
+  source                           = "../../resources/compute/windows_virtual_machine"
   resource_group                   = module.resource_group.name
   region                           = module.resource_group.location
   environment                      = var.environment
@@ -63,7 +63,7 @@ module "virtual_machine" {
 }
 
 module "managed_disk" {
-  source               = "../resources/compute/managed_disk"
+  source               = "../../resources/compute/managed_disk"
   resource_group       = module.resource_group.name
   region               = module.resource_group.location
   environment          = var.environment
@@ -78,7 +78,7 @@ module "managed_disk" {
 }
 
 module "virtual_machine_data_disk_attachment" {
-  source             = "../resources/compute/virtual_machine_data_disk_attachment"
+  source             = "../../resources/compute/virtual_machine_data_disk_attachment"
   managed_disk_id    = module.managed_disk.id
   virtual_machine_id = module.virtual_machine.id
   lun                = "0"
@@ -88,7 +88,7 @@ module "virtual_machine_data_disk_attachment" {
 #network security group
 
 module "network_security_group" {
-  source         = "../resources/network/network_security_group"
+  source         = "../../resources/network/network_security_group"
   resource_group = module.resource_group.name
   environment    = var.environment
   region         = module.resource_group.location
@@ -97,7 +97,7 @@ module "network_security_group" {
 }
 
 module "network_security_rule" {
-  source                      = "../resources/network/network_security_rule"
+  source                      = "../../resources/network/network_security_rule"
   resource_group              = module.resource_group.name
   region                      = module.resource_group.location
   network_security_group_name = module.network_security_group.name
@@ -304,7 +304,7 @@ module "network_security_rule" {
 }
 
 module "subnet_network_security_group_association" {
-  source                    = "../resources/network/subnet_network_security_group_association"
+  source                    = "../../resources/network/subnet_network_security_group_association"
   subnet_id                 = element(module.subnet.id, 0)
   network_security_group_id = module.network_security_group.id
 }

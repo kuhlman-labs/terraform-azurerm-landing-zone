@@ -5,7 +5,7 @@
 #resource group
 
 module "resource_group" {
-  source       = "../resources/base/resource_group"
+  source       = "../../resources/base/resource_group"
   service_name = "key-vault"
   region       = var.region
   environment  = var.environment
@@ -13,7 +13,7 @@ module "resource_group" {
 }
 
 module "key_vault" {
-  source         = "../resources/key_vault/key_vault"
+  source         = "../../resources/key_vault/key_vault"
   resource_group = module.resource_group.name
   region         = module.resource_group.location
   environment    = var.environment
@@ -22,7 +22,7 @@ module "key_vault" {
 }
 
 module "key_vault_access_policy" {
-  source       = "../resources/key_vault/key_vault_access_policy"
+  source       = "../../resources/key_vault/key_vault_access_policy"
   key_vault_id = module.key_vault.id
   object_id    = var.object_id
   certificate_permissions = [
