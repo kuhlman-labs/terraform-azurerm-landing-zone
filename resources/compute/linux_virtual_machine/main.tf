@@ -7,7 +7,7 @@
 resource "azurerm_linux_virtual_machine" "base" {
   count = var.vm_count
 
-  name                            = "${var.name_prefix}-${count.index}-${var.environment}-${var.region}"
+  name                            = "${var.name_prefix}-${format("%02d",count.index)}-${var.environment}-${var.region}"
   resource_group_name             = var.resource_group
   location                        = var.region
   size                            = var.size
@@ -17,7 +17,7 @@ resource "azurerm_linux_virtual_machine" "base" {
   network_interface_ids           = [element(var.network_interface_ids, count.index)]
   allow_extension_operations      = var.allow_extension_operations
   availability_set_id             = var.availability_set_id
-  computer_name                   = "${substr(var.name_prefix, 4, 8)}-${count.index}-${substr(var.environment, 0, 2)}${substr(var.region, 0, 2)}"
+  computer_name                   = "${substr(var.name_prefix, 4, 8)}-${format("%02d",count.index)}-${substr(var.environment, 0, 2)}${substr(var.region, 0, 2)}"
   custom_data                     = var.custom_data
   dedicated_host_id               = var.dedicated_host_id
   eviction_policy                 = var.eviction_policy
@@ -39,7 +39,7 @@ resource "azurerm_linux_virtual_machine" "base" {
     storage_account_type      = var.os_disk_storage_account_type
     disk_encryption_set_id    = var.os_disk_encryption_set_id
     disk_size_gb              = var.os_disk_size_gb
-    name                      = "osdisk-${var.name_prefix}-${count.index}-${var.environment}-${var.region}"
+    name                      = "osdisk-${var.name_prefix}-${format("%02d",count.index)}-${var.environment}-${var.region}"
     write_accelerator_enabled = var.os_disk_write_accelerator_enabled
   }
 

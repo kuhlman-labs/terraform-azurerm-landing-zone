@@ -7,7 +7,7 @@
 resource "azurerm_network_interface" "base" {
   count = var.nic_count
 
-  name                          = "${var.name_prefix}-${count.index}-${var.environment}-${var.region}"
+  name                          = "${var.name_prefix}-${format("%02d",count.index)}-${var.environment}-${var.region}"
   location                      = var.region
   resource_group_name           = var.resource_group
   dns_servers                   = var.dns_servers
@@ -16,7 +16,7 @@ resource "azurerm_network_interface" "base" {
   internal_dns_name_label       = var.internal_dns_name_label
 
   ip_configuration {
-    name                          = "ip-${var.name_prefix}-${count.index}-${var.environment}-${var.region}"
+    name                          = "ip-${var.name_prefix}-${format("%02d",count.index)}-${var.environment}-${var.region}"
     subnet_id                     = var.subnet_id
     private_ip_address_version    = var.private_ip_address_version
     private_ip_address_allocation = var.private_ip_address_allocation
