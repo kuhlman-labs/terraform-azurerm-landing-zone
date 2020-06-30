@@ -48,6 +48,16 @@ variable "address_prefix_aks" {
   type        = list(string)
 }
 
+variable "address_prefix_k8s_master" {
+  description = "The address prefixe to use for the k8s_master subnet."
+  type        = list(string)
+}
+
+variable "address_prefix_k8s_node" {
+  description = "The address prefixe to use for the k8s_node subnet."
+  type        = list(string)
+}
+
 #aks
 
 variable "dns_service_ip" {

@@ -5,7 +5,7 @@
 resource "azurerm_managed_disk" "base" {
   count = var.disk_count
 
-  name                   = "${var.name_prefix}-${format("%02d",count.index)}-${var.environment}-${var.region}"
+  name                   = "${var.name_prefix}-${format("%02d", count.index)}-${var.environment}-${var.region}"
   location               = var.region
   resource_group_name    = var.resource_group
   storage_account_type   = var.storage_account_type

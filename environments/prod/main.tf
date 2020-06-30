@@ -1,7 +1,7 @@
 ###
 # environment composition
 ###
-
+/*
 data "terraform_remote_state" "shared_services" {
   backend = "azurerm"
   config = {
@@ -52,3 +52,4 @@ module "linux_web_app" {
   sku_size    = "B1"
   sku_tier    = "Basic"
 }
+*/
