@@ -156,17 +156,12 @@ provider "helm" {
 
 #helm release for ingress-azure
 
-data "helm_repository" "ingress_azure" {
-  name = "application-gateway-kubernetes-ingress"
-  url  = "https://appgwingress.blob.core.windows.net/ingress-azure-helm-package/"
-}
-
 resource "helm_release" "ingress_azure" {
   depends_on = [null_resource.aks_config]
   name       = "application-gateway-kubernetes"
-  repository = data.helm_repository.ingress_azure.metadata[0].name
+  repository = "https://appgwingress.blob.core.windows.net/ingress-azure-helm-package/"
   chart      = "ingress-azure"
-  version    = "1.0.0"
+  version    = "1.2.0-rc1"
 
   values = [
     "${templatefile("${path.module}/templates/helm-config.yaml", {
