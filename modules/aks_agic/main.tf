@@ -179,6 +179,9 @@ resource "helm_release" "ingress_azure" {
 resource "null_resource" "aks_test_app" {
   depends_on = [helm_release.ingress_azure]
   provisioner "local-exec" {
-    command = "kubectl apply -f ${path.module}/templates/aspnetapp.yaml"
+    command = <<EOT
+    az aks get-credentials --resource-group ${module.resource_group.name} --name ${module.aks.name} --admin --overwrite-existing;
+    kubectl apply -f ${path.module}/templates/aspnetapp.yaml
+    EOT    
   }
 }
