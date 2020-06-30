@@ -81,7 +81,7 @@ module "virtual_machine_k8s_master" {
   storage_account_uri              = var.storage_account_uri
   source_image_reference_publisher = "Canonical"
   source_image_reference_offer     = "UbuntuServer"
-  source_image_reference_sku       = "18.04"
+  source_image_reference_sku       = "18.04-LTS"
   source_image_reference_version   = "latest"
   tags                             = var.tags
 }
@@ -144,7 +144,7 @@ module "virtual_machine_k8s_node" {
   storage_account_uri              = var.storage_account_uri
   source_image_reference_publisher = "Canonical"
   source_image_reference_offer     = "UbuntuServer"
-  source_image_reference_sku       = "18.04"
+  source_image_reference_sku       = "18.04-LTS"
   source_image_reference_version   = "latest"
   tags                             = var.tags
 }
