@@ -30,7 +30,7 @@ jobs:
         known_hosts: ${{ secrets.KNOWN_HOSTS }}
     
     - name: Generate Public key
-      run: ssh-keygen -l -f ~/.ssh/id_rsa
+      run: ssh-keygen -y -f ~/.ssh/id_rsa > ~/.ssh/id_rsa.pub
 
     - name: Format check
       id: fmt
@@ -149,7 +149,7 @@ jobs:
         known_hosts: ${{ secrets.KNOWN_HOSTS }}
 
     - name: Generate Public key
-      run: ssh-keygen -l -f ~/.ssh/id_rsa
+      run: ssh-keygen -y -f ~/.ssh/id_rsa > ~/.ssh/id_rsa.pub
           
     - name: Setup Kubectl
       uses: azure/setup-kubectl@v1
