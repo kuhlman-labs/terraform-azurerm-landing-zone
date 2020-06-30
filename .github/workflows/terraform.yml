@@ -22,6 +22,16 @@ jobs:
       with:
         terraform_version: 0.12.26
 
+    - name: Install SSH key
+      uses: shimataro/ssh-key-action@v2
+      with:
+        key: ${{ secrets.SSH_KEY }}
+        name: id_rsa
+        known_hosts: ${{ secrets.KNOWN_HOSTS }}
+    
+    - name: Generate Public key
+      run: ssh-keygen -y -f ~/.ssh/id_rsa > ~/.ssh/id_rsa.pub
+
     - name: Format check
       id: fmt
       run: terraform fmt -check -diff -recursive
@@ -78,7 +88,7 @@ jobs:
 
   provisioning_level_1:
     needs: building
-    if: github.ref == 'master'
+    if: github.ref == 'refs/heads/master' && github.event_name == 'push'
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -131,6 +141,16 @@ jobs:
       with:
         terraform_version: 0.12.26
 
+    - name: Install SSH key
+      uses: shimataro/ssh-key-action@v2
+      with:
+        key: ${{ secrets.SSH_KEY }}
+        name: id_rsa
+        known_hosts: ${{ secrets.KNOWN_HOSTS }}
+
+    - name: Generate Public key
+      run: ssh-keygen -y -f ~/.ssh/id_rsa > ~/.ssh/id_rsa.pub
+          
     - name: Setup Kubectl
       uses: azure/setup-kubectl@v1
 

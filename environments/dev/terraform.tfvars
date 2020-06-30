@@ -13,8 +13,10 @@ address_space = ["10.1.0.0/16"]
 
 #subnet
 
-address_prefix_aks = ["10.1.1.0/24"]
-address_prefix_agw = ["10.1.2.0/24"]
+address_prefix_aks        = ["10.1.1.0/24"]
+address_prefix_agw        = ["10.1.2.0/24"]
+address_prefix_k8s_master = ["10.1.3.0/24"]
+address_prefix_k8s_node   = ["10.1.4.0/24"]
 
 #aks
 

@@ -36,6 +36,7 @@ variable "additional_capabilities" {
 variable "admin_password" {
   description = "(Optional) The Password which should be used for the local-administrator on this Virtual Machine. Changing this forces a new resource to be created."
   type        = string
+  default     = null
 }
 
 variable "admin_ssh_key_public_key" {
