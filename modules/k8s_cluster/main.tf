@@ -6,7 +6,7 @@
 
 module "resource_group" {
   source       = "../../resources/base/resource_group"
-  service_name = ""
+  service_name = "k8s-cluster"
   region       = var.region
   environment  = var.environment
 }
