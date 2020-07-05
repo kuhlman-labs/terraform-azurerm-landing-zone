@@ -27,9 +27,16 @@ variable "region" {
 
 #bastion_host
 
-variable "subnet_id" {
-  description = "(Required) Reference to a subnet in which this Bastion Host has been created."
+#The Subnet used for the Bastion host must have the name AzureBastionSubnet.
+
+variable "virtual_network_name" {
+  description = "(Required) The name of the virtual network to which to attach the subnet. Changing this forces a new resource to be created."
   type        = string
+}
+
+variable "address_prefix_bastion" {
+  description = "(Required) The address prefixes to use for the bastion subnet."
+  type        = list
 }
 
 variable "public_ip_address_id" {
