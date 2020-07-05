@@ -37,6 +37,6 @@ module "bastion" {
   resource_group       = module.resource_group.name
   region               = module.resource_group.location
   environment          = var.environment
-  subnet_id            = module.subnet[0].id
+  subnet_id            = element(module.subnet.id, 0)
   public_ip_address_id = module.public_ip.id
 }
