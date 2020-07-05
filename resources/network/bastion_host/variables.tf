@@ -34,6 +34,11 @@ variable "virtual_network_name" {
   type        = string
 }
 
+variable "virtual_network_resource_group" {
+  description = "(Required) The name of the virtual network resource group which to attach the subnet. Changing this forces a new resource to be created."
+  type        = string
+}
+
 variable "address_prefix_bastion" {
   description = "(Required) The address prefixes to use for the bastion subnet."
   type        = list
