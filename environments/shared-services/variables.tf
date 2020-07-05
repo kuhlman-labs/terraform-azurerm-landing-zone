@@ -53,6 +53,11 @@ variable "address_prefix_jumpbox" {
   type        = list
 }
 
+variable "address_prefix_bastion" {
+  description = "The address prefixe to use for the bastion subnet."
+  type        = list
+}
+
 variable "address_prefix_adds" {
   description = "The address prefixe to use for the aads subnet."
   type        = list
