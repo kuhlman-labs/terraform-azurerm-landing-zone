@@ -34,6 +34,12 @@ module "boot_diag_storage" {
   tags        = var.tags
 }
 
+module "audit_logs" {
+  source      = "../../modules/audit_logs"
+  environment = var.environment
+  region      = var.region
+}
+
 module "windows_jumpbox" {
   source                         = "../../modules/windows_jumpbox"
   environment                    = var.environment
