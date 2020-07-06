@@ -3,12 +3,12 @@
 ###
 
 module "network_hub" {
-  source             = "../../modules/network_hub"
-  environment        = var.environment
-  region             = var.region
-  address_space      = var.address_space
-  dns_servers        = concat(var.private_ip_address_adds, ["168.63.129.16"])
-  tags               = var.tags
+  source        = "../../modules/network_hub"
+  environment   = var.environment
+  region        = var.region
+  address_space = var.address_space
+  dns_servers   = concat(var.private_ip_address_adds, ["168.63.129.16"])
+  tags          = var.tags
 }
 
 module "container_registry" {
