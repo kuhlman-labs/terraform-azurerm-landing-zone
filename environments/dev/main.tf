@@ -17,9 +17,9 @@ module "network_spoke" {
   environment                             = var.environment
   region                                  = var.region
   address_space                           = var.address_space
-  virtual_network_hub_resource_group_name = data.terraform_remote_state.shared_services.outputs.network_transit_hub_resource_group_name
-  virtual_network_hub_name                = data.terraform_remote_state.shared_services.outputs.network_transit_hub_name
-  virtual_network_hub_id                  = data.terraform_remote_state.shared_services.outputs.network_transit_hub_id
+  virtual_network_hub_resource_group_name = data.terraform_remote_state.shared_services.outputs.network_hub_resource_group_name
+  virtual_network_hub_name                = data.terraform_remote_state.shared_services.outputs.network_hub_name
+  virtual_network_hub_id                  = data.terraform_remote_state.shared_services.outputs.network_hub_id
   allow_gateway_transit_hub               = true
   allow_gateway_transit_spoke             = false
   use_remote_gateways_spoke               = true
@@ -72,8 +72,8 @@ module "bastion" {
   source                         = "../../modules/bastion"
   environment                    = var.environment
   region                         = var.region
-  virtual_network_resource_group = module.network_transit_hub.virtual_network_resource_group_name
-  virtual_network_name           = module.network_transit_hub.virtual_network_name
+  virtual_network_resource_group = module.network_hub.virtual_network_resource_group_name
+  virtual_network_name           = module.network_hub.virtual_network_name
   address_prefix_bastion         = var.address_prefix_bastion
   tags                           = var.tags
 }
