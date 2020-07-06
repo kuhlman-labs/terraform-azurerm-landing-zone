@@ -7,6 +7,7 @@ module "network_transit_hub" {
   environment        = var.environment
   region             = var.region
   address_space      = var.address_space
+  dns_servers        = concat(var.private_ip_address_adds, ["168.63.129.16"])
   address_prefix_vgw = var.address_prefix_vgw
   address_prefix_fw  = var.address_prefix_fw
   tags               = var.tags
@@ -32,6 +33,12 @@ module "boot_diag_storage" {
   environment = var.environment
   region      = var.region
   tags        = var.tags
+}
+
+module "audit_logs" {
+  source      = "../../modules/audit_logs"
+  environment = var.environment
+  region      = var.region
 }
 
 module "windows_jumpbox" {

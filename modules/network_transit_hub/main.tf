@@ -21,6 +21,7 @@ module "virtual_network" {
   environment    = var.environment
   name_prefix    = "vnet-transit-hub"
   address_space  = var.address_space
+  dns_servers    = var.dns_servers
   tags           = var.tags
 }
 
