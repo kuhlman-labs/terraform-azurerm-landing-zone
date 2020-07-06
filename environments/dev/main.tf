@@ -18,7 +18,7 @@ module "network_spoke" {
   region                                  = var.region
   address_space                           = var.address_space
   virtual_network_hub_resource_group_name = data.terraform_remote_state.shared_services.outputs.network_transit_hub_resource_group_name
-  virtual_network_hub_name                = data.terraform_remote_state.shared_services.outputs.network_transit_hub_hub_name
+  virtual_network_hub_name                = data.terraform_remote_state.shared_services.outputs.network_transit_hub_name
   virtual_network_hub_id                  = data.terraform_remote_state.shared_services.outputs.network_transit_hub_id
   allow_gateway_transit_hub               = true
   allow_gateway_transit_spoke             = false
