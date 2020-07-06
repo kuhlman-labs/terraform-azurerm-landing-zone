@@ -21,6 +21,12 @@ variable "address_space" {
   type        = list
 }
 
+variable "dns_servers" {
+  description = "(Optional) List of IP addresses of DNS servers"
+  type        = list
+  default     = null
+}
+
 variable "address_prefix_vgw" {
   description = "The address prefixe to use for the vgw subnet."
   type        = list
