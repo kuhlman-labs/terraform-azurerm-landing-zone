@@ -58,6 +58,11 @@ variable "address_prefix_k8s_node" {
   type        = list(string)
 }
 
+variable "address_prefix_bastion" {
+  description = "The address prefixe to use for the bastion subnet."
+  type        = list
+}
+
 #aks
 
 variable "dns_service_ip" {

@@ -2,15 +2,13 @@
 # environment composition
 ###
 
-module "network_transit_hub" {
-  source             = "../../modules/network_transit_hub"
-  environment        = var.environment
-  region             = var.region
-  address_space      = var.address_space
-  dns_servers        = concat(var.private_ip_address_adds, ["168.63.129.16"])
-  address_prefix_vgw = var.address_prefix_vgw
-  address_prefix_fw  = var.address_prefix_fw
-  tags               = var.tags
+module "network_hub" {
+  source        = "../../modules/network_hub"
+  environment   = var.environment
+  region        = var.region
+  address_space = var.address_space
+  dns_servers   = concat(var.private_ip_address_adds, ["168.63.129.16"])
+  tags          = var.tags
 }
 
 module "container_registry" {
@@ -41,23 +39,12 @@ module "audit_logs" {
   region      = var.region
 }
 
-module "windows_jumpbox" {
-  source                         = "../../modules/windows_jumpbox"
-  environment                    = var.environment
-  region                         = var.region
-  virtual_network_resource_group = module.network_transit_hub.virtual_network_resource_group_name
-  virtual_network_name           = module.network_transit_hub.virtual_network_name
-  address_prefix_jumpbox         = var.address_prefix_jumpbox
-  storage_account_uri            = module.boot_diag_storage.primary_blob_endpoint
-  tags                           = var.tags
-}
-
 module "domain_controllers" {
   source                         = "../../modules/domain_controllers"
   environment                    = var.environment
   region                         = var.region
-  virtual_network_resource_group = module.network_transit_hub.virtual_network_resource_group_name
-  virtual_network_name           = module.network_transit_hub.virtual_network_name
+  virtual_network_resource_group = module.network_hub.virtual_network_resource_group_name
+  virtual_network_name           = module.network_hub.virtual_network_name
   address_prefix_adds            = var.address_prefix_adds
   storage_account_uri            = module.boot_diag_storage.primary_blob_endpoint
   private_ip_address_adds        = var.private_ip_address_adds
@@ -68,8 +55,8 @@ module "bastion" {
   source                         = "../../modules/bastion"
   environment                    = var.environment
   region                         = var.region
-  virtual_network_resource_group = module.network_transit_hub.virtual_network_resource_group_name
-  virtual_network_name           = module.network_transit_hub.virtual_network_name
+  virtual_network_resource_group = module.network_hub.virtual_network_resource_group_name
+  virtual_network_name           = module.network_hub.virtual_network_name
   address_prefix_bastion         = var.address_prefix_bastion
   tags                           = var.tags
 }

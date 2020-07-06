@@ -67,3 +67,13 @@ module "k8s_cluster" {
   address_prefix_k8s_node        = var.address_prefix_k8s_node
   storage_account_uri            = module.boot_diag_storage.primary_blob_endpoint
 }
+
+module "bastion" {
+  source                         = "../../modules/bastion"
+  environment                    = var.environment
+  region                         = var.region
+  virtual_network_resource_group = module.network_spoke.virtual_network_resource_group_name
+  virtual_network_name           = module.network_spoke.virtual_network_name
+  address_prefix_bastion         = var.address_prefix_bastion
+  tags                           = var.tags
+}
