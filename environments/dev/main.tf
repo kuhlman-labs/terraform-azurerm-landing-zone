@@ -72,8 +72,8 @@ module "bastion" {
   source                         = "../../modules/bastion"
   environment                    = var.environment
   region                         = var.region
-  virtual_network_resource_group = module.network_hub.virtual_network_resource_group_name
-  virtual_network_name           = module.network_hub.virtual_network_name
+  virtual_network_resource_group = module.network_spoke.virtual_network_resource_group_name
+  virtual_network_name           = module.network_spoke.virtual_network_name
   address_prefix_bastion         = var.address_prefix_bastion
   tags                           = var.tags
 }
