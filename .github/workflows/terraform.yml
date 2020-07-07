@@ -20,7 +20,7 @@ jobs:
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
       with:
-        terraform_version: 0.12.26
+        terraform_version: 0.12.28
 
     - name: Install SSH key
       uses: shimataro/ssh-key-action@v2
@@ -105,7 +105,7 @@ jobs:
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
       with:
-        terraform_version: 0.12.26
+        terraform_version: 0.12.28
     
     - name: Initialize Terraform Directory
       id: init
@@ -139,7 +139,7 @@ jobs:
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
       with:
-        terraform_version: 0.12.26
+        terraform_version: 0.12.28
 
     - name: Install SSH key
       uses: shimataro/ssh-key-action@v2

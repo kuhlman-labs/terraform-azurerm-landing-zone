@@ -17,12 +17,12 @@ module "network_spoke" {
   environment                             = var.environment
   region                                  = var.region
   address_space                           = var.address_space
-  virtual_network_hub_resource_group_name = data.terraform_remote_state.shared_services.outputs.network_transit_hub_resource_group_name
-  virtual_network_hub_name                = data.terraform_remote_state.shared_services.outputs.network_transit_hub_name
-  virtual_network_hub_id                  = data.terraform_remote_state.shared_services.outputs.network_transit_hub_id
-  allow_gateway_transit_hub               = true
+  virtual_network_hub_resource_group_name = data.terraform_remote_state.shared_services.outputs.network_hub_resource_group_name
+  virtual_network_hub_name                = data.terraform_remote_state.shared_services.outputs.network_hub_name
+  virtual_network_hub_id                  = data.terraform_remote_state.shared_services.outputs.network_hub_id
+  allow_gateway_transit_hub               = false
   allow_gateway_transit_spoke             = false
-  use_remote_gateways_spoke               = true
+  use_remote_gateways_spoke               = false
   use_remote_gateways_hub                 = false
   tags                                    = var.tags
 }
