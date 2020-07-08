@@ -9,6 +9,7 @@ module "resource_group" {
   service_name = "k8s-cluster"
   region       = var.region
   environment  = var.environment
+  tags         = var.tags
 }
 
 #subnets
@@ -23,8 +24,31 @@ module "subnet" {
   environment          = var.environment
 }
 
-##k8s_master
+#network security group
 
+module "network_security_group" {
+  source         = "../../resources/network/network_security_group"
+  resource_group = module.resource_group.name
+  environment    = var.environment
+  region         = module.resource_group.location
+  policy_name    = "k8sclusterallow"
+  tags           = var.tags
+}
+
+module "subnet_network_security_group_association_0" {
+  source                    = "../../resources/network/subnet_network_security_group_association"
+  subnet_id                 = element(module.subnet.id, 0)
+  network_security_group_id = module.network_security_group.id
+}
+
+module "subnet_network_security_group_association_1" {
+  source                    = "../../resources/network/subnet_network_security_group_association"
+  subnet_id                 = element(module.subnet.id, 1)
+  network_security_group_id = module.network_security_group.id
+}
+
+##k8s_master
+/*
 module "lb_k8s_master" {
   source                        = "../../resources/network/lb"
   resource_group                = module.resource_group.name
@@ -43,26 +67,26 @@ module "lb_backend_address_pool_k8s_master" {
   name            = "beap-k8s_master"
   loadbalancer_id = module.lb_k8s_master.id
 }
-
+*/
 module "network_interface_k8s_master" {
   source                        = "../../resources/network/network_interface"
   resource_group                = module.resource_group.name
   region                        = module.resource_group.location
   environment                   = var.environment
-  name_prefix                   = "nic-lvm-k8s_master"
-  nic_count                     = 2
+  name_prefix                   = "nic-lvm-k8s-master"
+  nic_count                     = 1
   subnet_id                     = element(module.subnet.id, 0)
   private_ip_address_allocation = "Dynamic"
   tags                          = var.tags
 }
-
+/*
 module "network_interface_backend_address_pool_association_k8s_master" {
   source                  = "../../resources/network/network_interface_backend_address_pool_association"
   network_interface_id    = module.network_interface_k8s_master.id
   ip_configuration_name   = module.network_interface_k8s_master.ip_configuration_name
   backend_address_pool_id = module.lb_backend_address_pool_k8s_master.id
 }
-
+*/
 module "virtual_machine_k8s_master" {
   source                           = "../../resources/compute/linux_virtual_machine"
   resource_group                   = module.resource_group.name
@@ -87,7 +111,7 @@ module "virtual_machine_k8s_master" {
 }
 
 ##k8s_node
-
+/*
 module "lb_k8s_node" {
   source                        = "../../resources/network/lb"
   resource_group                = module.resource_group.name
@@ -106,7 +130,7 @@ module "lb_backend_address_pool_k8s_node" {
   name            = "beap-k8s-node"
   loadbalancer_id = module.lb_k8s_node.id
 }
-
+*/
 module "network_interface_k8s_node" {
   source                        = "../../resources/network/network_interface"
   resource_group                = module.resource_group.name
@@ -118,14 +142,14 @@ module "network_interface_k8s_node" {
   private_ip_address_allocation = "Dynamic"
   tags                          = var.tags
 }
-
+/*
 module "network_interface_backend_address_pool_association_k8s_node" {
   source                  = "../../resources/network/network_interface_backend_address_pool_association"
   network_interface_id    = module.network_interface_k8s_node.id
   ip_configuration_name   = module.network_interface_k8s_node.ip_configuration_name
   backend_address_pool_id = module.lb_backend_address_pool_k8s_node.id
 }
-
+*/
 module "virtual_machine_k8s_node" {
   source                           = "../../resources/compute/linux_virtual_machine"
   resource_group                   = module.resource_group.name
