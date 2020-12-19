@@ -2,10 +2,6 @@
 #  resource composition
 ###
 
-provider "azurerm" {
-  features {}
-}
-
 #kubernetes_cluster
 
 resource "azurerm_kubernetes_cluster" "base" {
@@ -31,6 +27,7 @@ resource "azurerm_kubernetes_cluster" "base" {
     node_count            = var.node_count
     max_pods              = var.max_pods
     node_labels           = var.node_labels
+    node_taints           = var.node_taints
     os_disk_size_gb       = var.os_disk_size_gb
     type                  = var.type
     vnet_subnet_id        = var.vnet_subnet_id
