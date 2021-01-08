@@ -13,7 +13,6 @@ variable "kubernetes_version" {
 variable "node_pool_name" {
   description = "(Required) The name which should be used for the default Kubernetes Node Pool. Changing this forces a new resource to be created."
   type        = string
-  default     = "default"
 }
 
 variable "kubernetes_cluster_id" {
