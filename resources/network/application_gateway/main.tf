@@ -40,7 +40,7 @@ resource "azurerm_application_gateway" "base" {
   }
 
   frontend_port {
-    name = local.frontend_port_name
+    name = "${local.frontend_port_name}-80"
     port = 80
   }
 
@@ -77,7 +77,10 @@ resource "azurerm_application_gateway" "base" {
   }
   tags = var.tags
 
-  lifecycle {
-    ignore_changes = [tags, backend_address_pool, backend_http_settings, frontend_ip_configuration, frontend_port, http_listener, probe, request_routing_rule]
+  dynamic "lifecycle" {
+    for_each = var.lifecycle
+    content {
+      ignore_changes = lifecycle.value
+    }
   }
 }

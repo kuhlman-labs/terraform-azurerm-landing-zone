@@ -1,0 +1,57 @@
+name: Build and push the tagged build to production
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build_push_image:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build and Push production image
+        uses: docker/build-push-action@v1.1.1
+        with:
+          username: ${{secrets.ACR_LOGIN}}
+          password: ${{secrets.ACR_PASSWORD}}
+          registry: ${{ secrets.ACR_NAME }}
+          repository: contoso-website
+          tag_with_ref: true
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build_push_image
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install Helm
+        uses: Azure/setup-helm@v1
+        with:
+          version: v3.3.1
+
+      - name: Get AKS Credentials
+        uses: Azure/aks-set-context@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          # Resource group name
+          resource-group: rg-aks-demo
+          # AKS cluster name
+          cluster-name: aks-demo
+
+      - name: Run Helm Deploy
+        run: |
+          helm upgrade \
+            --install \
+            --create-namespace \
+            --atomic \
+            --wait \
+            --namespace production \
+            contoso-website \
+            ./kubernetes/contoso-website \
+            --set image.repository=${{ secrets.ACR_NAME }} \
+            --set dns.name=${{ secrets.DNS_NAME }} \
+            --set image.tag=${GITHUB_REF##*/}
