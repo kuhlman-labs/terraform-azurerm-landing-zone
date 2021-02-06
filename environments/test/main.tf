@@ -10,33 +10,23 @@ module "network_isolated" {
   tags          = var.tags
 }
 
-/*
-
-module "boot_diag_storage" {
-  source      = "../../modules/boot_diag_storage"
+module "audit_logs" {
+  source      = "../../modules/audit_logs"
   environment = var.environment
   region      = var.region
 }
 
-module "sap_s4hana_linux" {
-  source                         = "../../modules/sap_s4hana_linux"
+
+module "aks_baseline" {
+  source                         = "../../modules/aks_baseline"
   environment                    = var.environment
   region                         = var.region
   virtual_network_resource_group = module.network_isolated.virtual_network_resource_group_name
   virtual_network_name           = module.network_isolated.virtual_network_name
-  address_prefix_app             = var.address_prefix_app
-  address_prefix_data            = var.address_prefix_data
-  storage_account_uri            = module.boot_diag_storage.primary_blob_endpoint
+  address_prefix_aks             = var.address_prefix_aks
+  dns_service_ip                 = var.dns_service_ip
+  docker_bridge_cidr             = var.docker_bridge_cidr
+  service_cidr                   = var.service_cidr
+  tags                           = var.tags
+  log_analytics_workspace_id     = module.audit_logs.log_analytics_id
 }
-
-module "glusterfs_cluster" {
-  source                         = "../../modules/glusterfs_cluster"
-  environment                    = var.environment
-  region                         = var.region
-  virtual_network_resource_group = module.network_isolated.virtual_network_resource_group_name
-  virtual_network_name           = module.network_isolated.virtual_network_name
-  address_prefix_glusterfs       = var.address_prefix_glusterfs
-  storage_account_uri            = module.boot_diag_storage.primary_blob_endpoint
-}
-
-*/

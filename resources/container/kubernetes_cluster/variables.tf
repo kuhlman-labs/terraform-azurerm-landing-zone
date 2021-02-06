@@ -244,7 +244,7 @@ variable "idle_timeout_in_minutes" {
 variable "managed_outbound_ip_count" {
   description = "(Optional) Count of desired managed outbound IPs for the cluster load balancer. Must be between 1 and 100 inclusive."
   type        = number
-  default     = null
+  default     = 1
 }
 
 variable "outbound_ip_prefix_ids" {

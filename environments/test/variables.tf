@@ -18,29 +18,33 @@ variable "region" {
 
 variable "address_space" {
   description = "This is a list of the ip address ranges for the vnet"
-  type        = list
+  type        = list(any)
 }
 
-variable "address_prefix_data" {
-  description = "The address prefix to use for the data subnet."
+variable "address_prefix_aks" {
+  description = "The address prefix to use for the aks node subnet."
   type        = list(string)
 }
 
-variable "address_prefix_app" {
-  description = "The address prefix to use for the app subnet."
-  type        = list(string)
+variable "dns_service_ip" {
+  description = "IP address within the Kubernetes service address range that will be used by cluster service discovery (kube-dns). This is required when network_plugin is set to azure. Changing this forces a new resource to be created."
+  type        = string
 }
 
-variable "address_prefix_glusterfs" {
-  description = "The address prefix to use for the glusterfs subnet."
-  type        = list(string)
+variable "docker_bridge_cidr" {
+  description = "IP address (in CIDR notation) used as the Docker bridge IP address on nodes. This is required when network_plugin is set to azure. Changing this forces a new resource to be created."
+  type        = string
 }
 
+variable "service_cidr" {
+  description = "The Network Range used by the Kubernetes service. This is required when network_plugin is set to azure. Changing this forces a new resource to be created."
+  type        = string
+}
 
 #tags
 
 variable "tags" {
   description = "A map of tags to add to all resources"
-  type        = map
+  type        = map(any)
   default     = {}
 }

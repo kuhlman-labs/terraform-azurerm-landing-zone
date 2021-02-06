@@ -14,29 +14,7 @@ variable "environment" {
   type        = string
 }
 
-#authentication
-
-variable "client_secret" {
-  description = "The Client Secret for the Service Principal. Changing this forces a new resource to be created."
-  type        = string
-}
-
-variable "app_id" {
-  description = "The client ID for the Service Principal"
-  type        = string
-}
-
-variable "object_id" {
-  description = "The object ID for the Service Principal"
-  type        = string
-}
-
 #subnet
-
-variable "address_prefix_agw" {
-  description = "The subnet address prefix to use for the agw."
-  type        = list(string)
-}
 
 variable "address_prefix_aks" {
   description = "The subnet address prefix to use for the aks."
@@ -79,13 +57,18 @@ variable "vm_size" {
 variable "node_count" {
   description = "(Required) The number of nodes which should exist in this Node Pool. If specified this must be between 1 and 100."
   type        = number
-  default     = 1
+  default     = 3
+}
+
+variable "log_analytics_workspace_id" {
+  description = "The ID of the Log Analytics Workspace which the OMS Agent should send data to. Must be present if enabled is true."
+  type        = string
 }
 
 #tags
 
 variable "tags" {
   description = "Optional tags to be added to resource"
-  type        = map
+  type        = map(any)
   default     = {}
 }

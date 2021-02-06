@@ -4,10 +4,6 @@
 
 #kubernetes_cluster_node_pool
 
-provider "azurerm" {
-  features {}
-}
-
 resource "azurerm_kubernetes_cluster_node_pool" "base" {
   orchestrator_version         = var.kubernetes_version
   name                         = var.node_pool_name
