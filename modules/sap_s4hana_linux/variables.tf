@@ -33,12 +33,12 @@ variable "virtual_network_resource_group" {
 
 variable "address_prefix_app" {
   description = "(Required) The address prefix for the app subnet"
-  type        = list
+  type        = list(any)
 }
 
 variable "address_prefix_data" {
   description = "(Required) The address prefix for the data subnet"
-  type        = list
+  type        = list(any)
 }
 
 variable "vm_size_web_dispatcher" {
@@ -69,6 +69,6 @@ variable "vm_size_database" {
 
 variable "tags" {
   description = "A map of tags to add to all resources"
-  type        = map
+  type        = map(any)
   default     = {}
 }

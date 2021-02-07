@@ -29,7 +29,7 @@ variable "network_security_group_name" {
 
 variable "network_security_rules" {
   description = "List of network security rules"
-  type        = list
+  type        = list(any)
   default     = []
   /* 
   example:

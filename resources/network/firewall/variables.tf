@@ -35,7 +35,7 @@ variable "virtual_network_name" {
 #The Subnet used for the Firewall must have the name AzureFirewallSubnet and the subnet mask must be at least /26.
 variable "address_prefixes" {
   description = "(Required) The address prefixes to use for the azfw subnet."
-  type        = list
+  type        = list(any)
 }
 
 variable "public_ip_address_id" {
@@ -45,7 +45,7 @@ variable "public_ip_address_id" {
 
 variable "zones" {
   description = "(Optional) Specifies the availability zones in which the Azure Firewall should be created."
-  type        = list
+  type        = list(any)
   default     = null
 }
 
@@ -53,6 +53,6 @@ variable "zones" {
 
 variable "tags" {
   description = "Optional tags to be added to resource"
-  type        = map
+  type        = map(any)
   default     = {}
 }

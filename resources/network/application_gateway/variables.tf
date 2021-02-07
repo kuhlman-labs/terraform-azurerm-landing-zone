@@ -45,7 +45,7 @@ variable "sku_capacity" {
 
 variable "zones" {
   description = "(Optional) A collection of availability zones to spread the Application Gateway over."
-  type        = list
+  type        = list(any)
   default     = null
 }
 
@@ -70,6 +70,6 @@ variable "private_ip_address" {
 
 variable "tags" {
   description = "Optional tags to be added to resource"
-  type        = map
+  type        = map(any)
   default     = {}
 }

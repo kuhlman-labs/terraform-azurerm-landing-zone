@@ -59,7 +59,7 @@ variable "disk_size_gb" {
 
 variable "encryption_settings" {
   description = "(Optional) A encryption_settings block as defined below."
-  type        = list
+  type        = list(any)
   default     = []
 }
 
@@ -106,7 +106,7 @@ variable "enable_zones" {
 
 variable "zones" {
   description = "(Optional) A collection containing the availability zone to allocate the Managed Disk in."
-  type        = list
+  type        = list(any)
   default     = null
 }
 
@@ -114,6 +114,6 @@ variable "zones" {
 
 variable "tags" {
   description = "A map of tags to add to all resources"
-  type        = map
+  type        = map(any)
   default     = {}
 }

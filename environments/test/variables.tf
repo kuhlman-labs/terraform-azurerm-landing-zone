@@ -26,6 +26,21 @@ variable "address_prefix_aks" {
   type        = list(string)
 }
 
+variable "address_prefix_agw" {
+  description = "The address prefix to use for the agw subnet."
+  type        = list(any)
+}
+
+variable "address_prefix_fw" {
+  description = "The address prefixe to use for the fw subnet."
+  type        = list(any)
+}
+
+variable "address_prefix_bastion" {
+  description = "The address prefixe to use for the bastion subnet."
+  type        = list(any)
+}
+
 variable "dns_service_ip" {
   description = "IP address within the Kubernetes service address range that will be used by cluster service discovery (kube-dns). This is required when network_plugin is set to azure. Changing this forces a new resource to be created."
   type        = string

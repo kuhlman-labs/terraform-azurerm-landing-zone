@@ -34,7 +34,7 @@ variable "sku_name" {
 
 variable "network_acls" {
   description = "(Optional) A network_acls block as defined below."
-  type        = list
+  type        = list(any)
   default     = []
   /*
 A network_acls block supports the following:
@@ -81,7 +81,7 @@ variable "soft_delete_enabled" {
 
 variable "tags" {
   description = "tags to be added to resource"
-  type        = map
+  type        = map(any)
   default     = {}
 }
 

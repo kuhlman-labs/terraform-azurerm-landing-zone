@@ -40,13 +40,8 @@ resource "azurerm_application_gateway" "base" {
   }
 
   frontend_port {
-    name = "${local.frontend_port_name}-80"
+    name = local.frontend_port_name
     port = 80
-  }
-
-  frontend_port {
-    name = "${local.frontend_port_name}-443"
-    port = 443
   }
 
   backend_address_pool {
@@ -76,11 +71,4 @@ resource "azurerm_application_gateway" "base" {
     backend_http_settings_name = local.http_setting_name
   }
   tags = var.tags
-
-  dynamic "lifecycle" {
-    for_each = var.lifecycle
-    content {
-      ignore_changes = lifecycle.value
-    }
-  }
 }

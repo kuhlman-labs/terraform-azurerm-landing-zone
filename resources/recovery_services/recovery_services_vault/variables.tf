@@ -37,7 +37,7 @@ variable "soft_delete_enabled" {
 
 variable "tags" {
   description = "tags to be added to resource"
-  type        = map
+  type        = map(any)
   default     = {}
 }
 

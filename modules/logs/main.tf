@@ -28,7 +28,7 @@ module "archive_storage_account" {
   resource_group           = module.resource_group.name
   region                   = module.resource_group.location
   environment              = var.environment
-  name_prefix              = "starchive"
+  name_prefix              = "starchivelogs"
   access_tier              = "Hot"
   account_tier             = "Standard"
   account_replication_type = "LRS"

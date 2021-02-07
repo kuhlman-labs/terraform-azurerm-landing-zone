@@ -16,7 +16,7 @@ variable "certificate_name" {
 
 variable "certificate" {
   description = "(Optional) A certificate block as defined below, used to Import an existing certificate."
-  type        = list
+  type        = list(any)
   default     = []
   /*
 certificate supports the following:
@@ -76,13 +76,13 @@ variable "days_before_expiry" {
 
 variable "extended_key_usage" {
   description = "(Optional) A list of Extended/Enhanced Key Usages. Changing this forces a new resource to be created."
-  type        = list
+  type        = list(any)
   default     = []
 }
 
 variable "key_usage" {
   description = "(Required) A list of uses associated with this Key. Possible values include cRLSign, dataEncipherment, decipherOnly, digitalSignature, encipherOnly, keyAgreement, keyCertSign, keyEncipherment and nonRepudiation and are case-sensitive. Changing this forces a new resource to be created."
-  type        = list
+  type        = list(any)
   default     = []
 }
 
@@ -93,19 +93,19 @@ variable "subject" {
 
 variable "dns_names" {
   description = "(Optional) A list of alternative DNS names (FQDNs) identified by the Certificate. Changing this forces a new resource to be created."
-  type        = list
+  type        = list(any)
   default     = []
 }
 
 variable "emails" {
   description = "(Optional) A list of email addresses identified by this Certificate. Changing this forces a new resource to be created."
-  type        = list
+  type        = list(any)
   default     = []
 }
 
 variable "upns" {
   description = "(Optional) A list of User Principal Names identified by the Certificate. Changing this forces a new resource to be created."
-  type        = list
+  type        = list(any)
   default     = []
 }
 
@@ -117,7 +117,7 @@ variable "validity_in_months" {
 
 variable "tags" {
   description = "tags to be added to resource"
-  type        = map
+  type        = map(any)
   default     = {}
 }
 

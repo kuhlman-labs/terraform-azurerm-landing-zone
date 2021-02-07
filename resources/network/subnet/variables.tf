@@ -39,7 +39,7 @@ variable "address_prefixes" {
 
 variable "service_endpoints" {
   description = "The list of Service endpoints to associate with the subnet. Possible values include: Microsoft.AzureActiveDirectory, Microsoft.AzureCosmosDB, Microsoft.EventHub, Microsoft.KeyVault, Microsoft.ServiceBus, Microsoft.Sql and Microsoft.Storage."
-  type        = list
+  type        = list(any)
   default     = null
 }
 
@@ -57,7 +57,7 @@ variable "enforce_private_link_service_network_policies" {
 
 variable "delegation" {
   description = "A List of delegation blocks to associate with the subnet."
-  type        = list
+  type        = list(any)
   default     = []
   /*
   Example:

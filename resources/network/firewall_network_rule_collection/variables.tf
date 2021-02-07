@@ -39,7 +39,7 @@ variable "action" {
 
 variable "rule" {
   description = "(Required) One or more rule blocks as defined below."
-  type        = list
+  type        = list(any)
   default     = []
   /*
   A rule block supports the following:
@@ -56,6 +56,6 @@ protocols - (Required) A list of protocols. Possible values are Any, ICMP, TCP a
 
 variable "tags" {
   description = "Optional tags to be added to resource"
-  type        = map
+  type        = map(any)
   default     = {}
 }

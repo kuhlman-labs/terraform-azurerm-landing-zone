@@ -39,7 +39,7 @@ variable "public_ip_address_id" {
 
 variable "address_prefixes" {
   description = "(Required) The address prefixes to use for the vgw subnet."
-  type        = list
+  type        = list(any)
 }
 
 variable "virtual_network_name" {
@@ -100,18 +100,18 @@ variable "private_ip_address_allocation" {
 
 variable "address_space" {
   description = "(Required) The address space out of which ip addresses for vpn clients will be taken. You can provide more than one address space, e.g. in CIDR notation."
-  type        = list
+  type        = list(any)
 }
 
 variable "vpn_client_protocols" {
   description = "(Optional) List of the protocols supported by the vpn client. The supported values are SSTP, IkeV2 and OpenVPN."
-  type        = list
+  type        = list(any)
   default     = null
 }
 
 variable "revoked_certificate" {
   description = "(Optional) One or more revoked_certificate blocks which are defined below. This setting is incompatible with the use of radius_server_address and radius_server_secret."
-  type        = list
+  type        = list(any)
   default     = []
 }
 
@@ -124,7 +124,7 @@ variable "root_certificate_name" {
 
 variable "tags" {
   description = "Optional tags to be added to resource"
-  type        = map
+  type        = map(any)
   default     = {}
 }
 

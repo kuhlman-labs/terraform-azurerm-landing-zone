@@ -34,13 +34,13 @@ variable "app_service_plan_id" {
 
 variable "app_settings" {
   description = "(Optional) A key-value pair of App Settings."
-  type        = map
+  type        = map(any)
   default     = null
 }
 
 variable "auth_settings" {
   description = "(Optional) A auth_settings block as defined below."
-  type        = list
+  type        = list(any)
   default     = []
   /*
   enabled - (Required) Is Authentication enabled?
@@ -76,7 +76,7 @@ variable "auth_settings" {
 
 variable "backup" {
   description = "(Optional) A backup block as defined below."
-  type        = list
+  type        = list(any)
   default     = []
   /*
   name (Required) Specifies the name for this Backup.
@@ -105,7 +105,7 @@ variable "client_cert_enabled" {
 
 variable "connection_string" {
   description = " (Optional) One or more connection_string blocks as defined below."
-  type        = list
+  type        = list(any)
   default     = []
   /*
   name - (Required) The name of the Connection String.
@@ -128,7 +128,7 @@ variable "https_only" {
 
 variable "identity" {
   description = "(Optional) A Managed Service Identity block as defined below."
-  type        = list
+  type        = list(any)
   default     = []
   /*
   type - (Required) Specifies the identity type of the App Service. Possible values are SystemAssigned (where Azure will generate a Service Principal for you), UserAssigned where you can specify the Service Principal IDs in the identity_ids field, and SystemAssigned, UserAssigned which assigns both a system managed identity as well as the specified user assigned identities.
@@ -140,7 +140,7 @@ variable "identity" {
 
 variable "logs" {
   description = "(Optional) A logs block as defined below."
-  type        = list
+  type        = list(any)
   default     = []
   /*
   application_logs - (Optional) An application_logs block as defined below.
@@ -161,7 +161,7 @@ variable "logs" {
 
 variable "site_config" {
   description = "(Optional) A site_config block as defined below."
-  type        = list
+  type        = list(any)
   default     = []
   /*
   always_on - (Optional) Should the app be loaded at all times? Defaults to false.
@@ -209,7 +209,7 @@ variable "site_config" {
 
 variable "storage_account" {
   description = "(Optional) One or more storage_account blocks as defined below."
-  type        = list
+  type        = list(any)
   default     = []
   /*
 name - (Required) The name of the storage account identifier.
@@ -226,6 +226,6 @@ mount_path - (Optional) The path to mount the storage within the site's runtime 
 
 variable "tags" {
   description = "A map of tags to add to all resources"
-  type        = map
+  type        = map(any)
   default     = {}
 }

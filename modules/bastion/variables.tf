@@ -18,7 +18,7 @@ variable "environment" {
 
 variable "address_prefix_bastion" {
   description = "(Required) The address prefix for the bastion subnet"
-  type        = list
+  type        = list(any)
 }
 
 variable "virtual_network_name" {
@@ -35,6 +35,6 @@ variable "virtual_network_resource_group" {
 
 variable "tags" {
   description = "A map of tags to add to all resources"
-  type        = map
+  type        = map(any)
   default     = {}
 }

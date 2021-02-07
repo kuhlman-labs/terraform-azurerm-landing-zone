@@ -35,7 +35,7 @@ variable "client_secret" {
 
 variable "address_space" {
   description = "This is a list of the ip address ranges for the vnet"
-  type        = list
+  type        = list(any)
 }
 
 variable "address_prefix_agw" {
@@ -60,7 +60,7 @@ variable "address_prefix_k8s_node" {
 
 variable "address_prefix_bastion" {
   description = "The address prefixe to use for the bastion subnet."
-  type        = list
+  type        = list(any)
 }
 
 #aks
@@ -85,7 +85,7 @@ variable "service_cidr" {
 
 variable "tags" {
   description = "A map of tags to add to all resources"
-  type        = map
+  type        = map(any)
   default     = {}
 }
 

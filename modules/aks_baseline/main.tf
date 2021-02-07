@@ -27,14 +27,14 @@ module "subnet" {
 #aks cluster
 
 module "aks" {
-  source                       = "../../resources/container/kubernetes_cluster"
-  resource_group               = module.resource_group.name
-  region                       = module.resource_group.location
-  environment                  = var.environment
-  node_pool_name               = "default"
-  vm_size                      = var.vm_size
+  source         = "../../resources/container/kubernetes_cluster"
+  resource_group = module.resource_group.name
+  region         = module.resource_group.location
+  environment    = var.environment
+  node_pool_name = "default"
+  vm_size        = var.vm_size
   #availability_zones           = [1, 2, 3]
-  node_count                   = 1
+  node_count = 1
   #node_taints                  = ["CriticalAddonsOnly=true:NoSchedule"]
   vnet_subnet_id               = element(module.subnet.id, 0)
   log_analytics_workspace_id   = var.log_analytics_workspace_id

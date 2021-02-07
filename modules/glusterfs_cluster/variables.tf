@@ -33,7 +33,7 @@ variable "virtual_network_resource_group" {
 
 variable "address_prefix_glusterfs" {
   description = "(Required) The address prefix for the adds subnet"
-  type        = list
+  type        = list(any)
 }
 
 variable "vm_size_glusterfs" {
@@ -46,6 +46,6 @@ variable "vm_size_glusterfs" {
 
 variable "tags" {
   description = "A map of tags to add to all resources"
-  type        = map
+  type        = map(any)
   default     = {}
 }

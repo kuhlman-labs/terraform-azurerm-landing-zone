@@ -18,23 +18,23 @@ variable "environment" {
 
 variable "address_space" {
   description = "This is a list of the ip address ranges for the vnet"
-  type        = list
+  type        = list(any)
 }
 
 variable "dns_servers" {
   description = "(Optional) List of IP addresses of DNS servers"
-  type        = list
+  type        = list(any)
   default     = null
 }
 
 variable "address_prefix_vgw" {
   description = "The address prefixe to use for the vgw subnet."
-  type        = list
+  type        = list(any)
 }
 
 variable "address_prefix_fw" {
   description = "The address prefixe to use for the fw subnet."
-  type        = list
+  type        = list(any)
 }
 
 #virtual network gateway
@@ -53,13 +53,13 @@ variable "vgw_type" {
 
 variable "vpn_client_protocols" {
   description = "(Optional) List of the protocols supported by the vpn client. The supported values are SSTP, IkeV2 and OpenVPN."
-  type        = list
+  type        = list(any)
   default     = ["SSTP"]
 }
 
 variable "vpn_address_space" {
   description = "(Required) The address space out of which ip addresses for vpn clients will be taken. You can provide more than one address space, e.g. in CIDR notation."
-  type        = list
+  type        = list(any)
   default     = ["192.168.100.0/24"]
 }
 
@@ -67,7 +67,7 @@ variable "vpn_address_space" {
 
 variable "tags" {
   description = "A map of tags to add to all resources"
-  type        = map
+  type        = map(any)
   default     = {}
 }
 

@@ -33,12 +33,12 @@ variable "virtual_network_resource_group" {
 
 variable "address_prefix_k8s_master" {
   description = "(Required) The address prefix for the k8s master subnet"
-  type        = list
+  type        = list(any)
 }
 
 variable "address_prefix_k8s_node" {
   description = "(Required) The address prefix for the k8s_node subnet"
-  type        = list
+  type        = list(any)
 }
 
 variable "vm_size_k8s_master" {
@@ -57,6 +57,6 @@ variable "vm_size_k8s_node" {
 
 variable "tags" {
   description = "A map of tags to add to all resources"
-  type        = map
+  type        = map(any)
   default     = {}
 }

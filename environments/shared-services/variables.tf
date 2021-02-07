@@ -35,44 +35,44 @@ variable "client_secret" {
 
 variable "address_space" {
   description = "This is a list of the ip address ranges for the vnet"
-  type        = list
+  type        = list(any)
 }
 
 variable "address_prefix_vgw" {
   description = "The address prefix to use for the vgw subnet."
-  type        = list
+  type        = list(any)
 }
 
 variable "address_prefix_fw" {
   description = "The address prefixe to use for the fw subnet."
-  type        = list
+  type        = list(any)
 }
 
 variable "address_prefix_jumpbox" {
   description = "The address prefixe to use for the jumpbox subnet."
-  type        = list
+  type        = list(any)
 }
 
 variable "address_prefix_bastion" {
   description = "The address prefixe to use for the bastion subnet."
-  type        = list
+  type        = list(any)
 }
 
 variable "address_prefix_adds" {
   description = "The address prefixe to use for the aads subnet."
-  type        = list
+  type        = list(any)
 }
 
 variable "private_ip_address_adds" {
   description = "(Required) The Static IP address for the aads Servers"
-  type        = list
+  type        = list(any)
 }
 
 #tags
 
 variable "tags" {
   description = "A map of tags to add to all resources"
-  type        = map
+  type        = map(any)
   default     = {}
 }
 

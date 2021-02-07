@@ -41,7 +41,7 @@ variable "virtual_network_resource_group" {
 
 variable "address_prefix_bastion" {
   description = "(Required) The address prefixes to use for the bastion subnet."
-  type        = list
+  type        = list(any)
 }
 
 variable "public_ip_address_id" {
@@ -53,7 +53,7 @@ variable "public_ip_address_id" {
 
 variable "tags" {
   description = "A map of tags to add to all resources"
-  type        = map
+  type        = map(any)
   default     = {}
 }
 

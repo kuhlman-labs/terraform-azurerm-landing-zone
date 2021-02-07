@@ -29,6 +29,6 @@ variable "environment" {
 
 variable "tags" {
   description = "(Optional) A mapping of tags which should be assigned to the Resource Group."
-  type        = map
+  type        = map(any)
   default     = {}
 }
