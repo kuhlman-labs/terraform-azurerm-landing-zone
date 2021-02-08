@@ -15,7 +15,7 @@ variable "environment" {
 }
 
 #authentication
-
+/*
 variable "app_id" {
   description = "The client ID for the Service Principal"
   type        = string
@@ -30,17 +30,12 @@ variable "client_secret" {
   description = "The secret for the Service Principal authentication"
   type        = string
 }
-
+*/
 #network
 
 variable "address_space" {
   description = "This is a list of the ip address ranges for the vnet"
   type        = list(any)
-}
-
-variable "address_prefix_agw" {
-  description = "The address prefixe to use for the agw subnet."
-  type        = list(string)
 }
 
 variable "address_prefix_aks" {

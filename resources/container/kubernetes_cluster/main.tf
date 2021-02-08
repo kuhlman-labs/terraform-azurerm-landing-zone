@@ -49,6 +49,9 @@ resource "azurerm_kubernetes_cluster" "base" {
       enabled     = var.aci_connector_linux_enabled
       subnet_name = var.aci_connector_linux_subnet_name
     }
+    kube_dashboard {
+      enabled = false
+    }
   }
 
   identity {

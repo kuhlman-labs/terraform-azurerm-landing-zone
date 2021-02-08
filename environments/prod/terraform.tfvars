@@ -14,7 +14,6 @@ address_space = ["10.2.0.0/16"]
 #subnet
 
 address_prefix_aks = ["10.2.1.0/24"]
-address_prefix_agw = ["10.2.2.0/24"]
 
 #aks
 

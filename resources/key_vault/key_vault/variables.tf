@@ -71,12 +71,13 @@ variable "purge_protection_enabled" {
 }
 
 #Once Soft Delete has been Enabled it's not possible to Disable it.
+/*
 variable "soft_delete_enabled" {
   description = "(Optional) Should Soft Delete be enabled for this Key Vault? Defaults to false."
   type        = bool
   default     = null
 }
-
+*/
 #tags
 
 variable "tags" {

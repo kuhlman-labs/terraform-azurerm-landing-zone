@@ -13,7 +13,7 @@ variable "region" {
   description = "Geographic region resource will be deployed into"
   type        = string
 }
-
+/*
 #authentication
 
 variable "app_id" {
@@ -21,13 +21,14 @@ variable "app_id" {
   type        = string
 }
 
-variable "object_id" {
-  description = "The object ID for the Service Principal"
-  type        = string
-}
-
 variable "client_secret" {
   description = "The secret for the Service Principal authentication"
+  type        = string
+}
+*/
+
+variable "object_id" {
+  description = "The object ID for the Service Principal"
   type        = string
 }
 
@@ -38,7 +39,7 @@ variable "address_space" {
   type        = list(any)
 }
 
-variable "address_prefix_vgw" {
+variable "address_prefix_agw" {
   description = "The address prefix to use for the vgw subnet."
   type        = list(any)
 }
@@ -48,23 +49,9 @@ variable "address_prefix_fw" {
   type        = list(any)
 }
 
-variable "address_prefix_jumpbox" {
-  description = "The address prefixe to use for the jumpbox subnet."
-  type        = list(any)
-}
 
 variable "address_prefix_bastion" {
   description = "The address prefixe to use for the bastion subnet."
-  type        = list(any)
-}
-
-variable "address_prefix_adds" {
-  description = "The address prefixe to use for the aads subnet."
-  type        = list(any)
-}
-
-variable "private_ip_address_adds" {
-  description = "(Required) The Static IP address for the aads Servers"
   type        = list(any)
 }
 
