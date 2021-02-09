@@ -111,3 +111,19 @@ module "application_gateway" {
   tags                 = var.tags
 }
 
+# DNS
+
+module "dns_zone" {
+  source = "../../resources/network/dns_zone"
+  resource_group = module.resource_group.name
+  domain_name = "kuhlman-labs.io"
+}
+
+module "dns_a_record" {
+  source = "../../resources/network/dns_a_record"
+  resource_group = module.resource_group.name
+  a_record_name = "tailwindtraders"
+  zone_name = module.dns_zone.name
+  ttl = "360"
+  target_resource_id = module.public_ip_agw.id
+}

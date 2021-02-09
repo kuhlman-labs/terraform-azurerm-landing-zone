@@ -39,4 +39,5 @@ module "aks_baseline" {
   service_cidr                   = var.service_cidr
   tags                           = var.tags
   log_analytics_workspace_id     = data.terraform_remote_state.shared_services.outputs.log_analytics_id
+  next_hop_in_ip_address         = data.terraform_remote_state.shared_services.outputs.firewall_private_ip_address
 }

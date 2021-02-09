@@ -21,3 +21,8 @@ output "log_analytics_id" {
   value       = module.logging.log_analytics_id
   description = "Log Analytics Workspace ID"
 }
+
+output "firewall_private_ip_address" {
+  value       = module.network_hub.firewall_private_ip_address
+  description = "The private IP address of the Azure Firewall."
+}

@@ -65,6 +65,14 @@ variable "log_analytics_workspace_id" {
   type        = string
 }
 
+# firewall route
+
+variable "next_hop_in_ip_address" {
+  description = "(Optional) Contains the IP address packets should be forwarded to. Next hop values are only allowed in routes where the next hop type is VirtualAppliance."
+  type        = string
+  default     = null
+}
+
 #tags
 
 variable "tags" {

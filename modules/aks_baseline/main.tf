@@ -27,15 +27,14 @@ module "subnet" {
 #aks cluster
 
 module "aks" {
-  source         = "../../resources/container/kubernetes_cluster"
-  resource_group = module.resource_group.name
-  region         = module.resource_group.location
-  environment    = var.environment
-  node_pool_name = "default"
-  vm_size        = var.vm_size
-  #availability_zones           = [1, 2, 3]
-  node_count = 1
-  #node_taints                  = ["CriticalAddonsOnly=true:NoSchedule"]
+  source                       = "../../resources/container/kubernetes_cluster"
+  resource_group               = module.resource_group.name
+  region                       = module.resource_group.location
+  environment                  = var.environment
+  node_pool_name               = "default"
+  vm_size                      = var.vm_size
+  availability_zones           = null
+  node_count                   = 1
   vnet_subnet_id               = element(module.subnet.id, 0)
   log_analytics_workspace_id   = var.log_analytics_workspace_id
   aci_connector_linux_enabled  = false
@@ -72,4 +71,33 @@ module "aks_node_pool_user" {
   mode                  = "User"
   vnet_subnet_id        = element(module.subnet.id, 0)
   tags                  = var.tags
+}
+
+# Firewall Route
+
+module "route_table" {
+  source         = "../../resources/network/route_table"
+  region         = module.resource_group.location
+  environment    = var.environment
+  resource_group = module.resource_group.name
+  name_prefix    = "rt-aks-nodes"
+  tags           = var.tags
+}
+
+module "route" {
+  source                 = "../../resources/network/route"
+  region                 = module.resource_group.location
+  environment            = var.environment
+  resource_group         = module.resource_group.name
+  route_table_name       = module.route_table.name
+  route_name             = "dg-to-firewall"
+  address_prefix         = "0.0.0.0/0"
+  next_hop_type          = "VirtualAppliance"
+  next_hop_in_ip_address = var.next_hop_in_ip_address
+}
+
+module "subnet_route_table_association" {
+  source         = "../../resources/network/subnet_route_table_association"
+  subnet_id      = element(module.subnet.id, 0)
+  route_table_id = module.route_table.id
 }
