@@ -102,7 +102,6 @@ module "virtual_machine_k8s_master" {
   os_disk_caching                  = "None"
   size                             = var.vm_size_k8s_master
   network_interface_ids            = module.network_interface_k8s_master.id
-  storage_account_uri              = var.storage_account_uri
   source_image_reference_publisher = "Canonical"
   source_image_reference_offer     = "UbuntuServer"
   source_image_reference_sku       = "18.04-LTS"
@@ -165,7 +164,6 @@ module "virtual_machine_k8s_node" {
   os_disk_caching                  = "None"
   size                             = var.vm_size_k8s_node
   network_interface_ids            = module.network_interface_k8s_node.id
-  storage_account_uri              = var.storage_account_uri
   source_image_reference_publisher = "Canonical"
   source_image_reference_offer     = "UbuntuServer"
   source_image_reference_sku       = "18.04-LTS"

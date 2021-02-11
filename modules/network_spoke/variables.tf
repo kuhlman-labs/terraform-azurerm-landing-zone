@@ -14,6 +14,28 @@ variable "environment" {
   type        = string
 }
 
+#authentication
+
+variable "client_id" {
+  description = "The client ID for the Service Principal"
+  type        = string
+}
+
+variable "client_secret" {
+  description = "The secret for the Service Principal authentication"
+  type        = string
+}
+
+variable "subscription_id" {
+  description = "The Subscription ID in which the Storage Account exists. This can also be sourced from the ARM_SUBSCRIPTION_ID environment variable."
+  type        = string
+}
+
+variable "tenant_id" {
+  description = "The Tenant ID in which the Subscription exists. This can also be sourced from the ARM_TENANT_ID environment variable."
+  type        = string
+}
+
 #vnet
 
 variable "address_space" {

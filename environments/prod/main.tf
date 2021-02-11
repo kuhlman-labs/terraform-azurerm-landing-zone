@@ -17,6 +17,10 @@ module "network_spoke" {
   environment                             = var.environment
   region                                  = var.region
   address_space                           = var.address_space
+  subscription_id                         = var.subscription_id
+  client_id                               = var.client_id
+  client_secret                           = var.client_secret
+  tenant_id                               = var.tenant_id
   virtual_network_hub_resource_group_name = data.terraform_remote_state.shared_services.outputs.network_hub_resource_group_name
   virtual_network_hub_name                = data.terraform_remote_state.shared_services.outputs.network_hub_name
   virtual_network_hub_id                  = data.terraform_remote_state.shared_services.outputs.network_hub_id

@@ -16,11 +16,6 @@ variable "environment" {
 
 #kubernetes_cluster
 
-variable "storage_account_uri" {
-  description = "(Required) The Primary/Secondary Endpoint for the Azure Storage Account which should be used to store Boot Diagnostics, including Console Output and Screenshots from the Hypervisor."
-  type        = string
-}
-
 variable "virtual_network_name" {
   description = "(Required) The Name of the Virtual Network where this subnet should be located in."
   type        = string
