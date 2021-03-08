@@ -13,10 +13,10 @@ variable "region" {
   description = "Geographic region resource will be deployed into"
   type        = string
 }
-/*
+
 #authentication
 
-variable "app_id" {
+variable "client_id" {
   description = "The client ID for the Service Principal"
   type        = string
 }
@@ -25,10 +25,14 @@ variable "client_secret" {
   description = "The secret for the Service Principal authentication"
   type        = string
 }
-*/
 
 variable "object_id" {
   description = "The object ID for the Service Principal"
+  type        = string
+}
+
+variable "tenant_id" {
+  description = "The Tenant ID in which the Subscription exists. This can also be sourced from the ARM_TENANT_ID environment variable."
   type        = string
 }
 
