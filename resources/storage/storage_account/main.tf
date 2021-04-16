@@ -12,7 +12,7 @@ resource "random_string" "base" {
 #storage account
 
 resource "azurerm_storage_account" "base" {
-  name                      = lower("${var.name_prefix}${substr(var.environment, 0, 2)}${random_string.base.result}${var.region}")
+  name                      = lower("${substr(var.name_prefix, 0, 4)}${substr(var.environment, 0, 2)}${random_string.base.result}${var.region}")
   resource_group_name       = var.resource_group
   location                  = var.region
   account_kind              = var.account_kind

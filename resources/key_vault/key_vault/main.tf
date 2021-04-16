@@ -33,7 +33,8 @@ resource "azurerm_key_vault" "base" {
     }
   }
   purge_protection_enabled = var.purge_protection_enabled
-  soft_delete_enabled      = var.soft_delete_enabled
+  #[DEPRECATED] Azure has removed support for disabling Soft Delete as of 2020-12-15, as such this field is no longer configurable and can be safely removed. This field will be removed in version 3.0 of the Azure Provider.
+  #soft_delete_enabled      = var.soft_delete_enabled
 
 
   tags = var.tags

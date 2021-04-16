@@ -25,9 +25,41 @@ variable "region" {
   type        = string
 }
 
-#aks
+#kubernetes_cluster
 
-variable "name" {
+variable "kubernetes_version" {
+  description = "Version of Kubernetes specified when creating the AKS managed cluster. If not specified, the latest recommended version will be used at provisioning time (but won't auto-upgrade)."
+  type        = string
+  default     = null
+}
+
+variable "dns_prefix" {
+  description = "DNS prefix specified when creating the managed cluster. Changing this forces a new resource to be created."
+  type        = string
+  default     = "nodes"
+}
+
+variable "private_cluster_enabled" {
+  description = "Should this Kubernetes Cluster have it's API server only exposed on internal IP addresses? This provides a Private IP Address for the Kubernetes API on the Virtual Network where the Kubernetes Cluster is located. Defaults to false. Changing this forces a new resource to be created."
+  type        = bool
+  default     = null
+}
+
+variable "api_server_authorized_ip_ranges" {
+  description = "(Optional) The IP ranges to whitelist for incoming traffic to the masters."
+  type        = list(string)
+  default     = null
+}
+
+variable "sku_tier" {
+  description = "(Optional) The SKU Tier that should be used for this Kubernetes Cluster. Possible values are Free and Paid (which includes the Uptime SLA). Defaults to Free."
+  type        = string
+  default     = null
+}
+
+#default_node_pool
+
+variable "node_pool_name" {
   description = "(Required) The name which should be used for the default Kubernetes Node Pool. Changing this forces a new resource to be created."
   type        = string
   default     = "default"
@@ -40,7 +72,7 @@ variable "vm_size" {
 
 variable "availability_zones" {
   description = "(Optional) A list of Availability Zones across which the Node Pool should be spread."
-  type        = list
+  type        = list(any)
   default     = null
 }
 
@@ -53,12 +85,6 @@ variable "enable_auto_scaling" {
 variable "enable_node_public_ip" {
   description = "(Optional) Should nodes in this Node Pool have a Public IP Address? Defaults to false."
   type        = bool
-  default     = null
-}
-
-variable "max_pods" {
-  description = "(Optional) The maximum number of pods that can run on each agent. Changing this forces a new resource to be created."
-  type        = number
   default     = null
 }
 
@@ -80,16 +106,21 @@ variable "node_count" {
   default     = null
 }
 
+variable "max_pods" {
+  description = "(Optional) The maximum number of pods that can run on each agent. Changing this forces a new resource to be created."
+  type        = number
+  default     = null
+}
 
 variable "node_labels" {
   description = "(Optional) A map of Kubernetes labels which should be applied to nodes in the Default Node Pool."
-  type        = map
+  type        = map(any)
   default     = null
 }
 
 variable "node_taints" {
   description = "(Optional) A list of Kubernetes taints which should be applied to nodes in the agent pool (e.g key=value:NoSchedule)."
-  type        = list
+  type        = list(any)
   default     = null
 }
 
@@ -111,160 +142,127 @@ variable "vnet_subnet_id" {
   default     = null
 }
 
-variable "kubernetes_version" {
-  description = "Version of Kubernetes specified when creating the AKS managed cluster. If not specified, the latest recommended version will be used at provisioning time (but won't auto-upgrade)."
+#addon_profile
+
+variable "log_analytics_workspace_id" {
+  description = "The ID of the Log Analytics Workspace which the OMS Agent should send data to. Must be present if enabled is true."
+  type        = string
+}
+
+variable "aci_connector_linux_enabled" {
+  description = "(Required) Is the virtual node addon enabled?"
+  type        = string
+}
+
+variable "aci_connector_linux_subnet_name" {
+  description = "(Optional) The subnet name for the virtual nodes to run. This is required when aci_connector_linux enabled argument is set to true."
   type        = string
   default     = null
 }
 
-variable "dns_prefix" {
-  description = "DNS prefix specified when creating the managed cluster. Changing this forces a new resource to be created."
+#identity
+
+variable "identity_type" {
+  description = "The type of identity used for the managed cluster. At this time the only supported value is SystemAssigned"
   type        = string
-  default     = "nodes"
+  default     = "SystemAssigned"
 }
 
-variable "node_resource_group" {
-  description = "(Optional) The name of the resource Group where the the Kubernetes Nodes should exist. Changing this forces a new resource to be created."
+#linux_profile
+
+variable "linux_profile_admin_username" {
+  description = "(Required) The Admin Username for the Cluster. Changing this forces a new resource to be created."
+  type        = string
+}
+
+variable "linux_profile_key_data" {
+  description = "(Required) An ssh_key block. Only one is currently allowed. Changing this forces a new resource to be created."
+  type        = string
+}
+
+#network_profile
+
+variable "network_plugin" {
+  description = "(Required) Network plugin to use for networking. Currently supported values are azure and kubenet. Changing this forces a new resource to be created."
+  type        = string
+}
+
+variable "network_policy" {
+  description = "(Optional) Sets up network policy to be used with Azure CNI. Network policy allows us to control the traffic flow between pods. Currently supported values are calico and azure. Changing this forces a new resource to be created."
   type        = string
   default     = null
 }
 
-variable "api_server_authorized_ip_ranges" {
-  description = "(Optional) The IP ranges to whitelist for incoming traffic to the masters."
-  type        = list
+variable "dns_service_ip" {
+  description = "(Optional) IP address within the Kubernetes service address range that will be used by cluster service discovery (kube-dns). Changing this forces a new resource to be created."
+  type        = string
   default     = null
 }
 
-variable "enable_pod_security_policy" {
-  description = "(Optional) Whether Pod Security Policies are enabled. Note that this also requires role based access control to be enabled."
-  type        = bool
+variable "dns_bridge_cidr" {
+  description = "(Optional) IP address (in CIDR notation) used as the Docker bridge IP address on nodes. Changing this forces a new resource to be created."
+  type        = string
   default     = null
 }
 
-variable "private_cluster_enabled" {
-  description = "Should this Kubernetes Cluster have it's API server only exposed on internal IP addresses? This provides a Private IP Address for the Kubernetes API on the Virtual Network where the Kubernetes Cluster is located. Defaults to false. Changing this forces a new resource to be created."
-  type        = bool
+variable "docker_bridge_cidr" {
+  description = "(Optional) IP address (in CIDR notation) used as the Docker bridge IP address on nodes. Changing this forces a new resource to be created."
+  type        = string
   default     = null
 }
 
-variable "identity" {
-  description = "(Optional) A identity block as defined below. Changing this forces a new resource to be created."
-  type        = list
-  default = [
-    {
-      type = "SystemAssigned"
-    }
-  ]
+variable "outbound_type" {
+  description = "(Optional) The outbound (egress) routing method which should be used for this Kubernetes Cluster. Possible values are loadBalancer and userDefinedRouting. Defaults to loadBalancer."
+  type        = string
+  default     = null
 }
 
-variable "service_principal" {
-  description = "(Optional) A service_principal block as documented below."
-  type        = list
-  default     = []
-  /*
-  [
-    {
-      clientid = ""
-      client_secret = ""
-    }
-  ]
-}
-*/
+variable "pod_cidr" {
+  description = "(Optional) The CIDR to use for pod IP addresses. This field can only be set when network_plugin is set to kubenet. Changing this forces a new resource to be created."
+  type        = string
+  default     = null
 }
 
-variable "linux_profile" {
-  description = "https://www.terraform.io/docs/providers/azurerm/r/kubernetes_cluster.html#linux_profile"
-  type        = list
-  default     = []
-  /*
-  [
-    {
-      admin_username = "admin"
-      key_data = "${path.module}/id_rsa.pub"
-    }
-  ]
-  */
+variable "service_cidr" {
+  description = "(Optional) The Network Range used by the Kubernetes service. Changing this forces a new resource to be created."
+  type        = string
+  default     = null
 }
 
-variable "windows_profile" {
-  description = "https://www.terraform.io/docs/providers/azurerm/r/kubernetes_cluster.html#windows_profile"
-  type        = list
-  default     = []
-  /*
-  [
-    {
-      admin_username = "admin"
-      admin_password = "password"
-    }
-  ]
-  */
+variable "outbound_ports_allocated" {
+  description = "(Optional) Number of desired SNAT port for each VM in the clusters load balancer. Must be between 0 and 64000 inclusive. Defaults to 0."
+  type        = number
+  default     = null
 }
 
-
-variable "network_profile" {
-  description = "https://www.terraform.io/docs/providers/azurerm/r/kubernetes_cluster.html#network_profile"
-  type        = list
-  default     = []
-  /*
-  #NOTE: When network_plugin is set to azure - the vnet_subnet_id field in the agent_pool_profile block must be set.
-  [
-    {
-      network_plugin = "kubenet"
-      #This field can only be set when network_plugin is set to azure
-      network_policy = null
-      #This is required when network_plugin is set to azure
-      dns_service_ip = null
-      #This is required when network_plugin is set to azure
-      docker_bridge_cidr = null
-      #This field can only be set when network_plugin is set to kubenet.
-      pod_cidr = "172.16.0.0/16"
-      #This is required when network_plugin is set to azure.
-      service_cidr = null
-      load_balancer_sku = "Basic"
-    }
-  ]
-  */
+variable "idle_timeout_in_minutes" {
+  description = "(Optional) Desired outbound flow idle timeout in minutes for the cluster load balancer. Must be between 4 and 120 inclusive. Defaults to 30."
+  type        = number
+  default     = null
 }
 
-variable "role_based_access_control" {
-  description = "https://www.terraform.io/docs/providers/azurerm/r/kubernetes_cluster.html#role_based_access_control"
-  type        = list
-  default     = []
-  /*
-  [
-    {
-      enabled = "true"
-      client_app_id     = "client_app_id"
-      server_app_id     = "server_app_id"
-      server_app_secret = "server_app_secret"
-      tenant_id         = "tenant_id"
-    }
-  ]
-  */
+variable "managed_outbound_ip_count" {
+  description = "(Optional) Count of desired managed outbound IPs for the cluster load balancer. Must be between 1 and 100 inclusive."
+  type        = number
+  default     = 1
 }
 
-variable "addon_profile" {
-  description = "https://www.terraform.io/docs/providers/azurerm/r/kubernetes_cluster.html#addon_profile"
-  type        = list
-  default     = []
-  /*
-  [
-    {
-      http_appication_routing_enabled = "false"
-      oms_agent_enabled               = "false"
-      log_analytics_workspace_id = null
-      aci_connector_linux_enabled = "false"
-      aci_connector_linux_name_prefix = null
-    }
-  ]
-  */
+variable "outbound_ip_prefix_ids" {
+  description = "(Optional) The ID of the outbound Public IP Address Prefixes which should be used for the cluster load balancer."
+  type        = list(string)
+  default     = null
 }
 
+variable "outbound_ip_address_ids" {
+  description = "(Optional) The ID of the Public IP Addresses which should be used for outbound communication for the cluster load balancer."
+  type        = list(string)
+  default     = null
+}
 
 #tags
 
 variable "tags" {
   description = "Optional tags to be added to resource"
-  type        = map
+  type        = map(any)
   default     = {}
 }

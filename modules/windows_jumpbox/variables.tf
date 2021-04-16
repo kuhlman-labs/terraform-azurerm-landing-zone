@@ -39,14 +39,14 @@ variable "vm_size" {
 
 variable "address_prefix_jumpbox" {
   description = "(Required) The address prefix for the aads subnet"
-  type        = list
+  type        = list(any)
 }
 
 #tags
 
 variable "tags" {
   description = "A map of tags to add to all resources"
-  type        = map
+  type        = map(any)
   default     = {}
 }
 

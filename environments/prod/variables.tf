@@ -16,13 +16,8 @@ variable "environment" {
 
 #authentication
 
-variable "app_id" {
+variable "client_id" {
   description = "The client ID for the Service Principal"
-  type        = string
-}
-
-variable "object_id" {
-  description = "The object ID for the Service Principal"
   type        = string
 }
 
@@ -31,16 +26,21 @@ variable "client_secret" {
   type        = string
 }
 
+variable "subscription_id" {
+  description = "The Subscription ID in which the Storage Account exists. This can also be sourced from the ARM_SUBSCRIPTION_ID environment variable."
+  type        = string
+}
+
+variable "tenant_id" {
+  description = "The Tenant ID in which the Subscription exists. This can also be sourced from the ARM_TENANT_ID environment variable."
+  type        = string
+}
+
 #network
 
 variable "address_space" {
   description = "This is a list of the ip address ranges for the vnet"
-  type        = list
-}
-
-variable "address_prefix_agw" {
-  description = "The address prefixe to use for the agw subnet."
-  type        = list(string)
+  type        = list(any)
 }
 
 variable "address_prefix_aks" {
@@ -70,6 +70,6 @@ variable "service_cidr" {
 
 variable "tags" {
   description = "A map of tags to add to all resources"
-  type        = map
+  type        = map(any)
   default     = {}
 }

@@ -14,11 +14,33 @@ variable "environment" {
   type        = string
 }
 
+#authentication
+
+variable "client_id" {
+  description = "The client ID for the Service Principal"
+  type        = string
+}
+
+variable "client_secret" {
+  description = "The secret for the Service Principal authentication"
+  type        = string
+}
+
+variable "subscription_id" {
+  description = "The Subscription ID in which the Storage Account exists. This can also be sourced from the ARM_SUBSCRIPTION_ID environment variable."
+  type        = string
+}
+
+variable "tenant_id" {
+  description = "The Tenant ID in which the Subscription exists. This can also be sourced from the ARM_TENANT_ID environment variable."
+  type        = string
+}
+
 #vnet
 
 variable "address_space" {
   description = "This is a list of the ip address ranges for the vnet"
-  type        = list
+  type        = list(any)
 }
 
 #peering
@@ -87,6 +109,6 @@ variable "use_remote_gateways_spoke" {
 
 variable "tags" {
   description = "A map of tags to add to all resources"
-  type        = map
+  type        = map(any)
   default     = {}
 }

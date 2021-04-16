@@ -42,14 +42,14 @@ variable "sku" {
 #The georeplication_locations is only supported on new resources with the Premium SKU.
 variable "georeplication_locations" {
   description = "(Optional) A list of Azure locations where the container registry should be geo-replicated."
-  type        = list
+  type        = list(any)
   default     = null
 }
 
 #network_rule_set is only supported with the Premium SKU at this time.
 variable "network_rule_set" {
   description = "(Optional) A network_rule_set block as documented below."
-  type        = list
+  type        = list(any)
   default     = []
   /*
 network_rule_set supports the following:
@@ -69,7 +69,7 @@ subnet_id - (Required) The subnet id from which requests will match the rule.
 
 variable "tags" {
   description = "A map of tags to add to all resources"
-  type        = map
+  type        = map(any)
   default     = {}
 }
 

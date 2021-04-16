@@ -70,7 +70,7 @@ variable "public_ip_prefix_id" {
 
 variable "zones" {
   description = "(Optional) A collection containing the availability zone to allocate the Public IP in."
-  type        = list
+  type        = list(any)
   default     = null
 }
 
@@ -78,6 +78,6 @@ variable "zones" {
 
 variable "tags" {
   description = "Optional tags to be added to resource"
-  type        = map
+  type        = map(any)
   default     = {}
 }

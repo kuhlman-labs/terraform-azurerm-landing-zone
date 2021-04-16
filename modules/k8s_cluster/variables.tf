@@ -16,11 +16,6 @@ variable "environment" {
 
 #kubernetes_cluster
 
-variable "storage_account_uri" {
-  description = "(Required) The Primary/Secondary Endpoint for the Azure Storage Account which should be used to store Boot Diagnostics, including Console Output and Screenshots from the Hypervisor."
-  type        = string
-}
-
 variable "virtual_network_name" {
   description = "(Required) The Name of the Virtual Network where this subnet should be located in."
   type        = string
@@ -33,12 +28,12 @@ variable "virtual_network_resource_group" {
 
 variable "address_prefix_k8s_master" {
   description = "(Required) The address prefix for the k8s master subnet"
-  type        = list
+  type        = list(any)
 }
 
 variable "address_prefix_k8s_node" {
   description = "(Required) The address prefix for the k8s_node subnet"
-  type        = list
+  type        = list(any)
 }
 
 variable "vm_size_k8s_master" {
@@ -57,6 +52,6 @@ variable "vm_size_k8s_node" {
 
 variable "tags" {
   description = "A map of tags to add to all resources"
-  type        = map
+  type        = map(any)
   default     = {}
 }

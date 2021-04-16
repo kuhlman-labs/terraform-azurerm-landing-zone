@@ -26,8 +26,20 @@ module "virtual_network" {
 
 #peering hub netowork to spoke network
 
+provider "azurerm" {
+  features {}
+  alias           = "shared_services"
+  subscription_id = var.subscription_id
+  client_id       = var.client_id
+  client_secret   = var.client_secret
+  tenant_id       = var.tenant_id
+}
+
 module "virtual_network_peering_hub" {
-  source                       = "../../resources/network/virtual_network_peering"
+  source = "../../resources/network/virtual_network_peering"
+  providers = {
+    azurerm = azurerm.shared_services
+  }
   resource_group_name          = var.virtual_network_hub_resource_group_name
   virtual_network_name         = var.virtual_network_hub_name
   remote_virtual_network_id    = module.virtual_network.id

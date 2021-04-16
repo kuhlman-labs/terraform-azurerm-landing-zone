@@ -29,13 +29,13 @@ variable "region" {
 
 variable "additional_capabilities" {
   description = "(Optional) A additional_capabilities block as defined below."
-  type        = list
+  type        = list(any)
   default     = []
 }
 
 variable "additional_unattend_content" {
   description = "(Optional) One or more additional_unattend_content blocks as defined below. Changing this forces a new resource to be created."
-  type        = list
+  type        = list(any)
   default     = []
 }
 
@@ -93,7 +93,7 @@ variable "eviction_policy" {
 
 variable "identity" {
   description = "(Optional) An identity block as defined below."
-  type        = list
+  type        = list(any)
   default     = []
 }
 
@@ -111,7 +111,7 @@ variable "max_bid_price" {
 
 variable "network_interface_ids" {
   description = "(Required). A list of Network Interface ID's which should be attached to this Virtual Machine. The first Network Interface ID in this list will be the Primary Network Interface on the Virtual Machine."
-  type        = list
+  type        = list(any)
 }
 
 variable "os_disk_caching" {
@@ -144,7 +144,7 @@ variable "os_disk_write_accelerator_enabled" {
 
 variable "plan" {
   description = "(Optional) A plan block as defined below. Changing this forces a new resource to be created."
-  type        = list
+  type        = list(any)
   default     = []
 }
 
@@ -168,7 +168,7 @@ variable "proximity_placement_group_id" {
 
 variable "secret" {
   description = "(Optional) One or more secret blocks as defined below."
-  type        = list
+  type        = list(any)
   default     = []
 }
 
@@ -222,7 +222,7 @@ variable "vm_count" {
 
 variable "winrm_listener" {
   description = "(Optional) One or more winrm_listener blocks as defined below."
-  type        = list
+  type        = list(any)
   default     = []
 }
 
@@ -234,7 +234,7 @@ variable "enable_zone" {
 
 variable "zone" {
   description = "(Optional) The Zone in which this Virtual Machine should be created. Changing this forces a new resource to be created."
-  type        = list
+  type        = list(any)
   default     = []
 }
 
@@ -242,6 +242,6 @@ variable "zone" {
 
 variable "tags" {
   description = "A map of tags to add to all resources"
-  type        = map
+  type        = map(any)
   default     = {}
 }

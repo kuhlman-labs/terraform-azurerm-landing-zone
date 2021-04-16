@@ -18,13 +18,13 @@ variable "environment" {
 
 variable "address_space" {
   description = "This is a list of the ip address ranges for the vnet"
-  type        = list
+  type        = list(any)
 }
 
 #tags
 
 variable "tags" {
   description = "A map of tags to add to all resources"
-  type        = map
+  type        = map(any)
   default     = {}
 }

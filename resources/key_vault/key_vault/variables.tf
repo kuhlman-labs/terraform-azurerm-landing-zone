@@ -34,7 +34,7 @@ variable "sku_name" {
 
 variable "network_acls" {
   description = "(Optional) A network_acls block as defined below."
-  type        = list
+  type        = list(any)
   default     = []
   /*
 A network_acls block supports the following:
@@ -71,17 +71,18 @@ variable "purge_protection_enabled" {
 }
 
 #Once Soft Delete has been Enabled it's not possible to Disable it.
+/*
 variable "soft_delete_enabled" {
   description = "(Optional) Should Soft Delete be enabled for this Key Vault? Defaults to false."
   type        = bool
   default     = null
 }
-
+*/
 #tags
 
 variable "tags" {
   description = "tags to be added to resource"
-  type        = map
+  type        = map(any)
   default     = {}
 }
 

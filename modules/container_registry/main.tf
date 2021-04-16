@@ -19,6 +19,7 @@ module "container_registry" {
   resource_group = module.resource_group.name
   region         = module.resource_group.location
   environment    = var.environment
+  admin_enabled  = true
   sku            = var.sku
   tags           = var.tags
 }

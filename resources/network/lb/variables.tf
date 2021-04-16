@@ -71,13 +71,13 @@ variable "public_ip_prefix_id" {
 
 variable "zones" {
   description = "(Optional) A list of Availability Zones which the Load Balancer's IP Addresses should be created in."
-  type        = list
+  type        = list(any)
   default     = null
 }
 
 variable "frontend_ip_configuration" {
   description = "(Optional) One or multiple frontend_ip_configuration blocks as documented below."
-  type        = list
+  type        = list(any)
   default     = []
   /*
   frontend_ip_configuration supports the following:
@@ -96,7 +96,7 @@ variable "frontend_ip_configuration" {
 
 variable "tags" {
   description = "A map of tags to add to all resources"
-  type        = map
+  type        = map(any)
   default     = {}
 }
 

@@ -16,13 +16,8 @@ variable "region" {
 
 #authentication
 
-variable "app_id" {
+variable "client_id" {
   description = "The client ID for the Service Principal"
-  type        = string
-}
-
-variable "object_id" {
-  description = "The object ID for the Service Principal"
   type        = string
 }
 
@@ -31,48 +26,44 @@ variable "client_secret" {
   type        = string
 }
 
+variable "object_id" {
+  description = "The object ID for the Service Principal"
+  type        = string
+}
+
+variable "tenant_id" {
+  description = "The Tenant ID in which the Subscription exists. This can also be sourced from the ARM_TENANT_ID environment variable."
+  type        = string
+}
+
 #network
 
 variable "address_space" {
   description = "This is a list of the ip address ranges for the vnet"
-  type        = list
+  type        = list(any)
 }
 
-variable "address_prefix_vgw" {
+variable "address_prefix_agw" {
   description = "The address prefix to use for the vgw subnet."
-  type        = list
+  type        = list(any)
 }
 
 variable "address_prefix_fw" {
   description = "The address prefixe to use for the fw subnet."
-  type        = list
+  type        = list(any)
 }
 
-variable "address_prefix_jumpbox" {
-  description = "The address prefixe to use for the jumpbox subnet."
-  type        = list
-}
 
 variable "address_prefix_bastion" {
   description = "The address prefixe to use for the bastion subnet."
-  type        = list
-}
-
-variable "address_prefix_adds" {
-  description = "The address prefixe to use for the aads subnet."
-  type        = list
-}
-
-variable "private_ip_address_adds" {
-  description = "(Required) The Static IP address for the aads Servers"
-  type        = list
+  type        = list(any)
 }
 
 #tags
 
 variable "tags" {
   description = "A map of tags to add to all resources"
-  type        = map
+  type        = map(any)
   default     = {}
 }
 

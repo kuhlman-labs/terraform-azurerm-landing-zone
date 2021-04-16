@@ -6,12 +6,12 @@
 
 variable "network_interface_id" {
   description = "The ID of the Subnet. Changing this forces a new resource to be created."
-  type        = list
+  type        = list(any)
 }
 
 variable "ip_configuration_name" {
   description = "(Required) The Name of the IP Configuration within the Network Interface which should be connected to the Backend Address Pool. Changing this forces a new resource to be created."
-  type        = list
+  type        = list(any)
 }
 
 variable "backend_address_pool_id" {

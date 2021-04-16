@@ -50,13 +50,13 @@ variable "account_tier" {
 
 variable "blob_properties" {
   description = "(Optional) A blob_properties block as defined below."
-  type        = list
+  type        = list(any)
   default     = []
 }
 
 variable "custom_domain" {
   description = "(Optional) A custom_domain block as documented below."
-  type        = list
+  type        = list(any)
   default     = []
 }
 
@@ -68,7 +68,7 @@ variable "enable_https_traffic_only" {
 
 variable "identity" {
   description = "(Optional) A identity block as defined below."
-  type        = list
+  type        = list(any)
   default     = []
 }
 
@@ -80,21 +80,21 @@ variable "is_hns_enabled" {
 
 variable "network_rules" {
   description = "(Optional) A network_rules block as documented below."
-  type        = list
+  type        = list(any)
   default     = []
 }
 
 #queue_properties cannot be set when the access_tier is set to BlobStorage
 variable "queue_properties" {
   description = "(Optional) A queue_properties block as defined below."
-  type        = list
+  type        = list(any)
   default     = []
 }
 
 #static_website can only be set when the account_kind is set to StorageV2
 variable "static_website" {
   description = "(Optional) A static_website block as defined below."
-  type        = list
+  type        = list(any)
   default     = []
 }
 
@@ -102,6 +102,6 @@ variable "static_website" {
 
 variable "tags" {
   description = "A map of tags to add to all resources"
-  type        = map
+  type        = map(any)
   default     = {}
 }

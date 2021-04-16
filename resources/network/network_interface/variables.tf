@@ -35,7 +35,7 @@ variable "nic_count" {
 
 variable "dns_servers" {
   description = "(Optional) A list of IP Addresses defining the DNS Servers which should be used for this Network Interface."
-  type        = list
+  type        = list(any)
   default     = null
 }
 
@@ -66,7 +66,7 @@ variable "primary" {
 #When private_ip_address_allocation is set to Static the following field can be configured:
 variable "private_ip_address" {
   description = "(Optional) The Static IP Address which should be used."
-  type        = list
+  type        = list(any)
   default     = []
 }
 
@@ -97,6 +97,6 @@ variable "subnet_id" {
 
 variable "tags" {
   description = "A map of tags to add to all resources"
-  type        = map
+  type        = map(any)
   default     = {}
 }

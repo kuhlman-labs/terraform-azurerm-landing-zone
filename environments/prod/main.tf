@@ -1,12 +1,12 @@
 ###
 # environment composition
 ###
-/*
+
 data "terraform_remote_state" "shared_services" {
   backend = "azurerm"
   config = {
     resource_group_name  = "rg-terraform-state"
-    storage_account_name = "stterraformfstate000"
+    storage_account_name = "sttfstate000eus"
     container_name       = "tfstate"
     key                  = "shared-services.tfstate"
   }
@@ -17,39 +17,37 @@ module "network_spoke" {
   environment                             = var.environment
   region                                  = var.region
   address_space                           = var.address_space
-  virtual_network_hub_resource_group_name = data.terraform_remote_state.shared_services.outputs.network_transit_hub_resource_group_name
-  virtual_network_hub_name                = data.terraform_remote_state.shared_services.outputs.network_transit_hub_name
-  virtual_network_hub_id                  = data.terraform_remote_state.shared_services.outputs.network_transit_hub_id
-  allow_gateway_transit_hub               = true
+  subscription_id                         = var.subscription_id
+  client_id                               = var.client_id
+  client_secret                           = var.client_secret
+  tenant_id                               = var.tenant_id
+  virtual_network_hub_resource_group_name = data.terraform_remote_state.shared_services.outputs.network_hub_resource_group_name
+  virtual_network_hub_name                = data.terraform_remote_state.shared_services.outputs.network_hub_name
+  virtual_network_hub_id                  = data.terraform_remote_state.shared_services.outputs.network_hub_id
+  allow_gateway_transit_hub               = false
   allow_gateway_transit_spoke             = false
-  use_remote_gateways_spoke               = true
+  use_remote_gateways_spoke               = false
   use_remote_gateways_hub                 = false
   tags                                    = var.tags
 }
 
-module "aks_agw_ingress" {
-  source                         = "../../modules/aks_agic"
+module "aks_baseline" {
+  source                         = "../../modules/aks_baseline"
   environment                    = var.environment
   region                         = var.region
   virtual_network_resource_group = module.network_spoke.virtual_network_resource_group_name
   virtual_network_name           = module.network_spoke.virtual_network_name
-  address_prefix_agw             = var.address_prefix_agw
   address_prefix_aks             = var.address_prefix_aks
-  client_secret                  = var.client_secret
-  app_id                         = var.app_id
-  object_id                      = var.object_id
   dns_service_ip                 = var.dns_service_ip
   docker_bridge_cidr             = var.docker_bridge_cidr
   service_cidr                   = var.service_cidr
   tags                           = var.tags
+  log_analytics_workspace_id     = data.terraform_remote_state.shared_services.outputs.log_analytics_id
+  next_hop_in_ip_address         = data.terraform_remote_state.shared_services.outputs.firewall_private_ip_address
 }
 
-module "linux_web_app" {
-  source      = "../../modules/linux_web_app"
+module "tt_backend" {
+  source      = "../../modules/tt_backend"
   environment = var.environment
   region      = var.region
-  tags        = var.tags
-  sku_size    = "B1"
-  sku_tier    = "Basic"
 }
-*/

@@ -3,16 +3,33 @@
 ###
 
 terraform {
-  required_version = ">= 0.12"
+  required_version = ">= 0.14"
   backend "azurerm" {
     resource_group_name  = "rg-terraform-state"
-    storage_account_name = "stterraformfstate000"
+    storage_account_name = "sttfstate000eus"
     container_name       = "tfstate"
     key                  = "shared-services.tfstate"
+  }
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = ">=2.46.0"
+    }
+    helm = {
+      source = "hashicorp/helm"
+      version = ">=2.0.0"
+    }
+    kubernetes = {
+      source = "hashicorp/kubernetes"
+      version = ">=2.0.0"
+    }
   }
 }
 
 provider "azurerm" {
-  version = ">= 2.0.0"
   features {}
+  subscription_id = "f43de08a-5e35-4ea9-8ca1-11fc231ace6a"
+  client_id       = var.client_id
+  client_secret   = var.client_secret
+  tenant_id       = var.tenant_id
 }

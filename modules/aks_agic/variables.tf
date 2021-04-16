@@ -86,6 +86,6 @@ variable "node_count" {
 
 variable "tags" {
   description = "Optional tags to be added to resource"
-  type        = map
+  type        = map(any)
   default     = {}
 }
